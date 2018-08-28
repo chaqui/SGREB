@@ -20,9 +20,26 @@ namespace SGREB
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        public MainWindow() 
         {
+            //Menu Inicial 
+            MenuItem iniciarMenu = new MenuItem();
+            iniciarMenu.Header = "Ingresar";
+            MenuItem iniciarSesionMenu = new MenuItem();
+            iniciarSesionMenu.Header = "Iniciar Sesion";
+            iniciarMenu.Items.Add(iniciarSesionMenu);
+            iniciarSesionMenu.Click += IniciarSesionMenu_Click;
             InitializeComponent();
+            this.menu.Items.Add(iniciarMenu);
+        }
+
+        private void IniciarSesionMenu_Click(object sender, RoutedEventArgs e)
+        {
+            var n = new IniciarSesion();
+            var r = n.ShowDialog();
+            this.menu.Items.Clear();
+    
+ 
         }
     }
 }
