@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using SGREB.Model;
 
 namespace SGREB
 {
@@ -19,9 +20,20 @@ namespace SGREB
     /// </summary>
     public partial class IniciarSesion : Window
     {
+        private InicioDeSesion inicioDeSesion;
         public IniciarSesion()
         {
+            InicioDeSesion = new InicioDeSesion();
             InitializeComponent();
+        }
+
+        internal InicioDeSesion InicioDeSesion { get => inicioDeSesion; set => inicioDeSesion = value; }
+
+        private void btInciarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            InicioDeSesion.ingreso = true;
+            InicioDeSesion.normal = true;
+            this.Close();
         }
     }
 }

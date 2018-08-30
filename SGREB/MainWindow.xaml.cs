@@ -37,9 +37,66 @@ namespace SGREB
         {
             var n = new IniciarSesion();
             var r = n.ShowDialog();
-            this.menu.Items.Clear();
-    
- 
+            if (n.InicioDeSesion.ingreso)
+            {
+                this.menu.Items.Clear();
+                if (n.InicioDeSesion.normal) {
+                    menuNormal();
+                }
+                else
+                { menuAdministrador(); }
+            }
+            
+        }
+
+        private void menuAdministrador()
+        {
+           
+        }
+
+        private void  menuNormal()
+        {
+            MenuItem reportesMenu = new MenuItem();
+            reportesMenu.Header = "Reportes";
+            MenuItem reporteAmbulanciaMenu = new MenuItem();
+            reporteAmbulanciaMenu.Header = "Ingresar Reporte de Ambulancias";
+            reporteAmbulanciaMenu.Click += mostrarIngresoDeReporte_Click;
+            MenuItem generarReproteMenu = new MenuItem();
+            generarReproteMenu.Header = "Generar Reporte de Incidentes";
+            reportesMenu.Items.Add(reporteAmbulanciaMenu);
+            reportesMenu.Items.Add(generarReproteMenu);
+            this.menu.Items.Add(reportesMenu);
+        }
+        private void mostrarIngresoDeReporte_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.contenido.Children.Count > 0)
+            {
+               var a=  MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    mostrarReporte();
+                }
+            }
+            else
+            {
+                mostrarReporte();
+            }
+        }
+        private void mostrarReporte()
+        {
+            MenuItem editarMenu = new MenuItem();
+            editarMenu.Header="editar";
+            MenuItem limpiarMenu = new MenuItem();
+            limpiarMenu.Header = "limpiar";
+            editarMenu.Items.Add(limpiarMenu);
+            this.menu.Items.Add(editarMenu);
+            this.contenido.Children.Clear();
+            var contenido = new IngresoDeIncidente()
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+            this.contenido.Children.Add(contenido);
         }
     }
 }
