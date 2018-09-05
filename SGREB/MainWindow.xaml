@@ -114,6 +114,5 @@
 
 
         </DockPanel>
-        <Menu x:Name="menu1" HorizontalAlignment="Left" Height="100" Margin="-150,374,0,-55" VerticalAlignment="Top" Width="100"/>
     </Grid>
 </Window>

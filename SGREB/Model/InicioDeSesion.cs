@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SGREB.Model
 {
-    class InicioDeSesion
+     public class InicioDeSesion
     {
         public bool normal { get; set; }
         public bool administrador { get; set; }

@@ -20,9 +20,13 @@ namespace SGREB
     /// </summary>
     public partial class IngresoDeIncidente : UserControl
     {
+        private List<String> incidentes; 
         public IngresoDeIncidente()
         {
             InitializeComponent();
+            incidentes.Add("Servicios Varios");
+
+            
         }
 
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
@@ -38,6 +42,19 @@ namespace SGREB
                 gridIncidente.Visibility = Visibility.Visible;
             }
            
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void llenarIncidentes()
+        {
+            foreach (String incidente in incidentes)
+                {
+                cmBxTipoDeIncidente.Items.Add(incidente);
+            }
         }
     }
 }

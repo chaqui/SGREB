@@ -64,6 +64,47 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Formularios\NuevoIncidente.xaml.cs">
+      <DependentUpon>NuevoIncidente.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model\Animal.cs" />
+    <Compile Include="Model\Bombero.cs" />
+    <Compile Include="Model\CausaIntoxicacion.cs" />
+    <Compile Include="Model\CausaSuicidio.cs" />
+    <Compile Include="Model\CRUD.cs" />
+    <Compile Include="Model\Grado.cs" />
+    <Compile Include="Model\HechoDeViolencia.cs" />
+    <Compile Include="Model\Incidente.cs" />
+    <Compile Include="Model\Institucion.cs" />
+    <Compile Include="Model\InstitucionDeSalud.cs" />
+    <Compile Include="Model\Lugar.cs" />
+    <Compile Include="Model\Maternidad.cs" />
+    <Compile Include="Model\MedioSolicitud.cs" />
+    <Compile Include="Model\Paciente.cs" />
+    <Compile Include="Model\Persona.cs" />
+    <Compile Include="Model\rastreo.cs" />
+    <Compile Include="Model\Rol.cs" />
+    <Compile Include="Model\servicioDeGalones.cs" />
+    <Compile Include="Model\ServiciosVarios.cs" />
+    <Compile Include="Model\Solicitud.cs" />
+    <Compile Include="Model\Suicidio.cs" />
+    <Compile Include="Model\TipoIncidente.cs" />
+    <Compile Include="Model\TipoServicio.cs" />
+    <Compile Include="Model\TipoUnidad.cs" />
+    <Compile Include="Model\TipoVehiculo.cs" />
+    <Compile Include="Model\Unidad.cs" />
+    <Compile Include="Model\UnidadParaInicidente.cs" />
+    <Compile Include="Model\Usuario.cs" />
+    <Compile Include="Model\VehiculoAccidentado.cs" />
+    <Compile Include="Model\VehiculoIncendidado.cs" />
+    <Compile Include="Model\ViviendaInundada.cs" />
+    <Compile Include="Servicios Varios.xaml.cs">
+      <DependentUpon>Servicios Varios.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Formularios\NuevoIncidente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Paginas\IngresoDeIncidente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -96,6 +137,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Servicios Varios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -137,6 +182,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\logo-completo-png.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controlador\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

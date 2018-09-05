@@ -43,11 +43,15 @@
             <Label Content="Hora de salida:" HorizontalAlignment="Left" Margin="41,56,0,0" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="151,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="461,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-            <Label Content="Lugar:" HorizontalAlignment="Left" Margin="41,106,0,0" VerticalAlignment="Top" Width="86"/>
+            <Label Content="Dirección:" HorizontalAlignment="Left" Margin="41,106,0,0" VerticalAlignment="Top" Width="86"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="151,109,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430"/>
-            <ComboBox HorizontalAlignment="Left" Margin="151,156,0,0" VerticalAlignment="Top" Width="232"/>
+            <ComboBox x:Name="cmBxTipoDeIncidente" HorizontalAlignment="Left" Margin="151,156,0,0" VerticalAlignment="Top" Width="232" SelectionChanged="ComboBox_SelectionChanged"/>
             <Label Content="Tipo de Incidente:" HorizontalAlignment="Left" Margin="41,156,0,0" VerticalAlignment="Top"/>
         </Grid>
+        <Grid x:Name="contenidoIncidente" HorizontalAlignment="Left" Height="460" Margin="53,604,0,-614" VerticalAlignment="Top" Width="693">
+                
+        </Grid>
+
 
     </Grid>
 </UserControl>
