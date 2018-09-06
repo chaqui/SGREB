@@ -8,6 +8,7 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <DockPanel >
+            
             <Menu x:Name="menu"
               MinHeight="22"
               Background="LightCyan"
@@ -28,6 +29,7 @@
                       FontSize="15"
                       Header="Iniciar sesión" />-->
             </Menu>
+            
             <Grid Background="White">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40*"/>
@@ -107,11 +109,12 @@
                         </TextBlock>
                     </Grid>
                 </Border>
-
-                <Grid x:Name="contenido" Grid.ColumnSpan="2" />
+                <ScrollViewer Grid.ColumnSpan="2" Margin="0,0,0,0">
+                    <Grid x:Name="contenido" Grid.ColumnSpan="2" />
+                </ScrollViewer>
             </Grid>
 
-
+          
 
         </DockPanel>
     </Grid>

@@ -5,20 +5,29 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SGREB"
                  Background="White"
-             mc:Ignorable="d" d:DesignWidth="800" Height="768">
-    <Grid Margin="0" Height="450" VerticalAlignment="Top">
+             mc:Ignorable="d" d:DesignWidth="733" Height="795">
+
+
+    <Grid Margin="0" Height="450" VerticalAlignment="Top" >
+
         <Image Grid.RowSpan="1"
             Width="100"
         Margin="0,0,700,302" />
         <TextBlock
             FontSize="24"
-            FontWeight="Bold"
+            FontWeight="Bold" 
             Text="BENEMERITO CUERPO VOLUNTARIO DE BOMBEROS DE GUATEMALA"
             TextAlignment="Center"
             TextWrapping="Wrap" RenderTransformOrigin="0.6,0.284" Margin="139,10,28,366" />
+        <Image HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="/SGREB;component/Resources/logo-completo-png.png" StretchDirection="UpOnly" Stretch="UniformToFill">
+            <Image.OpacityMask>
+                <ImageBrush ImageSource="/SGREB;component/Resources/logo-completo-png.png" Stretch="Uniform"/>
+            </Image.OpacityMask>
+        </Image>
         <TextBlock
             FontSize="24"
             TextAlignment="Center" Margin="139,74,28,290" Text="REPORTE DE AMBULANCIA"/>
+
         <Grid HorizontalAlignment="Left" Height="207" Margin="53,134,0,0" VerticalAlignment="Top" Width="719">
             <Label Content="Medio de Solicitud:" HorizontalAlignment="Left" Margin="68,46,0,0" VerticalAlignment="Top"/>
             <Label Content="Fecha:" HorizontalAlignment="Left" Margin="368,44,0,0" VerticalAlignment="Top"/>
@@ -30,14 +39,10 @@
             <Label Content="RadioTelefonista:" HorizontalAlignment="Left" Margin="73,138,0,0" VerticalAlignment="Top"/>
             <ComboBox HorizontalAlignment="Left" Margin="177,138,0,0" VerticalAlignment="Top" Width="384"/>
         </Grid>
-        <Image HorizontalAlignment="Left" Height="100" Margin="10,10,0,0" VerticalAlignment="Top" Width="100" Source="/SGREB;component/Resources/logo-completo-png.png" StretchDirection="UpOnly" Stretch="UniformToFill">
-            <Image.OpacityMask>
-                <ImageBrush ImageSource="/SGREB;component/Resources/logo-completo-png.png" Stretch="Uniform"/>
-            </Image.OpacityMask>
-        </Image>
+
         <RadioButton x:Name="rBcbm" Content="Enviar a los bomberos municipales" HorizontalAlignment="Left" Margin="302,309,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
-        <Button x:Name="btGuardarCBM" Content="Guardar" HorizontalAlignment="Left" Margin="671,346,0,0" VerticalAlignment="Top" Width="75" Visibility="Collapsed"/>
-        <Grid HorizontalAlignment="Left" Height="212" Margin="53,387,0,-149" VerticalAlignment="Top" Width="719" x:Name="gridIncidente">
+        <Button x:Name="btGuardarCBM"  Content="Guardar" HorizontalAlignment="Left" Margin="671,346,0,0" VerticalAlignment="Top" Width="75" Visibility="Collapsed"/>
+        <Grid HorizontalAlignment="Left" Height="212" Margin="53,387,0,-149" VerticalAlignment="Top" Width="635" x:Name="gridIncidente">
             <Label Content="Datos del Incidente " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
             <Label Content="Hora de entrada:" HorizontalAlignment="Left" Margin="348,56,0,0" VerticalAlignment="Top"/>
             <Label Content="Hora de salida:" HorizontalAlignment="Left" Margin="41,56,0,0" VerticalAlignment="Top"/>
@@ -45,13 +50,110 @@
             <TextBox HorizontalAlignment="Left" Height="23" Margin="461,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             <Label Content="Dirección:" HorizontalAlignment="Left" Margin="41,106,0,0" VerticalAlignment="Top" Width="86"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="151,109,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430"/>
-            <ComboBox x:Name="cmBxTipoDeIncidente" HorizontalAlignment="Left" Margin="151,156,0,0" VerticalAlignment="Top" Width="232" SelectionChanged="ComboBox_SelectionChanged"/>
+            <ComboBox x:Name="cmBxTipoDeIncidente" HorizontalAlignment="Left" Margin="151,156,0,0" VerticalAlignment="Top" Width="296" SelectionChanged="ComboBox_SelectionChanged"/>
             <Label Content="Tipo de Incidente:" HorizontalAlignment="Left" Margin="41,156,0,0" VerticalAlignment="Top"/>
         </Grid>
-        <Grid x:Name="contenidoIncidente" HorizontalAlignment="Left" Height="460" Margin="53,604,0,-614" VerticalAlignment="Top" Width="693">
-                
+        <Grid Margin="48,609,68,-245" x:Name="gridServiciosVarios" Visibility="Collapsed">
+            <Label Content="Servicios Varios " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" />
+            <Label Content="Clase de Servicio:" HorizontalAlignment="Left" Margin="32,46,0,0" VerticalAlignment="Top"/>
+            <ComboBox HorizontalAlignment="Left" Margin="146,46,0,0" VerticalAlignment="Top" Width="196" x:Name="combBoxClaseServicio"/>
+            <RadioButton Content="Falsa Alrma" HorizontalAlignment="Left" Margin="451,21,0,0" VerticalAlignment="Top" x:Name="rBFalsaArlarma"/>
+        </Grid>
+        <!--caidas csuales, enfermedad comun, Ataque con objeto contundente, Accidente de Motocicletas Accidente Laboral, Vapuleados, Linchados, Lapidados, Picados Con Abejas, Rescate en Posos, Rastreo, Accidente Aereo  -->
+        <Grid Margin="35,595,28,-740" x:Name="gridComun" Visibility="Collapsed">
+            <Label Content="Enfermedad Común " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  x:Name="tituloIncidenteComun"/>
+            <Label Content="Edad:" HorizontalAlignment="Left" Margin="300,89,0,0" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,85,0,-100" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,54,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="540,90,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarPaciente"/>
+            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,125,0,0" VerticalAlignment="Top" Width="110" x:Name="EliminarPaciente"/>
+
+        </Grid>
+        <Grid Margin="40,900,23,-1045" x:Name="gridUnidades" Visibility="Collapsed">
+            <Label Content="Unidades" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <Label Content="Edad:" HorizontalAlignment="Left" Margin="300,89,0,0" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,85,0,-100" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,54,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar unidad" HorizontalAlignment="Left" Margin="540,90,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarUnidad"/>
+            <Button Content="eliminar unidad" HorizontalAlignment="Left" Margin="540,125,0,0" VerticalAlignment="Top" Width="110" x:Name="EliminarUnidad"/>
+
+        </Grid>
+        <Grid Margin="48,609,68,-330" x:Name="gridMaternidad" Visibility="Collapsed">
+            <Label Content="Maternidad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" />
+            <Label Content="Edad:" HorizontalAlignment="Left" Margin="407,53,0,0" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="457,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
+            <RadioButton x:Name="radButAborto" Content="Aborto" HorizontalAlignment="Left" Margin="28,96,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radButtonAtencionParto" Content="Atención de Parto" HorizontalAlignment="Left" Margin="238,96,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radButtonRetencion_de_Placenta" Content="Retención de Placenta" HorizontalAlignment="Left" Margin="93,96,0,0" VerticalAlignment="Top"/>
+            <Label Content="Traslado a:" HorizontalAlignment="Left" Margin="22,131,0,0" VerticalAlignment="Top"/>
+            <ComboBox HorizontalAlignment="Left" Margin="107,136,0,0" VerticalAlignment="Top" Width="230"/>
+            <Label Content="Paciente:" HorizontalAlignment="Left" Margin="17,46,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="TxNombre" HorizontalAlignment="Left" Height="23" Margin="77,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
+            <RadioButton x:Name="radButtonVivo" Content="Vivo" HorizontalAlignment="Left" Margin="395,96,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radioButtonFallecido" Content="Fallecido" HorizontalAlignment="Left" Margin="457,96,0,0" VerticalAlignment="Top"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,54,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btAcompañante" Content="Acompañantes" HorizontalAlignment="Left" Margin="422,136,0,0" VerticalAlignment="Top" Width="95"/>
+        </Grid>
+        <Grid Margin="35,595,28,-740" x:Name="gridAtropellados" Visibility="Collapsed">
+            <Label Content="Atropellados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <Label Content="Tipo De Vehiculo:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="540,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarPaciente2"/>
+            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,155,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarPaciente2"/>
+            <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230"/>
+           
         </Grid>
 
+        <Grid Margin="35,595,28,-740" x:Name="gridIntoxicados" Visibility="Collapsed">
+            <Label Content="Intoxicados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <Label Content="Causa:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="540,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarPacienteIntoxicados"/>
+            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,155,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarPacienteIntoxicados"/>
+            <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230"/>
 
+        </Grid>
+
+        <Grid Margin="35,595,28,-740" x:Name="gridMordidos" Visibility="Collapsed">
+            <Label Content="Mordidos por Animales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <Label Content="Clase de Animal:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="540,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarPacienteMordido"/>
+            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,155,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarPacienteMordido"/>
+            <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230"/>
+
+        </Grid>
+        <Grid Margin="35,595,28,-740" x:Name="gridAccidenteTransito" Visibility="Collapsed">
+            <Label Content="Accidente de Transito" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <Label Content="Tipo De Vehiculo:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="540,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarPacienteAccidenteTransito"/>
+            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,155,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarPacienteAccidenteTransito"/>
+            <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230"/>
+            <TextBox x:Name="txtPlaca" HorizontalAlignment="Left" Height="23" Margin="440,62,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Placa:" HorizontalAlignment="Left" Margin="395,59,0,0" VerticalAlignment="Top"/>
+
+        </Grid>
+        <Grid Margin="35,595,28,-265" x:Name="gridServicioDeAgua" Visibility="Collapsed">
+            <Label Content="Servicio de Agua" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <TextBox x:Name="txtGalones" HorizontalAlignment="Left" Height="23" Margin="190,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Galones Entregados:" HorizontalAlignment="Left" Margin="65,60,0,0" VerticalAlignment="Top"/>
+        </Grid>
+        <Grid Margin="35,595,28,-740" x:Name="gridIncendiosDeViviendas" Visibility="Collapsed">
+            <Label Content="Incendio en Vivienda" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" x:Name="tituloIncendio" />
+            <Label Content="Propietario:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="540,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarPacienteIncendio"/>
+            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,155,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarPacienteIncendio"/>
+            <TextBox x:Name="txtPropietario" HorizontalAlignment="Left" Height="23" Margin="515,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <Label Content="Galones Utilizados:" HorizontalAlignment="Left" Margin="395,59,0,0" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="100,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"/>
+        </Grid>
     </Grid>
+
 </UserControl>

@@ -19,8 +19,12 @@ namespace SGREB.Model
         /// <summary>
         /// @param Solicitud
         /// </summary>
-        public void crearSolicitud(Solicitud solicitud) {
+        public void crearSolicitud(Solicitud solicitud, int tipoSolicitud, Boolean cbm) {
             // TODO implement here
+            if (cbm)
+            {
+
+            }
         }
 
     } }
