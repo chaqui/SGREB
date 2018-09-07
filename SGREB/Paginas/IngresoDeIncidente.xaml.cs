@@ -82,7 +82,7 @@ namespace SGREB
             gridAccidenteTransito.Visibility = Visibility.Collapsed;
             gridServicioDeAgua.Visibility = Visibility.Collapsed;
             gridIncendiosDeViviendas.Visibility = Visibility.Collapsed;
-
+            gridElementos.Visibility = Visibility.Collapsed;
 
             //seleccion de formulario por id
             switch (idTipoIncidente)
@@ -145,7 +145,9 @@ namespace SGREB
                 case 19: //Vapuleados
                     mostrarGridComun(nombreIncidente);
                     break;
-                   
+                case 20: //suicidados
+                    gridSuicidios.Visibility = Visibility.Visible;
+                    break;
                 case 21: //Linchados
                     mostrarGridComun(nombreIncidente);
                     break;
@@ -155,7 +157,9 @@ namespace SGREB
                 case 23: //Picados por Abejas
                     mostrarGridComun(nombreIncidente);
                     break;
-
+                case 24:
+                    gridBaleados.Visibility = Visibility.Visible;
+                    break;
                 case 25: //Incendios de Mercados
                     mostrarIncidendios(nombreIncidente);
                     break;
@@ -165,7 +169,15 @@ namespace SGREB
                 case 27: //Incendios en Locales Comerciales
                     mostrarIncidendios(nombreIncidente);
                     break;
-
+                case 28: //persona electrocutada
+                    mostrarGridComun(nombreIncidente);
+                    break;
+                case 29: //inundaciones
+                    gridInundaciones.Visibility = Visibility.Visible;
+                    break;
+                case 30: //Rescate en Posos
+                    mostrarGridComun(nombreIncidente);
+                    break;
                 case 31: //Rescate en Posos
                     mostrarGridComun(nombreIncidente);
                     break;
@@ -182,7 +194,7 @@ namespace SGREB
 
             }
             gridUnidades.Visibility = Visibility.Visible;
-
+            gridUnidades.Visibility = Visibility.Visible;
         }
 
         /// <summary>
@@ -225,7 +237,7 @@ namespace SGREB
         {
             tituloIncidenteComun.Content = nombreIncidente;
             gridComun.Visibility = Visibility.Visible;
-            this.Height = 1200;
+            this.Height = 1400;
         }
 
         /// <summary>
@@ -237,7 +249,7 @@ namespace SGREB
         {
             tituloIncendio.Content = nombreIncidente;
             gridIncendiosDeViviendas.Visibility = Visibility.Visible;
-            this.Height = 1200;
+            this.Height = 1400;
         }
 
     }

@@ -42,7 +42,7 @@
 
         <RadioButton x:Name="rBcbm" Content="Enviar a los bomberos municipales" HorizontalAlignment="Left" Margin="302,309,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
         <Button x:Name="btGuardarCBM"  Content="Guardar" HorizontalAlignment="Left" Margin="671,346,0,0" VerticalAlignment="Top" Width="75" Visibility="Collapsed"/>
-        
+
         <!--Formulario de Información basica del formulario-->
         <Grid HorizontalAlignment="Left" Height="212" Margin="53,387,0,-149" VerticalAlignment="Top" Width="635" x:Name="gridIncidente">
             <Label Content="Datos del Incidente " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
@@ -55,9 +55,9 @@
             <ComboBox x:Name="cmBxTipoDeIncidente" HorizontalAlignment="Left" Margin="151,156,0,0" VerticalAlignment="Top" Width="296" SelectionChanged="ComboBox_SelectionChanged"/>
             <Label Content="Tipo de Incidente:" HorizontalAlignment="Left" Margin="41,156,0,0" VerticalAlignment="Top"/>
         </Grid>
-        
-                                                 <!-------Formularios para incidentes------->
-        
+
+        <!--     Formularios para incidente   -->
+
         <!--Formulario para servicios Varios 
             Servicio para el incidente de tipo 1 -->
         <Grid Margin="48,609,68,-245" x:Name="gridServiciosVarios" Visibility="Collapsed">
@@ -66,8 +66,8 @@
             <ComboBox HorizontalAlignment="Left" Margin="146,46,0,0" VerticalAlignment="Top" Width="196" x:Name="combBoxClaseServicio"/>
             <RadioButton Content="Falsa Alrma" HorizontalAlignment="Left" Margin="451,21,0,0" VerticalAlignment="Top" x:Name="rBFalsaArlarma"/>
         </Grid>
-        
-        
+
+
         <!--Formulario común 
             para los siguientes incidentes:
                 -caidas csuales
@@ -91,7 +91,7 @@
             <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,125,0,0" VerticalAlignment="Top" Width="110" x:Name="EliminarPaciente"/>
 
         </Grid>
-        
+
         <!--Formulario para Maternidad-->
         <Grid Margin="48,609,68,-330" x:Name="gridMaternidad" Visibility="Collapsed">
             <Label Content="Maternidad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" />
@@ -109,7 +109,7 @@
             <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,54,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btAcompañante" Content="Acompañantes" HorizontalAlignment="Left" Margin="422,136,0,0" VerticalAlignment="Top" Width="95"/>
         </Grid>
-        
+
         <!-- Formulario para atropellados   -->
         <Grid Margin="35,595,28,-740" x:Name="gridAtropellados" Visibility="Collapsed">
             <Label Content="Atropellados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
@@ -119,7 +119,7 @@
             <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="540,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarPaciente2"/>
             <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,155,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarPaciente2"/>
             <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230"/>
-           
+
         </Grid>
 
         <!-- Formulario para intoxicados -->
@@ -133,7 +133,7 @@
             <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230"/>
 
         </Grid>
-        
+
         <!-- Formulario para Mordidos por Aninales -->
         <Grid Margin="35,595,28,-740" x:Name="gridMordidos" Visibility="Collapsed">
             <Label Content="Mordidos por Animales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
@@ -145,8 +145,8 @@
             <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230"/>
 
         </Grid>
-        
-        <!-- Formularios para Accidente de Transito--> 
+
+        <!-- Formularios para Accidente de Transito-->
         <Grid Margin="35,595,28,-740" x:Name="gridAccidenteTransito" Visibility="Collapsed">
             <Label Content="Accidente de Transito" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <Label Content="Tipo De Vehiculo:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
@@ -159,14 +159,14 @@
             <Label Content="Placa:" HorizontalAlignment="Left" Margin="395,59,0,0" VerticalAlignment="Top"/>
 
         </Grid>
-        
+
         <!-- Formulario para serivicio de Agua-->
         <Grid Margin="35,595,28,-265" x:Name="gridServicioDeAgua" Visibility="Collapsed">
             <Label Content="Servicio de Agua" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <TextBox x:Name="txtGalones" HorizontalAlignment="Left" Height="23" Margin="190,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label Content="Galones Entregados:" HorizontalAlignment="Left" Margin="65,60,0,0" VerticalAlignment="Top"/>
         </Grid>
-        
+
         <!--Formulario comun para los siguientes incidentes:
             -Incendios Forestales 
             -Contatos de Incendios 
@@ -186,19 +186,55 @@
             <Label Content="Galones Utilizados:" HorizontalAlignment="Left" Margin="395,59,0,0" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="100,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"/>
         </Grid>
-        
-        <!--   -->
-        <!--    Formulario para agregar las unidades que cubren la emergencia-->
-        <Grid Margin="40,900,23,-1045" x:Name="gridUnidades" Visibility="Collapsed">
-            <Label Content="Unidades" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
-            <Label Content="Edad:" HorizontalAlignment="Left" Margin="300,89,0,0" VerticalAlignment="Top"/>
-            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,85,0,-100" VerticalAlignment="Top" Width="465"/>
-            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,54,0,0" VerticalAlignment="Top"/>
-            <Button Content="agregar unidad" HorizontalAlignment="Left" Margin="540,90,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarUnidad"/>
-            <Button Content="eliminar unidad" HorizontalAlignment="Left" Margin="540,125,0,0" VerticalAlignment="Top" Width="110" x:Name="EliminarUnidad"/>
+
+        <!-- Formulario para ingresar personas suicidadas-->
+        <Grid Margin="35,595,28,-740" x:Name="gridSuicidios" Visibility="Collapsed">
+            <Label Content="Suicidados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="15,80,0,0" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="20,49,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar suicidado" HorizontalAlignment="Left" Margin="535,85,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarSuicidado"/>
+            <Button Content="eliminar suicidado" HorizontalAlignment="Left" Margin="535,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarSuicidado"/>
         </Grid>
-        
-        
+
+        <!-- Formulario para ingresar personas baleados-->
+        <Grid Margin="35,595,28,-740" x:Name="gridBaleados" Visibility="Collapsed">
+            <Label Content="Baleados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="15,80,0,0" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Baleados" HorizontalAlignment="Left" Margin="20,49,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar Baleado" HorizontalAlignment="Left" Margin="535,85,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarBaleado"/>
+            <Button Content="eliminar Baleado" HorizontalAlignment="Left" Margin="535,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarBaleado"/>
+        </Grid>
+
+        <!-- Formulario para ingresar personas inundaciones-->
+        <Grid Margin="35,595,28,-740" x:Name="gridInundaciones" Visibility="Collapsed">
+            <Label Content="Inundacion en Vivienda" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <Label Content="Propietario:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465"/>
+            <Label Content="Evacuados" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="540,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarEvacuado"/>
+            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,155,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarEvacuado"/>
+            <TextBox x:Name="txtPropietarioInundado" HorizontalAlignment="Left" Height="23" Margin="515,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+
+        </Grid>
+        <!--   -->
+
+
+        <!--    Formulario para agregar las unidades que cubren la emergencia-->
+        <Grid Margin="40,900,23,-725" x:Name="gridUnidades" Visibility="Visible">
+            <Label Content="Unidades" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,50,0,0" VerticalAlignment="Top" Width="465"/>
+            <Button Content="agregar unidad" HorizontalAlignment="Left" Margin="530,55,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarUnidad"/>
+            <Button Content="eliminar unidad" HorizontalAlignment="Left" Margin="530,90,0,0" VerticalAlignment="Top" Width="110" x:Name="EliminarUnidad"/>
+        </Grid>
+
+
+        <!--    Formulario para agregar los elementos que cubren la emergencia-->
+        <Grid Margin="35,1165,28,-990" x:Name="gridElementos" Visibility="Visible">
+            <Label Content="Elemtntos" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,50,0,0" VerticalAlignment="Top" Width="465"/>
+            <Button Content="agregar unidad" HorizontalAlignment="Left" Margin="530,55,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarElementos"/>
+            <Button Content="eliminar unidad" HorizontalAlignment="Left" Margin="530,90,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarElementos"/>
+        </Grid>
     </Grid>
 
 </UserControl>
