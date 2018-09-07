@@ -29,6 +29,11 @@ namespace SGREB
             LlenarIncidentes();
         }
 
+        /// <summary>
+        /// Evento del radio button de que es enviado a los Bomberos Municipales 
+        /// 
+        /// Se habilita el boton de guardar directanente
+        /// </summary>
         private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
             if(rBcbm.IsChecked == true)
@@ -44,15 +49,29 @@ namespace SGREB
            
         }
 
+        /// <summary>
+        /// muestra y oculta los formularios, por medio del id, buscado por medio del 
+        /// nombre del incidente seleccionado en el comboBox.
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
         private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //se obtiene el nombre de incidente
             String nombreIncidente = cmBxTipoDeIncidente.SelectedItem.ToString();
+
+
             idTipoIncidente = obtenerIdIncidente(nombreIncidente);
 
+            //si retorna 0 la función de busqueda 
             if (idTipoIncidente == 0)
             {
                 return;
             }
+
+            //se ocultan todos los formularios de incidentes
             gridServiciosVarios.Visibility = Visibility.Collapsed;
             gridComun.Visibility = Visibility.Collapsed;
             gridUnidades.Visibility= Visibility.Collapsed;
@@ -64,90 +83,111 @@ namespace SGREB
             gridServicioDeAgua.Visibility = Visibility.Collapsed;
             gridIncendiosDeViviendas.Visibility = Visibility.Collapsed;
 
+
+            //seleccion de formulario por id
             switch (idTipoIncidente)
             {
-                case 1:
+                
+                case 1: //incidentes varios
                     gridServiciosVarios.Visibility = Visibility.Visible;
                     this.Height = 800;
                     break;
-                case 2:
+                case 2: //Enfermedad Común
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 3:
+                case 3: //Caidas casuales
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 4:
+                case 4: //Maternidad
                     gridMaternidad.Visibility = Visibility.Visible;
                     break;
-                case 5:
+                case 5: //Atropellados
                     gridAtropellados.Visibility = Visibility.Visible;
                     break;
-                case 6:
+                case 6: //Intoxicados
                     gridIntoxicados.Visibility = Visibility.Visible;
                     break;
-                case 7:
+                case 7: //Quemados
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 8:
+                case 8: //Mordidos por Animales
                     gridMordidos.Visibility = Visibility.Visible;
                     break;
-                case 9:
+                case 9: //Ataque de objeto Contundente
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 10:
+                case 10: //Accidente de Transito
                     gridAccidenteTransito.Visibility = Visibility.Visible;
                     break;
-                case 11:
+                case 11: //Accidente de Motocicleta
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 12:
+                case 12: //Servicio de Agua
                     gridServicioDeAgua.Visibility = Visibility.Visible;
                     break;
-                case 13: 
+                case 13: //Prevenciones
                     break;
-                case 14:
+                case 14: //Accidente Laboral
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 15:
+                case 15: //Hechos de Violencia
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 16:
+                case 16: //Incendios de Viviendas 
                     mostrarIncidendios(nombreIncidente);
                     break;
-                case 17:
+                case 17: //Conatos de Incendios
                     mostrarIncidendios(nombreIncidente);
                     break;
-                case 18:
+                case 18: //Incendios Forestales
                     mostrarIncidendios(nombreIncidente);
                     break;
-                case 19:
+                case 19: //Vapuleados
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 21:
+                   
+                case 21: //Linchados
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 22:
+                case 22: //Lapidados
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 23:
+                case 23: //Picados por Abejas
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 31:
+
+                case 25: //Incendios de Mercados
+                    mostrarIncidendios(nombreIncidente);
+                    break;
+                case 26: //Incendios en Gasolineras
+                    mostrarIncidendios(nombreIncidente);
+                    break;
+                case 27: //Incendios en Locales Comerciales
+                    mostrarIncidendios(nombreIncidente);
+                    break;
+
+                case 31: //Rescate en Posos
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 32:
+                case 32: //Rastreo Efectuado
                     mostrarGridComun(nombreIncidente);
                     break;
-                case 33:
+                case 33: //Accidente aereo
                     mostrarGridComun(nombreIncidente);
                     break;
-         
+                case 34: //Rescate con equipo especial
+                    mostrarGridComun(nombreIncidente);
+                    break;
             
 
             }
             gridUnidades.Visibility = Visibility.Visible;
 
         }
+
+        /// <summary>
+        /// Formulario para seleccionar todos los incidentes, para que 
+        /// </summary>
 
         private void LlenarIncidentes()
         {
@@ -158,6 +198,12 @@ namespace SGREB
                 cmBxTipoDeIncidente.Items.Add(incidente.nombre);
             }
         }
+
+        /// <summary>
+        /// Se busca el id del incidente basado en el nombre
+        /// </summary>
+        /// <param name="nombreIncidente"></param>
+        /// <returns name="idTipo">tipo de incidente </returns>
         private int obtenerIdIncidente(String nombreIncidente)
         {
             foreach (TipoIncidente incidente in tiposDeIncidentes)
@@ -170,6 +216,11 @@ namespace SGREB
             }
             return 0;
         }
+
+        /// <summary>
+        /// uncion para mostrar el formulario común
+        /// </summary>
+        /// <param name="nombreIncidente"></param>
         private void mostrarGridComun(String nombreIncidente)
         {
             tituloIncidenteComun.Content = nombreIncidente;
@@ -177,6 +228,11 @@ namespace SGREB
             this.Height = 1200;
         }
 
+        /// <summary>
+        /// Funcion para mostrar el formulario común de  incidentes con Fuego.
+        /// </summary>
+        /// <param name="nombreIncidente"></param>
+        /// 
         private void mostrarIncidendios(String nombreIncidente)
         {
             tituloIncendio.Content = nombreIncidente;

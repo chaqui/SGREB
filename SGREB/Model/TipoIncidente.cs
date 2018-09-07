@@ -32,7 +32,7 @@ namespace SGREB.Model
             tipos.Add(new TipoIncidente(6, "Intoxicados"));
             tipos.Add(new TipoIncidente(7, "Quemadas"));
             tipos.Add(new TipoIncidente(8, "Mordidos Por Animales"));
-            tipos.Add(new TipoIncidente(, "Ataque con objeto contundente"));
+            tipos.Add(new TipoIncidente(9, "Ataque con objeto contundente"));
             tipos.Add(new TipoIncidente(10, "Accidente de Transito"));
             tipos.Add(new TipoIncidente(11, "Accidente de Motocicletas"));
             tipos.Add(new TipoIncidente(12, "Servicio de Agua"));
