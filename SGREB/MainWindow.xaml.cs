@@ -48,10 +48,29 @@ namespace SGREB
             }
             
         }
+        /// <summary>
+        /// 
+        /// </summary>
 
         private void menuAdministrador()
         {
-           
+            menuNormal();
+            MenuItem administrarMenu = new MenuItem();
+            administrarMenu.Header = "Administrar";
+
+            MenuItem usuariosMenu = new MenuItem();
+            usuariosMenu.Header = "usuarios";
+            administrarMenu.Items.Add(usuariosMenu);
+
+            MenuItem bomberosMenu = new MenuItem();
+            bomberosMenu.Header = "Bomberos";
+            administrarMenu.Items.Add(bomberosMenu);
+
+            MenuItem unidadesMenu = new MenuItem();
+            bomberosMenu.Header = "Unidades";
+            unidadesMenu.Items.Add(unidadesMenu);
+            
+
         }
 
         private void  menuNormal()
@@ -82,6 +101,7 @@ namespace SGREB
                 mostrarReporte();
             }
         }
+
         private void mostrarReporte()
         {
             MenuItem editarMenu = new MenuItem();
