@@ -22,6 +22,11 @@ namespace SGREB
     {
         public MainWindow() 
         {
+            menuInicial();
+        }
+
+        private void menuInicial()
+        {
             //Menu Inicial 
             MenuItem iniciarMenu = new MenuItem();
             iniciarMenu.Header = "Ingresar";
@@ -31,6 +36,7 @@ namespace SGREB
             iniciarSesionMenu.Click += IniciarSesionMenu_Click;
             InitializeComponent();
             this.menu.Items.Add(iniciarMenu);
+
         }
 
         private void IniciarSesionMenu_Click(object sender, RoutedEventArgs e)
@@ -67,11 +73,12 @@ namespace SGREB
             administrarMenu.Items.Add(bomberosMenu);
 
             MenuItem unidadesMenu = new MenuItem();
-            bomberosMenu.Header = "Unidades";
-            unidadesMenu.Items.Add(unidadesMenu);
-            
+            unidadesMenu.Header = "Unidades";
+            administrarMenu.Items.Add(unidadesMenu);
+            this.menu.Items.Add(administrarMenu);
 
         }
+
 
         private void  menuNormal()
         {
@@ -85,7 +92,28 @@ namespace SGREB
             reportesMenu.Items.Add(reporteAmbulanciaMenu);
             reportesMenu.Items.Add(generarReproteMenu);
             this.menu.Items.Add(reportesMenu);
+
+            MenuItem sesion = new MenuItem();
+            sesion.Header = "Sesión";
+            MenuItem cerrarSesion = new MenuItem();
+            cerrarSesion.Header = "cerrar Sesion";
+            cerrarSesion.Click += cerrarSesio_click;
+            sesion.Items.Add(cerrarSesion);
+            this.menu.Items.Add(sesion);
+
         }
+        private void cerrarSesio_click(object sebder, RoutedEventArgs e)
+        {
+            var a = MessageBox.Show("Desea cerrar sesión", "Alerta", MessageBoxButton.OKCancel);
+            if(a == MessageBoxResult.OK)
+            {
+                this.contenido.Children.Clear();
+                this.menu.Items.Clear();
+                menuInicial();
+            }
+
+        }
+
         private void mostrarIngresoDeReporte_Click(object sender, RoutedEventArgs e)
         {
             if(this.contenido.Children.Count > 0)

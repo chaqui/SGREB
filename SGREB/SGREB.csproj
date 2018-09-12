@@ -102,6 +102,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Paginas\administrador\Bomberos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Paginas\IngresoDeIncidente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -124,6 +128,9 @@
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="Model\InicioDeSesion.cs" />
+    <Compile Include="Paginas\administrador\Bomberos.xaml.cs">
+      <DependentUpon>Bomberos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\IngresoDeIncidente.xaml.cs">
       <DependentUpon>IngresoDeIncidente.xaml</DependentUpon>
     </Compile>

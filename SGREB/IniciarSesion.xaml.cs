@@ -31,9 +31,26 @@ namespace SGREB
 
         private void btInciarSesion_Click(object sender, RoutedEventArgs e)
         {
-            InicioDeSesion.ingreso = true;
-            InicioDeSesion.normal = true;
+            String usuario = txUsuario.Text;
+            String contrasenia = pBcontrsenia.Password;
+            iniciarSesion(usuario, contrasenia);
             this.Close();
+
+        }
+
+        private void iniciarSesion(String usuario, String contrasenia)
+        {
+            inicioDeSesion.ingreso = true;
+            if (usuario == "a")
+            {
+                
+                inicioDeSesion.administrador = true;
+               
+            }
+            else
+            {
+                inicioDeSesion.normal = true;
+            }
         }
     }
 }
