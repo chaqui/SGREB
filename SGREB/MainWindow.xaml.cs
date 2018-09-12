@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SGREB.Paginas.administrador;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,8 @@ namespace SGREB
     /// </summary>
     public partial class MainWindow : Window
     {
+        private Boolean reporteAdministrador;
+        private Boolean administrador;
         public MainWindow() 
         {
             menuInicial();
@@ -47,10 +50,13 @@ namespace SGREB
             {
                 this.menu.Items.Clear();
                 if (n.InicioDeSesion.normal) {
+                    administrador = false;
                     menuNormal();
                 }
                 else
-                { menuAdministrador(); }
+                {
+                    administrador = true;
+                    menuAdministrador(); }
             }
             
         }
@@ -60,20 +66,24 @@ namespace SGREB
 
         private void menuAdministrador()
         {
+            
             menuNormal();
             MenuItem administrarMenu = new MenuItem();
             administrarMenu.Header = "Administrar";
 
             MenuItem usuariosMenu = new MenuItem();
+            usuariosMenu.Click += usuarios_click;
             usuariosMenu.Header = "usuarios";
             administrarMenu.Items.Add(usuariosMenu);
 
             MenuItem bomberosMenu = new MenuItem();
+            bomberosMenu.Click += bomberos_click;
             bomberosMenu.Header = "Bomberos";
             administrarMenu.Items.Add(bomberosMenu);
 
             MenuItem unidadesMenu = new MenuItem();
             unidadesMenu.Header = "Unidades";
+            unidadesMenu.Click += unidades_click;
             administrarMenu.Items.Add(unidadesMenu);
             this.menu.Items.Add(administrarMenu);
 
@@ -114,6 +124,107 @@ namespace SGREB
 
         }
 
+        private void usuarios_click(object sebder, RoutedEventArgs e)
+        {
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+
+                if(a == MessageBoxResult.OK)
+                {
+                    if (reporteAdministrador)
+                    {
+                        this.menu.Items.Clear();
+                        menuAdministrador();
+                    }
+                    this.contenido.Children.Clear();
+                    var usuarios = new UsuarioControl()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(usuarios);
+                }
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var usuarios = new UsuarioControl()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(usuarios);
+            }
+
+
+        }
+
+        private void bomberos_click(object sebder, RoutedEventArgs e)
+        {
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    if (reporteAdministrador)
+                    {
+                        this.menu.Items.Clear();
+                        menuAdministrador();
+                    }
+                    this.contenido.Children.Clear();
+                    var bomberos = new Bomberos()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(bomberos);
+                }
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var bomberos = new Bomberos()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(bomberos);
+            }
+        }
+        private void unidades_click(object sebder, RoutedEventArgs e)
+        {
+            if(this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    if (reporteAdministrador)
+                    {
+                        this.menu.Items.Clear();
+                        menuAdministrador();
+                    }
+                    this.contenido.Children.Clear();
+                    var unidades = new UnidadesControl()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(unidades);
+                }
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var unidades = new UnidadesControl()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(unidades);
+            }
+        }
+
         private void mostrarIngresoDeReporte_Click(object sender, RoutedEventArgs e)
         {
             if(this.contenido.Children.Count > 0)
@@ -132,6 +243,10 @@ namespace SGREB
 
         private void mostrarReporte()
         {
+            if (administrador)
+            {
+                reporteAdministrador = true;
+            }
             MenuItem editarMenu = new MenuItem();
             editarMenu.Header="editar";
             MenuItem limpiarMenu = new MenuItem();

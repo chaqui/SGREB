@@ -64,6 +64,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\NuevoIncidente.xaml.cs">
       <DependentUpon>NuevoIncidente.xaml</DependentUpon>
     </Compile>
@@ -106,6 +109,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Paginas\administrador\UnidadesControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Paginas\administrador\UsuarioControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Paginas\GenerarReportes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Paginas\IngresoDeIncidente.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -130,6 +145,15 @@
     <Compile Include="Model\InicioDeSesion.cs" />
     <Compile Include="Paginas\administrador\Bomberos.xaml.cs">
       <DependentUpon>Bomberos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\administrador\UnidadesControl.xaml.cs">
+      <DependentUpon>UnidadesControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\administrador\UsuarioControl.xaml.cs">
+      <DependentUpon>UsuarioControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\GenerarReportes.xaml.cs">
+      <DependentUpon>GenerarReportes.xaml</DependentUpon>
     </Compile>
     <Compile Include="Paginas\IngresoDeIncidente.xaml.cs">
       <DependentUpon>IngresoDeIncidente.xaml</DependentUpon>
