@@ -35,7 +35,7 @@
             <ComboBox HorizontalAlignment="Left" Margin="185,46,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.886,0.769"/>
             <DatePicker HorizontalAlignment="Left" Margin="416,44,0,0" VerticalAlignment="Top"/>
             <Label Content="Solicitante:" HorizontalAlignment="Left" Margin="73,88,0,0" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="177,92,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="384"/>
+            <TextBox x:Name="txtSolicitante" HorizontalAlignment="Left" Height="23" Margin="177,92,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="384"/>
             <Label Content="RadioTelefonista:" HorizontalAlignment="Left" Margin="73,138,0,0" VerticalAlignment="Top"/>
             <ComboBox HorizontalAlignment="Left" Margin="177,138,0,0" VerticalAlignment="Top" Width="384"/>
         </Grid>
@@ -52,8 +52,8 @@
             <TextBox HorizontalAlignment="Left" Height="23" Margin="461,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
             <Label Content="Dirección:" HorizontalAlignment="Left" Margin="41,106,0,0" VerticalAlignment="Top" Width="86"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="151,109,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430"/>
-            <ComboBox x:Name="cmBxTipoDeIncidente" HorizontalAlignment="Left" Margin="151,156,0,0" VerticalAlignment="Top" Width="296" SelectionChanged="ComboBox_SelectionChanged"/>
             <Label Content="Tipo de Incidente:" HorizontalAlignment="Left" Margin="41,156,0,0" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="152,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140" x:Name="txTipoIncidente" TextChanged="txTipoIncidente_TextChanged"/>
         </Grid>
 
         <!--     Formularios para incidente   -->

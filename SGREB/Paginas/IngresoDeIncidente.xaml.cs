@@ -26,7 +26,7 @@ namespace SGREB
         public IngresoDeIncidente()
         {
             InitializeComponent();
-            LlenarIncidentes();
+      
         }
 
         /// <summary>
@@ -49,32 +49,75 @@ namespace SGREB
            
         }
 
+        private void obtenerIncidentes()
+        {
+            TipoIncidente tipoIncidente = new TipoIncidente();
+            tiposDeIncidentes = tipoIncidente.obtenerIncidentes();
+        }
+
+
+
         /// <summary>
-        /// muestra y oculta los formularios, por medio del id, buscado por medio del 
-        /// nombre del incidente seleccionado en el comboBox.
+        /// uncion para mostrar el formulario común
+        /// </summary>
+        /// <param name="nombreIncidente"></param>
+        private void mostrarGridComun(String nombreIncidente)
+        {
+            tituloIncidenteComun.Content = nombreIncidente;
+            gridComun.Visibility = Visibility.Visible;
+            this.Height = 2000;
+        }
+
+        /// <summary>
+        /// Funcion para mostrar el formulario común de  incidentes con Fuego.
+        /// </summary>
+        /// <param name="nombreIncidente"></param>
         /// 
+        private void mostrarIncidendios(String nombreIncidente)
+        {
+            tituloIncendio.Content = nombreIncidente;
+            gridIncendiosDeViviendas.Visibility = Visibility.Visible;
+            this.Height = 2000;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="idIncidente"></param>
+        /// <returns></returns>
+
+        private String obtenerNombre(int idIncidente)
+        {
+            foreach(TipoIncidente incidente in tiposDeIncidentes)
+            {
+                if (incidente.idTipo == idIncidente)
+                {
+                    return incidente.nombre;
+                }
+            }
+            return "";
+        }
+
+        /// <summary>
+        /// Seleccionar los formularios por tipo de incidente
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void txTipoIncidente_TextChanged(object sender, TextChangedEventArgs e)
         {
-            //se obtiene el nombre de incidente
-            String nombreIncidente = cmBxTipoDeIncidente.SelectedItem.ToString();
-
-
-            idTipoIncidente = obtenerIdIncidente(nombreIncidente);
-
+            idTipoIncidente = int.Parse(txTipoIncidente.Text);
+           
             //si retorna 0 la función de busqueda 
             if (idTipoIncidente == 0)
             {
                 return;
             }
-
+            String nombreIncidente = obtenerNombre(idTipoIncidente);
             //se ocultan todos los formularios de incidentes
             gridServiciosVarios.Visibility = Visibility.Collapsed;
             gridComun.Visibility = Visibility.Collapsed;
-            gridUnidades.Visibility= Visibility.Collapsed;
+            gridUnidades.Visibility = Visibility.Collapsed;
             gridMaternidad.Visibility = Visibility.Collapsed;
             gridAtropellados.Visibility = Visibility.Collapsed;
             gridIntoxicados.Visibility = Visibility.Collapsed;
@@ -82,12 +125,14 @@ namespace SGREB
             gridAccidenteTransito.Visibility = Visibility.Collapsed;
             gridServicioDeAgua.Visibility = Visibility.Collapsed;
             gridIncendiosDeViviendas.Visibility = Visibility.Collapsed;
+            gridInundaciones.Visibility = Visibility.Collapsed;
             gridElementos.Visibility = Visibility.Collapsed;
+            gridBaleados.Visibility = Visibility.Collapsed;
 
             //seleccion de formulario por id
             switch (idTipoIncidente)
             {
-                
+
                 case 1: //incidentes varios
                     gridServiciosVarios.Visibility = Visibility.Visible;
                     this.Height = 800;
@@ -190,67 +235,12 @@ namespace SGREB
                 case 34: //Rescate con equipo especial
                     mostrarGridComun(nombreIncidente);
                     break;
-            
+
 
             }
             gridUnidades.Visibility = Visibility.Visible;
-            gridUnidades.Visibility = Visibility.Visible;
+            gridElementos.Visibility = Visibility.Visible;
+
         }
-
-        /// <summary>
-        /// Formulario para seleccionar todos los incidentes, para que 
-        /// </summary>
-
-        private void LlenarIncidentes()
-        {
-            TipoIncidente tipoIncidente = new TipoIncidente();
-            tiposDeIncidentes = tipoIncidente.obtenerIncidentes();
-            foreach (TipoIncidente incidente in tiposDeIncidentes)
-                {
-                cmBxTipoDeIncidente.Items.Add(incidente.nombre);
-            }
-        }
-
-        /// <summary>
-        /// Se busca el id del incidente basado en el nombre
-        /// </summary>
-        /// <param name="nombreIncidente"></param>
-        /// <returns name="idTipo">tipo de incidente </returns>
-        private int obtenerIdIncidente(String nombreIncidente)
-        {
-            foreach (TipoIncidente incidente in tiposDeIncidentes)
-            {
-                if (nombreIncidente.Equals(incidente.nombre))
-                {
-                    return incidente.idTipo;
-                }
-                  
-            }
-            return 0;
-        }
-
-        /// <summary>
-        /// uncion para mostrar el formulario común
-        /// </summary>
-        /// <param name="nombreIncidente"></param>
-        private void mostrarGridComun(String nombreIncidente)
-        {
-            tituloIncidenteComun.Content = nombreIncidente;
-            gridComun.Visibility = Visibility.Visible;
-            this.Height = 1400;
-        }
-
-        /// <summary>
-        /// Funcion para mostrar el formulario común de  incidentes con Fuego.
-        /// </summary>
-        /// <param name="nombreIncidente"></param>
-        /// 
-        private void mostrarIncidendios(String nombreIncidente)
-        {
-            tituloIncendio.Content = nombreIncidente;
-            gridIncendiosDeViviendas.Visibility = Visibility.Visible;
-            this.Height = 1400;
-        }
-
     }
 }
