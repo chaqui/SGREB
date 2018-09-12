@@ -1,4 +1,5 @@
-﻿using SGREB.Paginas.administrador;
+﻿using SGREB.Paginas;
+using SGREB.Paginas.administrador;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -98,9 +99,24 @@ namespace SGREB
             reporteAmbulanciaMenu.Header = "Ingresar Reporte de Ambulancias";
             reporteAmbulanciaMenu.Click += mostrarIngresoDeReporte_Click;
             MenuItem generarReproteMenu = new MenuItem();
-            generarReproteMenu.Header = "Generar Reporte de Incidentes";
+            generarReproteMenu.Header = "Generar Reportes";
+            MenuItem multiReporteMenu = new MenuItem();
+            multiReporteMenu.Header = "Reporte de Incidentes";
+
+            generarReproteMenu.Items.Add(multiReporteMenu);
+            MenuItem reporteResumenMenu = new MenuItem();
+            reporteResumenMenu.Header = "Reporte Resunmido";
+
+            generarReproteMenu.Items.Add(reporteResumenMenu);
+            MenuItem reporteEspecial = new MenuItem();
+            reporteEspecial.Header = "Reporte Especial";
+
+            generarReproteMenu.Items.Add(reporteEspecial);
+
             reportesMenu.Items.Add(reporteAmbulanciaMenu);
             reportesMenu.Items.Add(generarReproteMenu);
+            
+
             this.menu.Items.Add(reportesMenu);
 
             MenuItem sesion = new MenuItem();
@@ -123,6 +139,121 @@ namespace SGREB
             }
 
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sebder"></param>
+        /// <param name="e"></param>
+
+        private void reportes_click(object sebder, RoutedEventArgs e)
+        {
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+
+                if (a == MessageBoxResult.OK)
+                {
+                    if (reporteAdministrador)
+                    {
+                        this.menu.Items.Clear();
+                        menuAdministrador();
+                    }
+                    this.contenido.Children.Clear();
+                    var reportes = new GenerarReportes()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(reportes);
+                }
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var reportes = new GenerarReportes()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(reportes);
+            }
+
+        }
+
+        private void resumen_click(object sebder, RoutedEventArgs e)
+        {
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+
+                if (a == MessageBoxResult.OK)
+                {
+                    if (reporteAdministrador)
+                    {
+                        this.menu.Items.Clear();
+                        menuAdministrador();
+                    }
+                    this.contenido.Children.Clear();
+                    var reportes = new ResumenReporte()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(reportes);
+                }
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var reportes = new ResumenReporte()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(reportes);
+            }
+        }
+
+        private void especial_click(object sebder, RoutedEventArgs e)
+        {
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+
+                if (a == MessageBoxResult.OK)
+                {
+                    if (reporteAdministrador)
+                    {
+                        this.menu.Items.Clear();
+                        menuAdministrador();
+                    }
+                    this.contenido.Children.Clear();
+                    var reportes = new ReporteEspecial()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(reportes);
+                }
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var reportes = new ReporteEspecial()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(reportes);
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sebder"></param>
+        /// <param name="e"></param>
 
         private void usuarios_click(object sebder, RoutedEventArgs e)
         {

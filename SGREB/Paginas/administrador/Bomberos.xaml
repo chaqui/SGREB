@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="SGREB.Paginas.administrador.Bomberos"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SGREB.Paginas.administrador"
+             mc:Ignorable="d"   Background="White"
+            d:DesignWidth="733" Height="495">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="65*"/>
+            <ColumnDefinition Width="668*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="19*"/>
+            <RowDefinition Height="14*"/>
+        </Grid.RowDefinitions>
+        <TextBlock
+            FontSize="24"
+            FontWeight="Bold" 
+            Text="BENEMERITO CUERPO VOLUNTARIO DE BOMBEROS DE GUATEMALA"
+            TextAlignment="Center"
+            TextWrapping="Wrap" RenderTransformOrigin="0.6,0.284" Margin="44,15,58,196" Grid.Column="1" />
+        <TextBlock
+            FontSize="24"
+            TextAlignment="Center" Margin="44,79,58,160" Text="BOMBEROS DE LA COMPAÑIA" Grid.Column="1"/>
+        <DataGrid HorizontalAlignment="Left" Height="250" Margin="5,150,0,0" VerticalAlignment="Top" Width="465" Grid.RowSpan="2" x:Name="dataGridBomberos" Grid.Column="1">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nombres" x:Name="nombre" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Apellidos" x:Name="SegundoNombre" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Grado" x:Name="primerApellido" ></DataGridTextColumn>
+                <DataGridTextColumn Header="Rol" x:Name="SegundoApellido" ></DataGridTextColumn>
+            </DataGrid.Columns>
+
+        </DataGrid>
+        <Button Content="Agregar Elemento" HorizontalAlignment="Left" Margin="515,170,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarElemento" Click="btAgregarElemento_Click" Grid.Column="1"/>
+        <Button Content="Eliminar Elemento" HorizontalAlignment="Left" Margin="515,210,0,0" VerticalAlignment="Top" Width="105" x:Name="btEliminarElemento" Grid.Column="1"/>
+        <Button Content="Modificar Elemento" HorizontalAlignment="Left" Margin="515,250,0,0" VerticalAlignment="Top" Width="105" x:Name="btModificarElemento" Grid.Column="1"/>
+    </Grid>
+</UserControl>
