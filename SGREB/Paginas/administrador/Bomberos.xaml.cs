@@ -1,4 +1,6 @@
-﻿using System;
+﻿using SGREB.Controlador;
+using SGREB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,13 +25,33 @@ namespace SGREB.Paginas.administrador
         public Bomberos()
         {
             InitializeComponent();
-      
+            
 
         }
 
         private void btAgregarElemento_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void obtenerBomberos()
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            var bomberos = bitacora.TC_Bombero;
+
+            if (bomberos.Count() == 0)
+            {
+                
+            }
+            else
+            {
+                foreach(var bombero in bomberos)
+                {
+                    var grado = new Grado();
+                    grado = grado.obtener(bombero.grado);
+
+                }
+            }
         }
     }
 }
