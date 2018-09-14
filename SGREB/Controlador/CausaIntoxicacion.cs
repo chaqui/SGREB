@@ -8,10 +8,16 @@ using System.Text;
 namespace SGREB.Controlador
 {
 
-
+    /// <summary>
+    /// clase que controla las funciones 
+    /// a la base de datos con la tabla 
+    /// causa intoxicación
+    /// </summary>
     public class CausaIntoxicacion
     {
-
+        /// <summary>
+        /// constructor para funcionalidades
+        /// </summary>
         public CausaIntoxicacion()
         {
         }
