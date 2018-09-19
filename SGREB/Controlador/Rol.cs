@@ -7,31 +7,14 @@ using System.Text;
 
 namespace SGREB.Controlador { 
 
-public class Rol : CRUD {
+public class Rol  {
 
     public Rol() {
     }
 
-    private int idRol;
-
-    private String nombre;
-
-        public Rol(int idRol, string nombre)
-        {
-            this.idRol = idRol;
-            this.nombre = nombre;
-        }
-
-        public Rol(string nombre)
-        {
-            this.nombre = nombre;
-        }
-
-        public void Crear()
+        public void Crear(TV_Rol tvRol)
         {
             var bitacora = new bitacoraBomberoaContext();
-            var tvRol = new TV_Rol();
-            tvRol.nombre = this.nombre;
             bitacora.TV_Rol.Add(tvRol);
             bitacora.SaveChanges();
             
@@ -47,15 +30,11 @@ public class Rol : CRUD {
             throw new NotImplementedException();
         }
 
-        public Rol obtener(int? id)
+        public TV_Rol obtener(int? id)
         {
             var bitacora = new bitacoraBomberoaContext();
-            var roles = bitacora.TV_Rol.Where(s=>s.idRol==id);
-            foreach( var rol in roles)
-            {
-                return new Rol(rol.idRol,rol.nombre);
-            }
-            return null;
+            var rol = bitacora.TV_Rol.Where(s=>s.idRol==id).Single();
+            return rol;
         }
 
         public List<TV_Rol> obtenerVarios()
@@ -70,9 +49,6 @@ public class Rol : CRUD {
             throw new NotImplementedException();
         }
 
-        List<object> CRUD.obtenerVarios()
-        {
-            throw new NotImplementedException();
-        }
+
     }
 }
