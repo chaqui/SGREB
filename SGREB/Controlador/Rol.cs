@@ -1,16 +1,16 @@
 
 using SGREB.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-namespace SGREB.Controlador { 
+namespace SGREB.Controlador
+{
 
-public class Rol  {
 
-    public Rol() {
-    }
+    public class Rol  {
+
+        public Rol() {
+        }
 
         public void Crear(TV_Rol tvRol)
         {
@@ -19,17 +19,6 @@ public class Rol  {
             bitacora.SaveChanges();
             
         }
-
-        public void Eliminar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void modificar(int id)
-        {
-            throw new NotImplementedException();
-        }
-
         public TV_Rol obtener(int? id)
         {
             var bitacora = new bitacoraBomberoaContext();
@@ -44,11 +33,5 @@ public class Rol  {
             return roles.ToList();
 
         }
-        public void obtener(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-
     }
 }

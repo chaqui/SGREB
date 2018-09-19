@@ -1,17 +1,52 @@
 
-using System;
+using SGREB.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
-public class TipoUnidad : CRUD {
+namespace SGREB.Controlador
+{
+    /// <summary>
+    /// clase para administrar la tabla TV_Unidad
+    /// </summary>
+    public class TipoUnidad  {
 
-    public TipoUnidad() {
+        /// <summary>
+        /// constructor para funcionalidades de la clase
+        /// </summary>
+        public TipoUnidad() {}
+
+        /// <summary>
+        /// crear el tipo de unidad en la base de datos
+        /// </summary>
+        /// <param name="tvTipoUnidad"></param>
+        public void Crear(TV_TipoUnidad tvTipoUnidad)
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            bitacora.TV_TipoUnidad.Add(tvTipoUnidad);
+            bitacora.SaveChanges();
+        }
+
+        /// <summary>
+        /// seleccionar el tipo de unidad por su id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public TV_TipoUnidad obtener(int? id)
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            var tipo = bitacora.TV_TipoUnidad.Where(s => s.idTipoUnidad == id).Single();
+            return tipo;
+        }
+
+        /// <summary>
+        /// obtener tda la lista de tipos de unidades
+        /// </summary>
+        /// <returns></returns>
+        public List<TV_TipoUnidad> obtenerVasrios()
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            var tipos = bitacora.TV_TipoUnidad;
+            return tipos.ToList();
+        }
     }
-
-    private Int idUnidad;
-
-    private String nombreTipo;
-
-
 }
