@@ -1,19 +1,9 @@
 ﻿using SGREB.Controlador;
+using SGREB.miscellany;
 using SGREB.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SGREB.Paginas.administrador
 {
@@ -25,33 +15,52 @@ namespace SGREB.Paginas.administrador
         public Bomberos()
         {
             InitializeComponent();
-            
+            obtenerBomberos();
 
         }
 
         private void btAgregarElemento_Click(object sender, RoutedEventArgs e)
         {
-
+            SGREB.Formularios.Bombero bombero = new Formularios.Bombero();
+            bombero.ShowDialog();
         }
 
         private void obtenerBomberos()
         {
-            var bitacora = new bitacoraBomberoaContext();
-            var bomberos = bitacora.TC_Bombero;
-
-            if (bomberos.Count() == 0)
+            if (dataGridBomberos.Items.Count > 0)
             {
-                
+                dataGridBomberos.Items.Clear();
+            }
+            Bombero bombero = new Bombero();
+            List<TC_Bombero> bomberos = bombero.obtenerVarios();
+            if(bomberos.Count != 0)
+            {
+                foreach(var bom in bomberos)
+                {
+                    Persona persona = new Persona();
+                    var per = persona.obtener(bom.persona);
+                    Grado grado = new Grado();
+                    var g = grado.obtener(bom.grado);
+                    Rol rol = new Rol();
+                    var r = rol.obtener(bom.rol);
+                    var elemento = new BomberoDataGrid { nombres = per.nombres, id = bom.idBombero, apellidos = per.apellidos, grado = g.nombreGrado, rol = r.nombre };
+                    dataGridBomberos.Items.Add(elemento);
+                }
             }
             else
             {
-                foreach(var bombero in bomberos)
-                {
-                    var grado = new Grado();
-                    grado = grado.obtener(bombero.grado);
+                var elemento = new BomberoDataGrid { nombres = "No existe ningun Bombero" };
 
-                }
+
             }
         }
-    }
+
+        private void btModificarElemento_Click(object sender, RoutedEventArgs e)
+        {
+            var seleccionado = (BomberoDataGrid)dataGridBomberos.SelectedItem;
+            SGREB.Formularios.Bombero bombero = new Formularios.Bombero(seleccionado.id);
+            bombero.ShowDialog();
+            obtenerBomberos();
+        }
+    } 
 }

@@ -45,7 +45,7 @@ public class Grado  {
         /// </summary>
         /// <param name="id"></param>
         /// <returns>objeto grado encontrado en la base de datos</returns>
-        public TV_Grado obtener(int id)
+        public TV_Grado obtener(int? id)
         {
             
             var bitacora = new bitacoraBomberoaContext();

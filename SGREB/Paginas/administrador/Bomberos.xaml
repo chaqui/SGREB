@@ -24,17 +24,18 @@
         <TextBlock
             FontSize="24"
             TextAlignment="Center" Margin="44,79,58,160" Text="BOMBEROS DE LA COMPAÑIA" Grid.Column="1"/>
-        <DataGrid HorizontalAlignment="Left" Height="250" Margin="5,150,0,0" VerticalAlignment="Top" Width="465" Grid.RowSpan="2" x:Name="dataGridBomberos" Grid.Column="1">
+        <DataGrid HorizontalAlignment="Left" Height="250" Margin="35,150,0,0" VerticalAlignment="Top" Width="500" Grid.RowSpan="2" x:Name="dataGridBomberos" Grid.ColumnSpan="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nombres" x:Name="nombre" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Apellidos" x:Name="SegundoNombre" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Grado" x:Name="primerApellido" ></DataGridTextColumn>
-                <DataGridTextColumn Header="Rol" x:Name="SegundoApellido" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=id}" Header="id" x:Name="id" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=nombres}" Header="Nombres" x:Name="nombre" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=apellidos}" Header="Apellidos" x:Name="SegundoNombre" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=grado}" Header="Grado" x:Name="primerApellido" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=rol}" Header="Rol" x:Name="SegundoApellido" ></DataGridTextColumn>
             </DataGrid.Columns>
 
         </DataGrid>
         <Button Content="Agregar Elemento" HorizontalAlignment="Left" Margin="515,170,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarElemento" Click="btAgregarElemento_Click" Grid.Column="1"/>
         <Button Content="Eliminar Elemento" HorizontalAlignment="Left" Margin="515,210,0,0" VerticalAlignment="Top" Width="105" x:Name="btEliminarElemento" Grid.Column="1"/>
-        <Button Content="Modificar Elemento" HorizontalAlignment="Left" Margin="515,250,0,0" VerticalAlignment="Top" Width="105" x:Name="btModificarElemento" Grid.Column="1"/>
+        <Button Content="Modificar Elemento" HorizontalAlignment="Left" Margin="515,250,0,0" VerticalAlignment="Top" Width="105" x:Name="btModificarElemento" Grid.Column="1" Click="btModificarElemento_Click"/>
     </Grid>
 </UserControl>
