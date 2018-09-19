@@ -18,37 +18,10 @@ public class Grado  {
         public Grado() {
         }
 
-        private int idGrado;
-
-        private String nombreGrado;
-
-        /// <summary>
-        /// constructor para la selección y modificación
-        /// </summary>
-        /// <param name="idGrado"></param>
-        /// <param name="nombreGrado"></param>
-        public Grado(int idGrado, string nombreGrado):this(nombreGrado)
-        {
-            this.idGrado = idGrado;
-        }
-
-        /// <summary>
-        /// constructor para la creación
-        /// </summary>
-        /// <param name="nombreGrado"></param>
-        public Grado(string nombreGrado)
-        {
-            this.nombreGrado = nombreGrado;
-        }
-        /// <summary>
-        /// crear un grado
-        /// </summary>
-        public void Crear()
+        public void Crear(TV_Grado grado)
         {
             var bitacora = new bitacoraBomberoaContext();
-            var tvGrado = new TV_Grado();
-            tvGrado.nombreGrado = this.nombreGrado;
-            bitacora.TV_Grado.Add(tvGrado);
+            bitacora.TV_Grado.Add(grado);
             bitacora.SaveChanges();
         }
 
@@ -57,7 +30,7 @@ public class Grado  {
         /// modificar el grado
         /// </summary>
         /// <param name="grado">el objeto grado a modificar</param>
-        public void modificar(Grado grado)
+        public void modificar(TV_Grado grado)
         {
             using (var bitacora = new bitacoraBomberoaContext())
             {

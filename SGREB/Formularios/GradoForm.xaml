@@ -10,6 +10,7 @@
         <Button Content="ingresar" HorizontalAlignment="Left" Margin="274,95,0,0" VerticalAlignment="Top" Width="75" x:Name="btGrado" Click="btGrado_Click"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="97,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="199" x:Name="nombreGrado"/>
         <Label Content="Nombre:" HorizontalAlignment="Left" Margin="34,49,0,0" VerticalAlignment="Top"/>
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="172,95,0,0" VerticalAlignment="Top" Width="75" x:Name="btCancelar" Click="btCancelar_Click"/>
 
     </Grid>
 </Window>

@@ -1,4 +1,5 @@
 ﻿using SGREB.Controlador;
+using SGREB.Models;
 using System.Windows;
 
 namespace SGREB.Formularios
@@ -16,8 +17,15 @@ namespace SGREB.Formularios
         private void btGrado_Click(object sender, RoutedEventArgs e)
         {
             var nombre = this.nombreGrado.Text;
-            Grado grado = new Grado(nombre);
-            grado.Crear();
+            Grado grado = new Grado();
+            var tvGrado = new TV_Grado();
+            tvGrado.nombreGrado = nombre;
+            grado.Crear(tvGrado);
+            this.Close();
+        }
+
+        private void btCancelar_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }
