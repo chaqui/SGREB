@@ -13,6 +13,7 @@ namespace SGREB.Models
         public string nickname { get; set; }
         public string contrasenia { get; set; }
         public string bombero { get; set; }
+        public string rol { get; set; }
         public virtual TC_Bombero TC_Bombero { get; set; }
         public virtual ICollection<TC_Solicitud> TC_Solicitud { get; set; }
     }

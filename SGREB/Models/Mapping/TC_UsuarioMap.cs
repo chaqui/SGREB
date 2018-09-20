@@ -23,12 +23,16 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.bombero)
                 .IsFixedLength()
                 .HasMaxLength(10);
+            this.Property(t => t.rol)
+                .IsFixedLength()
+                .HasMaxLength(10);
 
             // Table & Column Mappings
             this.ToTable("TC_Usuario");
             this.Property(t => t.nickname).HasColumnName("nickname");
             this.Property(t => t.contrasenia).HasColumnName("contrasenia");
             this.Property(t => t.bombero).HasColumnName("bombero");
+            this.Property(t => t.rol).HasColumnName("rol");
 
             // Relationships
             this.HasOptional(t => t.TC_Bombero)
