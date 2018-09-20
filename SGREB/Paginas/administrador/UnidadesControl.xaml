@@ -16,17 +16,17 @@
         <TextBlock
             FontSize="24"
             TextAlignment="Center" Margin="109,79,125,325" Text="UNIDADES DE LA COMPAÑIA"/>
-        <DataGrid HorizontalAlignment="Left" Height="250" Margin="70,150,0,0" VerticalAlignment="Top" Width="465" Grid.RowSpan="2" x:Name="dataGridBomberos">
+        <DataGrid HorizontalAlignment="Left" Height="250" Margin="70,150,0,0" VerticalAlignment="Top" Width="465" Grid.RowSpan="2" x:Name="dataGridUnidades">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Placa" x:Name="placaColumna" ></DataGridTextColumn>
-                <DataGridTextColumn Header="tipo" x:Name="tipoColumna" ></DataGridTextColumn>
-                <DataGridTextColumn Header="estado" x:Name="estadoColumna" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=placa}" Header="Placa" x:Name="placaColumna" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=tipo}" Header="tipo" x:Name="tipoColumna" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=estado}" Header="estado" x:Name="estadoColumna" ></DataGridTextColumn>
 
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button Content="Agregar Unidad" HorizontalAlignment="Left" Margin="580,170,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarElemento" />
+        <Button Content="Agregar Unidad" HorizontalAlignment="Left" Margin="580,170,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarElemento" Click="btAgregarElemento_Click" />
         <Button Content="Eliminar Unidad" HorizontalAlignment="Left" Margin="580,210,0,0" VerticalAlignment="Top" Width="105" x:Name="btEliminarElemento"/>
-        <Button Content="Modificar Unidad" HorizontalAlignment="Left" Margin="580,250,0,0" VerticalAlignment="Top" Width="105" x:Name="btModificarElemento"/>
+        <Button Content="Modificar Unidad" HorizontalAlignment="Left" Margin="580,250,0,0" VerticalAlignment="Top" Width="105" x:Name="btModificarElemento" Click="btModificarElemento_Click"/>
     </Grid>
 </UserControl>

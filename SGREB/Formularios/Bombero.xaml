@@ -6,22 +6,24 @@
         xmlns:local="clr-namespace:SGREB.Formularios"
         mc:Ignorable="d"
         Title="Bombero" Height="342" Width="510">
-    <Grid>
-        <Label Content="Nombres:" HorizontalAlignment="Left" Margin="37,54,0,0" VerticalAlignment="Top" />
-        <Label Content="Apellidos:" HorizontalAlignment="Left" Margin="37,94,0,0" VerticalAlignment="Top"/>
-        <Label Content="DPI:" HorizontalAlignment="Left" Margin="37,137,0,0" VerticalAlignment="Top"/>
-        <Label Content="Grado:" HorizontalAlignment="Left" Margin="37,174,0,0" VerticalAlignment="Top"/>
-        <Label Content="Rol:" HorizontalAlignment="Left" Margin="37,215,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="123,54,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" x:Name="txNombres"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="123,94,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" x:Name="txApellidos"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="123,137,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" x:Name="txDPI"/>
-        <ComboBox HorizontalAlignment="Left" Margin="123,178,0,0" VerticalAlignment="Top" Width="169" x:Name="cmbGrado"/>
-        <ComboBox HorizontalAlignment="Left" Margin="123,219,0,0" VerticalAlignment="Top" Width="169" x:Name="CmbRol"/>
-        <Button Content="Guardar" HorizontalAlignment="Left" Margin="401,262,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="287,262,0,0" VerticalAlignment="Top" Width="75"/>
+    <Grid Margin="3,9,-3,-9">
+        <Label Content="Nombres:" HorizontalAlignment="Left" Margin="50,75,0,0" VerticalAlignment="Top" />
+        <Label Content="Apellidos:" HorizontalAlignment="Left" Margin="50,115,0,0" VerticalAlignment="Top"/>
+        <Label Content="DPI:" HorizontalAlignment="Left" Margin="50,158,0,0" VerticalAlignment="Top"/>
+        <Label Content="Grado:" HorizontalAlignment="Left" Margin="50,195,0,0" VerticalAlignment="Top"/>
+        <Label Content="Rol:" HorizontalAlignment="Left" Margin="50,236,0,0" VerticalAlignment="Top"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="136,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" x:Name="txNombres"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="136,115,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" x:Name="txApellidos"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="136,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" x:Name="txDPI"/>
+        <ComboBox HorizontalAlignment="Left" Margin="136,199,0,0" VerticalAlignment="Top" Width="169" x:Name="cmbGrado" SelectionChanged="cmbGrado_SelectionChanged"/>
+        <ComboBox HorizontalAlignment="Left" Margin="136,240,0,0" VerticalAlignment="Top" Width="169" x:Name="CmbRol" SelectionChanged="CmbRol_SelectionChanged"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="397,221,0,0" VerticalAlignment="Top" Width="75" x:Name="btGuardar" Click="btGuardar_Click"/>
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="397,270,0,0" VerticalAlignment="Top" Width="75" x:Name="Cancelar" Click="Cancelar_Click"/>
         <TextBlock
             FontSize="24"
-            TextAlignment="Center"  Text="Nuevo Bombero" />
+            TextAlignment="Center"  Text="Nuevo Bombero" Margin="0,0,0,274" />
+        <Label Content="Codigo:" HorizontalAlignment="Left" Margin="50,42,0,0" VerticalAlignment="Top" />
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="136,42,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" x:Name="txCodigo"/>
 
     </Grid>
 </Window>

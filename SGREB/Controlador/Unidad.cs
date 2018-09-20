@@ -18,6 +18,7 @@ namespace SGREB.Controlador
         /// constructor para funciones
         /// </summary>
         public Unidad() {
+            estados = new string[3];
             estados[0] = "en servicio";
             estados[1] = "en espera";
             estados[2] = "desperfectos mecanicos";
@@ -79,7 +80,10 @@ namespace SGREB.Controlador
             return "";
         }
 
-
+        public string[] obtenerEstados()
+        {
+            return estados;
+        }
 
     }
 }

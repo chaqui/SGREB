@@ -19,40 +19,13 @@ namespace SGREB.Controlador
         public Bombero()
         {
         }
-
-        /// <summary>
-        /// constructor para la actualización y seleción de bombero
-        /// </summary>
-        /// <param name="idBombero"></param>
-        /// <param name="nombre"></param>
-        /// <param name="apellidos"></param>
-        /// <param name="dpi"></param>
-        /// <param name="idRol"></param>
-        /// <param name="idGrado"></param>
-        public Bombero(string idBombero, string nombre, string apellidos, string dpi, int idRol, int idGrado):base(nombre,apellidos,dpi)
+         /// <summary>
+         /// 
+         /// </summary>
+         /// <param name="tcBombero"></param>
+         public  void  Crear(TC_Bombero tcBombero) 
         {
-            this.idBombero = idBombero;
-
-            this.idGrado = idGrado;
-            this.idRol = idRol;
-        }
-
-        protected string idBombero { set; get; }
-        protected int idRol { set; get; }
-        protected int idGrado { set; get; }
-
-        /// <summary>
-        /// creacion de bombero
-        /// </summary>
-        public new void Crear()
-        {
-            int idPersona = base.Crear();
-
             var bitacora = new bitacoraBomberoaContext();
-            var tcBombero = new TC_Bombero();
-            tcBombero.persona = idPersona;
-            tcBombero.grado = idGrado;
-            tcBombero.rol = idRol;
             bitacora.TC_Bombero.Add(tcBombero);
             bitacora.SaveChanges();
         }
@@ -62,14 +35,13 @@ namespace SGREB.Controlador
         /// modificar bombero en la base de datos
         /// </summary>
         /// <param name="bombero">Bombero a modificar</param>
-        public void modificar(Bombero bombero)
+        public void modificar(TC_Bombero bombero)
         {
             using (var bitacora = new bitacoraBomberoaContext())
             {
-                var tcBombero = bitacora.TC_Bombero.Find(bombero.id);
-                base.modificar(new Persona(bombero.nombre, bombero.apellido, bombero.DPI, tcBombero.persona));
-                tcBombero.rol = bombero.idRol;
-                tcBombero.grado = bombero.idGrado;
+                var tcBombero = bitacora.TC_Bombero.Find(bombero.idBombero);
+                tcBombero.rol = bombero.rol;
+                tcBombero.grado = bombero.grado;
                 bitacora.SaveChanges();
             }
         }
@@ -79,18 +51,12 @@ namespace SGREB.Controlador
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public  Bombero Obtener(string id)
+        public TC_Bombero Obtener(string id)
         {
             
             var bitacora = new bitacoraBomberoaContext();
             var tcBombero = bitacora.TC_Bombero.Where(s => s.idBombero == id).Single();
-            if(tcBombero != null)
-            {
-                var tcPersona = base.obtener(tcBombero.persona);
-                Bombero bombero = new Bombero(tcBombero.idBombero, tcPersona.nombres, tcPersona.apellidos, tcPersona.dpi, int.Parse(tcBombero.rol.ToString()), int.Parse(tcBombero.grado.ToString()));
-                return bombero;
-            }
-            return null;
+            return tcBombero;
           
 
         }
@@ -99,19 +65,12 @@ namespace SGREB.Controlador
         /// obter todos los bomberos de la base de datos con la información de persona
         /// </summary>
         /// <returns>lista de bomberos encontrados en la base de datos</returns>
-        public  List<Bombero> obtenerVarios()
+        public  List<TC_Bombero> obtenerVarios()
         {
             List<Bombero> bomberos = new List<Bombero>();
             var bitacora = new bitacoraBomberoaContext();
-            var tcBomberos = bitacora.TC_Bombero;
-            foreach (var tcBombero in tcBomberos)
-            {
-                var tcPersona = base.obtener(tcBombero.persona);
-                Bombero bombero = new Bombero(tcBombero.idBombero, tcPersona.nombres, tcPersona.apellidos, tcPersona.dpi, int.Parse(tcBombero.rol.ToString()), int.Parse(tcBombero.grado.ToString()));
-                bomberos.Add(bombero);
-            }
-
-            return bomberos;
+            var tcBomberos = bitacora.TC_Bombero.ToList();
+            return tcBomberos;
         }
     }
 }

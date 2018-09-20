@@ -23,6 +23,7 @@ namespace SGREB.Paginas.administrador
         {
             SGREB.Formularios.Bombero bombero = new Formularios.Bombero();
             bombero.ShowDialog();
+            obtenerBomberos();
         }
 
         private void obtenerBomberos()
