@@ -70,7 +70,6 @@ namespace SGREB.Formularios
             {
                 Persona persona = new Persona();
                 var p = persona.obtener(b.persona);
-                MessageBox.Show(b.idBombero);
                 var nombre = p.nombres + " " + p.apellidos;
                 bomberosList.Add(new BomberoComboBox {nombre= nombre, id=b.idBombero });
                 

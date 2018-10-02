@@ -17,8 +17,8 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="136,158,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" x:Name="txDPI"/>
         <ComboBox HorizontalAlignment="Left" Margin="136,199,0,0" VerticalAlignment="Top" Width="169" x:Name="cmbGrado" SelectionChanged="cmbGrado_SelectionChanged"/>
         <ComboBox HorizontalAlignment="Left" Margin="136,240,0,0" VerticalAlignment="Top" Width="169" x:Name="CmbRol" SelectionChanged="CmbRol_SelectionChanged"/>
-        <Button Content="Guardar" HorizontalAlignment="Left" Margin="397,221,0,0" VerticalAlignment="Top" Width="75" x:Name="btGuardar" Click="btGuardar_Click"/>
-        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="397,270,0,0" VerticalAlignment="Top" Width="75" x:Name="Cancelar" Click="Cancelar_Click"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="379,206,0,0" VerticalAlignment="Top" Width="93" x:Name="btGuardar" Click="btGuardar_Click"/>
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="379,255,0,0" VerticalAlignment="Top" Width="93" x:Name="Cancelar" Click="Cancelar_Click"/>
         <TextBlock
             FontSize="24"
             TextAlignment="Center"  Text="Nuevo Bombero" Margin="0,0,0,274" />

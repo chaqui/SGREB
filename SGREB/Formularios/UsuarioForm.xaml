@@ -9,8 +9,8 @@
     <Grid>
         <Label Content="NicKname" HorizontalAlignment="Left" Margin="38,97,0,0" VerticalAlignment="Top"/>
         <Label Content="Contraseña:" HorizontalAlignment="Left" Margin="38,145,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="118,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" x:Name="txNickName"/>
-        <Button Content="Guardar" HorizontalAlignment="Left" Margin="283,229,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="118,101,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="169" x:Name="txNickName"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="274,251,0,0" VerticalAlignment="Top" Width="94" Click="Button_Click"/>
         <ComboBox HorizontalAlignment="Left" Margin="118,56,0,0" VerticalAlignment="Top" Width="240" x:Name="cmbBombero">
             <TextBlock
                 FontSize="24"
@@ -18,7 +18,7 @@
         </ComboBox>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="118,149,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="160" x:Name="txContrasenia"/>
         <Label Content="Bombero:" HorizontalAlignment="Left" Margin="38,56,0,0" VerticalAlignment="Top"/>
-        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="283,264,0,0" VerticalAlignment="Top" Width="75" x:Name="btCancelar"/>
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="155,252,0,0" VerticalAlignment="Top" Width="94" x:Name="btCancelar"/>
         <TextBlock
             FontSize="24"
             TextAlignment="Center"  Text="Nuevo Usuario" Margin="0,0,-14,257" x:Name="lbTitulo_Copy"/>

@@ -16,13 +16,13 @@ using System.Windows.Shapes;
 namespace SGREB.Paginas
 {
     /// <summary>
-    /// Lógica de interacción para GenerarReportes.xaml
+    /// Lógica de interacción para GenerarReporte1.xaml
     /// </summary>
-    public partial class ResumenReporte : UserControl
+    public partial class GenerarReporte1 : UserControl
     {
-        public ResumenReporte()
+        public GenerarReporte1()
         {
-      
+            InitializeComponent();
         }
     }
 }

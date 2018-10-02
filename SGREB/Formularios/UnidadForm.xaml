@@ -16,8 +16,8 @@
         <ComboBox HorizontalAlignment="Left" Margin="130,158,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.513,0.427" x:Name="cmbEstado"/>
         <Label Content="Estado:" HorizontalAlignment="Left" Margin="37,154,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="130,62,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" x:Name="txPlaca"/>
-        <Button Content="Guardar" HorizontalAlignment="Left" Margin="305,213,0,0" VerticalAlignment="Top" Width="75" x:Name="btGuardar" Click="btGuardar_Click"/>
-        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="305,175,0,0" VerticalAlignment="Top" Width="75" x:Name="btCancelar" Click="btCancelar_Click"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="292,213,0,0" VerticalAlignment="Top" Width="88" x:Name="btGuardar" Click="btGuardar_Click"/>
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="292,175,0,0" VerticalAlignment="Top" Width="88" x:Name="btCancelar" Click="btCancelar_Click"/>
 
     </Grid>
 </Window>

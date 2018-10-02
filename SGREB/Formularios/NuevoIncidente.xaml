@@ -9,8 +9,8 @@
     <Grid Margin="0,0,2,0">
         <Label Content="Nombre del Incidente:" HorizontalAlignment="Left" Margin="33,45,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtNombreIncidente" HorizontalAlignment="Left" Height="23" Margin="187,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="145"/>
-        <Button x:Name="btCancelar" Content="cancelar" HorizontalAlignment="Left" Margin="161,94,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="btAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="257,94,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="btCancelar" Content="cancelar" HorizontalAlignment="Left" Margin="142,94,0,0" VerticalAlignment="Top" Width="94"/>
+        <Button x:Name="btAceptar" Content="Aceptar" HorizontalAlignment="Left" Margin="248,94,0,0" VerticalAlignment="Top" Width="84"/>
 
     </Grid>
 </Window>

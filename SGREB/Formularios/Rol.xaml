@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="Rol" Height="204.545" Width="410.779">
     <Grid>
-        <Button Content="ingresar" HorizontalAlignment="Left" Margin="274,95,0,0" VerticalAlignment="Top" Width="75" x:Name="btGrado" Click="btRol_click"/>
+        <Button Content="ingresar" HorizontalAlignment="Left" Margin="248,95,0,0" VerticalAlignment="Top" Width="101" x:Name="btGrado" Click="btRol_click"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="97,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="199" x:Name="nombreRol"/>
         <Label Content="Nombre:" HorizontalAlignment="Left" Margin="34,49,0,0" VerticalAlignment="Top"/>
 
