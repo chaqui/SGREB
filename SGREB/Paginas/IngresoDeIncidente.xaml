@@ -249,17 +249,21 @@
             </DataGrid>
             <Button Content="agregar unidad" HorizontalAlignment="Left" Margin="264,58,0,0" VerticalAlignment="Top" Width="161" x:Name="btAgregarUnidad" Click="btAgregarUnidad_Click"/>
             <Button Content="eliminar unidad" HorizontalAlignment="Left" Margin="502,150,0,0" VerticalAlignment="Top" Width="139" x:Name="EliminarUnidad"/>
-            <ComboBox HorizontalAlignment="Left" Margin="21,58,0,0" VerticalAlignment="Top" Width="191" x:Name="cmbUnidades"/>
         </Grid>
 
 
         <!--    Formulario para agregar los elementos que cubren la emergencia-->
         <Grid Margin="35,1225,28,-1078" x:Name="gridElementos" Visibility="Visible">
             <Label Content="Elemtntos" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
-            <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,90,0,0" VerticalAlignment="Top" Width="465"/>
-            <Button Content="agregar bombero" HorizontalAlignment="Left" Margin="263,55,0,0" VerticalAlignment="Top" Width="163" x:Name="btAgregarElementos"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,90,0,0" VerticalAlignment="Top" Width="465" x:Name="gridBomberos">
+                <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=id}" Header="id" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=nombre}" Header="nombre" ></DataGridTextColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Content="agregar bombero" HorizontalAlignment="Left" Margin="263,55,0,0" VerticalAlignment="Top" Width="163" x:Name="btAgregarElementos" Click="btAgregarElementos_Click"/>
             <Button Content="eliminar unidad" HorizontalAlignment="Left" Margin="503,90,0,0" VerticalAlignment="Top" Width="137" x:Name="btEliminarElementos"/>
-            <ComboBox HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="195"/>
+            <ComboBox HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="195" x:Name="cmbBomberos"/>
         </Grid>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="139,254,0,0" TextWrapping="Wrap" Text="" x:Name="txNombresSolicitante" VerticalAlignment="Top" Width="140"/>
         <Label Content="Apellidos:" HorizontalAlignment="Left" Margin="297,251,0,0" VerticalAlignment="Top"/>

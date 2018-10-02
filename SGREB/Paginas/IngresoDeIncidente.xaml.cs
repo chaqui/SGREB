@@ -20,12 +20,17 @@ namespace SGREB
         private List<BomberoComboBox> radiotelefonistas;
         private List<TV_TipoServicio> tipoServiciosVarios;
         private List<TC_Unidad> tcUnidades;
+        private List<UniidadIncidenteForm> uniidadIncidenteForms;
+        private List<BomberoComboBox> bomberos;
+
         public IngresoDeIncidente()
         {
             InitializeComponent();
             obtenerMedios();
             radiotelefonistas = new List<BomberoComboBox>();
             tipoServiciosVarios = new List<TV_TipoServicio>();
+            uniidadIncidenteForms = new List<UniidadIncidenteForm>();
+            bomberos = new List<BomberoComboBox>();
             obtenerIncidentes();
             obternerRadioTelefonistas();
         }
@@ -116,16 +121,6 @@ namespace SGREB
                 cmbRadioTelefonista.Items.Add(rt.nombre);
             }
 
-        }
-
-        private void obtenerUnidades()
-        {
-            Unidad unidad = new Unidad();
-            tcUnidades = unidad.obtenerVarios();
-            foreach (var u in tcUnidades)
-            {
-                cmbUnidades.Items.Add(u.placa);
-            }
         }
 
 
@@ -447,22 +442,52 @@ namespace SGREB
         private void btGuardarCompleto_Click(object sender, RoutedEventArgs e)
         {
             var id = guardarSolicitud(false, false);
+            guardarBOmberos(id);
+            guardarUnidades(id);
+            guardarPaciente(id);
 
         }
 
         private void guardarBOmberos(int idIncidente)
         {
+            foreach( var item in gridBomberos.Items )
+            {
+                var bombero = (BomberoComboBox)item;
+                Incidente incidente = new Incidente();
+                incidente.agregarBombero(bombero, idIncidente);
+            }
 
         }
 
         private void guardarUnidades(int idIncidente)
         {
+            foreach(var u in uniidadIncidenteForms)
+            {
+                TC_UnidadParaIncidente unidad = new TC_UnidadParaIncidente();
+                unidad.IdUnidad = u.idUnidad;
+                unidad.Incidente = idIncidente;
+                unidad.piloto = u.idBombero;
+                UnidadParaInicidente unidadParaInicidente = new UnidadParaInicidente();
+                unidadParaInicidente.crear(unidad);
+            }
 
         }
 
-        private void guardarPaciente(int idIncidente)
-        {
 
+        private int guardarPaciente(int idIncidente)
+        {
+            Paciente paciente = new Paciente();
+            foreach (var item in PacienteGrid.Items)
+            {
+                var seleccionado = (PacienteGrid) item;
+               var id=  paciente.agregar(seleccionado, idIncidente);
+                if(id == -1)
+                {
+                    return -1;
+                }
+
+            }
+            return 0;
         }
         /// <summary>
         /// Agregar Paciente al incidente
@@ -531,13 +556,40 @@ namespace SGREB
         /// <param name="e"></param>
         private void btAgregarUnidad_Click(object sender, RoutedEventArgs e)
         {
-            var unidadSeleccionada = cmbUnidades.SelectedItem.ToString();
-            Unidad unidad = new Unidad();
-            var tcUnidad = unidad.obtener(unidadSeleccionada);
-            TipoUnidad tipo = new TipoUnidad();
-            var tvTipoUnidad = tipo.obtener(tcUnidad.tipo);
-            UnidadDataGrid unidadDataGrid = new UnidadDataGrid { placa = tcUnidad.placa, tipo = tvTipoUnidad.nombreTipo };
-            dgUnidades.Items.Add(unidadDataGrid);
+            UnidadPilotoForm unidadPiloto = new UnidadPilotoForm();
+            unidadPiloto.Show();
+            var r = unidadPiloto.unidadPiloto;
+            uniidadIncidenteForms.Add(r);
+            actualizarGridDeUnidad();
         }
+
+        private void actualizarGridDeUnidad()
+        {
+            dgUnidades.Items.Clear();
+            foreach( var u in uniidadIncidenteForms)
+            {
+                TipoUnidad tipoUnidad = new TipoUnidad();
+                Unidad unidad = new Unidad();
+                var t = unidad.obtener(u.idUnidad);
+                var tvTipoUnidad= tipoUnidad.obtener(t.tipo);
+                UnidadDataGrid unidadDataGrid = new UnidadDataGrid { placa = u.idUnidad, tipo = tvTipoUnidad.nombreTipo };
+                dgUnidades.Items.Add(unidadDataGrid);
+            }
+            
+        }
+
+        private void btAgregarElementos_Click(object sender, RoutedEventArgs e)
+        {
+            var seleccion = cmbBomberos.SelectedItem.ToString();
+            foreach(var b in bomberos)
+            {
+                if(b.nombre == seleccion)
+                {
+                    gridBomberos.Items.Add(b);
+                }
+            }
+        }
+
+
     }
 }

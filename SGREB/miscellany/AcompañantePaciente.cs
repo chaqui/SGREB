@@ -6,12 +6,10 @@ using System.Threading.Tasks;
 
 namespace SGREB.miscellany
 {
-    /// <summary>
-    /// clase tipo para comboBox de Bombero
-    /// </summary>
-  public  class BomberoComboBox
+    class AcompañantePaciente
     {
         public string nombre { set; get; }
-        public string id { set; get; }
+        public string apellido { set; get; }
+        public string dpi { set; get; }
     }
 }

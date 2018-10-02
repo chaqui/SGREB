@@ -1,10 +1,11 @@
 
+using SGREB.miscellany;
 using SGREB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-namespace SGREB.Controlador {
+namespace SGREB.Controlador
+{
 
     /// <summary>
     /// clase para controlar las acciones a la tabla incidente
@@ -17,68 +18,12 @@ namespace SGREB.Controlador {
         }
 
         /// <summary>
-        /// constructor para crear 
-        /// </summary>
-        /// <param name="fecha"> fecha del incidente</param>
-        /// <param name="horaEntrada">hora de entrada de la unidad</param>
-        /// <param name="horaSalida"> hora de salida de la unidad</param>
-        /// <param name="tipoIncidente">el id del tipo de incidente</param>
-        /// <param name="lugar"> el id del lugar</param>
-        public Incidente(DateTime? fecha, TimeSpan? horaEntrada, TimeSpan? horaSalida, int? tipoIncidente, int? lugar, int? solicitud)
-        {
-            this.fecha = fecha;
-            HoraEntrada = horaEntrada;
-            HoraSalida = horaSalida;
-            this.tipoIncidente = tipoIncidente;
-            this.lugar = lugar;
-            this.solicitud = solicitud;
-        }
-
-        /// <summary>
-        /// constructor para seleccionar y modificar
-        /// </summary>
-        /// <param name="fecha"></param>
-        /// <param name="horaEntrada"></param>
-        /// <param name="horaSalida"></param>
-        /// <param name="idIncidente">Id del incidente solo para la seleccion y modificacion</param>
-        /// <param name="tipoIncidente"></param>
-        /// <param name="lugar"></param>
-        public Incidente(DateTime? fecha, TimeSpan? horaEntrada, TimeSpan? horaSalida, int? idIncidente, int? tipoIncidente, int? lugar, int? incidente, int? solicitud) : this(fecha, horaEntrada, horaSalida, tipoIncidente, lugar, solicitud)
-        {
-            this.idIncidente = idIncidente;
-        }
-
-
-
-
-        protected DateTime? fecha { set; get; }
-
-        protected TimeSpan? HoraEntrada { set; get; }
-
-        protected TimeSpan? HoraSalida { set; get; }
-
-        protected int? idIncidente { set; get; }
-
-        protected int? tipoIncidente { set; get; }
-
-        protected int? lugar { set; get; }
-
-        protected int? solicitud { set; get; }
-        /// <summary>
         /// crear un incidente en la base de datos
         /// </summary>
         /// <returns> retorna el id del incidente creado</returns>
-        protected int crear()
+        public int crear(TC_Incidente tcIncidente)
         {
             var bitacora = new bitacoraBomberoaContext();
-            var tcIncidente = new TC_Incidente();
-            tcIncidente.tipoIncidente = tipoIncidente;
-            tcIncidente.lugar = lugar;
-            tcIncidente.Fecha = fecha;
-            tcIncidente.solicitud = solicitud;
-            tcIncidente.horaSalida = HoraSalida;
-            tcIncidente.HoraEntrada = HoraEntrada;
-
             bitacora.TC_Incidente.Add(tcIncidente);
             bitacora.SaveChanges();
             return tcIncidente.idIncidente;
@@ -88,18 +33,18 @@ namespace SGREB.Controlador {
         /// modificar el incidente en la base de datos
         /// </summary>
         /// <param name="incidente">inicidente a modificar</param>
-        protected void modificar(Incidente incidente)
+        public void modificar(TC_Incidente incidente)
         {
 
             using (var bitacora = new bitacoraBomberoaContext())
             {
                 var tcIncidente = bitacora.TC_Incidente.Find(incidente.idIncidente);
-                tcIncidente.tipoIncidente = tipoIncidente;
-                tcIncidente.lugar = lugar;
-                tcIncidente.Fecha = fecha;
-                tcIncidente.solicitud = solicitud;
-                tcIncidente.horaSalida = HoraSalida;
-                tcIncidente.HoraEntrada = HoraEntrada;
+                tcIncidente.tipoIncidente = incidente.tipoIncidente;
+                tcIncidente.lugar = incidente.lugar;
+                tcIncidente.Fecha = incidente.Fecha;
+                tcIncidente.solicitud = incidente.solicitud;
+                tcIncidente.horaSalida = incidente.horaSalida;
+                tcIncidente.HoraEntrada = incidente.HoraEntrada;
                 bitacora.SaveChanges();
             }
         }
@@ -151,5 +96,65 @@ namespace SGREB.Controlador {
             var tcIncidentes = bitacora.TC_Incidente.Where(s => s.tipoIncidente == idTipo);
             return tcIncidentes.ToList();
         }
+
+        /// <summary>
+        /// funcion para agregar pacientes
+        /// </summary>
+        /// <param name="tcPaciente"></param>
+        /// <param name="idIncidente"></param>
+        /// <returns></returns>
+        public int agregarPaciente(TC_Paciente tcPaciente, int idIncidente)
+        {
+            try
+            {
+                using (var bitacora = new bitacoraBomberoaContext())
+                {
+                    var tcIncidente = bitacora.TC_Incidente.Find(tcPaciente);
+                    tcIncidente.TC_Paciente.Add(tcPaciente);
+                    bitacora.SaveChanges();
+                }
+
+                }
+            catch (Exception e)
+            {
+                return -1;
+            }
+
+            return 0;
+        }
+
+        /// <summary>
+        /// agregar bomberos al incidente
+        /// </summary>
+        /// <param name="tcBombero"></param>
+        /// <param name="idIncidente"></param>
+        /// <returns></returns>
+        public int agregarBombero(TC_Bombero tcBombero, int idIncidente)
+        {
+            try
+            {
+                using (var bitacora = new bitacoraBomberoaContext())
+                {
+                    var tcIncidente = bitacora.TC_Incidente.Find(idIncidente);
+                    tcIncidente.TC_Bombero.Add(tcBombero);
+                    bitacora.SaveChanges();
+                }
+
+            }
+            catch (Exception e)
+            {
+                return -1;
+            }
+
+            return 0;
+        }
+
+        public int agregarBombero(BomberoComboBox bomberoComboBox, int idIncidente)
+        {
+            Bombero bombero = new Bombero();
+            var b =bombero.Obtener(bomberoComboBox.id);
+            return agregarBombero(b, idIncidente);
+        }
+
     }
 }

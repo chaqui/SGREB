@@ -69,8 +69,20 @@ namespace SGREB.Controlador
         {
             List<Bombero> bomberos = new List<Bombero>();
             var bitacora = new bitacoraBomberoaContext();
-            var tcBomberos = bitacora.TC_Bombero.ToList();
-            return tcBomberos;
+            var tcBomberos = bitacora.TC_Bombero;
+            return tcBomberos.ToList();
+        }
+
+        /// <summary>
+        /// obtener los bomberos por rol 
+        /// </summary>
+        /// <param name="idrol"></param>
+        /// <returns></returns>
+        public List<TC_Bombero> obtenerVarios(int idrol)
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            var tcBomberos = bitacora.TC_Bombero.Where(s => s.rol == idrol);
+            return tcBomberos.ToList();
         }
     }
 }
