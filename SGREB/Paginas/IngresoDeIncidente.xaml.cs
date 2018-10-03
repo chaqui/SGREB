@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
+using System.Linq;
 
 namespace SGREB
 {
@@ -16,13 +17,14 @@ namespace SGREB
     {
         private int idTipoIncidente;
         private List<TipoIncidente> tiposDeIncidentes;
+        private int[] comunes = new int[] { 2, 3, 4, 7, 9,14,15,19,21,22,23,28,30,31,32,33,34 };
+        private int[] incendios = new int[] { 16, 17, 18, 25, 26, 27, 28 };
         private List<TV_MedioSolicitud> medios;
         private List<BomberoComboBox> radiotelefonistas;
         private List<TV_TipoServicio> tipoServiciosVarios;
-        private List<TC_Unidad> tcUnidades;
         private List<UniidadIncidenteForm> uniidadIncidenteForms;
         private List<BomberoComboBox> bomberos;
-
+        private IEnumerable<String> direccionItems;
         public IngresoDeIncidente()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace SGREB
             radiotelefonistas = new List<BomberoComboBox>();
             tipoServiciosVarios = new List<TV_TipoServicio>();
             uniidadIncidenteForms = new List<UniidadIncidenteForm>();
+
             bomberos = new List<BomberoComboBox>();
             obtenerIncidentes();
             obternerRadioTelefonistas();
@@ -158,6 +161,14 @@ namespace SGREB
             this.Height = 2000;
         }
 
+        private void guardarIncidenteComun(int idIncidente)
+        {
+            guardarBOmberos(idIncidente);
+            guardarPaciente(idIncidente);
+            guardarUnidades(idIncidente);
+                
+        }
+
         /// <summary>
         /// Funcion para mostrar el formulario común de  incidentes con Fuego.
         /// </summary>
@@ -196,12 +207,19 @@ namespace SGREB
 
         private void txTipoIncidente_TextChanged(object sender, TextChangedEventArgs e)
         {
+
             if (txTipoIncidente.Text == "")
             {
                 return;
             }
+            try { 
             idTipoIncidente = int.Parse(txTipoIncidente.Text);
-           
+            }
+            catch
+            {
+                MessageBox.Show("Solo se aceptan numeros", "error");
+                return;
+            }
             //si retorna 0 la función de busqueda 
             if (idTipoIncidente == 0)
             {
@@ -340,13 +358,19 @@ namespace SGREB
 
         private void mostrarServiciosVarios()
         {
+            obtenerTiposDeServicioVarios();
             gridServiciosVarios.Visibility = Visibility.Visible;
+            btGuardarVarios.Visibility = Visibility.Visible;
+
+
             this.Height = 800;
+
         }
 
         private void obtenerTiposDeServicioVarios()
         {
             TipoServicio tipoServicio = new TipoServicio();
+            combBoxClaseServicio.Items.Clear();
             tipoServiciosVarios = tipoServicio.obtenerTodos();
             foreach(var tipoServicioVarios in tipoServiciosVarios)
             {
@@ -371,23 +395,6 @@ namespace SGREB
             }
         }
 
-        /// <summary>
-        /// guardar un incidente enviado a los bomberos municipales
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btGuardarCBM_Click(object sender, RoutedEventArgs e)
-        {
-            var resultado = guardarIncidente(true, false);
-            if (resultado != -1) {
-                MessageBox.Show("Incidente Guardado");
-            }
-            else
-            {
-                MessageBox.Show("Error al guardar", "error");
-            }
-            
-        }
 
         /// <summary>
         /// guarda la solcituda 
@@ -397,10 +404,13 @@ namespace SGREB
         /// <returns>id de la solicitud creada</returns>
         private int guardarSolicitud(Boolean cmb, Boolean falsaAlarma)
         {
+            try
+            { 
             var idRadioTelefonista = obtenerIdRadioTelefonista(cmbRadioTelefonista.SelectedItem.ToString());
             var idMedio = obtenerIdMedio(cmbMedioSolicitud.SelectedItem.ToString());
             var nombre = txNombresSolicitante.Text;
             var apellidos = txApellidosSolicitante.Text;
+            
             var dpi = txDPISolicitante.Text;
             if (nombre == "" && apellidos =="")
             {
@@ -435,17 +445,32 @@ namespace SGREB
             TC_Solicitud tcSolicitud = new TC_Solicitud { medioSolicitud = idMedio, solicitante = idPersona, radioTelefonista = idRadioTelefonista, TraspasoACBM = cmb, ingresadoPor = "rene", falsaAlarma= falsaAlarma };
             Solicitud solicitud = new Solicitud();
             return solicitud.crear(tcSolicitud);
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
 
 
         private void btGuardarCompleto_Click(object sender, RoutedEventArgs e)
         {
-            var id = guardarSolicitud(false, false);
-            guardarBOmberos(id);
-            guardarUnidades(id);
-            guardarPaciente(id);
+            var id = guardarIncidente(false, false);
 
+            if(Array.IndexOf(comunes, idTipoIncidente) != -1)
+            {
+                guardarIncidenteComun(id);
+            }
+            else if(Array.IndexOf(incendios, idTipoIncidente) != -1){
+                guardarIncendio(id);
+            }
+
+        }
+
+        private void guardarIncendio(int id)
+        {
+            throw new NotImplementedException();
         }
 
         private void guardarBOmberos(int idIncidente)
@@ -521,31 +546,59 @@ namespace SGREB
         }
         public int guardarIncidente(Boolean cbm, Boolean falsaAlarma)
         {
-            int idSolicitud = guardarSolicitud(cbm, falsaAlarma);
-            if (idSolicitud == -1)
-            {
-                return -1;
+            try {
+                int idSolicitud = guardarSolicitud(cbm, falsaAlarma);
+                if (idSolicitud == -1)
+                {
+                    return -1;
+                }
+
+                int tipoIncidente = int.Parse(txTipoIncidente.Text);
+
+
+                TC_Incidente tcIncidente = new TC_Incidente();
+
+                tcIncidente.Fecha = fechaSolicitud.SelectedDate;
+                tcIncidente.tipoIncidente = tipoIncidente;
+                tcIncidente.HoraEntrada = TimeSpan.Parse(Convert.ToDateTime(tPhoraEntrada.Text).ToString("HH:mm"));
+                tcIncidente.horaSalida = TimeSpan.Parse(Convert.ToDateTime(tPhoraSalida.Text).ToString("HH:mm"));
+
+                Lugar lugar = new Lugar();
+                var idLugar = lugar.crear(new TT_Lugar { direccion = txLugar.Text });
+                tcIncidente.lugar = idLugar;
+                tcIncidente.solicitud = idSolicitud;
+
+                Incidente incidente = new Incidente();
+                return incidente.crear(tcIncidente);
             }
-            TC_Incidente tcIncidente = new TC_Incidente();
-            tcIncidente.Fecha = fechaSolicitud.SelectedDate;
-            Incidente incidente = new Incidente();
-            return incidente.crear(tcIncidente);
+            catch
+            { 
+
+              return -1;
+            }
         }
 
         private void rBFalsaArlarma_Checked(object sender, RoutedEventArgs e)
         {
+            btGuardarVarios.Visibility = Visibility.Collapsed;
             btGuardarFalsaAlarma.Visibility = Visibility.Visible;
             combBoxClaseServicio.IsEnabled = false;
         }
 
         private void combBoxClaseServicio_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            try { 
             var seleccion = combBoxClaseServicio.SelectedItem.ToString();
             if(seleccion == "Agregar Tipo Servicio")
             {
                 TipoServicioVariosForm form = new TipoServicioVariosForm();
-                form.Show();
+                form.ShowDialog();
                 obtenerTiposDeServicioVarios();
+            }
+            }
+            catch
+            {
+
             }
         }
 
@@ -591,5 +644,56 @@ namespace SGREB
         }
 
 
+        /// <summary>
+        /// Guardar Servicios Varios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btGuardarVarios_Click(object sender, RoutedEventArgs e)
+        {
+            var id = guardarIncidente(false, false);
+            var seleccion = combBoxClaseServicio.SelectedItem.ToString();
+            int idTipo = 0;
+            foreach (var tipoServicioVarios in tipoServiciosVarios)
+            {
+                if(seleccion == tipoServicioVarios.nombre)
+                {
+                    idTipo = tipoServicioVarios.idTipoServicio;
+                } 
+            }
+            if(idTipo == 0)
+            {
+                return;
+            }
+            TC_servicioVarios tC_ServicioVarios = new TC_servicioVarios { tipoServicio = idTipo, idIncidente = id };
+            ServiciosVarios servicios = new ServiciosVarios();
+            servicios.Crear(tC_ServicioVarios);
+ 
+        }
+
+
+
+        private void btGuardarCBM_Click_2(object sender, RoutedEventArgs e)
+        {
+            var resultado = guardarIncidente(true, false);
+
+        if (resultado != -1)
+            {
+                MessageBox.Show("Incidente Guardado");
+            }
+            else
+            {
+                MessageBox.Show("Error al guardar", "error");
+            }
+
+        }
+
+        private void btAgregarPacienteIncendio_Click(object sender, RoutedEventArgs e)
+        {
+            PacienteForm pacienteForm = new PacienteForm();
+            pacienteForm.ShowDialog();
+            var paciente = pacienteForm.pacienteGrid;
+            PacienteGrid.Items.Add(paciente);
+        }
     }
 }

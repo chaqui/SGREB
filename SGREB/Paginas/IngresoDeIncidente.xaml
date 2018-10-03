@@ -4,7 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SGREB"
+             xmlns:behaviors="clr-namespace:WPFTextBoxAutoComplete;assembly=WPFTextBoxAutoComplete"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:Control="clr-namespace:WPF_AutoCompleteComboBox;assembly=WPF_AutoCompleteComboBox"
              Background="White"
              mc:Ignorable="d" d:DesignWidth="733" Height="795">
 
@@ -48,27 +50,28 @@
         </Grid>
 
         <RadioButton x:Name="rBcbm" Content="Enviar a los bomberos municipales" HorizontalAlignment="Left" Margin="475,305,0,0" VerticalAlignment="Top" Checked="RadioButton_Checked"/>
-        <Button x:Name="btGuardarCBM"  Content="Guardar" HorizontalAlignment="Left" Margin="630,346,0,0" VerticalAlignment="Top" Width="93" Visibility="Collapsed"/>
+        <Button x:Name="btGuardarCBM"  Content="Guardar" HorizontalAlignment="Left" Margin="630,346,0,0" VerticalAlignment="Top" Width="93" Visibility="Collapsed" Click="btGuardarCBM_Click_2"/>
 
         <!--Formulario de Información basica del formulario-->
         <Grid HorizontalAlignment="Left" Height="212" Margin="53,387,0,-149" VerticalAlignment="Top" Width="635" x:Name="gridIncidente">
             <Label Content="Datos del Incidente " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"/>
             <Label Content="Hora de entrada:" HorizontalAlignment="Left" Margin="348,56,0,0" VerticalAlignment="Top"/>
             <Label Content="Hora de salida:" HorizontalAlignment="Left" Margin="41,56,0,0" VerticalAlignment="Top"/>
-            <materialDesign:TimePicker Width="100" Style="{StaticResource MaterialDesignFloatingHintTimePicker}" materialDesign:HintAssist.Hint="Custom hint" Margin="466,60,69,0" x:Name="tPhoraSalida"/>
-            <materialDesign:TimePicker Width="100" Style="{StaticResource MaterialDesignFloatingHintTimePicker}" materialDesign:HintAssist.Hint="Custom hint" Margin="168,57,367,0" RenderTransformOrigin="-2.51,0.48" x:Name="tPhoraEntrada" />
+            <materialDesign:TimePicker Width="100" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"  Margin="466,60,69,0" x:Name="tPhoraSalida" />
+            <materialDesign:TimePicker Width="100" Style="{StaticResource MaterialDesignFloatingHintTimePicker}"  Margin="168,57,367,0"  x:Name="tPhoraEntrada"  />
 
             <Label Content="Dirección:" HorizontalAlignment="Left" Margin="41,106,0,0" VerticalAlignment="Top" Width="86"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="151,109,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="430"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="151,109,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="430" x:Name="txLugar"/>
             <Label Content="Tipo de Incidente:" HorizontalAlignment="Left" Margin="41,156,0,0" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="152,160,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="140" x:Name="txTipoIncidente" TextChanged="txTipoIncidente_TextChanged"/>
+
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="152,160,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="140" x:Name="txTipoIncidente" TextChanged="txTipoIncidente_TextChanged"/>
         </Grid>
 
         <!--     Formularios para incidente   -->
 
         <!--Formulario para servicios Varios 
             Servicio para el incidente de tipo 1 -->
-        <Grid Margin="48,609,68,-245" x:Name="gridServiciosVarios" Visibility="Visible">
+        <Grid Margin="48,609,68,-245" x:Name="gridServiciosVarios" Visibility="Collapsed">
             <Label Content="Servicios Varios " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" />
             <Label Content="Clase de Servicio:" HorizontalAlignment="Left" Margin="32,46,0,0" VerticalAlignment="Top"/>
             <ComboBox HorizontalAlignment="Left" Margin="146,46,0,0" VerticalAlignment="Top" Width="196" x:Name="combBoxClaseServicio" SelectionChanged="combBoxClaseServicio_SelectionChanged"/>
@@ -194,13 +197,13 @@
             -Incendios en Gasolineras 
             -Incendio en Locales Comerciales 
         -->
-        <Grid Margin="35,595,28,-740" x:Name="gridIncendiosDeViviendas" Visibility="Collapsed">
+        <Grid Margin="35,595,28,-740" x:Name="gridIncendiosDeViviendas" Visibility="Visible">
             <Label Content="Incendio en Vivienda" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" x:Name="tituloIncendio" />
             <Label Content="Propietario:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
-            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465" x:Name=""/>
             <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
-            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="540,120,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarPacienteIncendio"/>
-            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="540,155,0,0" VerticalAlignment="Top" Width="110" x:Name="btEliminarPacienteIncendio"/>
+            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="490,120,0,0" VerticalAlignment="Top" Width="160" x:Name="btAgregarPacienteIncendio" Click="btAgregarPacienteIncendio_Click"/>
+            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="490,155,0,0" VerticalAlignment="Top" Width="160" x:Name="btEliminarPacienteIncendio"/>
             <TextBox x:Name="txtPropietario" HorizontalAlignment="Left" Height="23" Margin="515,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label Content="Galones Utilizados:" HorizontalAlignment="Left" Margin="395,59,0,0" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="100,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"/>
@@ -257,8 +260,8 @@
             <Label Content="Elemtntos" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,90,0,0" VerticalAlignment="Top" Width="465" x:Name="gridBomberos">
                 <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=id}" Header="id" ></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=nombre}" Header="nombre" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=id}" Header="id" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=nombre}" Header="nombre" ></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Content="agregar bombero" HorizontalAlignment="Left" Margin="263,55,0,0" VerticalAlignment="Top" Width="163" x:Name="btAgregarElementos" Click="btAgregarElementos_Click"/>
@@ -271,6 +274,7 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="564,254,0,0" TextWrapping="Wrap" Text="" x:Name="txDPISolicitante" VerticalAlignment="Top" Width="141"/>
         <Button Content="Guardar" HorizontalAlignment="Left" Height="23" Margin="606,1533,0,-1106" VerticalAlignment="Top" Width="99" x:Name="btGuardarCompleto" Click="btGuardarCompleto_Click" />
         <Button Content="Guardar" HorizontalAlignment="Left" Height="26" Margin="564,700,0,-276" VerticalAlignment="Top" Width="75" x:Name="btGuardarFalsaAlarma" Click="btGuardarFalsaAlarma_Click" Visibility="Collapsed"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="564,705,0,-287" VerticalAlignment="Top" Width="101" x:Name="btGuardarVarios" Click="btGuardarVarios_Click" Visibility="Collapsed"/>
     </Grid>
 
 </UserControl>
