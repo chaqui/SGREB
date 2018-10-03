@@ -671,6 +671,7 @@ namespace SGREB
  
         }
 
+        private void 
 
 
         private void btGuardarCBM_Click_2(object sender, RoutedEventArgs e)

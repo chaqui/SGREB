@@ -200,7 +200,15 @@
         <Grid Margin="35,595,28,-740" x:Name="gridIncendiosDeViviendas" Visibility="Visible">
             <Label Content="Incendio en Vivienda" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" x:Name="tituloIncendio" />
             <Label Content="Propietario:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
-            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465" x:Name=""/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465" x:Name="dgPacientesIncendio">
+                <DataGridTextColumn Binding="{Binding Path=nombre}" Header="nombres" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=apellido}" Header="apellidos" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=dpi}" Header="dpi" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=edad}" Header="edad" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=sexo}" Header="sexo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="fallecido" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=herido}" Header="herido" ></DataGridTextColumn>
+            </DataGrid>
             <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
             <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="490,120,0,0" VerticalAlignment="Top" Width="160" x:Name="btAgregarPacienteIncendio" Click="btAgregarPacienteIncendio_Click"/>
             <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="490,155,0,0" VerticalAlignment="Top" Width="160" x:Name="btEliminarPacienteIncendio"/>
