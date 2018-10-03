@@ -354,7 +354,10 @@ namespace SGREB
 
         }
 
+        private void mostrargridAtropellados()
+        {
 
+        }
 
         private void mostrarServiciosVarios()
         {
@@ -465,12 +468,118 @@ namespace SGREB
             else if(Array.IndexOf(incendios, idTipoIncidente) != -1){
                 guardarIncendio(id);
             }
+            else if(idTipoIncidente == 4)
+            {
+                guardarMaternidad(id);
+            }
+            else if(idTipoIncidente == 5)
+            {
+                guardarAtropellados(id);
+            }
+            else if(idTipoIncidente == 6)
+            {
+                guardarIntoxicados(id);
+            }
+            else if(idTipoIncidente == 8)
+            {
+                guardarMordidos(id);
+            }
+            else if(idTipoIncidente == 12)
+            {
+                guardarServicioDeAgua(id);
+            }
+            else if(idTipoIncidente == 20)
+            {
+                guardarSuicidios(id);
+            }
+            else if(idTipoIncidente == 24)
+            {
+                guardarBaleados(id);
+            }
+            else if(idTipoIncidente == 29)
+            {
+                guardarInundaciones(id);
+            }
+        }
+
+        private void guardarInundaciones(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void guardarBaleados(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void guardarSuicidios(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private int guardarServicioDeAgua(int id)
+        {
+            try
+            {
+                var idIncidente = guardarIncidente(false, false);
+                if (idIncidente == -1) return idIncidente;
+
+                int galones = int.Parse(txtGalones.Text);
+                TC_ServicioDeGalones servicio = new TC_ServicioDeGalones { Galones = galones };
+                servicioDeGalones Sgalones = new servicioDeGalones();
+                 int id = Sgalones.crear(servicio);
+
+                return id;
+            }
+            catch
+            {
+                return -1;
+            }
+
 
         }
 
-        private void guardarIncendio(int id)
+        private void guardarMordidos(int id)
         {
             throw new NotImplementedException();
+        }
+
+        private void guardarIntoxicados(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void guardarAtropellados(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void guardarMaternidad(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void guardarIncendio(int idIncidente)
+        {
+            try
+            {
+
+            
+            guardarBOmberos(idIncidente);
+            guardarPacientesIncendio(idIncidente);
+            guardarUnidades(idIncidente);
+            Incendio tcIncendio = new Incendio();
+            var aguaUtilizada = float.Parse(txGalones.Text);
+            var propietario = txtPropietario.Text;
+            var perdidas = float.Parse(txtPerdidas.Text);
+                Persona persona = new Persona();
+                var id = persona.Crear(new TC_Persona { nombres = propietario });
+                tcIncendio.crear(new TC_Incendio { perdidas = perdidas, propietario = id, aguaUtilizada = aguaUtilizada, idIncidente = idIncidente });
+            }
+            catch
+            {
+                return;
+            }
         }
 
         private void guardarBOmberos(int idIncidente)
@@ -671,7 +780,21 @@ namespace SGREB
  
         }
 
-        private void 
+        private int guardarPacientesIncendio(int idIncidente)
+        {
+            Paciente paciente = new Paciente();
+            foreach (var item in dgPacientesIncendio.Items)
+            {
+                var seleccionado = (PacienteGrid)item;
+                var id = paciente.agregar(seleccionado, idIncidente);
+                if (id == -1)
+                {
+                    return -1;
+                }
+
+            }
+            return 0;
+        }
 
 
         private void btGuardarCBM_Click_2(object sender, RoutedEventArgs e)
@@ -694,7 +817,8 @@ namespace SGREB
             PacienteForm pacienteForm = new PacienteForm();
             pacienteForm.ShowDialog();
             var paciente = pacienteForm.pacienteGrid;
-            PacienteGrid.Items.Add(paciente);
+            dgPacientesIncendio.Items.Add(paciente);
         }
+
     }
 }

@@ -1,19 +1,23 @@
 
+using SGREB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class servicioDeGalones : CRUD {
-
+namespace SGREB.Controlador {
+public class servicioDeGalones  {
+    
     public servicioDeGalones() {
     }
 
-    protected void idServicio;
+    public int crear(TC_ServicioDeGalones servicio)
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            bitacora.TC_ServicioDeGalones.Add(servicio);
+            bitacora.SaveChanges();
+            return servicio.idServicio;
+        }
 
-    protected void Galones;
-
-    protected void idIncidente;
-
-
+}
 }

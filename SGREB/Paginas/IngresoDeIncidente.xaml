@@ -200,7 +200,7 @@
         <Grid Margin="35,595,28,-740" x:Name="gridIncendiosDeViviendas" Visibility="Visible">
             <Label Content="Incendio en Vivienda" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" x:Name="tituloIncendio" />
             <Label Content="Propietario:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
-            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465" x:Name="dgPacientesIncendio">
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,149,0,0" VerticalAlignment="Top" Width="465" x:Name="dgPacientesIncendio">
                 <DataGridTextColumn Binding="{Binding Path=nombre}" Header="nombres" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=apellido}" Header="apellidos" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=dpi}" Header="dpi" ></DataGridTextColumn>
@@ -209,12 +209,14 @@
                 <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="fallecido" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=herido}" Header="herido" ></DataGridTextColumn>
             </DataGrid>
-            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
-            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="490,120,0,0" VerticalAlignment="Top" Width="160" x:Name="btAgregarPacienteIncendio" Click="btAgregarPacienteIncendio_Click"/>
-            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="490,155,0,0" VerticalAlignment="Top" Width="160" x:Name="btEliminarPacienteIncendio"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="23,118,0,0" VerticalAlignment="Top"/>
+            <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="490,215,0,0" VerticalAlignment="Top" Width="160" x:Name="btAgregarPacienteIncendio" Click="btAgregarPacienteIncendio_Click"/>
+            <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="490,250,0,0" VerticalAlignment="Top" Width="160" x:Name="btEliminarPacienteIncendio"/>
             <TextBox x:Name="txtPropietario" HorizontalAlignment="Left" Height="23" Margin="515,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+            <TextBox x:Name="txtPerdidas" HorizontalAlignment="Left" Height="23" Margin="515,107,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label Content="Galones Utilizados:" HorizontalAlignment="Left" Margin="395,59,0,0" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="100,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="100,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" x:Name="txGalones"/>
+            <Label Content="Perdidas:" HorizontalAlignment="Left" Margin="435,112,0,0" VerticalAlignment="Top"/>
         </Grid>
 
         <!-- Formulario para ingresar personas suicidadas-->
@@ -251,7 +253,7 @@
 
         <!--    Formulario para agregar las unidades que cubren la emergencia-->
         <Grid Margin="35,895,28,-770" x:Name="gridUnidades" Visibility="Visible">
-            <Label Content="Unidades" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <Label Content="Unidades" HorizontalAlignment="Left" Margin="32,57,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,97,0,0" VerticalAlignment="Top" Width="465" x:Name="dgUnidades">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=placa}" Header="placa" ></DataGridTextColumn>
