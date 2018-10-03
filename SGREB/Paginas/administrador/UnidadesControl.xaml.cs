@@ -69,9 +69,15 @@ namespace SGREB.Paginas.administrador
 
         private void btAgregarElemento_Click(object sender, RoutedEventArgs e)
         {
+            try { 
             UnidadForm unidadForm = new UnidadForm();
             unidadForm.ShowDialog();
             obtenerUnidades();
+            }
+            catch
+            {
+
+            }
         }
 
         private void btModificarElemento_Click(object sender, RoutedEventArgs e)

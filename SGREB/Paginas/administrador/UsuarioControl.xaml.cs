@@ -57,9 +57,16 @@ namespace SGREB.Paginas.administrador
 
         private void btAgregarElemento_Click(object sender, RoutedEventArgs e)
         {
-            UsuarioForm uf = new UsuarioForm();
-            uf.ShowDialog();
-            obtenerUsuarios();
+            try
+            {
+                UsuarioForm uf = new UsuarioForm();
+                uf.ShowDialog();
+                obtenerUsuarios();
+            }
+            catch
+            {
+
+            }
         }
 
         private void btModificarElemento_Click(object sender, RoutedEventArgs e)

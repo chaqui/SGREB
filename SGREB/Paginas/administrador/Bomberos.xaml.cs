@@ -58,10 +58,17 @@ namespace SGREB.Paginas.administrador
 
         private void btModificarElemento_Click(object sender, RoutedEventArgs e)
         {
-            var seleccionado = (BomberoDataGrid)dataGridBomberos.SelectedItem;
-            SGREB.Formularios.Bombero bombero = new Formularios.Bombero(seleccionado.id);
-            bombero.ShowDialog();
-            obtenerBomberos();
+            try
+            {
+                var seleccionado = (BomberoDataGrid)dataGridBomberos.SelectedItem;
+                SGREB.Formularios.Bombero bombero = new Formularios.Bombero(seleccionado.id);
+                bombero.ShowDialog();
+                obtenerBomberos();
+            }
+            catch
+            {
+
+            }
         }
     } 
 }
