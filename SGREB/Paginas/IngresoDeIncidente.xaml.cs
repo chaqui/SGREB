@@ -17,14 +17,18 @@ namespace SGREB
     {
         private int idTipoIncidente;
         private List<TipoIncidente> tiposDeIncidentes;
-        private int[] comunes = new int[] { 2, 3, 4, 7, 9,14,15,19,21,22,23,28,30,31,32,33,34 };
+        private int[] comunes = new int[] { 2, 3, 4, 7, 9,14,15,19,21,22,23,24,28,30,31,32,33,34 };
         private int[] incendios = new int[] { 16, 17, 18, 25, 26, 27, 28 };
         private List<TV_MedioSolicitud> medios;
         private List<BomberoComboBox> radiotelefonistas;
         private List<TV_TipoServicio> tipoServiciosVarios;
         private List<UniidadIncidenteForm> uniidadIncidenteForms;
         private List<BomberoComboBox> bomberos;
-        private IEnumerable<String> direccionItems;
+        private List<TV_CausaSuicidio> causasSuicidio;
+        private List<TV_Animal> animales;
+        private List<BomberoComboBox> intoxicaciones;
+        private List<TV_CausaIntoxicacion> causas;
+        private List<TV_TipoVehiculo> vehiculos;
         public IngresoDeIncidente()
         {
             InitializeComponent();
@@ -34,6 +38,9 @@ namespace SGREB
             uniidadIncidenteForms = new List<UniidadIncidenteForm>();
 
             bomberos = new List<BomberoComboBox>();
+
+            causasSuicidio = new List<TV_CausaSuicidio>();
+
             obtenerIncidentes();
             obternerRadioTelefonistas();
         }
@@ -314,7 +321,7 @@ namespace SGREB
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 24:
-                    gridBaleados.Visibility = Visibility.Visible;
+                    mostrarGridComun(nombreIncidente);
                     break;
                 case 25: //Incendios de Mercados
                     mostrarIncidendios(nombreIncidente);
@@ -389,12 +396,20 @@ namespace SGREB
         /// <param name="e"></param>
         private void cmbMedioSolicitud_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            string nombre = cmbMedioSolicitud.SelectedItem.ToString();
-            if (nombre == "crear un nuevo medio...")
+            try
             {
-                MedioForm unidadForm = new MedioForm();
-                unidadForm.ShowDialog();
-                obtenerMedios();
+                string nombre = cmbMedioSolicitud.SelectedItem.ToString();
+                if (nombre == "crear un nuevo medio...")
+                {
+                    MedioForm unidadForm = new MedioForm();
+                    unidadForm.ShowDialog();
+                    obtenerMedios();
+                }
+
+            }
+            catch
+            {
+
             }
         }
 
@@ -492,10 +507,6 @@ namespace SGREB
             {
                 guardarSuicidios(id);
             }
-            else if(idTipoIncidente == 24)
-            {
-                guardarBaleados(id);
-            }
             else if(idTipoIncidente == 29)
             {
                 guardarInundaciones(id);
@@ -507,14 +518,40 @@ namespace SGREB
             throw new NotImplementedException();
         }
 
-        private void guardarBaleados(int id)
+       
+
+        private int guardarSuicidios(int id)
         {
-            throw new NotImplementedException();
+           try
+            {
+                var idIncidente = guardarIncidente(false, false);
+                if (idIncidente == -1) return idIncidente;
+
+                guardarPacienteSuicidio(idIncidente);
+                string nombre = cmbCausa.SelectedItem.ToString();
+                var idCausa = obtenerIdCAusaSuicidio(nombre);
+                Suicidio suicidio = new Suicidio();
+                suicidio.crearSuiciidio(new TC_Suicidio { Causa = idCausa, incidente = idIncidente });
+                guardarBOmberos(idIncidente);
+                guardarUnidades(idIncidente);
+                return 0;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
-        private void guardarSuicidios(int id)
+        private  int obtenerIdCAusaSuicidio(string nombre)
         {
-            throw new NotImplementedException();
+            foreach (var causa in causasSuicidio)
+            {
+                if(causa.CausaSuicidio == nombre)
+                {
+                    return causa.idCausa;
+                }
+            }
+            return -1;
         }
 
         private int guardarServicioDeAgua(int id)
@@ -527,9 +564,9 @@ namespace SGREB
                 int galones = int.Parse(txtGalones.Text);
                 TC_ServicioDeGalones servicio = new TC_ServicioDeGalones { Galones = galones };
                 servicioDeGalones Sgalones = new servicioDeGalones();
-                 int id = Sgalones.crear(servicio);
+                 int idR = Sgalones.crear(servicio);
 
-                return id;
+                return idR;
             }
             catch
             {
@@ -539,19 +576,125 @@ namespace SGREB
 
         }
 
-        private void guardarMordidos(int id)
+        private int guardarMordidos(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                int idIncidente = guardarIncidente(false, false);
+                var seleccion = cmbIntoxicacion.SelectedItem.ToString();
+                var idAnimal = obtenerIdAnimal(seleccion);
+
+                if (idIncidente == -1) return idIncidente;
+                if (idAnimal == -1) return idAnimal;
+                Paciente paciente = new Paciente();
+                foreach(var item in dgPacientesMordidos.Items)
+                {
+                    paciente.agregarMordioPorAnimal((PacienteGrid)item, idIncidente, idAnimal);
+                }
+                guardarBOmberos(idIncidente);
+                guardarUnidades(idIncidente);
+                return 0;
+            }
+            catch
+            {
+                return -1;
+            }
+
         }
 
-        private void guardarIntoxicados(int id)
+        private int obtenerIdIntoxicados(string seleccion)
         {
-            throw new NotImplementedException();
+            foreach (var a in causas)
+            {
+                if (a.nombre == seleccion)
+                {
+                    return a.idCausaIntoxicacion;
+                }
+            }
+            return -1;
         }
 
-        private void guardarAtropellados(int id)
+        private int obtenerIdAnimal(string seleccion)
         {
-            throw new NotImplementedException();
+           foreach(var a in animales)
+            {
+                if(a.tipo == seleccion)
+                {
+                    return a.idAnimal;
+                }
+            }
+            return -1;
+        }
+
+        private int guardarIntoxicados(int id)
+        {
+            try
+            {
+                int idIncidente = guardarIncidente(false, false);
+                var seleccion = cmbIntoxicacion.SelectedItem.ToString();
+                var idIntoxicado = obtenerIdIntoxicados(seleccion);
+
+                if (idIncidente == -1) return idIncidente;
+                if (idIntoxicado == -1) return idIntoxicado;
+                Paciente paciente = new Paciente();
+                foreach (var item in dgIntoxicados.Items)
+                {
+                    paciente.agregarMordioPorIntoxicacion((PacienteGrid)item, idIncidente, idIntoxicado);
+                }
+                guardarBOmberos(idIncidente);
+                guardarUnidades(idIncidente);
+                return 0;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        private int guardarAtropellados(int id)
+        {
+            int idIncidente = guardarIncidente(false, false);
+            if (idIncidente == -1) return idIncidente;
+            var seleccion = cmbIntoxicacion.SelectedItem.ToString();
+            var placa = txPlaca.Text;
+            var tipo = obtenerIdTipoDeVehiculo(seleccion);
+            TC_AccidenteTransito accidenteTransito = new TC_AccidenteTransito { placa = placa, tipoVehiculo = tipo,idIncidente=idIncidente };
+            AccidenteTransito accidente = new AccidenteTransito();
+            accidente.Crear(accidenteTransito);
+            guardarPacientesAtropellados(idIncidente);
+            guardarBOmberos(idIncidente);
+            guardarUnidades(idIncidente);
+
+            return 1;
+        }
+
+        private int guardarPacientesAtropellados(int idIncidente)
+        {
+            
+                 Paciente paciente = new Paciente();
+            foreach (var item in gdPacientesAtropellados.Items)
+            {
+                var seleccionado = (PacienteGrid)item;
+                var id = paciente.agregar(seleccionado, idIncidente);
+                if (id == -1)
+                {
+                    return -1;
+                }
+
+            }
+            return 0;
+        }
+
+        private int obtenerIdTipoDeVehiculo(string nombre)
+        {
+            foreach (var v in vehiculos)
+            {
+                if (v.tipo == nombre)
+                {
+                    return v.idTipoVehiculo;
+                }
+            }
+            return -1;
         }
 
         private void guardarMaternidad(int id)
@@ -623,6 +766,23 @@ namespace SGREB
             }
             return 0;
         }
+
+        private int guardarPacienteSuicidio(int idIncidente)
+        {
+            Paciente paciente = new Paciente();
+            foreach (var item in gdPacientesSucicidados.Items)
+            {
+                var seleccionado = (PacienteGrid)item;
+                var id = paciente.agregarSuicidio(seleccionado, idIncidente);
+                if (id == -1)
+                {
+                    return -1;
+                }
+
+            }
+            return 0;
+        }
+
         /// <summary>
         /// Agregar Paciente al incidente
         /// </summary>
@@ -820,5 +980,169 @@ namespace SGREB
             dgPacientesIncendio.Items.Add(paciente);
         }
 
+        private void cmbCausa_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                string nombre = cmbCausa.SelectedItem.ToString();
+                if (nombre == "crear una nueva causa...")
+                {
+                    CausaSuicidioForm causaForm = new CausaSuicidioForm();
+                    causaForm.ShowDialog();
+                    obtenerCausasSuicidio();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void obtenerCausasSuicidio()
+        {
+            if (cmbCausa.Items.Count > 0)
+            {
+                cmbCausa.Items.Clear();
+            }
+            CausaSuicidio causa = new CausaSuicidio();
+            causasSuicidio = causa.obtenerTodos();
+            foreach (var c in causasSuicidio)
+            {
+                cmbMedioSolicitud.Items.Add(c.CausaSuicidio);
+            }
+            cmbMedioSolicitud.Items.Add("crear una nueva causa...");
+        }
+
+        private void btAgregarSuicidado_Click(object sender, RoutedEventArgs e)
+        {
+            PacienteSuicidadoForm pacienteForm = new PacienteSuicidadoForm();
+            pacienteForm.ShowDialog();
+            var paciente = pacienteForm.pacienteGrid;
+            gdPacientesSucicidados.Items.Add(paciente);
+        }
+
+        private void cmbAnimales_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                string nombre = cmbCausa.SelectedItem.ToString();
+                if (nombre == "crear una nuevo Animal...")
+                {
+                    AnimalForm causaForm = new AnimalForm();
+                    causaForm.ShowDialog();
+                    obtenerAnimales();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void obtenerAnimales()
+        {
+            if (cmbAnimales.Items.Count > 0)
+            {
+                cmbAnimales.Items.Clear();
+            }
+            Animal animal = new Animal();
+            animales = animal.obtenerVarios();
+            foreach (var a in animales)
+            {
+                cmbAnimales.Items.Add(a.tipo);
+            }
+            cmbAnimales.Items.Add("crear un nuevo Animal...");
+        }
+
+        private void cmbIntoxicacion_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                string nombre = cmbIntoxicacion.SelectedItem.ToString();
+                if (nombre == "crear una nueva Causa...")
+                {
+                    AnimalForm causaForm = new AnimalForm();
+                    causaForm.ShowDialog();
+                    obtenerCausasIntoxicacion();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void obtenerCausasIntoxicacion()
+        {
+            if (cmbIntoxicacion.Items.Count > 0)
+            {
+                cmbIntoxicacion.Items.Clear();
+            }
+            CausaIntoxicacion causa = new CausaIntoxicacion();
+            causas = causa.obtenerTodos();
+            foreach (var a in causas)
+            {
+                cmbIntoxicacion.Items.Add(a.nombre);
+            }
+            cmbAnimales.Items.Add("crear una nueva Causa...");
+        }
+
+        private void btAgregarPacienteIntoxicados_Click(object sender, RoutedEventArgs e)
+        {
+            PacienteForm pacienteForm = new PacienteForm();
+            pacienteForm.ShowDialog();
+            var paciente = pacienteForm.pacienteGrid;
+            dgIntoxicados.Items.Add(paciente);
+        }
+
+        private void btAgregarPacienteMordido_Click(object sender, RoutedEventArgs e)
+        {
+            PacienteForm pacienteForm = new PacienteForm();
+            pacienteForm.ShowDialog();
+            var paciente = pacienteForm.pacienteGrid;
+            dgPacientesMordidos.Items.Add(paciente);
+        }
+
+        private void btAgregarPaciente2_Click(object sender, RoutedEventArgs e)
+        {
+            PacienteForm pacienteForm = new PacienteForm();
+            pacienteForm.ShowDialog();
+            var paciente = pacienteForm.pacienteGrid;
+            gdPacientesAtropellados.Items.Add(paciente);
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            try
+            {
+                string nombre = cmbTipoVehiculo.SelectedItem.ToString();
+                if (nombre == "crear un nuevo tipo de vehiculo....")
+                {
+                    VehiculoForm causaForm = new VehiculoForm();
+                    causaForm.ShowDialog();
+                    obtenerTiposDeVehiculos();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void obtenerTiposDeVehiculos()
+        {
+            if (cmbTipoVehiculo.Items.Count > 0)
+            {
+                cmbTipoVehiculo.Items.Clear();
+            }
+            TipoVehiculo tipo = new TipoVehiculo();
+            vehiculos = tipo.obtenerVarios();
+            foreach (var a in vehiculos)
+            {
+                cmbTipoVehiculo.Items.Add(a.tipo);
+            }
+            cmbTipoVehiculo.Items.Add("crear un nuevo tipo de vehiculo....");
+        }
     }
 }
