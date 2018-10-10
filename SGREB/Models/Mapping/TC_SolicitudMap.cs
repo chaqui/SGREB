@@ -19,6 +19,10 @@ namespace SGREB.Models.Mapping
                 .IsFixedLength()
                 .HasMaxLength(45);
 
+            this.Property(t => t.noTelefono)
+                .IsFixedLength()
+                .HasMaxLength(8);
+
             // Table & Column Mappings
             this.ToTable("TC_Solicitud");
             this.Property(t => t.idSolicitud).HasColumnName("idSolicitud");
@@ -28,6 +32,7 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.ingresadoPor).HasColumnName("ingresadoPor");
             this.Property(t => t.TraspasoACBM).HasColumnName("TraspasoACBM");
             this.Property(t => t.falsaAlarma).HasColumnName("falsaAlarma");
+            this.Property(t => t.noTelefono).HasColumnName("noTelefono");
 
             // Relationships
             this.HasOptional(t => t.TC_Bombero)

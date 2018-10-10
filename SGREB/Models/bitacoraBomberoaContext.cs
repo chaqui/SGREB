@@ -19,6 +19,7 @@ namespace SGREB.Models
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<TC_AccidenteTransito> TC_AccidenteTransito { get; set; }
         public DbSet<TC_Bombero> TC_Bombero { get; set; }
+        public DbSet<TC_Certificacion> TC_Certificacion { get; set; }
         public DbSet<TC_HechoDeViolencia> TC_HechoDeViolencia { get; set; }
         public DbSet<TC_Incendio> TC_Incendio { get; set; }
         public DbSet<TC_Incidente> TC_Incidente { get; set; }
@@ -55,6 +56,7 @@ namespace SGREB.Models
             modelBuilder.Configurations.Add(new sysdiagramMap());
             modelBuilder.Configurations.Add(new TC_AccidenteTransitoMap());
             modelBuilder.Configurations.Add(new TC_BomberoMap());
+            modelBuilder.Configurations.Add(new TC_CertificacionMap());
             modelBuilder.Configurations.Add(new TC_HechoDeViolenciaMap());
             modelBuilder.Configurations.Add(new TC_IncendioMap());
             modelBuilder.Configurations.Add(new TC_IncidenteMap());

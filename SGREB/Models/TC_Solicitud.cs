@@ -7,6 +7,7 @@ namespace SGREB.Models
     {
         public TC_Solicitud()
         {
+            this.TC_Certificacion = new List<TC_Certificacion>();
             this.TC_Incidente = new List<TC_Incidente>();
         }
 
@@ -17,7 +18,9 @@ namespace SGREB.Models
         public string ingresadoPor { get; set; }
         public Nullable<bool> TraspasoACBM { get; set; }
         public Nullable<bool> falsaAlarma { get; set; }
+        public string noTelefono { get; set; }
         public virtual TC_Bombero TC_Bombero { get; set; }
+        public virtual ICollection<TC_Certificacion> TC_Certificacion { get; set; }
         public virtual ICollection<TC_Incidente> TC_Incidente { get; set; }
         public virtual TC_Persona TC_Persona { get; set; }
         public virtual TC_Usuario TC_Usuario { get; set; }
