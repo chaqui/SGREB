@@ -11,8 +11,8 @@
             <ColumnDefinition Width="19*"/>
             <ColumnDefinition Width="69*"/>
         </Grid.ColumnDefinitions>
-        <Label Content="Unidad" HorizontalAlignment="Left" Margin="49,46,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
-        <Label Content="Piloto" HorizontalAlignment="Left" Margin="49,88,0,0" VerticalAlignment="Top" Height="26" Width="41"/>
+        <Label Content="Piloto:" HorizontalAlignment="Left" Margin="49,46,0,0" VerticalAlignment="Top" Height="26" Width="48"/>
+        <Label Content="Unidad:" HorizontalAlignment="Left" Margin="39,88,0,0" VerticalAlignment="Top" Height="26" Width="51" Grid.ColumnSpan="2"/>
         <ComboBox HorizontalAlignment="Left" Margin="112,46,0,0" VerticalAlignment="Top" Width="268" Grid.ColumnSpan="2" Height="28" x:Name="cmbPiloto"/>
         <ComboBox HorizontalAlignment="Left" Margin="112,88,0,0" VerticalAlignment="Top" Width="268" Grid.ColumnSpan="2" Height="28" x:Name="cmbUnidad"/>
         <Button Content="aceptar" HorizontalAlignment="Left" Margin="125,157,0,0" VerticalAlignment="Top" Width="96" Grid.Column="1" x:Name="btAceptar" Click="btAceptar_Click"/>

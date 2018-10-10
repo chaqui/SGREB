@@ -14,23 +14,107 @@
         </Grid.RowDefinitions>
         <TextBlock
             FontSize="24"
-            TextAlignment="Center" Margin="109,27.571,125,325" Text="GENERAR REPORTES" Grid.Row="1"/>
+            TextAlignment="Center" Margin="109,43,125,309" Text="GENERAR REPORTES" Grid.Row="1"/>
         <TextBlock
             FontSize="24"
             FontWeight="Bold" 
             Text="BENEMERITO CUERPO VOLUNTARIO DE BOMBEROS DE GUATEMALA"
             TextAlignment="Center"
             TextWrapping="Wrap" RenderTransformOrigin="0.6,0.284" Margin="109,15,125,361" Grid.RowSpan="2" />
-        <DatePicker HorizontalAlignment="Left" Margin="225,113.571,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <DatePicker HorizontalAlignment="Left" Margin="225,113.571,0,0" VerticalAlignment="Top" Grid.Row="1" x:Name="dpInicio"/>
         <Label Content="Fecha:" HorizontalAlignment="Left" Margin="65,117.571,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <Label Content="Inicial:" HorizontalAlignment="Left" Margin="230,87.571,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <Label Content="Tipo De Reporte (Numero):" HorizontalAlignment="Left" Margin="55,143.571,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="225,143.571,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1"/>
-        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1"/>
-        <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="640,208.571,0,0" VerticalAlignment="Top" Width="110" Grid.Row="1"/>
-        <DatePicker HorizontalAlignment="Left" Margin="449,113.571,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="225,143.571,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1" x:Name="txTipoReporte"/>
+        
+        <!-- Data grid para comunes-->
+        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgComun" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Fecha}" Header="Fecha" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Hora}" Header="Hora" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Cantidad}" Header="Cant." ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Lugar}" Header="Lugar" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=sexo}" Header="Sexo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Edad}" Header="Edad" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Vivo}" Header="Vivo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Fallecido}" Header="Fallecido" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Data grid para Enfermedades Comunes-->
+        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgEComun" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Fecha}" Header="Fecha" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Hora}" Header="Hora" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Cantidad}" Header="Cant." ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Lugar}" Header="Lugar" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=sexo}" Header="Sexo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Edad}" Header="Edad" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Causa}" Header="Causa" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Vivo}" Header="Vivo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Fallecido}" Header="Fallecido" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Data grid para Atropellados-->
+        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgAtropellados" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Fecha}" Header="Fecha" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Hora}" Header="Hora" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Cantidad}" Header="Cant." ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Lugar}" Header="Lugar" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=tipoVehiculo}" Header="Tipo de Vehiculo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=sexo}" Header="Sexo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=edad}" Header="Edad" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=vivo}" Header="Vivo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="Fallecido" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Data grid para Incendios-->
+        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgIncendiosA" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Fecha}" Header="Fecha" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Hora}" Header="Hora" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Cantidad}" Header="Cant." ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Lugar}" Header="Lugar" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=propietario}" Header="Propietario" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=perdidas}" Header="Perdidas" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=aguaUtilizada}" Header="Vivo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Fallecidos}" Header="Fallecido" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Vivos}" Header="Fallecido" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Data grid para Servicios de Agua-->
+        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgServicosDeAgua" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Fecha}" Header="Fecha" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Hora}" Header="Hora" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Cantidad}" Header="Cant." ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Lugar}" Header="Lugar" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=nombre}" Header="Propietario" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=galones}" Header="Perdidas" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Data grid para Suicidio-->
+        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgSuicidio" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=Fecha}" Header="Fecha" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Hora}" Header="Hora" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Cantidad}" Header="Cant." ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=Lugar}" Header="Lugar" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=nombre}" Header="Propietario" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=causa}" Header="Causa" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=edad}" Header="Edad" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=sexo}" Header="Sexo" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="619,209,0,0" VerticalAlignment="Top" Width="153" Grid.Row="1" Click="Button_Click"/>
+        <DatePicker HorizontalAlignment="Left" Margin="449,113.571,0,0" VerticalAlignment="Top" Grid.Row="1" x:Name="dpFinal"/>
         <Label Content="Final:" HorizontalAlignment="Left" Margin="454,87.571,0,0" VerticalAlignment="Top" Grid.Row="1"/>
-        <Button Content="buscar" HorizontalAlignment="Left" Margin="619,151.571,0,0" VerticalAlignment="Top" Width="75" x:Name="btBuscar" Grid.Row="1"/>
+        <Button Content="buscar" HorizontalAlignment="Left" Margin="619,151.571,0,0" VerticalAlignment="Top" Width="75" x:Name="btBuscar" Grid.Row="1" Click="btBuscar_Click"/>
 
     </Grid>
 </UserControl>

@@ -38,9 +38,9 @@ namespace SGREB.Models
         public DbSet<TT_EvacuadoInundacion> TT_EvacuadoInundacion { get; set; }
         public DbSet<TT_Lugar> TT_Lugar { get; set; }
         public DbSet<TV_Animal> TV_Animal { get; set; }
+        public DbSet<TV_CausaEnfermedadComun> TV_CausaEnfermedadComun { get; set; }
         public DbSet<TV_CausaIntoxicacion> TV_CausaIntoxicacion { get; set; }
         public DbSet<TV_CausaSuicidio> TV_CausaSuicidio { get; set; }
-        public DbSet<TV_ClaseServicio> TV_ClaseServicio { get; set; }
         public DbSet<TV_Grado> TV_Grado { get; set; }
         public DbSet<TV_InstitucionDeSalud> TV_InstitucionDeSalud { get; set; }
         public DbSet<TV_MedioSolicitud> TV_MedioSolicitud { get; set; }
@@ -74,9 +74,9 @@ namespace SGREB.Models
             modelBuilder.Configurations.Add(new TT_EvacuadoInundacionMap());
             modelBuilder.Configurations.Add(new TT_LugarMap());
             modelBuilder.Configurations.Add(new TV_AnimalMap());
+            modelBuilder.Configurations.Add(new TV_CausaEnfermedadComunMap());
             modelBuilder.Configurations.Add(new TV_CausaIntoxicacionMap());
             modelBuilder.Configurations.Add(new TV_CausaSuicidioMap());
-            modelBuilder.Configurations.Add(new TV_ClaseServicioMap());
             modelBuilder.Configurations.Add(new TV_GradoMap());
             modelBuilder.Configurations.Add(new TV_InstitucionDeSaludMap());
             modelBuilder.Configurations.Add(new TV_MedioSolicitudMap());

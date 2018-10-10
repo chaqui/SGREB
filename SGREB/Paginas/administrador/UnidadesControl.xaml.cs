@@ -88,5 +88,6 @@ namespace SGREB.Paginas.administrador
             unidadForm.ShowDialog();
             obtenerUnidades();
         }
+
     }
 }

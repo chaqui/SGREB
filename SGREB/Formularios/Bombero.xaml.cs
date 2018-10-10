@@ -39,7 +39,6 @@ namespace SGREB.Formularios
         /// <param name="id"> id del bombero a modificar</param>
         public Bombero(string id)
         {
-            MessageBox.Show(id);
             tipo = 2;
             this.id = id;
             InitializeComponent();
@@ -152,7 +151,8 @@ namespace SGREB.Formularios
         /// <param name="e"></param>
         private void cmbGrado_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
-            
+            try
+            { 
             if (cmbGrado.SelectedItem.ToString() == "crear un nuevo Grado...")
             {
                 var grado = new GradoForm();
@@ -164,6 +164,11 @@ namespace SGREB.Formularios
                 obtenerGrados();
                 return;
             }
+            }
+            catch
+            {
+
+            }
         }
 
         /// <summary>
@@ -173,11 +178,17 @@ namespace SGREB.Formularios
         /// <param name="e"></param>
         private void CmbRol_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
         {
+            try { 
             if(CmbRol.SelectedItem.ToString() == "crear un nuevo Rol...")
             {
                 var rol = new Rol();
                 rol.ShowDialog();
                 obtenerRoles();
+            }
+            }
+            catch
+            {
+
             }
         }
 

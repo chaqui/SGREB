@@ -17,13 +17,14 @@
             Text="BENEMERITO CUERPO VOLUNTARIO DE BOMBEROS DE GUATEMALA"
             TextAlignment="Center"
             TextWrapping="Wrap" RenderTransformOrigin="0.6,0.284" Margin="109,15,125,361" />
-        <DatePicker HorizontalAlignment="Left" Margin="225,165,0,0" VerticalAlignment="Top"/>
+        <DatePicker HorizontalAlignment="Left" Margin="225,165,0,0" VerticalAlignment="Top" x:Name="fechaInicial"/>
         <Label Content="Fecha:" HorizontalAlignment="Left" Margin="65,169,0,0" VerticalAlignment="Top"/>
         <Label Content="Inicial:" HorizontalAlignment="Left" Margin="230,139,0,0" VerticalAlignment="Top"/>
         <Label Content="Tipo De Reporte (Numero):" HorizontalAlignment="Left" Margin="55,195,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="225,195,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,240,0,0" VerticalAlignment="Top" Width="560"/>
-        <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="640,260,0,0" VerticalAlignment="Top" Width="110"/>
+        <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="507,222,0,0" VerticalAlignment="Top" Width="183" Click="Button_Click"/>
+        <DatePicker HorizontalAlignment="Left" Margin="411,170,0,0" VerticalAlignment="Top" x:Name="fechaFinal"/>
+        <Label Content="Final:" HorizontalAlignment="Left" Margin="399,144,0,0" VerticalAlignment="Top"/>
 
     </Grid>
 </UserControl>

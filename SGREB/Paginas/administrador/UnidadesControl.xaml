@@ -25,8 +25,7 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button Content="Agregar Unidad" HorizontalAlignment="Left" Margin="580,170,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarElemento" Click="btAgregarElemento_Click" />
-        <Button Content="Eliminar Unidad" HorizontalAlignment="Left" Margin="580,210,0,0" VerticalAlignment="Top" Width="105" x:Name="btEliminarElemento"/>
-        <Button Content="Modificar Unidad" HorizontalAlignment="Left" Margin="580,250,0,0" VerticalAlignment="Top" Width="105" x:Name="btModificarElemento" Click="btModificarElemento_Click"/>
+        <Button Content="Agregar Unidad" HorizontalAlignment="Left" Margin="580,170,0,0" VerticalAlignment="Top" Width="138" x:Name="btAgregarElemento" Click="btAgregarElemento_Click" />
+        <Button Content="Modificar Unidad" HorizontalAlignment="Left" Margin="580,250,0,0" VerticalAlignment="Top" Width="138" x:Name="btModificarElemento" Click="btModificarElemento_Click"/>
     </Grid>
 </UserControl>

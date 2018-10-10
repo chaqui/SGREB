@@ -32,8 +32,18 @@ namespace SGREB.Formularios
             var nombreI = txNombres.Text;
             var apellidosI = txApellidos.Text;
             var dpiI = txDPI.Text;
-            var sexo = cmbSexo.SelectedItem.ToString();
+            var sexo = cmbSexo.SelectionBoxItem.ToString();
             var edad = txEdad.Text;
+            try
+            {
+                int.Parse(edad);
+            }
+            catch
+            {
+                MessageBox.Show("La edad debe de ser en numeros");
+                return;
+                
+            }
             var fallecido = "";
             var herido = "";
             if(nombreI == "" && apellidosI == "")

@@ -34,8 +34,7 @@
             </DataGrid.Columns>
 
         </DataGrid>
-        <Button Content="Agregar Elemento" HorizontalAlignment="Left" Margin="515,170,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarElemento" Click="btAgregarElemento_Click" Grid.Column="1"/>
-        <Button Content="Eliminar Elemento" HorizontalAlignment="Left" Margin="515,210,0,0" VerticalAlignment="Top" Width="105" x:Name="btEliminarElemento" Grid.Column="1"/>
-        <Button Content="Modificar Elemento" HorizontalAlignment="Left" Margin="515,250,0,0" VerticalAlignment="Top" Width="105" x:Name="btModificarElemento" Grid.Column="1" Click="btModificarElemento_Click"/>
+        <Button Content="Agregar Elemento" HorizontalAlignment="Left" Margin="497,170,0,0" VerticalAlignment="Top" Width="140" x:Name="btAgregarElemento" Click="btAgregarElemento_Click" Grid.Column="1"/>
+        <Button Content="Modificar Elemento" HorizontalAlignment="Left" Margin="497,250,0,0" VerticalAlignment="Top" Width="140" x:Name="btModificarElemento" Grid.Column="1" Click="btModificarElemento_Click"/>
     </Grid>
 </UserControl>

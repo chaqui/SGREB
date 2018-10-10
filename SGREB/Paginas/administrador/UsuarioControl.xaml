@@ -6,32 +6,32 @@
              xmlns:local="clr-namespace:SGREB.Paginas.administrador"
              mc:Ignorable="d"  Background="White"
              d:DesignHeight="450" d:DesignWidth="800">
-    
-        <Grid>
-            <TextBlock
+
+    <Grid>
+        <TextBlock
             FontSize="24"
             FontWeight="Bold" 
             Text="BENEMERITO CUERPO VOLUNTARIO DE BOMBEROS DE GUATEMALA"
             TextAlignment="Center"
             TextWrapping="Wrap" RenderTransformOrigin="0.6,0.284" Margin="109,15,125,361" />
-            <TextBlock
+        <TextBlock
             FontSize="24"
             TextAlignment="Center" Margin="109,79,125,325" Text="USUARIOS DEL SISTEMA"/>
-            <DataGrid HorizontalAlignment="Left" Height="250" Margin="70,150,0,0" VerticalAlignment="Top" Width="465" x:Name="dataGridUsuarios">
+        <DataGrid HorizontalAlignment="Left" Height="250" Margin="70,150,0,0" VerticalAlignment="Top" Width="465" x:Name="dataGridUsuarios">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Path=nickName}" Header="nickName" x:Name="columnaNickName" ></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding Path=rol}" Header="Rol" x:Name="rol" ></DataGridTextColumn>
-                </DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=rol}" Header="Rol" x:Name="rol" ></DataGridTextColumn>
+            </DataGrid.Columns>
 
 
-            </DataGrid>
+        </DataGrid>
 
 
-            <Button Content="Agregar Usuario" HorizontalAlignment="Left" Margin="595,180,0,0" VerticalAlignment="Top" Width="110" x:Name="btAgregarElemento" Click="btAgregarElemento_Click"/>
-            <Button Content="Eliminar Usuario" HorizontalAlignment="Left" Margin="595,220,0,0" VerticalAlignment="Top" Width="105" x:Name="btEliminarElemento"/>
-            <Button Content="Modificar Usuario" HorizontalAlignment="Left" Margin="595,260,0,0" VerticalAlignment="Top" Width="105" x:Name="btModificarElemento" Click="btModificarElemento_Click"/>
+        <Button Content="Agregar Usuario" HorizontalAlignment="Left" Margin="572,180,0,0" VerticalAlignment="Top" Width="148" x:Name="btAgregarElemento" Click="btAgregarElemento_Click"/>
+        <Button Content="Eliminar Usuario" HorizontalAlignment="Left" Margin="572,220,0,0" VerticalAlignment="Top" Width="148" x:Name="btEliminarElemento"/>
+        <Button Content="Modificar Usuario" HorizontalAlignment="Left" Margin="572,260,0,0" VerticalAlignment="Top" Width="148" x:Name="btModificarElemento" Click="btModificarElemento_Click"/>
 
 
-        </Grid>
-    
+    </Grid>
+
 </UserControl>

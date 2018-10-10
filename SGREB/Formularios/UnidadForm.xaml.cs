@@ -59,6 +59,10 @@ namespace SGREB.Formularios
         {
             TipoUnidad tipoUnidad = new TipoUnidad();
             tipos = tipoUnidad.obtenerVasrios();
+            if(cmbTipo.Items.Count > 0)
+            {
+                cmbTipo.Items.Clear();
+            }
             foreach (var tip in tipos)
             {
                 cmbTipo.Items.Add(tip.nombreTipo);
@@ -122,6 +126,7 @@ namespace SGREB.Formularios
                 TC_Unidad tcUnidad = new TC_Unidad { placa = placa, estado = estadoId, tipo = tipoId };
                 unidad.modificar(tcUnidad);
             }
+            this.Close();
             
         }
 
@@ -161,10 +166,18 @@ namespace SGREB.Formularios
 
         private void cmbTipo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if(cmbTipo.SelectedItem.ToString() == "Crear un nuevo tipo...")
+            try
             {
-                TipoUnidadForm tipoUnidadForm = new TipoUnidadForm();
-                tipoUnidadForm.ShowDialog();
+                if (cmbTipo.SelectedItem.ToString() == "Crear un nuevo tipo...")
+                {
+                    TipoUnidadForm tipoUnidadForm = new TipoUnidadForm();
+                    tipoUnidadForm.ShowDialog();
+                    obtenerTipos();
+                }
+            }
+            catch
+            {
+
             }
         }
 

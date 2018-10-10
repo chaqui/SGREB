@@ -78,6 +78,7 @@ namespace SGREB.Formularios
                 }
                  
             }
+            this.Close();
         }
 
         /// <summary>

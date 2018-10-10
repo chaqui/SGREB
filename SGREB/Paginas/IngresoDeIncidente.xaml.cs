@@ -13,6 +13,7 @@ namespace SGREB
     /// <summary>
     /// Lógica de interacción para IngresoDeIncidente.xaml
     /// </summary>
+    /// 
     public partial class IngresoDeIncidente : UserControl
     {
         private int idTipoIncidente;
@@ -26,9 +27,9 @@ namespace SGREB
         private List<BomberoComboBox> bomberos;
         private List<TV_CausaSuicidio> causasSuicidio;
         private List<TV_Animal> animales;
-        private List<BomberoComboBox> intoxicaciones;
         private List<TV_CausaIntoxicacion> causas;
         private List<TV_TipoVehiculo> vehiculos;
+        private List<TV_CausaEnfermedadComun> causasEnfermedadComun;
         public IngresoDeIncidente()
         {
             InitializeComponent();
@@ -36,11 +37,12 @@ namespace SGREB
             radiotelefonistas = new List<BomberoComboBox>();
             tipoServiciosVarios = new List<TV_TipoServicio>();
             uniidadIncidenteForms = new List<UniidadIncidenteForm>();
-
+            causasEnfermedadComun = new List<TV_CausaEnfermedadComun>();
             bomberos = new List<BomberoComboBox>();
 
             causasSuicidio = new List<TV_CausaSuicidio>();
 
+            causas = new List<TV_CausaIntoxicacion>();
             obtenerIncidentes();
             obternerRadioTelefonistas();
         }
@@ -149,6 +151,7 @@ namespace SGREB
             }
             else
             {
+                
                 btGuardarCBM.Visibility = Visibility.Collapsed;
                 gridIncidente.Visibility = Visibility.Visible;
             }
@@ -170,10 +173,19 @@ namespace SGREB
 
         private void guardarIncidenteComun(int idIncidente)
         {
+            try
+            { 
             guardarBOmberos(idIncidente);
             guardarPaciente(idIncidente);
             guardarUnidades(idIncidente);
-                
+                MessageBox.Show("Guardado Correctamente");
+            }
+            catch
+            {
+                MessageBox.Show("Error al guardar");
+            }
+
+
         }
 
         /// <summary>
@@ -247,7 +259,8 @@ namespace SGREB
             gridInundaciones.Visibility = Visibility.Collapsed;
             gridElementos.Visibility = Visibility.Collapsed;
             gridBaleados.Visibility = Visibility.Collapsed;
-
+            gridEComun.Visibility = Visibility.Collapsed;
+            btGuardarVarios.Visibility = Visibility.Collapsed;
             //seleccion de formulario por id
             switch (idTipoIncidente)
             {
@@ -256,30 +269,35 @@ namespace SGREB
                     mostrarServiciosVarios();
                     break;
                 case 2: //Enfermedad Común
-                    mostrarGridComun(nombreIncidente);
+                    mostrarEnfermedadComun();
                     break;
                 case 3: //Caidas casuales
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 4: //Maternidad
+
                     gridMaternidad.Visibility = Visibility.Visible;
                     break;
                 case 5: //Atropellados
+                    obtenerTiposDeVehiculos();
                     gridAtropellados.Visibility = Visibility.Visible;
                     break;
                 case 6: //Intoxicados
+                    obtenerCausasIntoxicacion();
                     gridIntoxicados.Visibility = Visibility.Visible;
                     break;
                 case 7: //Quemados
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 8: //Mordidos por Animales
+                    obtenerAnimales();
                     gridMordidos.Visibility = Visibility.Visible;
                     break;
                 case 9: //Ataque de objeto Contundente
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 10: //Accidente de Transito
+
                     gridAccidenteTransito.Visibility = Visibility.Visible;
                     break;
                 case 11: //Accidente de Motocicleta
@@ -309,6 +327,7 @@ namespace SGREB
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 20: //suicidados
+                    obtenerCausasSuicidio();
                     gridSuicidios.Visibility = Visibility.Visible;
                     break;
                 case 21: //Linchados
@@ -336,6 +355,7 @@ namespace SGREB
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 29: //inundaciones
+                    
                     gridInundaciones.Visibility = Visibility.Visible;
                     break;
                 case 30: //Rescate en Posos
@@ -358,7 +378,44 @@ namespace SGREB
             }
             gridUnidades.Visibility = Visibility.Visible;
             gridElementos.Visibility = Visibility.Visible;
+            obtenerElementos();
+        }
 
+        private void mostrarEnfermedadComun()
+        {
+            obtenerCausasComunes();
+            gridEComun.Visibility = Visibility.Visible;
+            this.Height = 800;
+        }
+
+        private void obtenerCausasComunes()
+        {
+            CausaEnfermedadComun causa = new CausaEnfermedadComun();
+            causasEnfermedadComun = causa.obtenerTodos();
+            cmbCausaEComun.Items.Clear();
+            foreach(var c in causasEnfermedadComun)
+            {
+                cmbCausaEComun.Items.Add(c.nombre);
+            }
+            cmbCausaEComun.Items.Add("Crear una nueva causa...");
+
+        }
+
+        private void obtenerElementos()
+        {
+            Persona persona = new Persona();
+            Controlador.Bombero bombero = new Controlador.Bombero();
+            var bomberosO = bombero.obtenerVarios();
+            foreach (var b in bomberosO)
+            {
+                var p = persona.obtener(b.persona);
+                this.bomberos.Add(new BomberoComboBox { nombre = p.nombres + " " + p.apellidos, id = b.idBombero });
+            
+            }
+            foreach(var b in bomberos)
+            {
+                cmbBomberos.Items.Add(b.nombre);
+            }
         }
 
         private void mostrargridAtropellados()
@@ -475,6 +532,11 @@ namespace SGREB
         private void btGuardarCompleto_Click(object sender, RoutedEventArgs e)
         {
             var id = guardarIncidente(false, false);
+            if(id == -1)
+            {
+                MessageBox.Show("error al guardar el incidente");
+                return;
+            }
 
             if(Array.IndexOf(comunes, idTipoIncidente) != -1)
             {
@@ -524,16 +586,15 @@ namespace SGREB
         {
            try
             {
-                var idIncidente = guardarIncidente(false, false);
-                if (idIncidente == -1) return idIncidente;
+                if (id == -1) return id;
 
-                guardarPacienteSuicidio(idIncidente);
+                guardarPacienteSuicidio(id);
                 string nombre = cmbCausa.SelectedItem.ToString();
                 var idCausa = obtenerIdCAusaSuicidio(nombre);
                 Suicidio suicidio = new Suicidio();
-                suicidio.crearSuiciidio(new TC_Suicidio { Causa = idCausa, incidente = idIncidente });
-                guardarBOmberos(idIncidente);
-                guardarUnidades(idIncidente);
+                suicidio.crearSuiciidio(new TC_Suicidio { Causa = idCausa, incidente = id });
+                guardarBOmberos(id);
+                guardarUnidades(id);
                 return 0;
             }
             catch
@@ -558,11 +619,10 @@ namespace SGREB
         {
             try
             {
-                var idIncidente = guardarIncidente(false, false);
-                if (idIncidente == -1) return idIncidente;
+                if (id == -1) return id;
 
                 int galones = int.Parse(txtGalones.Text);
-                TC_ServicioDeGalones servicio = new TC_ServicioDeGalones { Galones = galones };
+                TC_ServicioDeGalones servicio = new TC_ServicioDeGalones { Galones = galones, idIncidente= id };
                 servicioDeGalones Sgalones = new servicioDeGalones();
                  int idR = Sgalones.crear(servicio);
 
@@ -580,19 +640,18 @@ namespace SGREB
         {
             try
             {
-                int idIncidente = guardarIncidente(false, false);
                 var seleccion = cmbIntoxicacion.SelectedItem.ToString();
                 var idAnimal = obtenerIdAnimal(seleccion);
 
-                if (idIncidente == -1) return idIncidente;
+                if (id == -1) return id;
                 if (idAnimal == -1) return idAnimal;
                 Paciente paciente = new Paciente();
                 foreach(var item in dgPacientesMordidos.Items)
                 {
-                    paciente.agregarMordioPorAnimal((PacienteGrid)item, idIncidente, idAnimal);
+                    paciente.agregarMordioPorAnimal((PacienteGrid)item, id, idAnimal);
                 }
-                guardarBOmberos(idIncidente);
-                guardarUnidades(idIncidente);
+                guardarBOmberos(id);
+                guardarUnidades(id);
                 return 0;
             }
             catch
@@ -604,7 +663,7 @@ namespace SGREB
 
         private int obtenerIdIntoxicados(string seleccion)
         {
-            foreach (var a in causas)
+            foreach (var a in this.causas)
             {
                 if (a.nombre == seleccion)
                 {
@@ -630,19 +689,19 @@ namespace SGREB
         {
             try
             {
-                int idIncidente = guardarIncidente(false, false);
+                
                 var seleccion = cmbIntoxicacion.SelectedItem.ToString();
                 var idIntoxicado = obtenerIdIntoxicados(seleccion);
 
-                if (idIncidente == -1) return idIncidente;
+                if (id == -1) return id;
                 if (idIntoxicado == -1) return idIntoxicado;
                 Paciente paciente = new Paciente();
                 foreach (var item in dgIntoxicados.Items)
                 {
-                    paciente.agregarMordioPorIntoxicacion((PacienteGrid)item, idIncidente, idIntoxicado);
+                    paciente.agregarMordioPorIntoxicacion((PacienteGrid)item, id, idIntoxicado);
                 }
-                guardarBOmberos(idIncidente);
-                guardarUnidades(idIncidente);
+                guardarBOmberos(id);
+                guardarUnidades(id);
                 return 0;
             }
             catch
@@ -653,17 +712,17 @@ namespace SGREB
 
         private int guardarAtropellados(int id)
         {
-            int idIncidente = guardarIncidente(false, false);
-            if (idIncidente == -1) return idIncidente;
-            var seleccion = cmbIntoxicacion.SelectedItem.ToString();
+
+            if (id == -1) return id;
+            var seleccion = cmbTipoVehiculo.SelectedItem.ToString();
             var placa = txPlaca.Text;
             var tipo = obtenerIdTipoDeVehiculo(seleccion);
-            TC_AccidenteTransito accidenteTransito = new TC_AccidenteTransito { placa = placa, tipoVehiculo = tipo,idIncidente=idIncidente };
+            TC_AccidenteTransito accidenteTransito = new TC_AccidenteTransito { placa = placa, tipoVehiculo = tipo,idIncidente= id };
             AccidenteTransito accidente = new AccidenteTransito();
             accidente.Crear(accidenteTransito);
-            guardarPacientesAtropellados(idIncidente);
-            guardarBOmberos(idIncidente);
-            guardarUnidades(idIncidente);
+            guardarPacientesAtropellados(id);
+            guardarBOmberos(id);
+            guardarUnidades(id);
 
             return 1;
         }
@@ -731,7 +790,7 @@ namespace SGREB
             {
                 var bombero = (BomberoComboBox)item;
                 Incidente incidente = new Incidente();
-                incidente.agregarBombero(bombero, idIncidente);
+                incidente.agregarBombero(bombero.id, idIncidente);
             }
 
         }
@@ -796,9 +855,23 @@ namespace SGREB
             PacienteGrid.Items.Add(paciente);
         }
 
+        private void btAgregarPacienteC_Click(object sender, RoutedEventArgs e)
+        {
+            PacienteForm pacienteForm = new PacienteForm();
+            pacienteForm.ShowDialog();
+            var paciente = pacienteForm.pacienteGrid;
+            gridEnfComun.Items.Add(paciente);
+        }
+
+
         private void EliminarPaciente_Click(object sender, RoutedEventArgs e)
         {
             PacienteGrid.Items.Remove(PacienteGrid.SelectedItem);
+        }
+
+        private void EliminarPacienteC_Click(object sender, RoutedEventArgs e)
+        {
+            gridEnfComun.Items.Remove(gridEnfComun.SelectedItem);
         }
 
         private void btGuardarFalsaAlarma_Click(object sender, RoutedEventArgs e)
@@ -879,7 +952,7 @@ namespace SGREB
         private void btAgregarUnidad_Click(object sender, RoutedEventArgs e)
         {
             UnidadPilotoForm unidadPiloto = new UnidadPilotoForm();
-            unidadPiloto.Show();
+            unidadPiloto.ShowDialog();
             var r = unidadPiloto.unidadPiloto;
             uniidadIncidenteForms.Add(r);
             actualizarGridDeUnidad();
@@ -902,6 +975,8 @@ namespace SGREB
 
         private void btAgregarElementos_Click(object sender, RoutedEventArgs e)
         {
+            try
+            { 
             var seleccion = cmbBomberos.SelectedItem.ToString();
             foreach(var b in bomberos)
             {
@@ -909,6 +984,11 @@ namespace SGREB
                 {
                     gridBomberos.Items.Add(b);
                 }
+            }
+            }
+            catch
+            {
+                MessageBox.Show("No selecciono ningun(a) Bombero");
             }
         }
 
@@ -1143,6 +1223,34 @@ namespace SGREB
                 cmbTipoVehiculo.Items.Add(a.tipo);
             }
             cmbTipoVehiculo.Items.Add("crear un nuevo tipo de vehiculo....");
+        }
+
+        private void btEliminarElementos_Click(object sender, RoutedEventArgs e)
+        {
+            gridBomberos.Items.Remove(gridBomberos.SelectedItem);
+        }
+
+        private void EliminarUnidad_Click(object sender, RoutedEventArgs e)
+        {
+            dgUnidades.Items.Remove(dgUnidades.SelectedItem);
+        }
+
+        private void cmbCausaEComun_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            { 
+                var seleccion = cmbCausaEComun.SelectedItem.ToString();
+                if(seleccion == "Crear una nueva causa...")
+                {
+                    CausaEnfermedadComunForm causaEnfermedadForm = new CausaEnfermedadComunForm();
+                    causaEnfermedadForm.ShowDialog();
+                    obtenerCausasComunes();
+                }           
+            }
+            catch
+            {
+
+            }
         }
     }
 }

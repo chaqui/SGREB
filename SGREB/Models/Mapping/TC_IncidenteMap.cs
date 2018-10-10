@@ -31,6 +31,15 @@ namespace SGREB.Models.Mapping
                         m.MapRightKey("idPaciente");
                     });
 
+            this.HasMany(t => t.TV_CausaEnfermedadComun)
+                .WithMany(t => t.TC_Incidente)
+                .Map(m =>
+                    {
+                        m.ToTable("TC_EnfermedadComun");
+                        m.MapLeftKey("idIncidente");
+                        m.MapRightKey("IdCausa");
+                    });
+
             this.HasOptional(t => t.TC_Solicitud)
                 .WithMany(t => t.TC_Incidente)
                 .HasForeignKey(d => d.solicitud);
