@@ -278,6 +278,11 @@ namespace SGREB.Paginas
                 {
                     crearPdfIncendio();
                 }
+                else if (idIncidente == 2)
+                {
+                    crearPdfEComun();
+                }
+
                 else if (idIncidente == 4)
                 {
                     crearPdfMaternidad();
@@ -314,6 +319,32 @@ namespace SGREB.Paginas
 
             }
 
+        }
+
+        private void crearPdfEComun()
+        {
+            DateTime fechaInicio = DateTime.Parse(dpInicio.SelectedDate.ToString());
+            DateTime fechaFinal = DateTime.Parse(dpFinal.SelectedDate.ToString());
+            List<DataGridEnfermedadComunDatos> datos = new List<DataGridEnfermedadComunDatos>();
+            foreach (var item in dgComun.Items)
+            {
+                datos.Add((DataGridEnfermedadComunDatos)item);
+            }
+
+            PDFCreador pdf = new PDFCreador();
+
+            TipoIncidente tipo = new TipoIncidente();
+            var nombreTipo = tipo.obtenerNombre(idIncidente);
+
+            string ubicaciion = obtenerLugar();
+            if (ubicaciion != "")
+            {
+                pdf.crearPDFEComun(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion);
+            }
+            else
+            {
+                MessageBox.Show("No coloco correctamente la ubicacion");
+            }
         }
 
         private void crearPdfInundaciones()

@@ -545,6 +545,10 @@ namespace SGREB
             else if(Array.IndexOf(incendios, idTipoIncidente) != -1){
                 guardarIncendio(id);
             }
+            else if(idTipoIncidente == 2)
+            {
+                guardarEnfermedadCOmun(id);
+            }
             else if(idTipoIncidente == 4)
             {
                 guardarMaternidad(id);
@@ -573,6 +577,39 @@ namespace SGREB
             {
                 guardarInundaciones(id);
             }
+        }
+
+        private int guardarEnfermedadCOmun(int id)
+        {
+            try
+            {
+                if (id == -1) return id;
+
+                guardarPacienteSuicidio(id);
+                string nombre = cmbCausaEComun.SelectedItem.ToString();
+                var idCausa = obtenerIdCAusaEComun(nombre);
+                Incidente incidente = new Incidente();
+                incidente.agregarEnfermedadComun(idCausa, id);
+                guardarBOmberos(id);
+                guardarUnidades(id);
+                return 0;
+            }
+            catch
+            {
+                return -1;
+            }
+        }
+
+        private int obtenerIdCAusaEComun(string nombre)
+        {
+            foreach (var causa in causasEnfermedadComun)
+            {
+                if (causa.nombre == nombre)
+                {
+                    return causa.idCausa;
+                }
+            }
+            return -1;
         }
 
         private void guardarInundaciones(int id)
