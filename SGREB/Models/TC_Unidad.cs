@@ -11,8 +11,8 @@ namespace SGREB.Models
         }
 
         public string placa { get; set; }
-        public Nullable<int> tipo { get; set; }
         public Nullable<int> estado { get; set; }
+        public Nullable<int> tipo { get; set; }
         public virtual TV_TipoUnidad TV_TipoUnidad { get; set; }
         public virtual ICollection<TC_UnidadParaIncidente> TC_UnidadParaIncidente { get; set; }
     }

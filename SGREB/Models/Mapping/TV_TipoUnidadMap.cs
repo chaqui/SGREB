@@ -11,9 +11,6 @@ namespace SGREB.Models.Mapping
             this.HasKey(t => t.idTipoUnidad);
 
             // Properties
-            this.Property(t => t.idTipoUnidad)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
             this.Property(t => t.nombreTipo)
                 .IsFixedLength()
                 .HasMaxLength(20);

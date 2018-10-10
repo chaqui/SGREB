@@ -16,6 +16,7 @@ namespace SGREB.Models
         public string radioTelefonista { get; set; }
         public string ingresadoPor { get; set; }
         public Nullable<bool> TraspasoACBM { get; set; }
+        public Nullable<bool> falsaAlarma { get; set; }
         public virtual TC_Bombero TC_Bombero { get; set; }
         public virtual ICollection<TC_Incidente> TC_Incidente { get; set; }
         public virtual TC_Persona TC_Persona { get; set; }

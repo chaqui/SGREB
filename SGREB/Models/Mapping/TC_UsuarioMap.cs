@@ -23,6 +23,7 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.bombero)
                 .IsFixedLength()
                 .HasMaxLength(10);
+
             this.Property(t => t.rol)
                 .IsFixedLength()
                 .HasMaxLength(10);

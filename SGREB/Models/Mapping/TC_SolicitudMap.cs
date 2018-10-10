@@ -27,6 +27,7 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.radioTelefonista).HasColumnName("radioTelefonista");
             this.Property(t => t.ingresadoPor).HasColumnName("ingresadoPor");
             this.Property(t => t.TraspasoACBM).HasColumnName("TraspasoACBM");
+            this.Property(t => t.falsaAlarma).HasColumnName("falsaAlarma");
 
             // Relationships
             this.HasOptional(t => t.TC_Bombero)

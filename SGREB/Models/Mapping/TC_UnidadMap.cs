@@ -19,8 +19,8 @@ namespace SGREB.Models.Mapping
             // Table & Column Mappings
             this.ToTable("TC_Unidad");
             this.Property(t => t.placa).HasColumnName("placa");
-            this.Property(t => t.tipo).HasColumnName("tipo");
             this.Property(t => t.estado).HasColumnName("estado");
+            this.Property(t => t.tipo).HasColumnName("tipo");
 
             // Relationships
             this.HasOptional(t => t.TV_TipoUnidad)
