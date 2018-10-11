@@ -30,6 +30,7 @@ namespace SGREB
         private List<TV_CausaIntoxicacion> causas;
         private List<TV_TipoVehiculo> vehiculos;
         private List<TV_CausaEnfermedadComun> causasEnfermedadComun;
+        private string observaciones;
         public IngresoDeIncidente()
         {
             InitializeComponent();
@@ -462,6 +463,10 @@ namespace SGREB
                     unidadForm.ShowDialog();
                     obtenerMedios();
                 }
+                else if(nombre == "telefono"){
+                    lbTelefono.Visibility = Visibility.Visible;
+                    txTelefono.Visibility = Visibility.Visible;
+                }
 
             }
             catch
@@ -481,45 +486,53 @@ namespace SGREB
         {
             try
             { 
-            var idRadioTelefonista = obtenerIdRadioTelefonista(cmbRadioTelefonista.SelectedItem.ToString());
-            var idMedio = obtenerIdMedio(cmbMedioSolicitud.SelectedItem.ToString());
-            var nombre = txNombresSolicitante.Text;
-            var apellidos = txApellidosSolicitante.Text;
-            
-            var dpi = txDPISolicitante.Text;
-            if (nombre == "" && apellidos =="")
-            {
-                MessageBox.Show("no ingreso el solicitante", "error de ingreso");
-                return -1;
-            }
-            if (idRadioTelefonista == "")
-            {
-                MessageBox.Show("no selecciono al radioTelefonista", "error de ingreso");
-                return -1;
-            }
-            if (idMedio == -1)
-            {
-                MessageBox.Show("no selecciono el Medio de Solicitud", "error de ingreso");
-                return -1;
-            }
-            if(dpi != "")
-            {
-                if(dpi.Length != 13)
+                var idRadioTelefonista = obtenerIdRadioTelefonista(cmbRadioTelefonista.SelectedItem.ToString());
+                var idMedio = obtenerIdMedio(cmbMedioSolicitud.SelectedItem.ToString());
+                var nombre = txNombresSolicitante.Text;
+                var apellidos = txApellidosSolicitante.Text;
+                var telefono = "";
+                if(cmbMedioSolicitud.SelectedItem.ToString() =="telefono" || cmbMedioSolicitud.SelectedItem.ToString() == "Telefono")
                 {
-                    MessageBox.Show("no ingreso un dpi correcto", "error de ingreso");
+                    telefono = txTelefono.Text;
+                }
+                
+            
+                var dpi = txDPISolicitante.Text;
+                if (nombre == "" && apellidos =="")
+                {
+                    MessageBox.Show("no ingreso el solicitante", "error de ingreso");
                     return -1;
                 }
-            }
-            TC_Persona tcPersona = new TC_Persona();
-            Persona persona = new Persona();
-            tcPersona.nombres = nombre;
-            tcPersona.apellidos = apellidos;
-            tcPersona.dpi = dpi;
-            int idPersona = persona.Crear(tcPersona);
+                if (idRadioTelefonista == "")
+                {
+                    MessageBox.Show("no selecciono al radioTelefonista", "error de ingreso");
+                    return -1;
+                }
+                if (idMedio == -1)
+                {
+                    MessageBox.Show("no selecciono el Medio de Solicitud", "error de ingreso");
+                    return -1;
+                }
+                if(dpi != "")
+                {
+                    if(dpi.Length != 13)
+                    {
+                        MessageBox.Show("no ingreso un dpi correcto", "error de ingreso");
+                        return -1;
+                    }
+                }
+            
 
-            TC_Solicitud tcSolicitud = new TC_Solicitud { medioSolicitud = idMedio, solicitante = idPersona, radioTelefonista = idRadioTelefonista, TraspasoACBM = cmb, ingresadoPor = "rene", falsaAlarma= falsaAlarma };
-            Solicitud solicitud = new Solicitud();
-            return solicitud.crear(tcSolicitud);
+                TC_Persona tcPersona = new TC_Persona();
+                Persona persona = new Persona();
+                tcPersona.nombres = nombre;
+                tcPersona.apellidos = apellidos;
+                tcPersona.dpi = dpi;
+                int idPersona = persona.Crear(tcPersona);
+
+                TC_Solicitud tcSolicitud = new TC_Solicitud { medioSolicitud = idMedio, solicitante = idPersona, radioTelefonista = idRadioTelefonista, TraspasoACBM = cmb, ingresadoPor = "rene", falsaAlarma= falsaAlarma, noTelefono= telefono };
+                Solicitud solicitud = new Solicitud();
+                return solicitud.crear(tcSolicitud);
             }
             catch
             {
@@ -941,6 +954,7 @@ namespace SGREB
                 tcIncidente.tipoIncidente = tipoIncidente;
                 tcIncidente.HoraEntrada = TimeSpan.Parse(Convert.ToDateTime(tPhoraEntrada.Text).ToString("HH:mm"));
                 tcIncidente.horaSalida = TimeSpan.Parse(Convert.ToDateTime(tPhoraSalida.Text).ToString("HH:mm"));
+                tcIncidente.observaciones = observaciones;
 
                 Lugar lugar = new Lugar();
                 var idLugar = lugar.crear(new TT_Lugar { direccion = txLugar.Text });
@@ -1288,6 +1302,13 @@ namespace SGREB
             {
 
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ObservacionesForm observacionesForm = new ObservacionesForm();
+            observacionesForm.ShowDialog();
+            observaciones = observacionesForm.contenidoObservaciones;
         }
     }
 }

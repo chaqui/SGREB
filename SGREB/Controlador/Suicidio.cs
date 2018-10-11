@@ -1,15 +1,22 @@
 
+using SGREB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class Suicidio : Incidente {
+public class Suicidio  {
 
     public Suicidio() {
     }
 
-    private void idSuicidio;Int;
+    public int crearSuiciidio(TC_Suicidio suicidio)
+    {
+        var bitacora = new bitacoraBomberoaContext();
+        bitacora.TC_Suicidio.Add(suicidio);
+        bitacora.SaveChanges();
+        return suicidio.idSuicidio;
+    }
 
 
 }

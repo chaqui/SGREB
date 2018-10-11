@@ -7,23 +7,14 @@ namespace SGREB.Controlador
 {
     public class TipoIncidente
     {
+        private List<TipoIncidente> tipos;
         public int idTipo { set; get; }
 
         public String nombre { set; get; }
 
         public TipoIncidente()
         {
-        }
-
-        public TipoIncidente(int idTipo, string nombre)
-        {
-            this.idTipo = idTipo;
-            this.nombre = nombre;
-        }
-
-        public List<TipoIncidente> obtenerIncidentes()
-        {
-            List<TipoIncidente> tipos = new List<TipoIncidente>();
+            tipos = new List<TipoIncidente>();
             tipos.Add(new TipoIncidente(1, "Incidentes Varios"));
             tipos.Add(new TipoIncidente(2, "Enfermedad Común"));
             tipos.Add(new TipoIncidente(3, "Caidads Casuales"));
@@ -58,9 +49,32 @@ namespace SGREB.Controlador
             tipos.Add(new TipoIncidente(32, "Rastreo Efectuado"));
             tipos.Add(new TipoIncidente(33, "Accidente Aereo"));
             tipos.Add(new TipoIncidente(34, "Rescates Vehiculares con Equipos Especiales"));
+        }
+
+        public TipoIncidente(int idTipo, string nombre)
+        {
+            this.idTipo = idTipo;
+            this.nombre = nombre;
+        }
+
+        public List<TipoIncidente> obtenerIncidentes()
+        {
+         
+           
             return tipos;
         }
 
+        public string obtenerNombre(int id)
+        {
+            foreach(var tipo in tipos)
+            {
+                if(tipo.idTipo == id)
+                {
+                    return tipo.nombre;
+                }
+            }
+            return "";
+        }
         
 
 

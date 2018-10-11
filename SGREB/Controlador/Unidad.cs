@@ -45,7 +45,7 @@ namespace SGREB.Controlador
         public TC_Unidad obtener(string placa)
         {
             var bitacora = new bitacoraBomberoaContext();
-            var unidad = bitacora.TC_Unidad.Where(s => s.placa == placa).Single();
+            var unidad = bitacora.TC_Unidad.Where(s => s.placa == placa).SingleOrDefault();
             return unidad;
         }
 

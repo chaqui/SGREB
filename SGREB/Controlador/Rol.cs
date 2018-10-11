@@ -33,5 +33,12 @@ namespace SGREB.Controlador
             return roles.ToList();
 
         }
+
+        public TV_Rol obtener(string nombre)
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            var rol = bitacora.TV_Rol.Where(s => s.nombre == nombre).Single();
+            return rol;
+        }
     }
 }

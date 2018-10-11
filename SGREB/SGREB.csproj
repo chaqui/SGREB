@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.EntityFrameworkCore.Design.2.1.3\build\net461\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('..\packages\Microsoft.EntityFrameworkCore.Design.2.1.3\build\net461\Microsoft.EntityFrameworkCore.Design.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -13,6 +14,8 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -34,15 +37,116 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
+      <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xmlworker, Version=5.5.0.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>..\packages\itextsharp.xmlworker.5.5.0\lib\itextsharp.xmlworker.dll</HintPath>
+    </Reference>
     <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.4.1.1101, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.4.1.1101\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.2.1.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Abstractions, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Abstractions.2.1.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Design, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Design.2.1.3\lib\net461\Microsoft.EntityFrameworkCore.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.EntityFrameworkCore.Relational, Version=2.1.3.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.EntityFrameworkCore.Relational.2.1.3\lib\netstandard2.0\Microsoft.EntityFrameworkCore.Relational.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Caching.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Caching.Memory, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Caching.Memory.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Caching.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Configuration.Binder, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Configuration.Binder.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Configuration.Binder.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.2.1.1\lib\net461\Microsoft.Extensions.DependencyInjection.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.DependencyInjection.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.DependencyInjection.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Options, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Options.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Options.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Extensions.Primitives, Version=2.1.1.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Primitives.2.1.1\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcPdfWriter-4.5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcPdfWriter.0.2\lib\net45\MvcPdfWriter-4.5.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="RSPK.EfExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RSPK.EfExtensions.1.0.0.0\lib\net45\RSPK.EfExtensions.dll</HintPath>
+    </Reference>
+    <Reference Include="ShowMeTheXAML, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShowMeTheXAML.1.0.10\lib\net45\ShowMeTheXAML.dll</HintPath>
+    </Reference>
+    <Reference Include="ShowMeTheXAML.AvalonEdit, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ShowMeTheXAML.AvalonEdit.1.0.10\lib\net45\ShowMeTheXAML.AvalonEdit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.4.5.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.4.5.0\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Interactive.Async, Version=3.0.3000.0, Culture=neutral, PublicKeyToken=94bc3704cddfc263, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Interactive.Async.3.1.1\lib\net46\System.Interactive.Async.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.1\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,50 +162,191 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WPFTextBoxAutoComplete, Version=1.0.0.2, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\WPFTextBoxAutoComplete.1.0.5\lib\net40\WPFTextBoxAutoComplete.dll</HintPath>
+    </Reference>
+    <Reference Include="WPF_AutoCompleteComboBox">
+      <HintPath>..\..\..\..\Desktop\WPF_AutoCompleteComboBox_dll\WPF_AutoCompleteComboBox.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="DataSet1.cs">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
+    <Compile Include="Controlador\AccidenteTransito.cs" />
+    <Compile Include="Controlador\CausaEnfermedadComun.cs" />
+    <Compile Include="Controlador\Incendio.cs" />
+    <Compile Include="Controlador\InicioDeSesion.cs" />
+    <Compile Include="Controlador\PDFCreador.cs" />
+    <Compile Include="Controlador\Reportes.cs" />
+    <Compile Include="Controlador\TV_InstitucionSalud.cs" />
+    <Compile Include="Formularios\CausaEnfermedadComunForm.xaml.cs">
+      <DependentUpon>CausaEnfermedadComunForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\FormularioSolicitante.xaml.cs">
+      <DependentUpon>FormularioSolicitante.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\ObservacionesForm.xaml.cs">
+      <DependentUpon>ObservacionesForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\VehiculoForm.xaml.cs">
+      <DependentUpon>VehiculoForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\IntoxicacionForm.xaml.cs">
+      <DependentUpon>IntoxicacionForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Bombero.xaml.cs">
+      <DependentUpon>Bombero.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\AnimalForm.xaml.cs">
+      <DependentUpon>AnimalForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\CausaSuicidioForm.xaml.cs">
+      <DependentUpon>CausaSuicidioForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\GradoForm.xaml.cs">
+      <DependentUpon>GradoForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\MedioForm.xaml.cs">
+      <DependentUpon>MedioForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Formularios\NuevoIncidente.xaml.cs">
       <DependentUpon>NuevoIncidente.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model\Animal.cs" />
-    <Compile Include="Model\Bombero.cs" />
-    <Compile Include="Model\CausaIntoxicacion.cs" />
-    <Compile Include="Model\CausaSuicidio.cs" />
-    <Compile Include="Model\CRUD.cs" />
-    <Compile Include="Model\Grado.cs" />
-    <Compile Include="Model\HechoDeViolencia.cs" />
-    <Compile Include="Model\Incidente.cs" />
-    <Compile Include="Model\Institucion.cs" />
-    <Compile Include="Model\InstitucionDeSalud.cs" />
-    <Compile Include="Model\Lugar.cs" />
-    <Compile Include="Model\Maternidad.cs" />
-    <Compile Include="Model\MedioSolicitud.cs" />
-    <Compile Include="Model\Paciente.cs" />
-    <Compile Include="Model\Persona.cs" />
-    <Compile Include="Model\rastreo.cs" />
-    <Compile Include="Model\Rol.cs" />
-    <Compile Include="Model\servicioDeGalones.cs" />
-    <Compile Include="Model\ServiciosVarios.cs" />
-    <Compile Include="Model\Solicitud.cs" />
-    <Compile Include="Model\Suicidio.cs" />
-    <Compile Include="Model\TipoIncidente.cs" />
-    <Compile Include="Model\TipoServicio.cs" />
-    <Compile Include="Model\TipoUnidad.cs" />
-    <Compile Include="Model\TipoVehiculo.cs" />
-    <Compile Include="Model\Unidad.cs" />
-    <Compile Include="Model\UnidadParaInicidente.cs" />
-    <Compile Include="Model\Usuario.cs" />
-    <Compile Include="Model\VehiculoAccidentado.cs" />
-    <Compile Include="Model\VehiculoIncendidado.cs" />
-    <Compile Include="Model\ViviendaInundada.cs" />
+    <Compile Include="Formularios\PacienteSuicidado.xaml.cs">
+      <DependentUpon>PacienteSuicidado.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\PacienteForm.xaml.cs">
+      <DependentUpon>PacienteForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\Rol.xaml.cs">
+      <DependentUpon>Rol.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\TipoServicioVariosForm.xaml.cs">
+      <DependentUpon>TipoServicioVariosForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\TipoUnidadForm.xaml.cs">
+      <DependentUpon>TipoUnidadForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\UnidadForm.xaml.cs">
+      <DependentUpon>UnidadForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\UnidadPilotoForm.xaml.cs">
+      <DependentUpon>UnidadPilotoForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\UsuarioForm.xaml.cs">
+      <DependentUpon>UsuarioForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="miscellany\AcompañantePaciente.cs" />
+    <Compile Include="miscellany\BomberoComboBox.cs" />
+    <Compile Include="miscellany\BomberoDataGrid.cs" />
+    <Compile Include="miscellany\BomberoInforme.cs" />
+    <Compile Include="miscellany\DataGridAtropelladosDatos.cs" />
+    <Compile Include="miscellany\DataGridComunDatos.cs" />
+    <Compile Include="miscellany\DataGridEnfermedadComunDatos.cs" />
+    <Compile Include="miscellany\DataGridFallecimientoDatos.cs" />
+    <Compile Include="miscellany\DataGridIncendiosDatos.cs" />
+    <Compile Include="miscellany\DataGridServiciosDeAguaDatos.cs" />
+    <Compile Include="miscellany\DatosCertificacion.cs" />
+    <Compile Include="miscellany\PacienteGrid.cs" />
+    <Compile Include="miscellany\UnidadDataGrid.cs" />
+    <Compile Include="miscellany\UniidadIncidenteForm.cs" />
+    <Compile Include="miscellany\UsuarioDataGrid.cs" />
+    <Compile Include="Controlador\Animal.cs" />
+    <Compile Include="Controlador\Bombero.cs" />
+    <Compile Include="Controlador\CausaIntoxicacion.cs" />
+    <Compile Include="Controlador\CausaSuicidio.cs" />
+    <Compile Include="Controlador\CRUD.cs" />
+    <Compile Include="Controlador\Grado.cs" />
+    <Compile Include="Controlador\HechoDeViolencia.cs" />
+    <Compile Include="Controlador\Incidente.cs" />
+    <Compile Include="Controlador\InstitucionDeSalud.cs" />
+    <Compile Include="Controlador\Lugar.cs" />
+    <Compile Include="Controlador\Maternidad.cs" />
+    <Compile Include="Controlador\MedioSolicitud.cs" />
+    <Compile Include="Controlador\Paciente.cs" />
+    <Compile Include="Controlador\Persona.cs" />
+    <Compile Include="Controlador\rastreo.cs" />
+    <Compile Include="Controlador\Rol.cs" />
+    <Compile Include="Controlador\servicioDeGalones.cs" />
+    <Compile Include="Controlador\ServiciosVarios.cs" />
+    <Compile Include="Controlador\Solicitud.cs" />
+    <Compile Include="Controlador\Suicidio.cs" />
+    <Compile Include="Controlador\TipoIncidente.cs" />
+    <Page Include="Formularios\CausaEnfermedadComunForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Formularios\FormularioSolicitante.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\ObservacionesForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\VehiculoForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Formularios\IntoxicacionForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Formularios\Bombero.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\AnimalForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Formularios\CausaSuicidioForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\GradoForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\MedioForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Formularios\NuevoIncidente.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\PacienteSuicidado.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Formularios\PacienteForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\Rol.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\TipoServicioVariosForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\TipoUnidadForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\UnidadForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\UnidadPilotoForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\UsuarioForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,13 +362,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Paginas\ReporteEspecial.xaml">
-      <Generator>MSBuild:Compile</Generator>
+    <Page Include="Paginas\GenerarReporte1.xaml">
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Paginas\ResumenReportes.xaml">
       <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="Paginas\GenerarReportes.xaml">
       <SubType>Designer</SubType>
@@ -145,12 +386,84 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </Compile>
-    <Compile Include="Model\InicioDeSesion.cs" />
+    <Compile Include="Controlador\TipoServicio.cs" />
+    <Compile Include="Controlador\TipoUnidad.cs" />
+    <Compile Include="Controlador\TipoVehiculo.cs" />
+    <Compile Include="Controlador\Unidad.cs" />
+    <Compile Include="Controlador\UnidadParaInicidente.cs" />
+    <Compile Include="Controlador\Usuario.cs" />
+    <Compile Include="Controlador\VehiculoAccidentado.cs" />
+    <Compile Include="Controlador\VehiculoIncendidado.cs" />
+    <Compile Include="Controlador\ViviendaInundada.cs" />
+    <Compile Include="Models\bitacoraBomberoaContext.cs" />
+    <Compile Include="Models\Mapping\sysdiagramMap.cs" />
+    <Compile Include="Models\Mapping\TC_AccidenteTransitoMap.cs" />
+    <Compile Include="Models\Mapping\TC_BomberoMap.cs" />
+    <Compile Include="Models\Mapping\TC_CertificacionMap.cs" />
+    <Compile Include="Models\Mapping\TC_HechoDeViolenciaMap.cs" />
+    <Compile Include="Models\Mapping\TC_IncendioMap.cs" />
+    <Compile Include="Models\Mapping\TC_IncidenteMap.cs" />
+    <Compile Include="Models\Mapping\TC_MaternidadMap.cs" />
+    <Compile Include="Models\Mapping\TC_PacienteMap.cs" />
+    <Compile Include="Models\Mapping\TC_PersonaMap.cs" />
+    <Compile Include="Models\Mapping\TC_RastreoMap.cs" />
+    <Compile Include="Models\Mapping\TC_ServicioDeGalonesMap.cs" />
+    <Compile Include="Models\Mapping\TC_servicioVariosMap.cs" />
+    <Compile Include="Models\Mapping\TC_SolicitudMap.cs" />
+    <Compile Include="Models\Mapping\TC_SuicidioMap.cs" />
+    <Compile Include="Models\Mapping\TC_UnidadMap.cs" />
+    <Compile Include="Models\Mapping\TC_UnidadParaIncidenteMap.cs" />
+    <Compile Include="Models\Mapping\TC_UsuarioMap.cs" />
+    <Compile Include="Models\Mapping\TC_VehiculoIncendiadoMap.cs" />
+    <Compile Include="Models\Mapping\TC_ViviendaInundadaMap.cs" />
+    <Compile Include="Models\Mapping\TT_EvacuadoInundacionMap.cs" />
+    <Compile Include="Models\Mapping\TT_LugarMap.cs" />
+    <Compile Include="Models\Mapping\TV_AnimalMap.cs" />
+    <Compile Include="Models\Mapping\TV_CausaEnfermedadComunMap.cs" />
+    <Compile Include="Models\Mapping\TV_CausaIntoxicacionMap.cs" />
+    <Compile Include="Models\Mapping\TV_CausaSuicidioMap.cs" />
+    <Compile Include="Models\Mapping\TV_GradoMap.cs" />
+    <Compile Include="Models\Mapping\TV_InstitucionDeSaludMap.cs" />
+    <Compile Include="Models\Mapping\TV_MedioSolicitudMap.cs" />
+    <Compile Include="Models\Mapping\TV_RolMap.cs" />
+    <Compile Include="Models\Mapping\TV_TipoIncidenteMap.cs" />
+    <Compile Include="Models\Mapping\TV_TipoServicioMap.cs" />
+    <Compile Include="Models\Mapping\TV_TipoUnidadMap.cs" />
+    <Compile Include="Models\Mapping\TV_TipoVehiculoMap.cs" />
+    <Compile Include="Models\sysdiagram.cs" />
+    <Compile Include="Models\TC_AccidenteTransito.cs" />
+    <Compile Include="Models\TC_Bombero.cs" />
+    <Compile Include="Models\TC_Certificacion.cs" />
+    <Compile Include="Models\TC_HechoDeViolencia.cs" />
+    <Compile Include="Models\TC_Incendio.cs" />
+    <Compile Include="Models\TC_Incidente.cs" />
+    <Compile Include="Models\TC_Maternidad.cs" />
+    <Compile Include="Models\TC_Paciente.cs" />
+    <Compile Include="Models\TC_Persona.cs" />
+    <Compile Include="Models\TC_Rastreo.cs" />
+    <Compile Include="Models\TC_ServicioDeGalones.cs" />
+    <Compile Include="Models\TC_servicioVarios.cs" />
+    <Compile Include="Models\TC_Solicitud.cs" />
+    <Compile Include="Models\TC_Suicidio.cs" />
+    <Compile Include="Models\TC_Unidad.cs" />
+    <Compile Include="Models\TC_UnidadParaIncidente.cs" />
+    <Compile Include="Models\TC_Usuario.cs" />
+    <Compile Include="Models\TC_VehiculoIncendiado.cs" />
+    <Compile Include="Models\TC_ViviendaInundada.cs" />
+    <Compile Include="Models\TT_EvacuadoInundacion.cs" />
+    <Compile Include="Models\TT_Lugar.cs" />
+    <Compile Include="Models\TV_Animal.cs" />
+    <Compile Include="Models\TV_CausaEnfermedadComun.cs" />
+    <Compile Include="Models\TV_CausaIntoxicacion.cs" />
+    <Compile Include="Models\TV_CausaSuicidio.cs" />
+    <Compile Include="Models\TV_Grado.cs" />
+    <Compile Include="Models\TV_InstitucionDeSalud.cs" />
+    <Compile Include="Models\TV_MedioSolicitud.cs" />
+    <Compile Include="Models\TV_Rol.cs" />
+    <Compile Include="Models\TV_TipoIncidente.cs" />
+    <Compile Include="Models\TV_TipoServicio.cs" />
+    <Compile Include="Models\TV_TipoUnidad.cs" />
+    <Compile Include="Models\TV_TipoVehiculo.cs" />
     <Compile Include="Paginas\administrador\Bomberos.xaml.cs">
       <DependentUpon>Bomberos.xaml</DependentUpon>
     </Compile>
@@ -160,11 +473,8 @@
     <Compile Include="Paginas\administrador\UsuarioControl.xaml.cs">
       <DependentUpon>UsuarioControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Paginas\ReporteEspecial.xaml.cs">
-      <DependentUpon>ReporteEspecial.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Paginas\ResumenReportes.xaml.cs">
-      <DependentUpon>ResumenReportes.xaml</DependentUpon>
+    <Compile Include="Paginas\GenerarReporte1.xaml.cs">
+      <DependentUpon>GenerarReporte1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Paginas\GenerarReportes.xaml.cs">
       <DependentUpon>GenerarReportes.xaml</DependentUpon>
@@ -179,8 +489,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Paginas\ReporteEspecial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Paginas\ResumenReporte.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Paginas\ReporteEspecial.xaml.cs">
+      <DependentUpon>ReporteEspecial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\ResumenReporte.xaml.cs">
+      <DependentUpon>ResumenReporte.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -198,22 +522,13 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet1.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="packages.config" />
+    <None Include="PdfTemplates\Test1\ToPdf.tpdf" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Views\Test1\ViewAsPdf.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -221,8 +536,14 @@
   <ItemGroup>
     <Resource Include="Resources\logo-completo-png.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Controlador\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Este proyecto hace referencia a los paquetes NuGet que faltan en este equipo. Use la restauración de paquetes NuGet para descargarlos. Para obtener más información, consulte http://go.microsoft.com/fwlink/?LinkID=322105. El archivo que falta es {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.EntityFrameworkCore.Design.2.1.3\build\net461\Microsoft.EntityFrameworkCore.Design.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.EntityFrameworkCore.Design.2.1.3\build\net461\Microsoft.EntityFrameworkCore.Design.props'))" />
+    <Error Condition="!Exists('..\packages\ShowMeTheXAML.MSBuild.1.0.10\build\net45\ShowMeTheXAML.MSBuild.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\ShowMeTheXAML.MSBuild.1.0.10\build\net45\ShowMeTheXAML.MSBuild.targets'))" />
+  </Target>
+  <Import Project="..\packages\ShowMeTheXAML.MSBuild.1.0.10\build\net45\ShowMeTheXAML.MSBuild.targets" Condition="Exists('..\packages\ShowMeTheXAML.MSBuild.1.0.10\build\net45\ShowMeTheXAML.MSBuild.targets')" />
 </Project>

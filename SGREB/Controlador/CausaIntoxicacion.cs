@@ -48,13 +48,12 @@ namespace SGREB.Controlador
         /// <summary>
         /// 
         /// </summary>
-        public void crear()
+        public int crear(TV_CausaIntoxicacion causa)
         {
             var bitacora = new bitacoraBomberoaContext();
-            var tvCausaIntoxicacion = new TV_CausaIntoxicacion();
-            tvCausaIntoxicacion.nombre = this.nombre;
-            bitacora.TV_CausaIntoxicacion.Add(tvCausaIntoxicacion);
+            bitacora.TV_CausaIntoxicacion.Add(causa);
             bitacora.SaveChanges();
+            return causa.idCausaIntoxicacion;
         }
 
 

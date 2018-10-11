@@ -1,19 +1,8 @@
 ﻿using SGREB.Paginas;
 using SGREB.Paginas.administrador;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SGREB
 {
@@ -99,20 +88,22 @@ namespace SGREB
             reporteAmbulanciaMenu.Header = "Ingresar Reporte de Ambulancias";
             reporteAmbulanciaMenu.Click += mostrarIngresoDeReporte_Click;
             MenuItem generarReproteMenu = new MenuItem();
-            generarReproteMenu.Header = "Generar Reportes";
+            generarReproteMenu.Header = "Generar Informes";
             MenuItem multiReporteMenu = new MenuItem();
-            multiReporteMenu.Header = "Reporte de Incidentes";
-
+            multiReporteMenu.Header = "Informe de Incidentes";
+            multiReporteMenu.Click += MultiReporteMenu_Click;
             generarReproteMenu.Items.Add(multiReporteMenu);
             MenuItem reporteResumenMenu = new MenuItem();
-            reporteResumenMenu.Header = "Reporte Resunmido";
-
+            reporteResumenMenu.Header = "Resumen Completo";
+            reporteResumenMenu.Click += reportes_click;
             generarReproteMenu.Items.Add(reporteResumenMenu);
-            MenuItem reporteEspecial = new MenuItem();
-            reporteEspecial.Header = "Reporte Especial";
-
-            generarReproteMenu.Items.Add(reporteEspecial);
-
+            if (administrador)
+            {
+                MenuItem reporteEspecial = new MenuItem();
+                reporteEspecial.Header = "Certificacion de Reporte de Ambulancia";
+                reporteEspecial.Click += certificacion_click;
+                generarReproteMenu.Items.Add(reporteEspecial);
+            }
             reportesMenu.Items.Add(reporteAmbulanciaMenu);
             reportesMenu.Items.Add(generarReproteMenu);
             
@@ -128,6 +119,75 @@ namespace SGREB
             this.menu.Items.Add(sesion);
 
         }
+
+        private void certificacion_click(object sender, RoutedEventArgs e)
+        {
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+
+                if (a == MessageBoxResult.OK)
+                {
+                    if (reporteAdministrador)
+                    {
+                        this.menu.Items.Clear();
+                        menuAdministrador();
+                    }
+                    this.contenido.Children.Clear();
+                    var reportes = new ReporteEspecial()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(reportes);
+                }
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var reportes = new ReporteEspecial()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(reportes);
+            }
+        }
+
+        private void MultiReporteMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+
+                if (a == MessageBoxResult.OK)
+                {
+                    if (reporteAdministrador)
+                    {
+                        this.menu.Items.Clear();
+                        menuAdministrador();
+                    }
+                    this.contenido.Children.Clear();
+                    var reportes = new GenerarReporte1()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(reportes);
+                }
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var reportes = new GenerarReporte1()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(reportes);
+            }
+        }
+
         private void cerrarSesio_click(object sebder, RoutedEventArgs e)
         {
             var a = MessageBox.Show("Desea cerrar sesión", "Alerta", MessageBoxButton.OKCancel);

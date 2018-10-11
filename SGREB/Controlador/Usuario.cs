@@ -16,7 +16,7 @@ namespace SGREB.Controlador
         public Usuario() {
             roles = new string[2];
             roles[0] = "usuario";
-            roles[1] = "administrador";
+            roles[1] = "admin";
         }
         
         /// <summary>

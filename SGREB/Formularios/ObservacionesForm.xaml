@@ -1,0 +1,15 @@
+﻿<Window x:Class="SGREB.Formularios.ObservacionesForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SGREB.Formularios"
+        mc:Ignorable="d"
+        Title="observaciones" Height="324.093" Width="719.56">
+    <Grid>
+        <TextBox HorizontalAlignment="Left" Height="162" Margin="59,43,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="471" x:Name="txObservaciones"/>
+        <Label Content="Obsevacions:" HorizontalAlignment="Left" Margin="59,12,0,0" VerticalAlignment="Top"/>
+        <Button Content="Aceptar" HorizontalAlignment="Left" Margin="561,231,0,0" VerticalAlignment="Top" Width="92" x:Name="btAceptar" Click="btAceptar_Click"/>
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="405,231,0,0" VerticalAlignment="Top" Width="96" x:Name="btCancelar" Click="btCancelar_Click"/>
+    </Grid>
+</Window>

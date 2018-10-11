@@ -8,6 +8,9 @@ using System.Text;
 
 namespace SGREB.Controlador
 {
+    /// <summary>
+    /// clase para gestionar las actividades de institución de salud
+    /// </summary>
     public class InstitucionDeSalud
     {
 
@@ -26,7 +29,6 @@ namespace SGREB.Controlador
         public int crear(TV_InstitucionDeSalud tV_InstitucionSalud)
         {
             var bitacora = new bitacoraBomberoaContext();
-            var tcIncidente = new TC_Incidente();
             bitacora.TV_InstitucionDeSalud.Add(tV_InstitucionSalud);
             bitacora.SaveChanges();
             return tV_InstitucionSalud.idInstitucion;

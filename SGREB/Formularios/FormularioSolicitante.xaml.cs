@@ -10,29 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace SGREB.Paginas
+namespace SGREB.Formularios
 {
     /// <summary>
-    /// Lógica de interacción para ReporteEspecial.xaml
+    /// Lógica de interacción para FormularioSolicitante.xaml
     /// </summary>
-    public partial class ReporteEspecial : Page
+    public partial class FormularioSolicitante : Window
     {
-        public ReporteEspecial()
+        public FormularioSolicitante()
         {
             InitializeComponent();
-        }
-
-        private void btBuscar_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
         }
     }
 }

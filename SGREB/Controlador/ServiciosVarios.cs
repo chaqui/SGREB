@@ -1,15 +1,23 @@
 
+using SGREB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class ServiciosVarios : Incidente {
+namespace SGREB.Controlador {
+public class ServiciosVarios  {
 
     public ServiciosVarios() {
     }
 
-    private Int idServiciosVarios;
+        public void Crear(TC_servicioVarios tcServiciosVarios)
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            bitacora.TC_servicioVarios.Add(tcServiciosVarios);
+            bitacora.SaveChanges();
+        }
 
 
+    }
 }

@@ -4,6 +4,8 @@ using SGREB.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
+
 namespace SGREB.Controlador
 {
 
@@ -103,20 +105,47 @@ namespace SGREB.Controlador
         /// <param name="tcPaciente"></param>
         /// <param name="idIncidente"></param>
         /// <returns></returns>
-        public int agregarPaciente(TC_Paciente tcPaciente, int idIncidente)
+        public int agregarPaciente(int idPaciente, int idIncidente)
         {
             try
             {
                 using (var bitacora = new bitacoraBomberoaContext())
                 {
-                    var tcIncidente = bitacora.TC_Incidente.Find(tcPaciente);
+                    var tcPaciente = bitacora.TC_Paciente.FirstOrDefault(x => x.idPaciente == idPaciente);
+                    var tcIncidente = bitacora.TC_Incidente.FirstOrDefault(x => x.idIncidente == idIncidente);
+
                     tcIncidente.TC_Paciente.Add(tcPaciente);
                     bitacora.SaveChanges();
-                }
 
                 }
+            }
             catch (Exception e)
             {
+                Console.Write(e.ToString());
+                return -1;
+            }
+
+            return 0;
+        }
+
+
+        public int agregarEnfermedadComun(int idTiipoEnfermedadComun, int idIncidente)
+        {
+            try
+            {
+                using (var bitacora = new bitacoraBomberoaContext())
+                {
+                    var tvCausa = bitacora.TV_CausaEnfermedadComun.FirstOrDefault(x => x.idCausa == idTiipoEnfermedadComun);
+                    var tcIncidente = bitacora.TC_Incidente.FirstOrDefault(x => x.idIncidente == idIncidente);
+
+                    tcIncidente.TV_CausaEnfermedadComun.Add(tvCausa);
+                    bitacora.SaveChanges();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.ToString());
                 return -1;
             }
 
@@ -129,13 +158,14 @@ namespace SGREB.Controlador
         /// <param name="tcBombero"></param>
         /// <param name="idIncidente"></param>
         /// <returns></returns>
-        public int agregarBombero(TC_Bombero tcBombero, int idIncidente)
+        public int agregarBombero(string idBombero, int idIncidente)
         {
             try
             {
                 using (var bitacora = new bitacoraBomberoaContext())
                 {
-                    var tcIncidente = bitacora.TC_Incidente.Find(idIncidente);
+                    var tcBombero = bitacora.TC_Bombero.FirstOrDefault(x => x.idBombero == idBombero);
+                    var tcIncidente = bitacora.TC_Incidente.FirstOrDefault(x => x.idIncidente == idIncidente);
                     tcIncidente.TC_Bombero.Add(tcBombero);
                     bitacora.SaveChanges();
                 }
@@ -143,18 +173,14 @@ namespace SGREB.Controlador
             }
             catch (Exception e)
             {
+                Console.Write(e.ToString());
                 return -1;
             }
 
             return 0;
         }
 
-        public int agregarBombero(BomberoComboBox bomberoComboBox, int idIncidente)
-        {
-            Bombero bombero = new Bombero();
-            var b =bombero.Obtener(bomberoComboBox.id);
-            return agregarBombero(b, idIncidente);
-        }
+
 
     }
 }

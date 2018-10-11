@@ -49,12 +49,10 @@ public class CausaSuicidio {
     /// <summary>
     /// creación de causa suicidio en la base de datos
     /// </summary>
-    public void crear()
+    public void crear(TV_CausaSuicidio causa)
     {
         var bitacora = new bitacoraBomberoaContext();
-        var tvCausaSuicido = new TV_CausaSuicidio();
-        tvCausaSuicido.CausaSuicidio = this.nCausaSuicidio;
-        bitacora.TV_CausaSuicidio.Add(tvCausaSuicido);
+        bitacora.TV_CausaSuicidio.Add(causa);
         bitacora.SaveChanges();
     }
 

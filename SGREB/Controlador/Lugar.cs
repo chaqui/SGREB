@@ -6,18 +6,21 @@ using System.Linq;
 namespace SGREB.Controlador
 {
     public class Lugar  {
-
+        /// <summary>
+        /// 
+        /// </summary>
         public Lugar() {
         }
         /// <summary>
         /// crear un lugar en la base de datos
         /// </summary>
         /// <param name="tT_Lugar"></param>
-        public void crear(TT_Lugar tT_Lugar)
+        public int crear(TT_Lugar tT_Lugar)
         {
             var bitacora = new bitacoraBomberoaContext();
             bitacora.TT_Lugar.Add(tT_Lugar);
             bitacora.SaveChanges();
+            return tT_Lugar.idLugar;
         }
 
         public TT_Lugar obtener(int id)

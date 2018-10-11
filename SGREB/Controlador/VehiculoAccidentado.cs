@@ -4,15 +4,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-public class VehiculoAccidentado : Incidente {
+namespace SGREB.Controlador
+{
 
-    public VehiculoAccidentado() {
+    public class VehiculoAccidentado
+    {
+
+        public VehiculoAccidentado()
+        {
+        }
+
+
+
     }
-
-    public Int idAccidente;
-
-    public String placa;
-
-
 
 }
