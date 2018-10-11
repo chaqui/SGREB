@@ -30,6 +30,7 @@ namespace SGREB.Models
         public Nullable<int> solicitud { get; set; }
         public Nullable<System.TimeSpan> HoraEntrada { get; set; }
         public Nullable<System.TimeSpan> horaSalida { get; set; }
+        public string observaciones { get; set; }
         public virtual ICollection<TC_AccidenteTransito> TC_AccidenteTransito { get; set; }
         public virtual ICollection<TC_HechoDeViolencia> TC_HechoDeViolencia { get; set; }
         public virtual ICollection<TC_Incendio> TC_Incendio { get; set; }

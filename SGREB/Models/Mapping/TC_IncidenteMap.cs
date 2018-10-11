@@ -20,6 +20,7 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.solicitud).HasColumnName("solicitud");
             this.Property(t => t.HoraEntrada).HasColumnName("HoraEntrada");
             this.Property(t => t.horaSalida).HasColumnName("horaSalida");
+            this.Property(t => t.observaciones).HasColumnName("observaciones");
 
             // Relationships
             this.HasMany(t => t.TC_Paciente)
