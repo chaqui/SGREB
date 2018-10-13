@@ -190,6 +190,9 @@
     <Compile Include="Formularios\ObservacionesForm.xaml.cs">
       <DependentUpon>ObservacionesForm.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Formularios\InstitucionForm.xaml.cs">
+      <DependentUpon>InstitucionForm.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Formularios\VehiculoForm.xaml.cs">
       <DependentUpon>VehiculoForm.xaml</DependentUpon>
     </Compile>
@@ -261,7 +264,6 @@
     <Compile Include="Controlador\Grado.cs" />
     <Compile Include="Controlador\HechoDeViolencia.cs" />
     <Compile Include="Controlador\Incidente.cs" />
-    <Compile Include="Controlador\InstitucionDeSalud.cs" />
     <Compile Include="Controlador\Lugar.cs" />
     <Compile Include="Controlador\Maternidad.cs" />
     <Compile Include="Controlador\MedioSolicitud.cs" />
@@ -285,6 +287,10 @@
     <Page Include="Formularios\ObservacionesForm.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Formularios\InstitucionForm.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Formularios\VehiculoForm.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -396,6 +402,7 @@
     <Compile Include="Controlador\VehiculoIncendidado.cs" />
     <Compile Include="Controlador\ViviendaInundada.cs" />
     <Compile Include="Models\bitacoraBomberoaContext.cs" />
+    <Compile Include="Models\Mapping\PacienteDeIncidenteMap.cs" />
     <Compile Include="Models\Mapping\sysdiagramMap.cs" />
     <Compile Include="Models\Mapping\TC_AccidenteTransitoMap.cs" />
     <Compile Include="Models\Mapping\TC_BomberoMap.cs" />
@@ -423,13 +430,13 @@
     <Compile Include="Models\Mapping\TV_CausaIntoxicacionMap.cs" />
     <Compile Include="Models\Mapping\TV_CausaSuicidioMap.cs" />
     <Compile Include="Models\Mapping\TV_GradoMap.cs" />
-    <Compile Include="Models\Mapping\TV_InstitucionDeSaludMap.cs" />
     <Compile Include="Models\Mapping\TV_MedioSolicitudMap.cs" />
     <Compile Include="Models\Mapping\TV_RolMap.cs" />
     <Compile Include="Models\Mapping\TV_TipoIncidenteMap.cs" />
     <Compile Include="Models\Mapping\TV_TipoServicioMap.cs" />
     <Compile Include="Models\Mapping\TV_TipoUnidadMap.cs" />
     <Compile Include="Models\Mapping\TV_TipoVehiculoMap.cs" />
+    <Compile Include="Models\PacienteDeIncidente.cs" />
     <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\TC_AccidenteTransito.cs" />
     <Compile Include="Models\TC_Bombero.cs" />
@@ -457,7 +464,6 @@
     <Compile Include="Models\TV_CausaIntoxicacion.cs" />
     <Compile Include="Models\TV_CausaSuicidio.cs" />
     <Compile Include="Models\TV_Grado.cs" />
-    <Compile Include="Models\TV_InstitucionDeSalud.cs" />
     <Compile Include="Models\TV_MedioSolicitud.cs" />
     <Compile Include="Models\TV_Rol.cs" />
     <Compile Include="Models\TV_TipoIncidente.cs" />
