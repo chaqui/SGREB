@@ -234,7 +234,7 @@ namespace SGREB.Controlador
             datosCertificacion.MinutosTrabajados = (obt.horasalida - obt.horasalida).ToString();
             datosCertificacion.numeroTelefono = obt.noTelefono;
             datosCertificacion.direccion = obt.lugar;
-            datosCertificacion.fecha = obt.fecha.ToString();
+            datosCertificacion.fecha = DateTime.Parse( obt.fecha.ToString());
             datosCertificacion.observaciones = obt.observaciones;
 
 

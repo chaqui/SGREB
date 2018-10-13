@@ -158,7 +158,8 @@ namespace SGREB.Controlador
             Paragraph parafo3 = new Paragraph("Estadisticas de " + evento + " Mensuales ", _titulo);
             parafo3.Alignment = centrado;
             doc.Add(parafo3);
-            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.ToShortDateString() + " al " + fechaFinal.ToShortDateString(), _titulo);
+            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.Day.ToString()+ " de "+obtenerMeses(fechaInicio.Month)+ " "+fechaInicio.Year.ToString()
+                + " al " + fechaFinal.Day.ToString() + " de " + obtenerMeses(fechaFinal.Month) + " " + fechaFinal.Year.ToString(), _titulo);
             parafo4.Alignment = centrado;
             doc.Add(parafo4);
             doc.Add(Chunk.NEWLINE);
@@ -285,7 +286,8 @@ namespace SGREB.Controlador
             Paragraph parafo3 = new Paragraph("Estadisticas de " + evento + " Mensuales ", _titulo);
             parafo3.Alignment = centrado;
             doc.Add(parafo3);
-            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.ToShortDateString() + " al " + fechaFinal.ToShortDateString(), _titulo);
+            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.Day.ToString() + " de " + obtenerMeses(fechaInicio.Month) + " " + fechaInicio.Year.ToString()
+                + " al " + fechaFinal.Day.ToString() + " de " + obtenerMeses(fechaFinal.Month) + " " + fechaFinal.Year.ToString(), _titulo);
             parafo4.Alignment = centrado;
             doc.Add(parafo4);
             doc.Add(Chunk.NEWLINE);
@@ -410,7 +412,8 @@ namespace SGREB.Controlador
             Paragraph parafo3 = new Paragraph("Estadisticas de " + evento + " Mensuales ", _titulo);
             parafo3.Alignment = centrado;
             doc.Add(parafo3);
-            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.ToShortDateString() + " al " + fechaFinal.ToShortDateString(), _titulo);
+            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.Day.ToString() + " de " + obtenerMeses(fechaInicio.Month) + " " + fechaInicio.Year.ToString()
+                + " al " + fechaFinal.Day.ToString() + " de " + obtenerMeses(fechaFinal.Month) + " " + fechaFinal.Year.ToString(), _titulo);
             parafo4.Alignment = centrado;
             doc.Add(parafo4);
             doc.Add(Chunk.NEWLINE);
@@ -537,7 +540,8 @@ namespace SGREB.Controlador
             Paragraph parafo3 = new Paragraph("Estadisticas de " + evento + " Mensuales ", _titulo);
             parafo3.Alignment = centrado;
             doc.Add(parafo3);
-            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.ToShortDateString() + " al " + fechaFinal.ToShortDateString(), _titulo);
+            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.Day.ToString() + " de " + obtenerMeses(fechaInicio.Month) + " " + fechaInicio.Year.ToString()
+                + " al " + fechaFinal.Day.ToString() + " de " + obtenerMeses(fechaFinal.Month) + " " + fechaFinal.Year.ToString(), _titulo);
             parafo4.Alignment = centrado;
             doc.Add(parafo4);
             doc.Add(Chunk.NEWLINE);
@@ -646,7 +650,8 @@ namespace SGREB.Controlador
             Paragraph parafo3 = new Paragraph("Estadisticas de " + evento + " Mensuales ", _titulo);
             parafo3.Alignment = centrado;
             doc.Add(parafo3);
-            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.ToShortDateString() + " al " + fechaFinal.ToShortDateString(), _titulo);
+            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.Day.ToString() + " de " + obtenerMeses(fechaInicio.Month) + " " + fechaInicio.Year.ToString()
+                + " al " + fechaFinal.Day.ToString() + " de " + obtenerMeses(fechaFinal.Month) + " " + fechaFinal.Year.ToString(), _titulo);
             parafo4.Alignment = centrado;
             doc.Add(parafo4);
             doc.Add(Chunk.NEWLINE);
@@ -742,5 +747,145 @@ namespace SGREB.Controlador
             writer.Close();
 
         }
+
+        public void crearCertificacion(DatosCertificacion datos, BomberoInforme secretario, string ubicacion) {
+
+            DateTime hoy = DateTime.Today;
+            
+
+
+            int centrado = iTextSharp.text.Image.ALIGN_CENTER;
+            int justificado = iTextSharp.text.Image.ALIGN_JUSTIFIED;
+            //creacion del documento
+            Document doc = new Document();
+
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(@ubicacion, FileMode.Create));
+            doc.AddTitle("Informe");
+            doc.SetPageSize(iTextSharp.text.PageSize.LEGAL);
+            doc.Open();
+            iTextSharp.text.Font _contenidoTabla = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            iTextSharp.text.Font _titulo = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+            iTextSharp.text.Font _tituloTabla = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+
+            //abecera 
+            Paragraph parafo1 = new Paragraph("19a. COMPAÑIA DE BOMBEEROS VOLUNTARIOS", _titulo);
+            parafo1.Alignment = centrado;
+            doc.Add(parafo1);
+            Paragraph parafo2 = new Paragraph("Tel.   7760 1661", _titulo);
+            parafo2.Alignment = centrado;
+            doc.Add(parafo2);
+            Paragraph parafo3 = new Paragraph("San Pedro Sacatepéquez, San Marcos.", _titulo);
+            parafo3.Alignment = centrado;
+            doc.Add(parafo3);
+            Paragraph parafo4 = new Paragraph(hoy.Day.ToString()+" de "+obtenerMeses(hoy.Month)+" "+hoy.Year.ToString(),_titulo);
+            parafo4.Alignment = centrado;
+            doc.Add(parafo4);
+            doc.Add(Chunk.NEWLINE);
+
+            DateTime fecha = datos.fecha;
+            //parrafo Principal 
+            Paragraph parrafoPrincipal = new Paragraph("El Infrascrito Secretario de la 19ª. compañía de Bomberos Voluntarios de la ciudad de San Pedro Sacatepéquez, departamento " +
+                "de San Marcos por medio de la presente hace entrega una copia certificada de un servicio realizado por esta compañía el día "+ fecha.Day.ToString() + 
+                " de " + obtenerMeses(fecha.Month) + " " + fecha.Year.ToString()+" y a solicitud de: "+datos.solicitanteCertificacion+ " "+datos.oficioSolicitanteCertificacion+", " +
+                "que literalmente dice:",_contenidoTabla);
+            parrafoPrincipal.Alignment = justificado;
+            doc.Add(parrafoPrincipal);
+            doc.Add(Chunk.NEWLINE);
+
+            //cabecera de reporte
+
+            Paragraph tituloReporte = new Paragraph("BENEMERITO CUERPO VOLUNTARIO DE BOMBEROS DE GUATEMALA ", _contenidoTabla);
+            tituloReporte.Alignment = centrado;
+            doc.Add(tituloReporte);
+            doc.Add(Chunk.NEWLINE);
+
+            Paragraph tituloReporte2 = new Paragraph("REPORTE DE AMBULANCIA",_contenidoTabla);
+
+            //Cuerpo del Reporte
+
+            string fallecidosi = "   ";
+            string fallecidono = "   ";
+            if(datos.fallecido == "true")
+            {
+                fallecidosi = "x";
+            }
+            else
+            {
+                fallecidono = "x";
+            }
+
+            Paragraph reporte = new Paragraph("Control: " + datos.idControl + " Minutos Trabajados: " + datos.MinutosTrabajados+ " Solicitud por telefono: "+datos.numeroTelefono+ 
+                " Personal: "+datos.solPersona+ " Fecha: "+ fecha.ToString()+ " Salida de compañía: " + datos.HoraSalidaDeCompañia + " Hrs. Entrada a compañía: "+datos.HoraEntradaDeCompañia+
+                " Hrs. Dirección: "+ datos.direccion + " Nombre del o (los) solicitante (es): "+ datos.solicitantes+ "Nombre (s) de (los) paciente (s):  "+datos.nombrePaciente +
+                " fallecidos: si: "+fallecidosi+ " no: "+fallecidono+ "Edad: "+ datos.edad+ " domicilio: "+datos.domicilio+" acompañante"+ datos.acompaniante+ " servicio: "+ datos.tipoServico+ 
+                " traslado a: "+ datos.traslado + " radiotelefonista: "+datos.radioTelefonista+ " Piloto(s): "+datos.pilotos+ "Unidad(es): "+datos.unidades  +" Personal Destacado: "+ datos.personal );
+
+            reporte.Alignment = centrado;
+            doc.Add(reporte);
+            doc.Add(Chunk.NEWLINE);
+
+            Paragraph observacionesTitulo = new Paragraph("Observaciones: ");
+            observacionesTitulo.Alignment = justificado;
+            doc.Add(observacionesTitulo);
+            Paragraph observaciones = new Paragraph(datos.observaciones);
+            observaciones.Alignment = justificado;
+            doc.Add(observaciones);
+            doc.Add(Chunk.NEWLINE);
+
+            Paragraph razon = new Paragraph("Razón: : la Secretaría Ejecutiva del Cuerpo, para que conste que en esta fecha y a solicitud en esta fecha se extiende copia certificada de este reporte a:"+
+                datos.solicitanteCertificacion+ " "+datos.oficioSolicitanteCertificacion+ ". Se entrega en una hoja de papel tamaño oficio con membrete de la institución a los diez días del mes de agosto del dos mil dieciocho.");
+            razon.Alignment = justificado;
+            doc.Add(razon);
+            doc.Add(Chunk.NEWLINE);
+            doc.Add(Chunk.NEWLINE);
+
+            Paragraph firmaSecretario = new Paragraph("f._____________________");
+            firmaSecretario.Alignment = centrado;
+            doc.Add(firmaSecretario);
+            Paragraph NombreSecretario = new Paragraph(secretario.NombreCompleto);
+            NombreSecretario.Alignment = centrado;
+            doc.Add(NombreSecretario);
+            Paragraph RolSecretario = new Paragraph(secretario.rol);
+            RolSecretario.Alignment = centrado;
+            doc.Add(RolSecretario);
+
+
+
+        }
+
+        public string obtenerMeses(int mes)
+        {
+            switch (mes)
+            {
+                case 1:
+                    return ("Enero");
+                case 2:
+                    return ("Febrero");
+                case 3:
+                    return ("Marzo");
+                case 4:
+                    return ("Abril");
+                case 5:
+                    return ("Mayo");
+                case 6:
+                    return ("junio");
+                case 7:
+                    return ("Julio");
+                case 8:
+                    return ("Agosto");
+                case 9:
+                    return ("Septiembre");
+                case 10:
+                    return ("Octubre");
+                case 11:
+                    return ("Noviembre");
+                case 12:
+                    return ("Diciembre");
+            }
+            return "";
+        }
+
+
+
     }
 }
