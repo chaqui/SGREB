@@ -15,11 +15,15 @@ namespace SGREB.Models.Mapping
                 .IsFixedLength()
                 .HasMaxLength(45);
 
+            this.Property(t => t.institucio)
+                .IsFixedLength()
+                .HasMaxLength(100);
+
             // Table & Column Mappings
             this.ToTable("TT_Lugar");
             this.Property(t => t.idLugar).HasColumnName("idLugar");
             this.Property(t => t.direccion).HasColumnName("direccion");
-            this.Property(t => t.institucion).HasColumnName("institucion");
+            this.Property(t => t.institucio).HasColumnName("institucio");
         }
     }
 }

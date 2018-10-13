@@ -13,7 +13,7 @@ namespace SGREB.Models
 
         public int idLugar { get; set; }
         public string direccion { get; set; }
-        public Nullable<int> institucion { get; set; }
+        public string institucio { get; set; }
         public virtual ICollection<TC_Incidente> TC_Incidente { get; set; }
         public virtual ICollection<TC_Incidente> TC_Incidente1 { get; set; }
     }
