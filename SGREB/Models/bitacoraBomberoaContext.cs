@@ -16,6 +16,7 @@ namespace SGREB.Models
         {
         }
 
+        public DbSet<PacienteDeIncidente> PacienteDeIncidentes { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<TC_AccidenteTransito> TC_AccidenteTransito { get; set; }
         public DbSet<TC_Bombero> TC_Bombero { get; set; }
@@ -43,7 +44,6 @@ namespace SGREB.Models
         public DbSet<TV_CausaIntoxicacion> TV_CausaIntoxicacion { get; set; }
         public DbSet<TV_CausaSuicidio> TV_CausaSuicidio { get; set; }
         public DbSet<TV_Grado> TV_Grado { get; set; }
-        public DbSet<TV_InstitucionDeSalud> TV_InstitucionDeSalud { get; set; }
         public DbSet<TV_MedioSolicitud> TV_MedioSolicitud { get; set; }
         public DbSet<TV_Rol> TV_Rol { get; set; }
         public DbSet<TV_TipoIncidente> TV_TipoIncidente { get; set; }
@@ -53,6 +53,7 @@ namespace SGREB.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            modelBuilder.Configurations.Add(new PacienteDeIncidenteMap());
             modelBuilder.Configurations.Add(new sysdiagramMap());
             modelBuilder.Configurations.Add(new TC_AccidenteTransitoMap());
             modelBuilder.Configurations.Add(new TC_BomberoMap());
@@ -80,7 +81,6 @@ namespace SGREB.Models
             modelBuilder.Configurations.Add(new TV_CausaIntoxicacionMap());
             modelBuilder.Configurations.Add(new TV_CausaSuicidioMap());
             modelBuilder.Configurations.Add(new TV_GradoMap());
-            modelBuilder.Configurations.Add(new TV_InstitucionDeSaludMap());
             modelBuilder.Configurations.Add(new TV_MedioSolicitudMap());
             modelBuilder.Configurations.Add(new TV_RolMap());
             modelBuilder.Configurations.Add(new TV_TipoIncidenteMap());

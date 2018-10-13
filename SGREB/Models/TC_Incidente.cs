@@ -18,9 +18,8 @@ namespace SGREB.Models
             this.TC_VehiculoIncendiado = new List<TC_VehiculoIncendiado>();
             this.TC_ViviendaInundada = new List<TC_ViviendaInundada>();
             this.TC_ServicioDeGalones = new List<TC_ServicioDeGalones>();
-            this.TC_Paciente = new List<TC_Paciente>();
             this.TV_CausaEnfermedadComun = new List<TV_CausaEnfermedadComun>();
-            this.TC_Bombero = new List<TC_Bombero>();
+            this.TC_Bombero3 = new List<TC_Bombero>();
         }
 
         public int idIncidente { get; set; }
@@ -31,11 +30,19 @@ namespace SGREB.Models
         public Nullable<System.TimeSpan> HoraEntrada { get; set; }
         public Nullable<System.TimeSpan> horaSalida { get; set; }
         public string observaciones { get; set; }
+        public Nullable<int> LugarTraslado { get; set; }
+        public string formuladioPor { get; set; }
+        public string PilotoConforme { get; set; }
+        public string JefeDeServicio { get; set; }
         public virtual ICollection<TC_AccidenteTransito> TC_AccidenteTransito { get; set; }
+        public virtual TC_Bombero TC_Bombero { get; set; }
+        public virtual TC_Bombero TC_Bombero1 { get; set; }
+        public virtual TC_Bombero TC_Bombero2 { get; set; }
         public virtual ICollection<TC_HechoDeViolencia> TC_HechoDeViolencia { get; set; }
         public virtual ICollection<TC_Incendio> TC_Incendio { get; set; }
         public virtual TC_Solicitud TC_Solicitud { get; set; }
         public virtual TT_Lugar TT_Lugar { get; set; }
+        public virtual TT_Lugar TT_Lugar1 { get; set; }
         public virtual TV_TipoIncidente TV_TipoIncidente { get; set; }
         public virtual ICollection<TC_Maternidad> TC_Maternidad { get; set; }
         public virtual ICollection<TC_Rastreo> TC_Rastreo { get; set; }
@@ -45,8 +52,7 @@ namespace SGREB.Models
         public virtual ICollection<TC_VehiculoIncendiado> TC_VehiculoIncendiado { get; set; }
         public virtual ICollection<TC_ViviendaInundada> TC_ViviendaInundada { get; set; }
         public virtual ICollection<TC_ServicioDeGalones> TC_ServicioDeGalones { get; set; }
-        public virtual ICollection<TC_Paciente> TC_Paciente { get; set; }
         public virtual ICollection<TV_CausaEnfermedadComun> TV_CausaEnfermedadComun { get; set; }
-        public virtual ICollection<TC_Bombero> TC_Bombero { get; set; }
+        public virtual ICollection<TC_Bombero> TC_Bombero3 { get; set; }
     }
 }

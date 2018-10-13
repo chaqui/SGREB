@@ -18,6 +18,10 @@ namespace SGREB.Models.Mapping
                 .IsFixedLength()
                 .HasMaxLength(1);
 
+            this.Property(t => t.domicilio)
+                .IsFixedLength()
+                .HasMaxLength(60);
+
             // Table & Column Mappings
             this.ToTable("TC_Paciente");
             this.Property(t => t.idPaciente).HasColumnName("idPaciente");
@@ -26,6 +30,7 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.fallecido).HasColumnName("fallecido");
             this.Property(t => t.Persoan).HasColumnName("Persoan");
             this.Property(t => t.herido).HasColumnName("herido");
+            this.Property(t => t.domicilio).HasColumnName("domicilio");
 
             // Relationships
             this.HasMany(t => t.TV_Animal)

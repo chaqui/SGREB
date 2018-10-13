@@ -24,8 +24,8 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.grado).HasColumnName("grado");
 
             // Relationships
-            this.HasMany(t => t.TC_Incidente)
-                .WithMany(t => t.TC_Bombero)
+            this.HasMany(t => t.TC_Incidente3)
+                .WithMany(t => t.TC_Bombero3)
                 .Map(m =>
                     {
                         m.ToTable("TC_PersonalIncidente");

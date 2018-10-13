@@ -17,7 +17,6 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.aborto).HasColumnName("aborto");
             this.Property(t => t.atencionDeParto).HasColumnName("atencionDeParto");
             this.Property(t => t.RetencionDePlacenta).HasColumnName("RetencionDePlacenta");
-            this.Property(t => t.InstitucionDeTraslado).HasColumnName("InstitucionDeTraslado");
             this.Property(t => t.idIncidente).HasColumnName("idIncidente");
             this.Property(t => t.mesesDeEmbarazo).HasColumnName("mesesDeEmbarazo");
 
@@ -25,9 +24,6 @@ namespace SGREB.Models.Mapping
             this.HasRequired(t => t.TC_Incidente)
                 .WithMany(t => t.TC_Maternidad)
                 .HasForeignKey(d => d.idIncidente);
-            this.HasOptional(t => t.TV_InstitucionDeSalud)
-                .WithMany(t => t.TC_Maternidad)
-                .HasForeignKey(d => d.InstitucionDeTraslado);
 
         }
     }

@@ -20,12 +20,6 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.idLugar).HasColumnName("idLugar");
             this.Property(t => t.direccion).HasColumnName("direccion");
             this.Property(t => t.institucion).HasColumnName("institucion");
-
-            // Relationships
-            this.HasOptional(t => t.TV_InstitucionDeSalud)
-                .WithMany(t => t.TT_Lugar)
-                .HasForeignKey(d => d.institucion);
-
         }
     }
 }
