@@ -10,5 +10,6 @@
         public string causa { set; get; }
         public string edad { set; get; }
         public string sexo { set; get; }
+        public string domicilio { set; get; }
     }
 }

@@ -34,6 +34,7 @@ namespace SGREB.Formularios
             var dpiI = txDPI.Text;
             var sexo = cmbSexo.SelectionBoxItem.ToString();
             var edad = txEdad.Text;
+            var domicilio = txtDomicilio.Text;
             try
             {
                 int.Parse(edad);
@@ -46,7 +47,7 @@ namespace SGREB.Formularios
             }
             var fallecido = "";
             var herido = "";
-            if(nombreI == "" && apellidosI == "")
+            if(nombreI == "" )
             {
                 MessageBox.Show("Información importante faltante");
                 return;
@@ -68,6 +69,7 @@ namespace SGREB.Formularios
             pacienteGrid.edad = edad;
             pacienteGrid.fallecido = fallecido;
             pacienteGrid.herido = herido;
+            pacienteGrid.domicilio = domicilio;
             this.Close();
         }
 
@@ -75,6 +77,11 @@ namespace SGREB.Formularios
         {
             rbFallecido.IsEnabled = false;
             rbFallecido.IsChecked = false;
+        }
+
+        private void txtDomicilio_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

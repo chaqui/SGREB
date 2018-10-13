@@ -18,6 +18,7 @@ namespace SGREB.miscellany
         public string aguaUtilizada { set; get; }
         public string Fallecidos { set; get; }
         public string Vivos { set; get; }
+        public string domicilio { set; get; }
 
     }
 }

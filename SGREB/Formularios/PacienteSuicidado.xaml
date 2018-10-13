@@ -25,6 +25,8 @@
         <TextBlock
             FontSize="24"
             TextAlignment="Center"  Text="Nuevo Paciente" Margin="0,0,0,272" />
+        <Label Content="domicilio:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Width="61" Margin="33,235,0,0"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="111,235,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txtDomicilio"/>
 
     </Grid>
 </Window>

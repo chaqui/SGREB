@@ -73,7 +73,7 @@ namespace SGREB.Controlador
             Incidente incidente = new Incidente();
             var id= persona.Crear(tcPersona);
             int idPaciente = obtenerId();
-            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id,herido = obtenerBooleano( paciente.herido),fallecido = obtenerBooleano(paciente.fallecido), Sexo  = paciente.sexo };
+            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id,herido = obtenerBooleano( paciente.herido),fallecido = obtenerBooleano(paciente.fallecido), Sexo  = paciente.sexo, domicilio =paciente.domicilio };
             crear(tcPaciente);
             var resultado = incidente.agregarPaciente(idPaciente, idIncidente);
             idPaciente++;
@@ -106,7 +106,7 @@ namespace SGREB.Controlador
             var a = animal.obtener(idAnimal);
 
             int idPaciente = obtenerId();
-            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id, herido = obtenerBooleano(paciente.herido), fallecido =obtenerBooleano(paciente.fallecido), Sexo = paciente.sexo, idPaciente = idPaciente };
+            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id, herido = obtenerBooleano(paciente.herido), fallecido =obtenerBooleano(paciente.fallecido), Sexo = paciente.sexo, idPaciente = idPaciente, domicilio = paciente.domicilio };
             tcPaciente.TV_Animal.Add(a);
             crear(tcPaciente);
             var resultado = incidente.agregarPaciente(idPaciente, idIncidente);
@@ -132,7 +132,7 @@ namespace SGREB.Controlador
 
             var c = causa.obtener(idIntoxicacion);
             int idPaciente = obtenerId();
-            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id, herido =obtenerBooleano(paciente.herido), fallecido =obtenerBooleano(paciente.fallecido), Sexo = paciente.sexo, idPaciente = idPaciente };
+            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id, herido =obtenerBooleano(paciente.herido), fallecido =obtenerBooleano(paciente.fallecido), Sexo = paciente.sexo, idPaciente = idPaciente, domicilio = paciente.domicilio };
             crear(tcPaciente);
             var resultado = incidente.agregarPaciente(idPaciente, idIncidente);
             idPaciente++;
@@ -153,7 +153,7 @@ namespace SGREB.Controlador
             var id = persona.Crear(tcPersona);
             CausaSuicidio causaSuicidio = new CausaSuicidio();
             int idPaciente = obtenerId();
-            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id,  Sexo = paciente.sexo, idPaciente = idPaciente };
+            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id,  Sexo = paciente.sexo, idPaciente = idPaciente, domicilio = paciente.domicilio };
             crear(tcPaciente);
             var resultado = incidente.agregarPaciente(idPaciente, idIncidente);
             idPaciente++;

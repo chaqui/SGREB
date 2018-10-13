@@ -16,5 +16,6 @@ namespace SGREB.miscellany
         public string nombre { set; get; }
         public string apellido { set; get; }
         public string dpi { set; get; }
+        public string domicilio { set; get; }
     }
 }

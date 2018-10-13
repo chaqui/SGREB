@@ -25,11 +25,13 @@ namespace SGREB
         private List<TV_TipoServicio> tipoServiciosVarios;
         private List<UniidadIncidenteForm> uniidadIncidenteForms;
         private List<BomberoComboBox> bomberos;
+        private List<BomberoComboBox> bomberosRev;
         private List<TV_CausaSuicidio> causasSuicidio;
         private List<TV_Animal> animales;
         private List<TV_CausaIntoxicacion> causas;
         private List<TV_TipoVehiculo> vehiculos;
         private List<TV_CausaEnfermedadComun> causasEnfermedadComun;
+        private List<TT_Lugar> LugaresDeTraslado;
         private string observaciones;
         public IngresoDeIncidente()
         {
@@ -40,6 +42,7 @@ namespace SGREB
             uniidadIncidenteForms = new List<UniidadIncidenteForm>();
             causasEnfermedadComun = new List<TV_CausaEnfermedadComun>();
             bomberos = new List<BomberoComboBox>();
+            bomberosRev = new List<BomberoComboBox>();
 
             causasSuicidio = new List<TV_CausaSuicidio>();
 
@@ -94,6 +97,18 @@ namespace SGREB
                 if(r.nombre == nombre)
                 {
                     return r.id;
+                }
+            }
+            return "";
+        }
+
+        private string obtenerIdBomberoRev(string nombre)
+        {
+            foreach (var b in bomberosRev)
+            {
+                if (b.nombre == nombre)
+                {
+                    return b.id;
                 }
             }
             return "";
@@ -281,9 +296,11 @@ namespace SGREB
                     break;
                 case 5: //Atropellados
                     obtenerTiposDeVehiculos();
+                    obtenerLugaresAtropellado();
                     gridAtropellados.Visibility = Visibility.Visible;
                     break;
                 case 6: //Intoxicados
+                    obtenerLugaresIntoxicados();
                     obtenerCausasIntoxicacion();
                     gridIntoxicados.Visibility = Visibility.Visible;
                     break;
@@ -291,6 +308,7 @@ namespace SGREB
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 8: //Mordidos por Animales
+                    obtenerLugaresMordido();
                     obtenerAnimales();
                     gridMordidos.Visibility = Visibility.Visible;
                     break;
@@ -382,12 +400,75 @@ namespace SGREB
             obtenerElementos();
         }
 
+        private void obtenerLugaresMordido()
+        {
+            cmbTrasladoMordido.Items.Clear();
+            foreach (var l in LugaresDeTraslado)
+            {
+                cmbTrasladoMordido.Items.Add(l.institucio);
+            }
+            cmbTrasladoMordido.Items.Add("Agregar Nueva Institucion...");
+        }
+
+        private void obtenerLugaresIntoxicados()
+        {
+            cmbTrasladoIntoxicados.Items.Clear();
+            foreach (var l in LugaresDeTraslado)
+            {
+                cmbTrasladoIntoxicados.Items.Add(l.institucio);
+            }
+            cmbTrasladoIntoxicados.Items.Add("Agregar Nueva Institucion...");
+        }
+
+        private void obtenerLugaresAtropellado()
+        {
+            cmbTrasladoAtropellado.Items.Clear();
+            foreach (var l in LugaresDeTraslado)
+            {
+                cmbTrasladoAtropellado.Items.Add(l.institucio);
+            }
+            cmbTrasladoAtropellado.Items.Add("Agregar Nueva Institucion...");
+        }
+
+        private void obtenerLugaresDeTraslado()
+        {
+
+            Lugar lugar = new Lugar();
+            LugaresDeTraslado = lugar.obtenerVariasInstituciones();
+        }
+
         private void mostrarEnfermedadComun()
         {
             obtenerCausasComunes();
+            obtenerLugaresComunes();
             gridEComun.Visibility = Visibility.Visible;
             this.Height = 800;
+            obtenerLugaresEnfermedadComun();
         }
+
+        private void obtenerLugaresEnfermedadComun()
+        {
+            cmbTrasladoEnfermedadComun.Items.Clear();
+            foreach (var l in LugaresDeTraslado)
+            {
+                cmbTrasladoEnfermedadComun.Items.Add(l.institucio);
+            }
+            cmbTrasladoEnfermedadComun.Items.Add("Agregar Nueva Institucion...");
+
+        }
+
+        private void obtenerLugaresComunes()
+        {
+            cmbTraslado.Items.Clear();
+            foreach(var l in LugaresDeTraslado)
+            {
+                cmbTraslado.Items.Add(l.institucio);
+            }
+            cmbTraslado.Items.Add("Agregar Nueva Institucion...");
+
+        }
+
+        
 
         private void obtenerCausasComunes()
         {
@@ -416,6 +497,24 @@ namespace SGREB
             foreach(var b in bomberos)
             {
                 cmbBomberos.Items.Add(b.nombre);
+            }
+        }
+
+        private void obtenerElementosRev()
+        {
+            Persona persona = new Persona();
+            Controlador.Bombero bombero = new Controlador.Bombero();
+            var bomberosO = bombero.obtenerVarios();
+            foreach (var b in bomberosO)
+            {
+                var p = persona.obtener(b.persona);
+                this.bomberosRev.Add(new BomberoComboBox { nombre = p.nombres + " " + p.apellidos, id = b.idBombero });
+
+            }
+            foreach (var b in bomberosRev)
+            {
+                cmbVoBo.Items.Add(b.nombre);
+                cmbFormuladoPor.Items.Add(b.nombre);
             }
         }
 
@@ -955,11 +1054,14 @@ namespace SGREB
                 tcIncidente.HoraEntrada = TimeSpan.Parse(Convert.ToDateTime(tPhoraEntrada.Text).ToString("HH:mm"));
                 tcIncidente.horaSalida = TimeSpan.Parse(Convert.ToDateTime(tPhoraSalida.Text).ToString("HH:mm"));
                 tcIncidente.observaciones = observaciones;
-
+                tcIncidente.formuladioPor = obtenerIdBomberoRev(cmbFormuladoPor.SelectedItem.ToString());
+                tcIncidente.JefeDeServicio = obtenerIdBomberoRev(cmbVoBo.SelectedItem.ToString());
+                int traslado = obtenerIdLugar();
                 Lugar lugar = new Lugar();
                 var idLugar = lugar.crear(new TT_Lugar { direccion = txLugar.Text });
                 tcIncidente.lugar = idLugar;
                 tcIncidente.solicitud = idSolicitud;
+                tcIncidente.LugarTraslado = traslado;
 
                 Incidente incidente = new Incidente();
                 return incidente.crear(tcIncidente);
@@ -1291,11 +1393,11 @@ namespace SGREB
             try
             { 
                 var seleccion = cmbCausaEComun.SelectedItem.ToString();
-                if(seleccion == "Crear una nueva causa...")
+                if(seleccion == "Agregar Nueva Institucion...")
                 {
-                    CausaEnfermedadComunForm causaEnfermedadForm = new CausaEnfermedadComunForm();
-                    causaEnfermedadForm.ShowDialog();
-                    obtenerCausasComunes();
+                    abrirFormularioDeInstitucion();
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresComunes();
                 }           
             }
             catch
@@ -1304,11 +1406,146 @@ namespace SGREB
             }
         }
 
+        private void abrirFormularioDeInstitucion()
+        {
+            InstitucionForm institucionForm = new InstitucionForm();
+            institucionForm.ShowDialog();
+          
+        }
+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ObservacionesForm observacionesForm = new ObservacionesForm();
             observacionesForm.ShowDialog();
             observaciones = observacionesForm.contenidoObservaciones;
+        }
+
+        private void cmbTraslado_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var seleccion = cmbTraslado.SelectedItem.ToString();
+                if (seleccion == "Crear una nueva causa...")
+                {
+                    CausaEnfermedadComunForm causaEnfermedadForm = new CausaEnfermedadComunForm();
+                    causaEnfermedadForm.ShowDialog();
+                    obtenerCausasComunes();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void cmbTrasladoEnfermedadComun_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var seleccion = cmbTrasladoEnfermedadComun.SelectedItem.ToString();
+                if (seleccion == "Agregar Nueva Institucion...")
+                {
+                    abrirFormularioDeInstitucion();
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresEnfermedadComun();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void cmbTrasladoAtropellado_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var seleccion = cmbTrasladoAtropellado.SelectedItem.ToString();
+                if (seleccion == "Agregar Nueva Institucion...")
+                {
+                    abrirFormularioDeInstitucion();
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresAtropellado();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void cmbTrasladoIntoxicados_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var seleccion = cmbTrasladoIntoxicados.SelectedItem.ToString();
+                if (seleccion == "Agregar Nueva Institucion...")
+                {
+                    abrirFormularioDeInstitucion();
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresIntoxicados();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void cmbTrasladoMordido_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var seleccion = cmbTrasladoMordido.SelectedItem.ToString();
+                if (seleccion == "Agregar Nueva Institucion...")
+                {
+                    abrirFormularioDeInstitucion();
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresMordido();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private int obtenerIdLugar()
+        {
+            if (Array.IndexOf(comunes, idTipoIncidente) != -1)
+            {
+                return obtenerIdLugar(cmbTraslado.SelectedItem.ToString());
+            }
+            else if (idTipoIncidente == 2)
+            {
+                return obtenerIdLugar(cmbTrasladoEnfermedadComun.SelectedItem.ToString());
+            }
+            else if (idTipoIncidente == 5)
+            {
+                return obtenerIdLugar(cmbTrasladoAtropellado.SelectedItem.ToString());
+            }
+            else if (idTipoIncidente == 6)
+            {
+                return obtenerIdLugar(cmbTrasladoIntoxicados.SelectedItem.ToString());
+            }
+            else if (idTipoIncidente == 8)
+            {
+                return obtenerIdLugar(cmbTrasladoMordido.SelectedItem.ToString());
+            }
+
+            return -1;
+        }
+
+        private int obtenerIdLugar(string nombre)
+        {
+            foreach(var l in LugaresDeTraslado)
+            {
+                if(l.institucio == nombre)
+                {
+                    return l.idLugar;
+                }
+            }
+            return -1;
         }
     }
 }

@@ -34,6 +34,7 @@ namespace SGREB.Formularios
             var dpiI = txDPI.Text;
             var sexo = cmbSexo.SelectedItem.ToString();
             var edad = txEdad.Text;
+            var domicilio = txtDomicilio.Text;
             if(nombreI == "" && apellidosI == "")
             {
                 MessageBox.Show("Información importante faltante");
@@ -44,6 +45,7 @@ namespace SGREB.Formularios
             pacienteGrid.dpi = dpiI;
             pacienteGrid.sexo = sexo;
             pacienteGrid.edad = edad;
+            pacienteGrid.domicilio = domicilio;
             this.Close();
         }
 

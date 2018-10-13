@@ -1,0 +1,15 @@
+﻿<Window x:Class="SGREB.Formularios.InstitucionForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SGREB.Formularios"
+        mc:Ignorable="d"
+        Title="Institucion" Height="204.545" Width="410.779">
+    <Grid>
+        <Button Content="ingresar" HorizontalAlignment="Left" Margin="248,95,0,0" VerticalAlignment="Top" Width="101" x:Name="btGrado" Click="btRol_click"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="97,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="199" x:Name="nombreRol"/>
+        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="34,49,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

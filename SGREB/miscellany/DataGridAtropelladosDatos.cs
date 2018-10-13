@@ -17,5 +17,6 @@ namespace SGREB.miscellany
         public string edad { set; get; }
         public string vivo { set; get; }
         public string fallecido { set; get; }
+        public string domicilio { set; get; }
     }
 }

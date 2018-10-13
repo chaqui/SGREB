@@ -5,28 +5,45 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SGREB.Formularios"
         mc:Ignorable="d"
-        Title="PacienteForm" Height="340.13" Width="455.194">
+        Title="PacienteForm" Height="355.991" Width="455.194">
     <Grid>
-        <Label Content="Nombres:" HorizontalAlignment="Left" Margin="32,74,0,0" VerticalAlignment="Top"/>
-        <Label Content="Apellidos:" HorizontalAlignment="Left" Margin="32,105,0,0" VerticalAlignment="Top"/>
-        <Label Content="dpi:" HorizontalAlignment="Left" Margin="32,136,0,0" VerticalAlignment="Top"/>
-        <Label Content="Sexo:" HorizontalAlignment="Left" Margin="32,167,0,0" VerticalAlignment="Top"/>
-        <Label Content="edad:" HorizontalAlignment="Left" Margin="32,198,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="111,77,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txNombres"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="111,108,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txApellidos"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="111,139,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txDPI"/>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="111,201,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txEdad"/>
-        <RadioButton Content="Fallecido" HorizontalAlignment="Left" Margin="207,244,0,0" VerticalAlignment="Top" x:Name="rbFallecido" RenderTransformOrigin="1.827,0.323"/>
-        <ComboBox HorizontalAlignment="Left" Margin="111,171,0,0" VerticalAlignment="Top" Width="181" x:Name="cmbSexo">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="33*"/>
+            <ColumnDefinition Width="76*"/>
+            <ColumnDefinition Width="184*"/>
+            <ColumnDefinition Width="29*"/>
+            <ColumnDefinition Width="125*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="69*"/>
+            <RowDefinition Height="166*"/>
+            <RowDefinition Height="32*"/>
+            <RowDefinition Height="58*"/>
+        </Grid.RowDefinitions>
+        <Label Content="Nombres:" HorizontalAlignment="Left" Margin="32,5,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1" Height="26" Width="62"/>
+        <Label Content="Apellidos:" HorizontalAlignment="Left" Margin="32,36,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1" Height="26" Width="62"/>
+        <Label Content="dpi:" HorizontalAlignment="Left" Margin="32,67,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1" Height="26" Width="30"/>
+        <Label Content="Sexo:" HorizontalAlignment="Left" Margin="32,98,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1" Height="26" Width="38"/>
+        <Label Content="edad:" HorizontalAlignment="Left" Margin="32,129,0,0" VerticalAlignment="Top" Grid.ColumnSpan="2" Grid.Row="1" Height="26" Width="39"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="2,8,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txNombres" Grid.Column="2" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="2,39,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txApellidos" Grid.Column="2" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="2,70,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txDPI" Grid.Column="2" Grid.Row="1"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="2,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txEdad" Grid.Column="2" Grid.Row="1"/>
+        <RadioButton Content="Fallecido" HorizontalAlignment="Left" Margin="100,13,0,0" VerticalAlignment="Top" x:Name="rbFallecido" RenderTransformOrigin="1.827,0.323" Grid.Row="3" Grid.Column="2" Height="18" Width="68"/>
+        <ComboBox HorizontalAlignment="Left" Margin="2,102,0,0" VerticalAlignment="Top" Width="181" x:Name="cmbSexo" Grid.Column="2" Grid.Row="1" Height="28">
             <ComboBoxItem Content="F"/>
             <ComboBoxItem Content="M"/>
         </ComboBox>
-        <Button Content="Guardar" HorizontalAlignment="Left" Margin="331,209,0,0" VerticalAlignment="Top" Width="90" x:Name="btGuardar" Click="btGuardar_Click"/>
-        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="331,244,0,0" VerticalAlignment="Top" Width="90" x:Name="btCancelar"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="0,6,0,0" VerticalAlignment="Top" Width="90" x:Name="btGuardar" Click="btGuardar_Click" Grid.Row="2" Grid.Column="4" Grid.RowSpan="2"/>
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="0,13,0,0" VerticalAlignment="Top" Width="90" x:Name="btCancelar" Grid.Row="3" Grid.Column="4"/>
+
+        <Label Content="domicilio:" HorizontalAlignment="Left" Grid.Row="2" VerticalAlignment="Top" Grid.Column="1" Height="26" Width="61"/>
         <TextBlock
             FontSize="24"
-            TextAlignment="Center"  Text="Nuevo Paciente" Margin="0,0,0,272" />
-        <RadioButton Content="Herido" HorizontalAlignment="Left" Margin="92,244,0,0" VerticalAlignment="Top" x:Name="rbHerido" Checked="rbHerido_Checked"/>
+            TextAlignment="Center"  Text="Nuevo Paciente" Margin="0,0,0,16" Grid.ColumnSpan="5" />
+        <RadioButton Content="Herido" HorizontalAlignment="Left" Margin="61,13,0,0" VerticalAlignment="Top" x:Name="rbHerido" Checked="rbHerido_Checked" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1" Height="18" Width="58"/>
+        <TextBox Grid.Column="2" HorizontalAlignment="Left" Height="23" Margin="2,3,0,0" Grid.Row="2" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="181" x:Name="txtDomicilio"/>
+
 
     </Grid>
 </Window>

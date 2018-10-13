@@ -66,5 +66,12 @@ namespace SGREB.Controlador
             var tt_Lugar = bitacora.TT_Lugar.Where(s => s.direccion == direccion);
             return tt_Lugar.ToList();
         }
+
+        public List<TT_Lugar> obtenerVariasInstituciones()
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            var tt_Lugar = bitacora.TT_Lugar.Where(s => s.institucio != "");
+            return tt_Lugar.ToList();
+        }
     }
 }

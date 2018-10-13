@@ -74,11 +74,15 @@
 
         <!--Formulario para servicios Varios 
             Servicio para el incidente de tipo 1 -->
-        <Grid Margin="48,609,68,-245" x:Name="gridServiciosVarios" Visibility="Collapsed">
+        <Grid Margin="53,683,63,-319" x:Name="gridServiciosVarios" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="414*"/>
+                <ColumnDefinition Width="203*"/>
+            </Grid.ColumnDefinitions>
             <Label Content="Servicios Varios " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" />
             <Label Content="Clase de Servicio:" HorizontalAlignment="Left" Margin="32,46,0,0" VerticalAlignment="Top"/>
             <ComboBox HorizontalAlignment="Left" Margin="146,46,0,0" VerticalAlignment="Top" Width="196" x:Name="combBoxClaseServicio" SelectionChanged="combBoxClaseServicio_SelectionChanged"/>
-            <RadioButton Content="Falsa Alrma" HorizontalAlignment="Left" Margin="451,21,0,0" VerticalAlignment="Top" x:Name="rBFalsaArlarma" Checked="rBFalsaArlarma_Checked"/>
+            <RadioButton Content="Falsa Alrma" HorizontalAlignment="Left" Margin="37,21,0,0" VerticalAlignment="Top" x:Name="rBFalsaArlarma" Checked="rBFalsaArlarma_Checked" Grid.Column="1"/>
         </Grid>
 
 
@@ -96,7 +100,7 @@
                 -Rescate en Posos
                 -Rastreo
                 -Accidente Aereo  -->
-        <Grid Margin="35,595,28,-740" x:Name="gridComun" Visibility="Collapsed">
+        <Grid Margin="35,683,28,-828" x:Name="gridComun" Visibility="Collapsed">
             <Label Content="Enfermedad Común " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  x:Name="tituloIncidenteComun"/>
             <Label Content="Edad:" HorizontalAlignment="Left" Margin="300,89,0,0" VerticalAlignment="Top"/>
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,85,0,-100" VerticalAlignment="Top" Width="465" x:Name="PacienteGrid">
@@ -108,20 +112,23 @@
                     <DataGridTextColumn Binding="{Binding Path=sexo}" Header="sexo" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="fallecido" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=herido}" Header="herido" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=domicilio}" Header="domicilio" ></DataGridTextColumn>
 
                 </DataGrid.Columns>
             </DataGrid>
             <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,54,0,0" VerticalAlignment="Top"/>
             <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="503,90,0,0" VerticalAlignment="Top" Width="147" x:Name="btAgregarPaciente" Click="btAgregarPaciente_Click"/>
             <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="503,125,0,0" VerticalAlignment="Top" Width="147" x:Name="EliminarPaciente" Click="EliminarPaciente_Click"/>
+            <Label Content="Traslado a:" HorizontalAlignment="Left" Margin="277,15,0,0" VerticalAlignment="Top" Width="62"/>
+            <ComboBox HorizontalAlignment="Left" Margin="356,15,0,0" VerticalAlignment="Top" Width="222" x:Name="cmbTraslado" SelectionChanged="cmbTraslado_SelectionChanged"/>
 
         </Grid>
 
         <!--Formulario para Enfermedad Comun-->
-        <Grid Margin="35,595,28,-740" x:Name="gridEComun" Visibility="Collapsed">
+        <Grid Margin="18,683,45,-828" x:Name="gridEComun" Visibility="Collapsed">
             <Label Content="Enfermedad Común " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  x:Name="titulo"/>
-            <Label Content="Edad:" HorizontalAlignment="Left" Margin="300,89,0,0" VerticalAlignment="Top"/>
-            <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,85,0,-100" VerticalAlignment="Top" Width="465" x:Name="gridEnfComun">
+            <ComboBox HorizontalAlignment="Left" Margin="275,54,0,0" VerticalAlignment="Top" Width="192" x:Name="cmbTrasladoEnfermedadComun" SelectionChanged="cmbTrasladoEnfermedadComun_SelectionChanged"/>
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,115,0,0" VerticalAlignment="Top" Width="465" x:Name="gridEnfComun">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=nombre}" Header="nombres" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=apellido}" Header="apellidos" ></DataGridTextColumn>
@@ -130,21 +137,22 @@
                     <DataGridTextColumn Binding="{Binding Path=sexo}" Header="sexo" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="fallecido" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=herido}" Header="herido" ></DataGridTextColumn>
-
+                    <DataGridTextColumn Binding="{Binding Path=domicilio}" Header="domicilio" ></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,54,0,0" VerticalAlignment="Top"/>
+            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="19,84,0,0" VerticalAlignment="Top"/>
             <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="503,90,0,0" VerticalAlignment="Top" Width="147" x:Name="btAgregarPacienteE" Click="btAgregarPacienteC_Click"/>
             <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="503,125,0,0" VerticalAlignment="Top" Width="147" x:Name="EliminarPacienteE" Click="EliminarPacienteC_Click"/>
             <Label Content="Causa:" HorizontalAlignment="Left" Margin="213,23,0,0" VerticalAlignment="Top"/>
             <ComboBox x:Name="cmbCausaEComun" HorizontalAlignment="Left" Margin="275,23,0,0" VerticalAlignment="Top" Width="192" SelectionChanged="cmbCausaEComun_SelectionChanged"/>
+            <Label Content="Traslado A:" HorizontalAlignment="Left" Margin="213,56,0,0" VerticalAlignment="Top"/>
 
         </Grid>
 
 
 
         <!--Formulario para Maternidad-->
-        <Grid Margin="48,609,68,-330" x:Name="gridMaternidad" Visibility="Collapsed">
+        <Grid Margin="53,693,63,-414" x:Name="gridMaternidad" Visibility="Collapsed">
             <Label Content="Maternidad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" />
             <Label Content="Edad:" HorizontalAlignment="Left" Margin="407,53,0,0" VerticalAlignment="Top"/>
             <TextBox HorizontalAlignment="Left" Height="23" Margin="457,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
@@ -157,14 +165,13 @@
             <TextBox x:Name="TxNombre" HorizontalAlignment="Left" Height="23" Margin="77,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
             <RadioButton x:Name="radButtonVivo" Content="Vivo" HorizontalAlignment="Left" Margin="395,96,0,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="radioButtonFallecido" Content="Fallecido" HorizontalAlignment="Left" Margin="457,96,0,0" VerticalAlignment="Top"/>
-            <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,54,0,0" VerticalAlignment="Top"/>
             <Button x:Name="btAcompañante" Content="Acompañantes" HorizontalAlignment="Left" Margin="422,136,0,0" VerticalAlignment="Top" Width="95"/>
         </Grid>
 
         <!-- Formulario para atropellados   -->
-        <Grid Margin="35,595,28,-740" x:Name="gridAtropellados" Visibility="Collapsed">
+        <Grid Margin="35,683,28,-828" x:Name="gridAtropellados" Visibility="Collapsed">
             <Label Content="Atropellados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
-            <Label Content="Tipo De Vehiculo:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
+            <Label Content="Tipo De Vehiculo:" HorizontalAlignment="Left" Margin="148,8,0,0" VerticalAlignment="Top"/>
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465" x:Name="gdPacientesAtropellados">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=nombre}" Header="nombres" ></DataGridTextColumn>
@@ -174,6 +181,7 @@
                     <DataGridTextColumn Binding="{Binding Path=sexo}" Header="sexo" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="fallecido" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=herido}" Header="herido" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=domicilio}" Header="domicilio" ></DataGridTextColumn>
 
                 </DataGrid.Columns>
 
@@ -181,14 +189,17 @@
             <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
             <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="506,120,0,0" VerticalAlignment="Top" Width="144" x:Name="btAgregarPaciente2" Click="btAgregarPaciente2_Click"/>
             <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="506,155,0,0" VerticalAlignment="Top" Width="144" x:Name="btEliminarPaciente2"/>
-            <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="ComboBox_SelectionChanged" x:Name="cmbTipoVehiculo"/>
-            <Label Content="Placa:" HorizontalAlignment="Left" Margin="417,68,0,0" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="487,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" x:Name="txPlaca"/>
+            <ComboBox HorizontalAlignment="Left" Margin="255,13,0,0" VerticalAlignment="Top" Width="230" SelectionChanged="ComboBox_SelectionChanged" x:Name="cmbTipoVehiculo"/>
+            <Label Content="Placa:" HorizontalAlignment="Left" Margin="35,56,0,0" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="105,59,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" x:Name="txPlaca"/>
+            <ComboBox HorizontalAlignment="Left" Margin="393,57,0,0" VerticalAlignment="Top" Width="192" x:Name="cmbTrasladoAtropellado" SelectionChanged="cmbTrasladoAtropellado_SelectionChanged"/>
+            <Label Content="Traslado A:" HorizontalAlignment="Left" Margin="331,59,0,0" VerticalAlignment="Top"/>
+
 
         </Grid>
 
         <!-- Formulario para intoxicados -->
-        <Grid Margin="35,595,28,-740" x:Name="gridIntoxicados" Visibility="Collapsed">
+        <Grid Margin="35,693,28,-838" x:Name="gridIntoxicados" Visibility="Collapsed">
             <Label Content="Intoxicados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <Label Content="Causa:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465" x:Name="dgIntoxicados">
@@ -200,18 +211,22 @@
                     <DataGridTextColumn Binding="{Binding Path=sexo}" Header="sexo" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="fallecido" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=herido}" Header="herido" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=domicilio}" Header="domicilio" ></DataGridTextColumn>
 
                 </DataGrid.Columns>
             </DataGrid>
+
             <Label Content="Pacientes" HorizontalAlignment="Left" Margin="25,84,0,0" VerticalAlignment="Top"/>
             <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="505,120,0,0" VerticalAlignment="Top" Width="145" x:Name="btAgregarPacienteIntoxicados" Click="btAgregarPacienteIntoxicados_Click"/>
             <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="505,155,0,0" VerticalAlignment="Top" Width="145" x:Name="btEliminarPacienteIntoxicados"/>
             <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230" x:Name="cmbIntoxicacion" SelectionChanged="cmbIntoxicacion_SelectionChanged"/>
+            <ComboBox HorizontalAlignment="Left" Margin="460,61,0,0" VerticalAlignment="Top" Width="192" x:Name="cmbTrasladoIntoxicados" SelectionChanged="cmbTrasladoIntoxicados_SelectionChanged"/>
+            <Label Content="Traslado A:" HorizontalAlignment="Left" Margin="398,63,0,0" VerticalAlignment="Top"/>
 
         </Grid>
 
         <!-- Formulario para Mordidos por Aninales -->
-        <Grid Margin="35,595,28,-740" x:Name="gridMordidos" Visibility="Collapsed">
+        <Grid Margin="35,715,28,-860" x:Name="gridMordidos" Visibility="Collapsed">
             <Label Content="Mordidos por Animales" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <Label Content="Clase de Animal:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465" x:Name="dgPacientesMordidos">
@@ -223,6 +238,7 @@
                     <DataGridTextColumn Binding="{Binding Path=sexo}" Header="sexo" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="fallecido" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=herido}" Header="herido" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=domicilio}" Header="domicilio" ></DataGridTextColumn>
 
                 </DataGrid.Columns>
             </DataGrid>
@@ -230,11 +246,13 @@
             <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="504,120,0,0" VerticalAlignment="Top" Width="146" x:Name="btAgregarPacienteMordido" Click="btAgregarPacienteMordido_Click"/>
             <Button Content="eliminar paciente" HorizontalAlignment="Left" Margin="504,155,0,0" VerticalAlignment="Top" Width="146" x:Name="btEliminarPacienteMordido"/>
             <ComboBox HorizontalAlignment="Left" Margin="130,60,0,0" VerticalAlignment="Top" Width="230" x:Name="cmbAnimales" SelectionChanged="cmbAnimales_SelectionChanged"/>
+            <ComboBox HorizontalAlignment="Left" Margin="458,60,0,0" VerticalAlignment="Top" Width="192" x:Name="cmbTrasladoMordido" SelectionChanged="cmbTrasladoMordido_SelectionChanged"/>
+            <Label Content="Traslado A:" HorizontalAlignment="Left" Margin="396,62,0,0" VerticalAlignment="Top"/>
 
         </Grid>
 
         <!-- Formularios para Accidente de Transito-->
-        <Grid Margin="35,595,28,-740" x:Name="gridAccidenteTransito" Visibility="Collapsed">
+        <Grid Margin="35,715,28,-860" x:Name="gridAccidenteTransito" Visibility="Collapsed">
             <Label Content="Accidente de Transito" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <Label Content="Tipo De Vehiculo:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,115,0,0" VerticalAlignment="Top" Width="465"/>
@@ -248,7 +266,7 @@
         </Grid>
 
         <!-- Formulario para serivicio de Agua-->
-        <Grid Margin="35,595,28,-265" x:Name="gridServicioDeAgua" Visibility="Collapsed">
+        <Grid Margin="35,737,28,-407" x:Name="gridServicioDeAgua" Visibility="Collapsed">
             <Label Content="Servicio de Agua" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <TextBox x:Name="txtGalones" HorizontalAlignment="Left" Height="23" Margin="190,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
             <Label Content="Galones Entregados:" HorizontalAlignment="Left" Margin="65,60,0,0" VerticalAlignment="Top"/>
@@ -262,7 +280,7 @@
             -Incendios en Gasolineras 
             -Incendio en Locales Comerciales 
         -->
-        <Grid Margin="35,595,28,-740" x:Name="gridIncendiosDeViviendas" Visibility="Collapsed">
+        <Grid Margin="35,661,28,-806" x:Name="gridIncendiosDeViviendas" Visibility="Collapsed">
             <Label Content="Incendio en Vivienda" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" x:Name="tituloIncendio" />
             <Label Content="Propietario:" HorizontalAlignment="Left" Margin="23,55,0,0" VerticalAlignment="Top"/>
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="20,149,0,0" VerticalAlignment="Top" Width="465" x:Name="dgPacientesIncendio">
@@ -273,6 +291,7 @@
                 <DataGridTextColumn Binding="{Binding Path=sexo}" Header="sexo" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="fallecido" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=herido}" Header="herido" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=domicilio}" Header="domicilio" ></DataGridTextColumn>
             </DataGrid>
             <Label Content="Pacientes" HorizontalAlignment="Left" Margin="23,118,0,0" VerticalAlignment="Top"/>
             <Button Content="agregar paciente" HorizontalAlignment="Left" Margin="490,215,0,0" VerticalAlignment="Top" Width="160" x:Name="btAgregarPacienteIncendio" Click="btAgregarPacienteIncendio_Click"/>
@@ -294,6 +313,7 @@
                     <DataGridTextColumn Binding="{Binding Path=dpi}" Header="dpi" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=edad}" Header="edad" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=sexo}" Header="sexo" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=domicilio}" Header="domicilio" ></DataGridTextColumn>
 
                 </DataGrid.Columns>
             </DataGrid>
@@ -329,22 +349,22 @@
 
 
         <!--    Formulario para agregar las unidades que cubren la emergencia-->
-        <Grid Margin="35,895,28,-770" x:Name="gridUnidades" Visibility="Visible">
-            <Label Content="Unidades" HorizontalAlignment="Left" Margin="32,57,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
-            <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,97,0,0" VerticalAlignment="Top" Width="465" x:Name="dgUnidades">
+        <Grid Margin="35,967,28,-842" x:Name="gridUnidades" Visibility="Visible">
+            <Label Content="Unidades" HorizontalAlignment="Left" Margin="30,84,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+            <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,120,0,0" VerticalAlignment="Top" Width="465" x:Name="dgUnidades">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=placa}" Header="placa" ></DataGridTextColumn>
                     <DataGridTextColumn Binding="{Binding Path=tipo}" Header="tipo" ></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Content="agregar unidad" HorizontalAlignment="Left" Margin="264,58,0,0" VerticalAlignment="Top" Width="161" x:Name="btAgregarUnidad" Click="btAgregarUnidad_Click"/>
-            <Button Content="eliminar unidad" HorizontalAlignment="Left" Margin="502,150,0,0" VerticalAlignment="Top" Width="139" x:Name="EliminarUnidad" Click="EliminarUnidad_Click"/>
+            <Button Content="agregar unidad" HorizontalAlignment="Left" Margin="502,140,0,0" VerticalAlignment="Top" Width="139" x:Name="btAgregarUnidad" Click="btAgregarUnidad_Click"/>
+            <Button Content="eliminar unidad" HorizontalAlignment="Left" Margin="502,177,0,0" VerticalAlignment="Top" Width="139" x:Name="EliminarUnidad" Click="EliminarUnidad_Click"/>
         </Grid>
 
 
         <!--    Formulario para agregar los elementos que cubren la emergencia-->
-        <Grid Margin="35,1225,28,-1078" x:Name="gridElementos" Visibility="Visible">
-            <Label Content="Elemtntos" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
+        <Grid Margin="35,1297,28,-1150" x:Name="gridElementos" Visibility="Visible">
+            <Label Content="Elementos" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="10,90,0,0" VerticalAlignment="Top" Width="465" x:Name="gridBomberos">
                 <DataGrid.Columns>
                     <DataGridTextColumn Binding="{Binding Path=id}" Header="id" ></DataGridTextColumn>
@@ -360,8 +380,12 @@
         <TextBox HorizontalAlignment="Left" Height="23" Margin="359,254,0,0" TextWrapping="Wrap" Text="" x:Name="txApellidosSolicitante" VerticalAlignment="Top" Width="140"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="564,254,0,0" TextWrapping="Wrap" Text="" x:Name="txDPISolicitante" VerticalAlignment="Top" Width="141"/>
         <Button Content="Guardar" HorizontalAlignment="Left" Height="23" Margin="606,1533,0,-1106" VerticalAlignment="Top" Width="99" x:Name="btGuardarCompleto" Click="btGuardarCompleto_Click" />
-        <Button Content="Guardar" HorizontalAlignment="Left" Height="26" Margin="564,700,0,-276" VerticalAlignment="Top" Width="75" x:Name="btGuardarFalsaAlarma" Click="btGuardarFalsaAlarma_Click" Visibility="Collapsed"/>
-        <Button Content="Guardar" HorizontalAlignment="Left" Margin="564,705,0,-287" VerticalAlignment="Top" Width="101" x:Name="btGuardarVarios" Click="btGuardarVarios_Click" Visibility="Collapsed"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Height="26" Margin="538,785,0,-361" VerticalAlignment="Top" Width="101" x:Name="btGuardarFalsaAlarma" Click="btGuardarFalsaAlarma_Click" Visibility="Collapsed"/>
+        <Button Content="Guardar" HorizontalAlignment="Left" Margin="538,790,0,-372" VerticalAlignment="Top" Width="101" x:Name="btGuardarVarios" Click="btGuardarVarios_Click" Visibility="Collapsed"/>
+        <Label Content="Formulado Por:" HorizontalAlignment="Right" Height="24" Margin="0,599,642,-173" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Height="26" Margin="96,604,0,-180" VerticalAlignment="Top" Width="216" x:Name="cmbFormuladoPor"/>
+        <Label Content="Vo. Bo. Por:" HorizontalAlignment="Right" Height="24" Margin="0,599,302,-173" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Height="26" Margin="464,604,0,-180" VerticalAlignment="Top" Width="216" x:Name="cmbVoBo"/>
     </Grid>
 
 </UserControl>
