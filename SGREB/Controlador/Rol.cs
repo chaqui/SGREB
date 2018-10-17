@@ -12,6 +12,10 @@ namespace SGREB.Controlador
         public Rol() {
         }
 
+        /// <summary>
+        /// crear rol
+        /// </summary>
+        /// <param name="tvRol"></param>
         public void Crear(TV_Rol tvRol)
         {
             var bitacora = new bitacoraBomberoaContext();
@@ -19,6 +23,12 @@ namespace SGREB.Controlador
             bitacora.SaveChanges();
             
         }
+
+        /// <summary>
+        /// obtener rol por su id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns> rol encontrado</returns>
         public TV_Rol obtener(int? id)
         {
             var bitacora = new bitacoraBomberoaContext();
@@ -26,6 +36,10 @@ namespace SGREB.Controlador
             return rol;
         }
 
+        /// <summary>
+        /// obtiene todos los roles almacenados
+        /// </summary>
+        /// <returns>roles en formato List</returns>
         public List<TV_Rol> obtenerVarios()
         {
             var bitacora = new bitacoraBomberoaContext();
@@ -34,6 +48,11 @@ namespace SGREB.Controlador
 
         }
 
+        /// <summary>
+        /// obtener el rol por su nombre
+        /// </summary>
+        /// <param name="nombre"></param>
+        /// <returns></returns>
         public TV_Rol obtener(string nombre)
         {
             var bitacora = new bitacoraBomberoaContext();

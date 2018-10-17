@@ -152,20 +152,25 @@
 
 
         <!--Formulario para Maternidad-->
-        <Grid Margin="53,693,63,-414" x:Name="gridMaternidad" Visibility="Collapsed">
+        <Grid Margin="53,693,63,-536" x:Name="gridMaternidad" Visibility="Collapsed">
             <Label Content="Maternidad" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16" />
             <Label Content="Edad:" HorizontalAlignment="Left" Margin="407,53,0,0" VerticalAlignment="Top"/>
-            <TextBox HorizontalAlignment="Left" Height="23" Margin="457,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45"/>
-            <RadioButton x:Name="radButAborto" Content="Aborto" HorizontalAlignment="Left" Margin="28,96,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="radButtonAtencionParto" Content="Atención de Parto" HorizontalAlignment="Left" Margin="238,96,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="radButtonRetencion_de_Placenta" Content="Retención de Placenta" HorizontalAlignment="Left" Margin="93,96,0,0" VerticalAlignment="Top"/>
-            <Label Content="Traslado a:" HorizontalAlignment="Left" Margin="22,131,0,0" VerticalAlignment="Top"/>
-            <ComboBox HorizontalAlignment="Left" Margin="107,136,0,0" VerticalAlignment="Top" Width="230"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="457,56,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" x:Name="txEdadPaciente"/>
+            <RadioButton x:Name="radButAborto" Content="Aborto" HorizontalAlignment="Left" Margin="28,126,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radButtonAtencionParto" Content="Atención de Parto" HorizontalAlignment="Left" Margin="238,126,0,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="radButtonRetencion_de_Placenta" Content="Retención de Placenta" HorizontalAlignment="Left" Margin="93,126,0,0" VerticalAlignment="Top"/>
+            <Label Content="Traslado a:" HorizontalAlignment="Left" Margin="21,188,0,0" VerticalAlignment="Top"/>
+            <ComboBox HorizontalAlignment="Left" Margin="104,188,0,0" VerticalAlignment="Top" Width="230" x:Name="cmbTrasladoaAMaternidad" SelectionChanged="cmbTrasladoaAMaternidad_SelectionChanged"/>
             <Label Content="Paciente:" HorizontalAlignment="Left" Margin="17,46,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="TxNombre" HorizontalAlignment="Left" Height="23" Margin="77,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
-            <RadioButton x:Name="radButtonVivo" Content="Vivo" HorizontalAlignment="Left" Margin="395,96,0,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="radioButtonFallecido" Content="Fallecido" HorizontalAlignment="Left" Margin="457,96,0,0" VerticalAlignment="Top"/>
-            <Button x:Name="btAcompañante" Content="Acompañantes" HorizontalAlignment="Left" Margin="422,136,0,0" VerticalAlignment="Top" Width="95"/>
+            <TextBox x:Name="TxNombrePaciente" HorizontalAlignment="Left" Height="23" Margin="77,51,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
+            <RadioButton x:Name="radioButtonFallecido" Content="Fallecido" HorizontalAlignment="Left" Margin="457,126,0,0" VerticalAlignment="Top"/>
+            <Button x:Name="btAcompañante" Content="Acompañantes" HorizontalAlignment="Left" Margin="439,230,0,0" VerticalAlignment="Top" Width="130"/>
+            <Label Content="Domicilio:" HorizontalAlignment="Left" Margin="21,230,0,0" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="104,230,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="230" x:Name="txDomicilio"/>
+            <Label Content="DPI:" HorizontalAlignment="Left" Margin="17,84,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="txDPIPaciente" HorizontalAlignment="Left" Height="23" Margin="77,89,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="285"/>
+            <Label Content="Edad:" HorizontalAlignment="Left" Margin="27,157,0,0" VerticalAlignment="Top"/>
+            <TextBox HorizontalAlignment="Left" Height="23" Margin="77,160,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="45" x:Name="txMesesEmbarazo"/>
         </Grid>
 
         <!-- Formulario para atropellados   -->
@@ -386,6 +391,7 @@
         <ComboBox HorizontalAlignment="Left" Height="26" Margin="96,604,0,-180" VerticalAlignment="Top" Width="216" x:Name="cmbFormuladoPor"/>
         <Label Content="Vo. Bo. Por:" HorizontalAlignment="Right" Height="24" Margin="0,599,302,-173" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Height="26" Margin="464,604,0,-180" VerticalAlignment="Top" Width="216" x:Name="cmbVoBo"/>
+        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
     </Grid>
 
 </UserControl>

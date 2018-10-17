@@ -294,7 +294,8 @@ namespace SGREB
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 4: //Maternidad
-
+                    obtenerLugaresDeTraslado();
+                    obtenerLugarresMaternidad();
                     gridMaternidad.Visibility = Visibility.Visible;
                     break;
                 case 5: //Atropellados
@@ -403,6 +404,26 @@ namespace SGREB
             gridUnidades.Visibility = Visibility.Visible;
             gridElementos.Visibility = Visibility.Visible;
             obtenerElementos();
+        }
+
+
+        /// <summary>
+        /// ingresar los lugare de maternidad al combo box 
+        /// </summary>
+        private void obtenerLugarresMaternidad()
+        {
+            cmbTrasladoaAMaternidad.Items.Clear();
+            try
+            {
+                foreach (var l in LugaresDeTraslado)
+                {
+                    cmbTrasladoaAMaternidad.Items.Add(l.institucio);
+                }
+            }
+            catch
+            {
+                cmbTrasladoaAMaternidad.Items.Add("Agregar Nueva Institucion...");
+            }
         }
 
         private void obtenerLugaresMordido()
@@ -982,18 +1003,62 @@ namespace SGREB
             return -1;
         }
 
-        private void guardarMaternidad(int id)
+        /// <summary>
+        /// guardar incidente de Maternidad
+        /// </summary>
+        /// <param name="idIncidente"></param>
+        private void guardarMaternidad(int idIncidente)
         {
-            throw new NotImplementedException();
+
+            guardarBOmberos(idIncidente);
+            guardarUnidades(idIncidente);
+            PacienteGrid paciente = new PacienteGrid();
+            Paciente pacienteA = new Paciente();
+            try
+            {
+                int.Parse(txEdadPaciente.Text);
+            }
+            catch
+            {
+                MessageBox.Show("La edad debe de ser en numeros");
+                return;
+            }
+
+            try
+            {
+                int.Parse(txMesesEmbarazo.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Los meses deben de ser en numeros");
+                return;
+            }
+            paciente.edad = txEdadPaciente.Text;
+            paciente.nombre = TxNombrePaciente.Text;
+            paciente.sexo = "F";
+            paciente.domicilio = txDomicilio.Text;
+            if (radioButtonFallecido.IsChecked == true)
+            {
+                paciente.fallecido = "x";
+            }
+            paciente.dpi = txDPIPaciente.Text;
+            var id = pacienteA.agregar(paciente, idIncidente);
+            TC_Maternidad tC_Maternidad = new TC_Maternidad
+            {
+                aborto = radButAborto.IsChecked,
+                atencionDeParto = radButtonAtencionParto.IsChecked,
+                RetencionDePlacenta = radButtonRetencion_de_Placenta.IsChecked,
+                idIncidente = idIncidente,
+                mesesDeEmbarazo = int.Parse(txMesesEmbarazo.Text)
+            };
+            Maternidad maternidad = new Maternidad();
+            maternidad.crear(tC_Maternidad);
         }
 
         private void guardarIncendio(int idIncidente)
         {
             try
-            {
-
-            
-            guardarBOmberos(idIncidente);
+            {            
             guardarPacientesIncendio(idIncidente);
             guardarUnidades(idIncidente);
             Incendio tcIncendio = new Incendio();
@@ -1618,6 +1683,10 @@ namespace SGREB
             {
                 return obtenerIdLugar(cmbTrasladoEnfermedadComun.SelectedItem.ToString());
             }
+            else if(idTipoIncidente == 4)
+            {
+                return obtenerIdLugar(cmbTrasladoaAMaternidad.SelectedItem.ToString());
+            }
             else if (idTipoIncidente == 5)
             {
                 return obtenerIdLugar(cmbTrasladoAtropellado.SelectedItem.ToString());
@@ -1644,6 +1713,24 @@ namespace SGREB
                 }
             }
             return -1;
+        }
+
+        private void cmbTrasladoaAMaternidad_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var seleccion = cmbTrasladoaAMaternidad.SelectedItem.ToString();
+                if (seleccion == "Agregar Nueva Institucion...")
+                {
+                    abrirFormularioDeInstitucion();
+                    obtenerLugaresDeTraslado();
+                    obtenerLugarresMaternidad();
+                }
+            }
+            catch
+            {
+
+            }
         }
     }
 }

@@ -35,6 +35,13 @@ namespace SGREB.Paginas
         {
             try
             {
+                dgComun.Visibility = Visibility.Collapsed;
+                dgEComun.Visibility = Visibility.Collapsed;
+                dgMaternidad.Visibility = Visibility.Collapsed;
+                dgAtropellados.Visibility = Visibility.Collapsed;
+                dgIncendiosA.Visibility = Visibility.Collapsed;
+                dgServicosDeAgua.Visibility = Visibility.Collapsed;
+                dgSuicidio.Visibility = Visibility.Collapsed;
                 idIncidente = int.Parse(txTipoReporte.Text);
                 if (Array.IndexOf(comunes, idIncidente) != -1)
                 {
@@ -106,7 +113,7 @@ namespace SGREB.Paginas
             }
             catch
             {
-
+                MessageBox.Show("Error en la busqueda");
             }
         }
 
@@ -133,7 +140,7 @@ namespace SGREB.Paginas
             }
             catch
             {
-
+                MessageBox.Show("Error en la busqueda");
             }
         }
 
@@ -200,13 +207,38 @@ namespace SGREB.Paginas
             }
             catch
             {
-
+                MessageBox.Show("Error en la busqueda");
             }
         }
 
         private void buscarMaternidad()
         {
-            throw new NotImplementedException();
+            try
+            {
+                DateTime fechaInicio = DateTime.Parse(dpInicio.SelectedDate.ToString());
+                DateTime fechaFinal = DateTime.Parse(dpFinal.SelectedDate.ToString());
+
+                Reportes reportes = new Reportes();
+                List<DataGridMaternidadDatos> resultado = reportes.obtenerMaternidad(idIncidente, fechaInicio, fechaFinal);
+
+
+                dgMaternidad.Items.Clear();
+
+                foreach (var item in resultado)
+                {
+                    item.cantidad = "1";
+                    item.fallecido = item.fallecido == "True" ? "x" : " ";
+                    item.vivo = item.fallecido == "False" ? "x" : " ";
+                    item.hora = item.hora + " Hrs.";
+                    dgMaternidad.Items.Add(item);
+
+                }
+                dgMaternidad.Visibility = Visibility.Visible;
+            }
+            catch
+            {
+                MessageBox.Show("Error en la busqueda");
+            }
         }
 
         private void buscarIncendios()
@@ -232,7 +264,7 @@ namespace SGREB.Paginas
             }
             catch
             {
-
+                MessageBox.Show("Error en la busqueda");
             }
         }
 
@@ -260,7 +292,7 @@ namespace SGREB.Paginas
             }
             catch
             {
-
+                MessageBox.Show("Error en la busqueda");
             }
 
         }

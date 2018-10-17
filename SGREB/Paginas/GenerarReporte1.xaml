@@ -56,6 +56,22 @@
             </DataGrid.Columns>
         </DataGrid>
 
+        <!-- Data grid para Maternudad-->
+        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgMaternidad" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=fecha}" Header="Fecha" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=hora}" Header="Hora" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=cantidad}" Header="Cant." ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=lugar}" Header="Lugar" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=aborto}" Header="aborto" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=parto}" Header="ATENCION DE PARTO " ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=lugarTraslado}" Header="Lugar de Traslado" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="Fallecido" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=vivo}" Header="Vivo" ></DataGridTextColumn>
+             
+            </DataGrid.Columns>
+        </DataGrid>
+
         <!-- Data grid para Atropellados-->
         <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgAtropellados" Visibility="Collapsed">
             <DataGrid.Columns>

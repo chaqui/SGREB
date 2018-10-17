@@ -74,13 +74,13 @@ namespace SGREB.Controlador
                         join lug in context.TT_Lugar on tc.lugar equals lug.idLugar
                         from inc in tc.TC_Incendio
                         join per in context.TC_Persona on inc.propietario equals per.idPersona
-                        
+
                         select new DataGridIncendiosDatos
                         {
                             Fecha = tc.Fecha.ToString(),
                             Hora = tc.horaSalida.ToString().Remove(8, 8),
                             Lugar = lug.direccion,
-                            propietario = per.nombres + " " + per.apellidos,
+                            propietario = obtenerNombre(per),
                             perdidas = inc.perdidas.ToString(),
                             aguaUtilizada = inc.aguaUtilizada.ToString(),
                             idIncidente = tc.idIncidente
@@ -162,7 +162,7 @@ namespace SGREB.Controlador
                             hora = tc.horaSalida.ToString().Remove(8, 8),
                             cantidad = lug.direccion,
                             lugar = lug.direccion,
-                            nombre = per.nombres + " " + per.apellidos,
+                            nombre = obtenerNombre(per),
                             galones = ser.Galones.ToString()
                         };
 
@@ -186,12 +186,40 @@ namespace SGREB.Controlador
                         {
                             fecha = tc.Fecha.ToString(),
                             hora = tc.horaSalida.ToString().Remove(8, 8),
-                            cantidad = lug.direccion,
+                            domicilio = lug.direccion,
                             lugar = lug.direccion,
-                            nombre = per.nombres + " " + per.apellidos,
+                            nombre = obtenerNombre(per),
                             causa = cau.CausaSuicidio,
                             edad = pac.edad.ToString(),
                             sexo = pac.Sexo
+                        };
+
+            return query.ToList();
+        }
+
+        public List<DataGridMaternidadDatos> obtenerMaternidad(int idIncidente, DateTime fechaInicio, DateTime fechaFinal)
+        {
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+
+            var query = from tc in context.TC_Incidente
+                        where tc.tipoIncidente == idIncidente && tc.Fecha < fechaFinal && tc.Fecha > fechaInicio
+                        join sol in context.TC_Solicitud on tc.solicitud equals sol.idSolicitud
+                        join lug in context.TT_Lugar on tc.lugar equals lug.idLugar
+                        join tras in context.TT_Lugar on tc.LugarTraslado equals tras.idLugar
+                        from pac in tc.TC_Paciente
+                        join mat in context.TC_Maternidad on tc.idIncidente equals mat.idIncidente
+
+                        select new DataGridMaternidadDatos
+                        {
+                            fecha = tc.Fecha.ToString(),
+                            hora = tc.horaSalida.ToString().Remove(8, 8),
+                            lugar = lug.direccion,
+                            edad = pac.edad.ToString(),
+                            lugarTraslado = tras.institucio,
+                            fallecido = pac.fallecido.ToString(),
+                            parto = (bool.Parse(mat.atencionDeParto.ToString()) ? "x" : 
+                            bool.Parse(mat.RetencionDePlacenta.ToString())? "retencion de placenta":"x")
+                            
                         };
 
             return query.ToList();
@@ -215,17 +243,17 @@ namespace SGREB.Controlador
                               join lug in context.TT_Lugar on inc.lugar equals lug.idLugar
                               select new
                                     {
-                                    idSolicitud = sol.idSolicitud,
+                                    sol.idSolicitud,
                                     solicitante = obtenerNombre(solPer),
                                     radioTelefonista = obtenerNombre(solPer),
-                                    noTelefono = sol.noTelefono,
-                                    medio = med.medio,
-                                    
-                                    //datos del incidente
-                                    idIncidente = inc.idIncidente,
+                                    sol.noTelefono,
+                                    med.medio,
+
+                                  //datos del incidente
+                                    inc.idIncidente,
                                     horaEntrada = inc.HoraEntrada,
                                     horasalida = inc.horaSalida,
-                                    observaciones = inc.observaciones,
+                                    inc.observaciones,
                                     lugar = lug.direccion,
                                     fecha = inc.Fecha
                                     };
