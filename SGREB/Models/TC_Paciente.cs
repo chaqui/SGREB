@@ -7,8 +7,8 @@ namespace SGREB.Models
     {
         public TC_Paciente()
         {
-            this.PacienteDeIncidentes = new List<PacienteDeIncidente>();
             this.TT_EvacuadoInundacion = new List<TT_EvacuadoInundacion>();
+            this.TC_Incidente = new List<TC_Incidente>();
             this.TV_Animal = new List<TV_Animal>();
             this.TV_CausaIntoxicacion = new List<TV_CausaIntoxicacion>();
             this.TC_Persona1 = new List<TC_Persona>();
@@ -21,9 +21,9 @@ namespace SGREB.Models
         public Nullable<int> Persoan { get; set; }
         public Nullable<bool> herido { get; set; }
         public string domicilio { get; set; }
-        public virtual ICollection<PacienteDeIncidente> PacienteDeIncidentes { get; set; }
         public virtual TC_Persona TC_Persona { get; set; }
         public virtual ICollection<TT_EvacuadoInundacion> TT_EvacuadoInundacion { get; set; }
+        public virtual ICollection<TC_Incidente> TC_Incidente { get; set; }
         public virtual ICollection<TV_Animal> TV_Animal { get; set; }
         public virtual ICollection<TV_CausaIntoxicacion> TV_CausaIntoxicacion { get; set; }
         public virtual ICollection<TC_Persona> TC_Persona1 { get; set; }

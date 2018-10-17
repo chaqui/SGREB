@@ -18,6 +18,7 @@ namespace SGREB.Models
             this.TC_VehiculoIncendiado = new List<TC_VehiculoIncendiado>();
             this.TC_ViviendaInundada = new List<TC_ViviendaInundada>();
             this.TC_ServicioDeGalones = new List<TC_ServicioDeGalones>();
+            this.TC_Paciente = new List<TC_Paciente>();
             this.TV_CausaEnfermedadComun = new List<TV_CausaEnfermedadComun>();
             this.TC_Bombero3 = new List<TC_Bombero>();
         }
@@ -52,6 +53,7 @@ namespace SGREB.Models
         public virtual ICollection<TC_VehiculoIncendiado> TC_VehiculoIncendiado { get; set; }
         public virtual ICollection<TC_ViviendaInundada> TC_ViviendaInundada { get; set; }
         public virtual ICollection<TC_ServicioDeGalones> TC_ServicioDeGalones { get; set; }
+        public virtual ICollection<TC_Paciente> TC_Paciente { get; set; }
         public virtual ICollection<TV_CausaEnfermedadComun> TV_CausaEnfermedadComun { get; set; }
         public virtual ICollection<TC_Bombero> TC_Bombero3 { get; set; }
     }

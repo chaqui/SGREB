@@ -39,6 +39,15 @@ namespace SGREB.Models.Mapping
             this.Property(t => t.JefeDeServicio).HasColumnName("JefeDeServicio");
 
             // Relationships
+            this.HasMany(t => t.TC_Paciente)
+                .WithMany(t => t.TC_Incidente)
+                .Map(m =>
+                    {
+                        m.ToTable("PacienteDeIncidente");
+                        m.MapLeftKey("incidente");
+                        m.MapRightKey("idPaciente");
+                    });
+
             this.HasMany(t => t.TV_CausaEnfermedadComun)
                 .WithMany(t => t.TC_Incidente)
                 .Map(m =>
