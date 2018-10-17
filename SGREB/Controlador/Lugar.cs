@@ -70,8 +70,26 @@ namespace SGREB.Controlador
         public List<TT_Lugar> obtenerVariasInstituciones()
         {
             var bitacora = new bitacoraBomberoaContext();
-            var tt_Lugar = bitacora.TT_Lugar.Where(s => s.institucio != "");
+            var tt_Lugar = bitacora.TT_Lugar.Where(s => s.institucio != null);
             return tt_Lugar.ToList();
         }
+
+        public int guardar(TT_Lugar lugar)
+        {
+            var lugardes = obtener(lugar.direccion);
+            if(lugardes.Count > 0)
+            {
+                foreach(var l in lugardes)
+                {
+                    return l.idLugar;
+                }
+                
+            }
+            else
+            {
+                return crear(lugar);
+            }
+            return -1;
+        } 
     }
 }

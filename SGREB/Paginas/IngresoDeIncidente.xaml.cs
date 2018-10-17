@@ -18,7 +18,7 @@ namespace SGREB
     {
         private int idTipoIncidente;
         private List<TipoIncidente> tiposDeIncidentes;
-        private int[] comunes = new int[] { 2, 3, 4, 7, 9,14,15,19,21,22,23,24,28,30,31,32,33,34 };
+        private int[] comunes = new int[] {  3, 4, 7, 9,14,15,19,21,22,23,24,28,30,31,32,33,34 };
         private int[] incendios = new int[] { 16, 17, 18, 25, 26, 27, 28 };
         private List<TV_MedioSolicitud> medios;
         private List<BomberoComboBox> radiotelefonistas;
@@ -49,6 +49,7 @@ namespace SGREB
             causas = new List<TV_CausaIntoxicacion>();
             obtenerIncidentes();
             obternerRadioTelefonistas();
+            obtenerElementosRev();
         }
 
         /// <summary>
@@ -182,6 +183,8 @@ namespace SGREB
         /// <param name="nombreIncidente"></param>
         private void mostrarGridComun(String nombreIncidente)
         {
+            obtenerLugaresDeTraslado();
+
             tituloIncidenteComun.Content = nombreIncidente;
             gridComun.Visibility = Visibility.Visible;
             this.Height = 2000;
@@ -296,6 +299,7 @@ namespace SGREB
                     break;
                 case 5: //Atropellados
                     obtenerTiposDeVehiculos();
+                    obtenerLugaresDeTraslado();
                     obtenerLugaresAtropellado();
                     gridAtropellados.Visibility = Visibility.Visible;
                     break;
@@ -308,6 +312,7 @@ namespace SGREB
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 8: //Mordidos por Animales
+                    obtenerLugaresDeTraslado();
                     obtenerLugaresMordido();
                     obtenerAnimales();
                     gridMordidos.Visibility = Visibility.Visible;
@@ -403,32 +408,64 @@ namespace SGREB
         private void obtenerLugaresMordido()
         {
             cmbTrasladoMordido.Items.Clear();
-            foreach (var l in LugaresDeTraslado)
+            try
             {
-                cmbTrasladoMordido.Items.Add(l.institucio);
+                foreach (var l in LugaresDeTraslado)
+                {
+                    cmbTrasladoMordido.Items.Add(l.institucio);
+                }
             }
-            cmbTrasladoMordido.Items.Add("Agregar Nueva Institucion...");
+            catch
+            {
+                cmbTrasladoMordido.Items.Add("Agregar Nueva Institucion...");
+            }
+          
         }
 
         private void obtenerLugaresIntoxicados()
         {
             cmbTrasladoIntoxicados.Items.Clear();
-            foreach (var l in LugaresDeTraslado)
+            try
             {
-                cmbTrasladoIntoxicados.Items.Add(l.institucio);
+                foreach (var l in LugaresDeTraslado)
+                {
+                    cmbTrasladoIntoxicados.Items.Add(l.institucio);
+                }
             }
-            cmbTrasladoIntoxicados.Items.Add("Agregar Nueva Institucion...");
+            catch
+
+            {
+
+            }
+            
+            finally
+            {
+                cmbTrasladoIntoxicados.Items.Add("Agregar Nueva Institucion...");
+            }
+            
         }
 
         private void obtenerLugaresAtropellado()
         {
             cmbTrasladoAtropellado.Items.Clear();
-            foreach (var l in LugaresDeTraslado)
+            try
             {
-                cmbTrasladoAtropellado.Items.Add(l.institucio);
+                foreach (var l in LugaresDeTraslado)
+                {
+                    cmbTrasladoAtropellado.Items.Add(l.institucio);
+                }
             }
-            cmbTrasladoAtropellado.Items.Add("Agregar Nueva Institucion...");
+            catch
+            {
+
+            }
+            finally
+            {
+
+                cmbTrasladoAtropellado.Items.Add("Agregar Nueva Institucion...");
+            }
         }
+            
 
         private void obtenerLugaresDeTraslado()
         {
@@ -440,32 +477,56 @@ namespace SGREB
         private void mostrarEnfermedadComun()
         {
             obtenerCausasComunes();
+            obtenerLugaresDeTraslado();
             obtenerLugaresComunes();
             gridEComun.Visibility = Visibility.Visible;
-            this.Height = 800;
+            this.Height = 2000;
             obtenerLugaresEnfermedadComun();
         }
 
         private void obtenerLugaresEnfermedadComun()
         {
+            try
+            {
+
+            
             cmbTrasladoEnfermedadComun.Items.Clear();
             foreach (var l in LugaresDeTraslado)
             {
                 cmbTrasladoEnfermedadComun.Items.Add(l.institucio);
             }
-            cmbTrasladoEnfermedadComun.Items.Add("Agregar Nueva Institucion...");
+       
+            }
+            catch
+            {
 
+            }
+            finally
+            {
+                cmbTrasladoEnfermedadComun.Items.Add("Agregar Nueva Institucion...");
+            }
         }
 
         private void obtenerLugaresComunes()
         {
             cmbTraslado.Items.Clear();
+            try
+            {
+
+            
             foreach(var l in LugaresDeTraslado)
             {
                 cmbTraslado.Items.Add(l.institucio);
             }
-            cmbTraslado.Items.Add("Agregar Nueva Institucion...");
+            }
+            catch
+            {
 
+            }
+            finally
+            { 
+            cmbTraslado.Items.Add("Agregar Nueva Institucion...");
+            }
         }
 
         
@@ -530,7 +591,7 @@ namespace SGREB
             btGuardarVarios.Visibility = Visibility.Visible;
 
 
-            this.Height = 800;
+            this.Height = 2000;
 
         }
 
@@ -555,16 +616,20 @@ namespace SGREB
         {
             try
             {
-                string nombre = cmbMedioSolicitud.SelectedItem.ToString();
+                var nombre = cmbMedioSolicitud.SelectedItem.ToString();
                 if (nombre == "crear un nuevo medio...")
                 {
                     MedioForm unidadForm = new MedioForm();
                     unidadForm.ShowDialog();
                     obtenerMedios();
                 }
-                else if(nombre == "telefono"){
-                    lbTelefono.Visibility = Visibility.Visible;
-                    txTelefono.Visibility = Visibility.Visible;
+                else{
+                    nombre = nombre.Replace(" ", "");
+                    if (nombre == "telefono" || nombre == "Telefono")
+                    {
+                        lbTelefono.Visibility = Visibility.Visible;
+                        txTelefono.Visibility = Visibility.Visible;
+                    }
                 }
 
             }
@@ -590,9 +655,20 @@ namespace SGREB
                 var nombre = txNombresSolicitante.Text;
                 var apellidos = txApellidosSolicitante.Text;
                 var telefono = "";
-                if(cmbMedioSolicitud.SelectedItem.ToString() =="telefono" || cmbMedioSolicitud.SelectedItem.ToString() == "Telefono")
+                var medio = cmbMedioSolicitud.SelectedItem.ToString();
+                medio = medio.Replace(" ", "");
+                
+                if (medio == "telefono" || medio == "Telefono")
                 {
-                    telefono = txTelefono.Text;
+                    try
+                    {
+                        int.Parse(txTelefono.Text);
+                    }
+                    catch
+                    {
+                        return -1;
+                    }
+                    telefono = txTelefono.Text.Replace(" ", "").Replace("\n", "").Replace("\r", "");
                 }
                 
             
@@ -635,6 +711,7 @@ namespace SGREB
             }
             catch
             {
+
                 return -1;
             }
         }
@@ -697,7 +774,7 @@ namespace SGREB
             {
                 if (id == -1) return id;
 
-                guardarPacienteSuicidio(id);
+                guardarPacienteEnfermadadComun(id);
                 string nombre = cmbCausaEComun.SelectedItem.ToString();
                 var idCausa = obtenerIdCAusaEComun(nombre);
                 Incidente incidente = new Incidente();
@@ -975,6 +1052,23 @@ namespace SGREB
             return 0;
         }
 
+        
+
+        private int guardarPacienteEnfermadadComun(int idIncidente)
+        {
+            Paciente paciente = new Paciente();
+            foreach (var item in gridEnfComun.Items)
+            {
+                var seleccionado = (PacienteGrid)item;
+                var id = paciente.agregar(seleccionado, idIncidente);
+                if (id == -1)
+                {
+                    return -1;
+                }
+
+            }
+            return 0;
+        }
         private int guardarPacienteSuicidio(int idIncidente)
         {
             Paciente paciente = new Paciente();
@@ -1037,7 +1131,8 @@ namespace SGREB
         }
         public int guardarIncidente(Boolean cbm, Boolean falsaAlarma)
         {
-            try {
+            try
+            {
                 int idSolicitud = guardarSolicitud(cbm, falsaAlarma);
                 if (idSolicitud == -1)
                 {
@@ -1058,19 +1153,22 @@ namespace SGREB
                 tcIncidente.JefeDeServicio = obtenerIdBomberoRev(cmbVoBo.SelectedItem.ToString());
                 int traslado = obtenerIdLugar();
                 Lugar lugar = new Lugar();
-                var idLugar = lugar.crear(new TT_Lugar { direccion = txLugar.Text });
+                var idLugar = lugar.guardar(new TT_Lugar { direccion = txLugar.Text });
                 tcIncidente.lugar = idLugar;
                 tcIncidente.solicitud = idSolicitud;
                 tcIncidente.LugarTraslado = traslado;
 
                 Incidente incidente = new Incidente();
                 return incidente.crear(tcIncidente);
+
             }
             catch
-            { 
-
-              return -1;
+            {
+                return -1;
             }
+
+            
+            
         }
 
         private void rBFalsaArlarma_Checked(object sender, RoutedEventArgs e)

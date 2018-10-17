@@ -335,7 +335,7 @@ namespace SGREB.Controlador
             //consulta De Personal
             var queryPersonal = from inc in context.TC_Incidente
                                 where inc.idIncidente == obt.idIncidente
-                                from bomb in inc.TC_Bombero
+                                from bomb in inc.TC_Bombero3
                                 join bombPer in context.TC_Persona on bomb.persona equals bombPer.idPersona
                                 select new
                                 {

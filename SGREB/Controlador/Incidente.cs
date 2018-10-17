@@ -166,7 +166,7 @@ namespace SGREB.Controlador
                 {
                     var tcBombero = bitacora.TC_Bombero.FirstOrDefault(x => x.idBombero == idBombero);
                     var tcIncidente = bitacora.TC_Incidente.FirstOrDefault(x => x.idIncidente == idIncidente);
-                    tcIncidente.TC_Bombero.Add(tcBombero);
+                    tcIncidente.TC_Bombero3.Add(tcBombero);
                     bitacora.SaveChanges();
                 }
 
