@@ -225,6 +225,11 @@ namespace SGREB.Controlador
             return query.ToList();
         }
 
+        /// <summary>
+        /// obtener datos para la creacion de la certificación
+        /// </summary>
+        /// <param name="idSolicitud"></param>
+        /// <returns></returns>
         public DatosCertificacion obtenerCertificacion(int idSolicitud)
         {
             DatosCertificacion datosCertificacion = new DatosCertificacion();
@@ -237,15 +242,20 @@ namespace SGREB.Controlador
                               join perRadio in context.TC_Persona on radio.persona equals perRadio.idPersona
                               join cert in context.TC_Certificacion on sol.idSolicitud equals cert.idSolicitud
                               join med in context.TV_MedioSolicitud on sol.medioSolicitud equals med.idSolicitud
-                         
+                            
+                             
                               from inc in sol.TC_Incidente
                               join tipoInc in context.TV_TipoIncidente on inc.tipoIncidente equals tipoInc.idTipo
                               join lug in context.TT_Lugar on inc.lugar equals lug.idLugar
+                              join formPor in context.TC_Bombero on inc.formuladioPor equals formPor.idBombero
+                              join jefeServicio in context.TC_Bombero on inc.formuladioPor equals jefeServicio.idBombero
+                              join perFom in context.TC_Persona on formPor.persona equals perFom.idPersona
+                              join perJefe in context.TC_Persona on jefeServicio.persona equals perJefe.idPersona
                               select new
                                     {
                                     sol.idSolicitud,
                                     solicitante = obtenerNombre(solPer),
-                                    radioTelefonista = obtenerNombre(solPer),
+                                    radioTelefonista = obtenerNombre(perRadio),
                                     sol.noTelefono,
                                     med.medio,
 
@@ -255,7 +265,9 @@ namespace SGREB.Controlador
                                     horasalida = inc.horaSalida,
                                     inc.observaciones,
                                     lugar = lug.direccion,
-                                    fecha = inc.Fecha
+                                    fecha = inc.Fecha,
+                                    redactor = obtenerNombre(perFom),
+                                    vobo = obtenerNombre(perJefe)
                                     };
             var obt = queryPerInc.SingleOrDefault();
 
@@ -264,6 +276,8 @@ namespace SGREB.Controlador
             datosCertificacion.direccion = obt.lugar;
             datosCertificacion.fecha = DateTime.Parse( obt.fecha.ToString());
             datosCertificacion.observaciones = obt.observaciones;
+            datosCertificacion.redactor = obt.redactor;
+            datosCertificacion.vobo = obt.vobo;
 
 
             //obtención de pacientes
@@ -274,11 +288,9 @@ namespace SGREB.Controlador
                            select new
                            {
                                nombre= obtenerNombre(pacPer),
-                               idPaciente = pac.idPaciente,
+                               pac.idPaciente,
                                paciente = obtenerNombre(pacPer),
-                               edad = pac.edad,
-                               sexo = pac.Sexo,
-                               fallecido = pac.fallecido
+                               pac.domicilio
                            };
 
 
@@ -288,6 +300,7 @@ namespace SGREB.Controlador
             {
                 datosCertificacion.nombrePaciente = "";
                 datosCertificacion.acompaniante = "";
+                datosCertificacion.domicilio = "";
                 foreach (var paciente in pacientes)
                 {
                     if (datosCertificacion.nombrePaciente.Count() > 0)
@@ -296,6 +309,11 @@ namespace SGREB.Controlador
                     }
                     datosCertificacion.nombrePaciente = datosCertificacion.nombrePaciente + " "+ paciente.nombre;
 
+                    if(datosCertificacion.domicilio.Count() > 0)
+                    {
+                        datosCertificacion.domicilio = datosCertificacion.domicilio + ",";
+                    }
+                    datosCertificacion.domicilio = datosCertificacion.domicilio + " " + paciente.domicilio;
 
                     var query = from pac in context.TC_Paciente
                                 where pac.idPaciente == paciente.idPaciente
@@ -390,10 +408,48 @@ namespace SGREB.Controlador
 
         }
 
+        public List<DataGridBusqueCertificacionDatos> busquedaDatosCertificacion(int idTipoIncidente, DateTime fechaInicio, DateTime fechaFinal)
+        {
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+            List<DataGridBusqueCertificacionDatos> datos = new List<DataGridBusqueCertificacionDatos>();
+            var query = from tc in context.TC_Incidente
+                        where tc.tipoIncidente == idTipoIncidente && tc.Fecha < fechaFinal && tc.Fecha > fechaInicio
+                        select new{tc.idIncidente, tc.Fecha };
+               
+            foreach(var q in query)
+            {
+                string pacientes = "";
+                var querypac = from tc in context.TC_Incidente
+                               where tc.idIncidente == q.idIncidente
+                               from pac in tc.TC_Paciente
+                               join pacPer in context.TC_Persona on pac.Persoan equals pacPer.idPersona
+                               select new
+                               {
+                                   nombre = obtenerNombre(pacPer)
+                               };
+                foreach (var qp in querypac)
+                {
+                    if(pacientes != "")
+                    {
+                        pacientes = pacientes + ",";
+                    }
+                    pacientes = pacientes + " " + qp.nombre;
+                }
+                datos.Add(new DataGridBusqueCertificacionDatos { id = q.idIncidente.ToString(), fecha = q.Fecha.ToString(), pacientes = pacientes });
+            }
+
+                    
+
+
+            return datos;
+
+        }
+
         private string obtenerNombre(TC_Persona persona)
         {
             return persona.nombres + " " + persona.apellidos;
         }
+
 
 
     }

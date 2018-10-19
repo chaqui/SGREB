@@ -24,5 +24,10 @@ namespace SGREB.Paginas
         {
             InitializeComponent();
         }
+
+        private void btBuscar_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

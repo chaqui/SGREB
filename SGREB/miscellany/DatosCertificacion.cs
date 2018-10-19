@@ -1,5 +1,7 @@
 ﻿using System;
 
+
+
 namespace SGREB.miscellany
 {
     class DatosCertificacion
@@ -31,6 +33,8 @@ namespace SGREB.miscellany
         public string solicitanteCertificacion { set; get; }
         public string oficioSolicitanteCertificacion { set; get; }
         public string traslado { set; get; }
-
+        public string redactor { set; get; }
+        public string vobo { set; get; }
+        
     }
 }
