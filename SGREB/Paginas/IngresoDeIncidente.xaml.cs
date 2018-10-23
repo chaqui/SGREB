@@ -567,19 +567,25 @@ namespace SGREB
 
         private void obtenerElementos()
         {
-            Persona persona = new Persona();
-            Controlador.Bombero bombero = new Controlador.Bombero();
-            var bomberosO = bombero.obtenerVarios();
-            foreach (var b in bomberosO)
+            if(bomberos.Count == 0)
             {
-                var p = persona.obtener(b.persona);
-                this.bomberos.Add(new BomberoComboBox { nombre = p.nombres + " " + p.apellidos, id = b.idBombero });
+                Persona persona = new Persona();
+                Controlador.Bombero bombero = new Controlador.Bombero();
+
+                var bomberosO = bombero.obtenerVarios();
+                foreach (var b in bomberosO)
+                {
+                    var p = persona.obtener(b.persona);
+                    this.bomberos.Add(new BomberoComboBox { nombre = p.nombres + " " + p.apellidos, id = b.idBombero });
+
+                }
+                cmbBomberos.Items.Clear();
+                foreach (var b in bomberos)
+                {
+                    cmbBomberos.Items.Add(b.nombre);
+                }
+            }
             
-            }
-            foreach(var b in bomberos)
-            {
-                cmbBomberos.Items.Add(b.nombre);
-            }
         }
 
         private void obtenerElementosRev()

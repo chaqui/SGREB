@@ -27,5 +27,6 @@
         </DataGrid>
         <Button Content="Agregar Unidad" HorizontalAlignment="Left" Margin="580,170,0,0" VerticalAlignment="Top" Width="138" x:Name="btAgregarElemento" Click="btAgregarElemento_Click" />
         <Button Content="Modificar Unidad" HorizontalAlignment="Left" Margin="580,250,0,0" VerticalAlignment="Top" Width="138" x:Name="btModificarElemento" Click="btModificarElemento_Click"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="39,29,0,0" VerticalAlignment="Top" Width="100" Source="/SGREB;component/Resources/logo-completo-png.png"/>
     </Grid>
 </UserControl>

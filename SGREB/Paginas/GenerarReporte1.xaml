@@ -26,7 +26,7 @@
         <Label Content="Inicial:" HorizontalAlignment="Left" Margin="230,87.571,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <Label Content="Tipo De Reporte (Numero):" HorizontalAlignment="Left" Margin="55,143.571,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="225,143.571,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Row="1" x:Name="txTipoReporte"/>
-        
+
         <!-- Data grid para comunes-->
         <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgComun" Visibility="Collapsed">
             <DataGrid.Columns>
@@ -68,7 +68,7 @@
                 <DataGridTextColumn Binding="{Binding Path=lugarTraslado}" Header="Lugar de Traslado" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=fallecido}" Header="Fallecido" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=vivo}" Header="Vivo" ></DataGridTextColumn>
-             
+
             </DataGrid.Columns>
         </DataGrid>
 
@@ -131,6 +131,7 @@
         <DatePicker HorizontalAlignment="Left" Margin="449,113.571,0,0" VerticalAlignment="Top" Grid.Row="1" x:Name="dpFinal"/>
         <Label Content="Final:" HorizontalAlignment="Left" Margin="454,87.571,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <Button Content="buscar" HorizontalAlignment="Left" Margin="619,151.571,0,0" VerticalAlignment="Top" Width="75" x:Name="btBuscar" Grid.Row="1" Click="btBuscar_Click"/>
+        <Image HorizontalAlignment="Left" Height="105" Margin="30,25,0,0" VerticalAlignment="Top" Width="110" Source="/SGREB;component/Resources/logo-completo-png.png" Grid.RowSpan="2"/>
 
     </Grid>
 </UserControl>

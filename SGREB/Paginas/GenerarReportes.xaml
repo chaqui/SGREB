@@ -23,6 +23,7 @@
         <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="507,222,0,0" VerticalAlignment="Top" Width="183" Click="Button_Click"/>
         <DatePicker HorizontalAlignment="Left" Margin="411,170,0,0" VerticalAlignment="Top" x:Name="fechaFinal"/>
         <Label Content="Final:" HorizontalAlignment="Left" Margin="399,144,0,0" VerticalAlignment="Top"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="39,29,0,0" VerticalAlignment="Top" Width="100" Source="/SGREB;component/Resources/logo-completo-png.png"/>
 
     </Grid>
 </UserControl>

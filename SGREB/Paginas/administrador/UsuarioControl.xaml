@@ -30,6 +30,7 @@
         <Button Content="Agregar Usuario" HorizontalAlignment="Left" Margin="572,180,0,0" VerticalAlignment="Top" Width="148" x:Name="btAgregarElemento" Click="btAgregarElemento_Click"/>
         <Button Content="Eliminar Usuario" HorizontalAlignment="Left" Margin="572,220,0,0" VerticalAlignment="Top" Width="148" x:Name="btEliminarElemento"/>
         <Button Content="Modificar Usuario" HorizontalAlignment="Left" Margin="572,260,0,0" VerticalAlignment="Top" Width="148" x:Name="btModificarElemento" Click="btModificarElemento_Click"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="39,29,0,0" VerticalAlignment="Top" Width="100" Source="/SGREB;component/Resources/logo-completo-png.png"/>
 
 
     </Grid>

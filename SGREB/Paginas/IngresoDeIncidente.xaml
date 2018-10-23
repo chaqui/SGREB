@@ -29,7 +29,7 @@
         </Image>
         <TextBlock
             FontSize="24"
-            TextAlignment="Center" Margin="139,74,28,290" Text="REPORTE DE AMBULANCIA"/>
+            TextAlignment="Center" Margin="139,74,28,290"><Run Text="REPORTE DE AM"/><Run Text="BULANCIA"/></TextBlock>
 
         <Grid HorizontalAlignment="Left" Height="207" Margin="35,134,-39,0" VerticalAlignment="Top" Width="737">
             <Grid.RowDefinitions>
@@ -378,7 +378,7 @@
             </DataGrid>
             <Button Content="agregar bombero" HorizontalAlignment="Left" Margin="263,55,0,0" VerticalAlignment="Top" Width="163" x:Name="btAgregarElementos" Click="btAgregarElementos_Click"/>
             <Button Content="eliminar bombero" HorizontalAlignment="Left" Margin="503,90,0,0" VerticalAlignment="Top" Width="148" x:Name="btEliminarElementos" Click="btEliminarElementos_Click"/>
-            <ComboBox HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="195" x:Name="cmbBomberos"/>
+            <ComboBox HorizontalAlignment="Left" Margin="10,55,0,0" VerticalAlignment="Top" Width="195" x:Name="cmbBomberos" />
         </Grid>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="139,254,0,0" TextWrapping="Wrap" Text="" x:Name="txNombresSolicitante" VerticalAlignment="Top" Width="140"/>
         <Label Content="Apellidos:" HorizontalAlignment="Left" Margin="297,251,0,0" VerticalAlignment="Top"/>
@@ -388,10 +388,10 @@
         <Button Content="Guardar" HorizontalAlignment="Left" Height="26" Margin="538,785,0,-361" VerticalAlignment="Top" Width="101" x:Name="btGuardarFalsaAlarma" Click="btGuardarFalsaAlarma_Click" Visibility="Collapsed"/>
         <Button Content="Guardar" HorizontalAlignment="Left" Margin="538,790,0,-372" VerticalAlignment="Top" Width="101" x:Name="btGuardarVarios" Click="btGuardarVarios_Click" Visibility="Collapsed"/>
         <Label Content="Formulado Por:" HorizontalAlignment="Right" Height="24" Margin="0,599,642,-173" VerticalAlignment="Top"/>
-        <ComboBox HorizontalAlignment="Left" Height="26" Margin="96,604,0,-180" VerticalAlignment="Top" Width="216" x:Name="cmbFormuladoPor"/>
+        <ComboBox HorizontalAlignment="Left" Height="26" Margin="119,604,0,-180" VerticalAlignment="Top" Width="216" x:Name="cmbFormuladoPor"/>
         <Label Content="Vo. Bo. Por:" HorizontalAlignment="Right" Height="24" Margin="0,599,302,-173" VerticalAlignment="Top"/>
         <ComboBox HorizontalAlignment="Left" Height="26" Margin="464,604,0,-180" VerticalAlignment="Top" Width="216" x:Name="cmbVoBo"/>
-        <TextBox HorizontalAlignment="Left" Height="23" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="39,29,0,0" VerticalAlignment="Top" Width="100" Source="/SGREB;component/Resources/logo-completo-png.png"/>
     </Grid>
 
 </UserControl>

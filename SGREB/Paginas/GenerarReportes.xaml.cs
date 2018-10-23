@@ -22,7 +22,7 @@ namespace SGREB.Paginas
     /// </summary>
     public partial class GenerarReportes : UserControl
     {
-        private int[] comunes = new int[] { 2, 3, 4, 7, 9, 14, 15, 19, 21, 22, 23, 24, 28, 30, 31, 32, 33, 34 };
+        private int[] comunes = new int[] {  3, 4, 7, 9, 14, 15, 19, 21, 22, 23, 24, 28, 30, 31, 32, 33, 34 };
         private int[] incendios = new int[] { 16, 17, 18, 25, 26, 27, 28 };
         public GenerarReportes()
         {

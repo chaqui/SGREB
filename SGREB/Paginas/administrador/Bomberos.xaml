@@ -36,5 +36,6 @@
         </DataGrid>
         <Button Content="Agregar Elemento" HorizontalAlignment="Left" Margin="497,170,0,0" VerticalAlignment="Top" Width="140" x:Name="btAgregarElemento" Click="btAgregarElemento_Click" Grid.Column="1"/>
         <Button Content="Modificar Elemento" HorizontalAlignment="Left" Margin="497,250,0,0" VerticalAlignment="Top" Width="140" x:Name="btModificarElemento" Grid.Column="1" Click="btModificarElemento_Click"/>
+        <Image HorizontalAlignment="Left" Height="100" Margin="39,29,0,0" VerticalAlignment="Top" Width="100" Source="/SGREB;component/Resources/logo-completo-png.png" Grid.ColumnSpan="2"/>
     </Grid>
 </UserControl>

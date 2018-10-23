@@ -1,4 +1,5 @@
 ﻿using SGREB.Controlador;
+using SGREB.Formularios;
 using SGREB.miscellany;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,11 @@ using System.Windows.Shapes;
 namespace SGREB.Paginas
 {
     /// <summary>
-    /// Lógica de interacción para ReporteEspecial.xaml
+    /// Lógica de interacción para Certificacion.xaml
     /// </summary>
-    public partial class ReporteEspecial : Page
+    public partial class Certificacion : UserControl
     {
-        
-        public ReporteEspecial()
+        public Certificacion()
         {
             InitializeComponent();
         }
@@ -31,7 +31,7 @@ namespace SGREB.Paginas
         private void btBuscar_Click(object sender, RoutedEventArgs e)
         {
             int id = 0;
-            if (txTipo.Text!="")
+            if (txTipo.Text != "")
             {
                 try
                 {
@@ -48,7 +48,7 @@ namespace SGREB.Paginas
                 return;
             }
 
-            if(dpInicial.SelectedDate.ToString() == "" || dpFinal.SelectedDate.ToString() == "")
+            if (dpInicial.SelectedDate.ToString() == "" || dpFinal.SelectedDate.ToString() == "")
             {
                 MessageBox.Show("Le falto una fecha");
                 return;
@@ -57,10 +57,10 @@ namespace SGREB.Paginas
             DateTime fechaInicio = DateTime.Parse(dpInicial.SelectedDate.ToString());
             DateTime fechaFinal = DateTime.Parse(dpFinal.SelectedDate.ToString());
             Reportes reportes = new Reportes();
-            List<DataGridBusqueCertificacionDatos> datos = reportes.busquedaDatosCertificacion(id,fechaInicio,fechaFinal);
-            foreach(DataGridBusqueCertificacionDatos d in datos)
+            List<DataGridBusqueCertificacionDatos> datos = reportes.busquedaDatosCertificacion(id, fechaInicio, fechaFinal);
+            foreach (DataGridBusqueCertificacionDatos d in datos)
             {
-                dgBusqueda.Items.Add(datos);
+                dgBusqueda.Items.Add(d);
             }
 
         }
@@ -69,12 +69,20 @@ namespace SGREB.Paginas
         {
             Reportes reportes = new Reportes();
             PDFCreador creador = new PDFCreador();
+
             var seleccionado = (DataGridBusqueCertificacionDatos)dgBusqueda.SelectedItem;
-            var datos = reportes.obtenerCertificacion(int.Parse( seleccionado.id));
+            SolicitanteCertificacionForm solicitante = new SolicitanteCertificacionForm(int.Parse(seleccionado.id));
+            solicitante.ShowDialog();
+
+            if (solicitante.cancelar)
+            {
+                return; 
+            }
+            var datos = reportes.obtenerCertificacion(int.Parse(seleccionado.id), solicitante.id);
             string ubicaciion = obtenerLugar();
             if (ubicaciion != "")
             {
-                creador.crearCertificacion(datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, ubicaciion);
+                creador.crearCertificacion(datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz", rol="Secretario" }, ubicaciion);
             }
         }
 
@@ -89,6 +97,7 @@ namespace SGREB.Paginas
                 return saveFileDialog1.FileName;
             }
             return "";
+
         }
     }
 }
