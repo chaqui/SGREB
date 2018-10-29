@@ -75,10 +75,10 @@
         <!-- Data grid para Atropellados-->
         <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgAtropellados" Visibility="Collapsed">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Path=Fecha}" Header="Fecha" ></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=Hora}" Header="Hora" ></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=Cantidad}" Header="Cant." ></DataGridTextColumn>
-                <DataGridTextColumn Binding="{Binding Path=Lugar}" Header="Lugar" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=fecha}" Header="Fecha" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=hora}" Header="Hora" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=cantidad}" Header="Cant." ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=lugar}" Header="Lugar" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=tipoVehiculo}" Header="Tipo de Vehiculo" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=sexo}" Header="Sexo" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=edad}" Header="Edad" ></DataGridTextColumn>
@@ -125,6 +125,21 @@
                 <DataGridTextColumn Binding="{Binding Path=causa}" Header="Causa" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=edad}" Header="Edad" ></DataGridTextColumn>
                 <DataGridTextColumn Binding="{Binding Path=sexo}" Header="Sexo" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Data grid para Mordidos-->
+        <DataGrid HorizontalAlignment="Left" Height="200" Margin="45,188.571,0,0" VerticalAlignment="Top" Width="560" Grid.Row="1" x:Name="dgIntoxicados" Visibility="Collapsed">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Path=fecha}" Header="Fecha" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=hora}" Header="Hora" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=cantidad}" Header="Cant." ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=lugar}" Header="Lugar" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=claseAnimal}" Header="Clase de Animal" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=edad}" Header="Edad" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=sexo}" Header="Sexo" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=fallecidos}" Header="Fallecido" ></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Path=vivos}" Header="Vivo" ></DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
         <Button Content="Generar Reporte" HorizontalAlignment="Left" Margin="619,209,0,0" VerticalAlignment="Top" Width="153" Grid.Row="1" Click="Button_Click"/>

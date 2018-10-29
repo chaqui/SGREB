@@ -21,8 +21,19 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class MedioForm : Window
     {
+        private int IdMedio;
+        private int forma;
+
         public MedioForm()
+        {   
+            InitializeComponent();
+            forma = 1;
+        }
+
+        public MedioForm(int idMedio)
         {
+            this.IdMedio = idMedio;
+            forma = 2;
             InitializeComponent();
         }
 
@@ -41,9 +52,22 @@ namespace SGREB.Formularios
             }
             TV_MedioSolicitud tvMedio = new TV_MedioSolicitud();
             tvMedio.medio = nombre;
-            MedioSolicitud medioSolicitud = new MedioSolicitud();
-            medioSolicitud.crear(tvMedio);
+            MedioSolicitud medio = new MedioSolicitud();
+            if(forma == 1)
+            {                   
+            medio.crear(tvMedio);
             MessageBox.Show("Medio creado");
+            }
+            else
+            {
+                tvMedio.idSolicitud = IdMedio; 
+                medio.modificar(tvMedio);
+            }
+            this.Close();
+        }
+
+        private void btCancelar_Click(object sender, RoutedEventArgs e)
+        {
             this.Close();
         }
     }

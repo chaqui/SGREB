@@ -9,9 +9,19 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class GradoForm : Window
     {
+        private int idGrado;
+        private int forma;
         public GradoForm()
         {
+            forma = 1;
             InitializeComponent();
+            
+        }
+
+        public GradoForm(int idGrado)
+        {
+            forma = 2;
+            this.idGrado = idGrado;
         }
 
         private void btGrado_Click(object sender, RoutedEventArgs e)
@@ -20,7 +30,17 @@ namespace SGREB.Formularios
             Grado grado = new Grado();
             var tvGrado = new TV_Grado();
             tvGrado.nombreGrado = nombre;
-            grado.Crear(tvGrado);
+
+            if(forma ==1)
+            {
+                grado.Crear(tvGrado);
+            }
+            else
+            {
+                tvGrado.idGrado = idGrado;
+                grado.modificar(tvGrado);
+            }
+            
             this.Close();
         }
 

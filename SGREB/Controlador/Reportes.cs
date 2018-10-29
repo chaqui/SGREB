@@ -80,7 +80,7 @@ namespace SGREB.Controlador
                             Fecha = tc.Fecha.ToString(),
                             Hora = tc.horaSalida.ToString().Remove(8, 8),
                             Lugar = lug.direccion,
-                            propietario = obtenerNombre(per),
+                            propietario = per.nombres + " " + per.apellidos,
                             perdidas = inc.perdidas.ToString(),
                             aguaUtilizada = inc.aguaUtilizada.ToString(),
                             idIncidente = tc.idIncidente
@@ -138,10 +138,33 @@ namespace SGREB.Controlador
                             edad = pac.edad.ToString(),
                             fallecido = pac.fallecido.ToString(),
                             vivo = pac.herido.ToString(),
-                            lugar = lug.direccion,
+                            lugar = lug.direccion.TrimEnd(),
                             tipoVehiculo = veh.tipo
                         };
 
+            return query.ToList();
+        }
+
+        internal List<DataGridAnimalDatos> obtenerMordidos(DateTime fechaInicio, DateTime fechaFinal)
+        {
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+
+            var query = from tc in context.TC_Incidente
+                        where tc.tipoIncidente == 8 && tc.Fecha < fechaFinal && tc.Fecha > fechaInicio
+                        join lug in context.TT_Lugar on tc.lugar equals lug.idLugar
+                        from pac in tc.TC_Paciente
+                        from ani in pac.TV_Animal
+                        select new DataGridAnimalDatos
+                        {
+                            fecha = tc.Fecha.ToString(),
+                            hora = tc.horaSalida.ToString().Remove(8, 8),
+                            lugar = lug.direccion.TrimEnd(),
+                            edad = pac.edad.ToString(),
+                            sexo = pac.Sexo,
+                            fallecido = pac.fallecido.ToString(),
+                            claseAnimal = ani.tipo
+
+                        };
             return query.ToList();
         }
 
@@ -162,7 +185,7 @@ namespace SGREB.Controlador
                             hora = tc.horaSalida.ToString().Remove(8, 8),
                             cantidad = lug.direccion,
                             lugar = lug.direccion,
-                            nombre = obtenerNombre(per),
+                            nombre = per.nombres + " " + per.apellidos,
                             galones = ser.Galones.ToString()
                         };
 
@@ -188,7 +211,7 @@ namespace SGREB.Controlador
                             hora = tc.horaSalida.ToString().Remove(8, 8),
                             domicilio = lug.direccion,
                             lugar = lug.direccion,
-                            nombre = obtenerNombre(per),
+                            nombre = per.nombres + " " + per.apellidos,
                             causa = cau.CausaSuicidio,
                             edad = pac.edad.ToString(),
                             sexo = pac.Sexo
@@ -200,7 +223,7 @@ namespace SGREB.Controlador
         public List<DataGridMaternidadDatos> obtenerMaternidad(int idIncidente, DateTime fechaInicio, DateTime fechaFinal)
         {
             bitacoraBomberoaContext context = new bitacoraBomberoaContext();
-
+            List<DataGridMaternidadDatos> maternidades = new List<DataGridMaternidadDatos>();
             var query = from tc in context.TC_Incidente
                         where tc.tipoIncidente == idIncidente && tc.Fecha < fechaFinal && tc.Fecha > fechaInicio
                         join sol in context.TC_Solicitud on tc.solicitud equals sol.idSolicitud
@@ -209,20 +232,43 @@ namespace SGREB.Controlador
                         from pac in tc.TC_Paciente
                         join mat in context.TC_Maternidad on tc.idIncidente equals mat.idIncidente
 
-                        select new DataGridMaternidadDatos
+                        select new 
                         {
                             fecha = tc.Fecha.ToString(),
                             hora = tc.horaSalida.ToString().Remove(8, 8),
                             lugar = lug.direccion,
-                            edad = pac.edad.ToString(),
                             lugarTraslado = tras.institucio,
+                            edad = pac.edad.ToString(),
+                          
                             fallecido = pac.fallecido.ToString(),
-                            parto = (bool.Parse(mat.atencionDeParto.ToString()) ? "x" : 
-                            bool.Parse(mat.RetencionDePlacenta.ToString())? "retencion de placenta":"x")
-                            
+                            parto = mat.atencionDeParto,
+                            placenta = mat.RetencionDePlacenta,
+                             mat.aborto                           
                         };
 
-            return query.ToList();
+            var queryMaternidades = query.ToList();
+
+            foreach (var qM in queryMaternidades)
+            {
+                string ab = "";
+                string ap = "";
+                if (bool.Parse( qM.parto.ToString()))
+                {
+                    ab = "x";
+                }
+                 else if(bool.Parse(qM.placenta.ToString()))
+                {
+                    ap = "Retencion de Placenta";
+                }
+                else
+                {
+                    ap = "x";
+                }
+
+                maternidades.Add(new DataGridMaternidadDatos {fecha = qM.fecha, hora = qM.hora, lugar = qM.lugar, lugarTraslado = qM.lugarTraslado, edad = qM.edad, fallecido = qM.fallecido, aborto =ab, parto = ap  });
+            }
+
+            return maternidades;
         }
 
         /// <summary>
@@ -230,7 +276,7 @@ namespace SGREB.Controlador
         /// </summary>
         /// <param name="idSolicitud"></param>
         /// <returns></returns>
-        public DatosCertificacion obtenerCertificacion(int idSolicitud)
+        public DatosCertificacion obtenerCertificacion(int idSolicitud, int idCertificacion)
         {
             DatosCertificacion datosCertificacion = new DatosCertificacion();
             bitacoraBomberoaContext context = new bitacoraBomberoaContext();
@@ -240,13 +286,13 @@ namespace SGREB.Controlador
                               join solPer in context.TC_Persona on sol.solicitante equals solPer.idPersona
                               join radio in context.TC_Bombero on sol.radioTelefonista equals radio.idBombero
                               join perRadio in context.TC_Persona on radio.persona equals perRadio.idPersona
-                              join cert in context.TC_Certificacion on sol.idSolicitud equals cert.idSolicitud
                               join med in context.TV_MedioSolicitud on sol.medioSolicitud equals med.idSolicitud
                             
                              
                               from inc in sol.TC_Incidente
                               join tipoInc in context.TV_TipoIncidente on inc.tipoIncidente equals tipoInc.idTipo
                               join lug in context.TT_Lugar on inc.lugar equals lug.idLugar
+                              join tras in context.TT_Lugar on inc.LugarTraslado equals tras.idLugar
                               join formPor in context.TC_Bombero on inc.formuladioPor equals formPor.idBombero
                               join jefeServicio in context.TC_Bombero on inc.formuladioPor equals jefeServicio.idBombero
                               join perFom in context.TC_Persona on formPor.persona equals perFom.idPersona
@@ -254,26 +300,37 @@ namespace SGREB.Controlador
                               select new
                                     {
                                     sol.idSolicitud,
-                                    solicitante = obtenerNombre(solPer),
-                                    radioTelefonista = obtenerNombre(perRadio),
+                                    solicitante = solPer.nombres.TrimEnd() + " " + solPer.apellidos.TrimEnd(),
+                                    radioTelefonista = perRadio.nombres.TrimEnd() + " " + perRadio.apellidos.TrimEnd(),
                                     sol.noTelefono,
                                     med.medio,
+                                    tipoIncidente = tipoInc.nombre,
 
                                   //datos del incidente
                                     inc.idIncidente,
-                                    horaEntrada = inc.HoraEntrada,
-                                    horasalida = inc.horaSalida,
+                                     inc.HoraEntrada,
+                                    inc.horaSalida,
                                     inc.observaciones,
-                                    lugar = lug.direccion,
+                                    lugar = lug.direccion.TrimEnd(),
+                                    tras = tras.institucio.TrimEnd(),
                                     fecha = inc.Fecha,
-                                    redactor = obtenerNombre(perFom),
-                                    vobo = obtenerNombre(perJefe)
-                                    };
+                                    redactor = perFom.nombres.TrimEnd() + " " + perFom.apellidos.TrimEnd(),
+                                    vobo = perJefe.nombres.TrimEnd() + " " + perJefe.apellidos.TrimEnd()
+                              };
             var obt = queryPerInc.SingleOrDefault();
 
-            datosCertificacion.MinutosTrabajados = (obt.horasalida - obt.horasalida).ToString();
+
+            datosCertificacion.MinutosTrabajados = (obt.horaSalida - obt.HoraEntrada).ToString();
+            datosCertificacion.solicitantes = obt.solicitante;
+            /// TODO
+            /// corregir error
+            datosCertificacion.HoraEntradaDeCompañia = obt.horaSalida.ToString();
+            datosCertificacion.HoraSalidaDeCompañia = obt.HoraEntrada.ToString();
             datosCertificacion.numeroTelefono = obt.noTelefono;
-            datosCertificacion.direccion = obt.lugar;
+            datosCertificacion.radioTelefonista = obt.radioTelefonista;
+            datosCertificacion.traslado = obt.tras;
+            datosCertificacion.tipoServico = obt.tipoIncidente;
+            datosCertificacion.direccion = obt.lugar.TrimEnd();
             datosCertificacion.fecha = DateTime.Parse( obt.fecha.ToString());
             datosCertificacion.observaciones = obt.observaciones;
             datosCertificacion.redactor = obt.redactor;
@@ -287,10 +344,10 @@ namespace SGREB.Controlador
                            join pacPer in context.TC_Persona on pac.Persoan equals pacPer.idPersona
                            select new
                            {
-                               nombre= obtenerNombre(pacPer),
+                               nombre= pacPer.nombres.TrimEnd() + " " + pacPer.apellidos.TrimEnd(),
                                pac.idPaciente,
-                               paciente = obtenerNombre(pacPer),
-                               pac.domicilio
+                               pac.domicilio,
+                               pac.edad
                            };
 
 
@@ -301,27 +358,35 @@ namespace SGREB.Controlador
                 datosCertificacion.nombrePaciente = "";
                 datosCertificacion.acompaniante = "";
                 datosCertificacion.domicilio = "";
+                datosCertificacion.edad = "";
                 foreach (var paciente in pacientes)
                 {
                     if (datosCertificacion.nombrePaciente.Count() > 0)
                     {
                         datosCertificacion.nombrePaciente = datosCertificacion.nombrePaciente + ",";
                     }
-                    datosCertificacion.nombrePaciente = datosCertificacion.nombrePaciente + " "+ paciente.nombre;
+                    datosCertificacion.nombrePaciente = datosCertificacion.nombrePaciente + " "+ paciente.nombre.TrimEnd();
 
-                    if(datosCertificacion.domicilio.Count() > 0)
+                    if (datosCertificacion.domicilio.Count() > 0)
                     {
                         datosCertificacion.domicilio = datosCertificacion.domicilio + ",";
                     }
-                    datosCertificacion.domicilio = datosCertificacion.domicilio + " " + paciente.domicilio;
+                    datosCertificacion.domicilio = datosCertificacion.domicilio + " " + paciente.domicilio.TrimEnd();
+
+                    if (datosCertificacion.edad.Count() > 0)
+                    {
+                        datosCertificacion.edad = datosCertificacion.edad + ",";
+                    }
+                    datosCertificacion.edad = datosCertificacion.edad + " " + paciente.edad.ToString();
+
 
                     var query = from pac in context.TC_Paciente
                                 where pac.idPaciente == paciente.idPaciente
                                 from acomp in pac.TC_Persona1
                                 select new
                                 {
-                                    nombre = obtenerNombre(acomp)
-                    
+                                    nombre = acomp.nombres.TrimEnd() + " " + acomp.apellidos.TrimEnd(),
+
                                 };
                     var acompaniantes = query.ToList();
                     if (acompaniantes.Count > 0)
@@ -332,7 +397,7 @@ namespace SGREB.Controlador
                             {
                                 datosCertificacion.acompaniante = datosCertificacion.acompaniante + ",";
                             }
-                            datosCertificacion.acompaniante = datosCertificacion.acompaniante + " " + acompaniante.nombre;
+                            datosCertificacion.acompaniante = datosCertificacion.acompaniante.TrimEnd() + " " + acompaniante.nombre.TrimEnd();
                         }
                     }
                     else
@@ -355,7 +420,7 @@ namespace SGREB.Controlador
                                 join nombrePiloto in context.TC_Persona on pilotoBombero.persona equals nombrePiloto.idPersona
                                 select new
                                 {
-                                    piloto = obtenerNombre(nombrePiloto),
+                                    piloto = nombrePiloto.nombres.TrimEnd() + " " + nombrePiloto.apellidos.TrimEnd(),
                                     unidad = uni.IdUnidad
                                 };
 
@@ -385,7 +450,7 @@ namespace SGREB.Controlador
                                 join bombPer in context.TC_Persona on bomb.persona equals bombPer.idPersona
                                 select new
                                 {
-                                    nombre = obtenerNombre(bombPer)
+                                    nombre = bombPer.nombres.TrimEnd() + " " + bombPer.apellidos.TrimEnd()
                                 };
             var bomberos = queryPersonal.ToList();
             datosCertificacion.personal = "";
@@ -401,7 +466,12 @@ namespace SGREB.Controlador
             }
 
 
-
+            var querycertificacion = from cert in context.TC_Certificacion
+                                     where cert.idCertificacion == idCertificacion
+                                     select new { solicitante = cert.solicitante.TrimEnd(), profesion= cert.profesion.TrimEnd() };
+            var certi = querycertificacion.SingleOrDefault();
+            datosCertificacion.solicitanteCertificacion = certi.solicitante;
+            datosCertificacion.oficioSolicitanteCertificacion = certi.profesion;
 
 
             return datosCertificacion;
@@ -414,7 +484,7 @@ namespace SGREB.Controlador
             List<DataGridBusqueCertificacionDatos> datos = new List<DataGridBusqueCertificacionDatos>();
             var query = from tc in context.TC_Incidente
                         where tc.tipoIncidente == idTipoIncidente && tc.Fecha < fechaFinal && tc.Fecha > fechaInicio
-                        select new{tc.idIncidente, tc.Fecha };
+                        select new{tc.idIncidente, tc.solicitud, tc.Fecha };
                
             foreach(var q in query)
             {
@@ -425,7 +495,7 @@ namespace SGREB.Controlador
                                join pacPer in context.TC_Persona on pac.Persoan equals pacPer.idPersona
                                select new
                                {
-                                   nombre = obtenerNombre(pacPer)
+                                   nombre = pacPer.nombres + " " + pacPer.apellidos
                                };
                 foreach (var qp in querypac)
                 {
@@ -435,7 +505,7 @@ namespace SGREB.Controlador
                     }
                     pacientes = pacientes + " " + qp.nombre;
                 }
-                datos.Add(new DataGridBusqueCertificacionDatos { id = q.idIncidente.ToString(), fecha = q.Fecha.ToString(), pacientes = pacientes });
+                datos.Add(new DataGridBusqueCertificacionDatos { id = q.solicitud.ToString(), fecha = q.Fecha.ToString(), pacientes = pacientes });
             }
 
                     
@@ -445,11 +515,61 @@ namespace SGREB.Controlador
 
         }
 
-        private string obtenerNombre(TC_Persona persona)
+        public List<DataGridIntoxicadosDatos> obtenerIntoxicados(DateTime fechaInicial, DateTime fechaFinal)
         {
-            return persona.nombres + " " + persona.apellidos;
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+
+            var query = from tc in context.TC_Incidente
+                        where tc.tipoIncidente == 6 && tc.Fecha < fechaFinal && tc.Fecha > fechaInicial
+                        join lug in context.TT_Lugar on tc.lugar equals lug.idLugar
+                        from pac in tc.TC_Paciente
+                        from cau in pac.TV_CausaIntoxicacion
+
+                        select new DataGridIntoxicadosDatos
+                        {   
+                            fecha = tc.Fecha.ToString(),
+                            hora = tc.horaSalida.ToString().Remove(8, 8),
+                            lugar = lug.direccion.TrimEnd(),
+                            edad = pac.edad.ToString(),
+                            sexo = pac.Sexo,
+                            fallecido = pac.fallecido.ToString(),
+                            causas = cau.nombre
+                            
+                        };
+            return query.ToList();
+            
         }
 
+        public List<CantidadTipoIncidente> obtenerCantidadesCertificacion(DateTime fechaInicial, DateTime fechaFinal)
+        {
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+            List<CantidadTipoIncidente> cantidadTipoIncidentes = new List<CantidadTipoIncidente>();
+            var query = from inc in context.TC_Incidente
+                        where inc.Fecha > fechaInicial && inc.Fecha < fechaFinal
+                        group inc by inc.tipoIncidente into GrupoIncidente
+                        select new 
+                        {
+                           idTipo =GrupoIncidente.Key,
+                           cantidad = GrupoIncidente.Count()
+
+                        };
+            var incidentes = query.ToList();
+
+            foreach (var incidente in incidentes)
+            {
+                var queryInc = from tipoInc in context.TV_TipoIncidente
+                            where tipoInc.idTipo == incidente.idTipo
+                            select new
+                            {
+                                tipoInc.nombre
+                            };
+                var tipo = queryInc.SingleOrDefault();
+                cantidadTipoIncidentes.Add(new CantidadTipoIncidente { nombreIncidente = tipo.nombre, cantidad = incidente.cantidad });
+            }
+            return cantidadTipoIncidentes;
+        }
+
+        
 
 
     }

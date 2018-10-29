@@ -217,7 +217,7 @@ namespace SGREB.Formularios
             {
                 actualizar();
             }
-            this.Close();
+    
         }
 
         private void crear()
@@ -225,6 +225,15 @@ namespace SGREB.Formularios
             /// verificacion si se ingreso un nombre y un apellido
             if (txNombres.Text != "" && txApellidos.Text != "" && txCodigo.Text != "")
             {
+                string codigo = txCodigo.Text;
+                Controlador.Bombero bomb = new Controlador.Bombero();
+                var resultado = bomb.Obtener(codigo);
+                if (resultado != null)
+                {
+                    MessageBox.Show("El id ya existe");
+                    return;
+                }
+
                 int idRol = obtenerIdRol(CmbRol.SelectedItem.ToString());
                 ///verificar si selecciono un Rol
                 if (idRol == 0)
@@ -260,14 +269,15 @@ namespace SGREB.Formularios
                 tC_Bombero.persona = idPersona;
                 tC_Bombero.rol = idRol;
                 tC_Bombero.grado = idGrado;
-                Controlador.Bombero bomb = new Controlador.Bombero();
                 bomb.Crear(tC_Bombero);
                 MessageBox.Show("Elemento Creado");
             }
             else
             {
                 MessageBox.Show("Le falto el nombre o el apellido", "Error");
+                return;
             }
+            this.Close();
         }
 
         private void actualizar()
@@ -292,6 +302,7 @@ namespace SGREB.Formularios
             Persona persona = new Persona();
             persona.modificar(tcPersona);
             MessageBox.Show("Elemento Actualizado");
+            this.Close();
         }
         
     }

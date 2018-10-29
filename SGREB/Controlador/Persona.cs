@@ -60,6 +60,8 @@ namespace SGREB.Controlador
         {
             var bitacora = new bitacoraBomberoaContext();
             var tcPersona = bitacora.TC_Persona.Where(s => s.idPersona == id).Single();
+            tcPersona.apellidos = tcPersona.apellidos.TrimEnd();
+            tcPersona.nombres = tcPersona.nombres.TrimEnd();
             return tcPersona;
         }
     }

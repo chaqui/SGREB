@@ -29,7 +29,6 @@ namespace SGREB.Controlador
         {
             var bitacora = new bitacoraBomberoaContext();
             bitacora.TC_Paciente.Add(paciente);
-            paciente.idPaciente = obtenerId();
             bitacora.SaveChanges();
             guardarId(paciente.idPaciente + 1);
             return paciente.idPaciente;
@@ -73,7 +72,7 @@ namespace SGREB.Controlador
             Incidente incidente = new Incidente();
             var id= persona.Crear(tcPersona);
             int idPaciente = obtenerId();
-            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id,herido = obtenerBooleano( paciente.herido),fallecido = obtenerBooleano(paciente.fallecido), Sexo  = paciente.sexo, domicilio =paciente.domicilio };
+            TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id,herido = obtenerBooleano( paciente.herido),fallecido = obtenerBooleano(paciente.fallecido), Sexo  = paciente.sexo, domicilio =paciente.domicilio, idPaciente = idPaciente };
             crear(tcPaciente);
             var resultado = incidente.agregarPaciente(idPaciente, idIncidente);
             idPaciente++;
@@ -103,12 +102,11 @@ namespace SGREB.Controlador
             var id = persona.Crear(tcPersona);
 
             Animal animal = new Animal();
-            var a = animal.obtener(idAnimal);
 
             int idPaciente = obtenerId();
             TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id, herido = obtenerBooleano(paciente.herido), fallecido =obtenerBooleano(paciente.fallecido), Sexo = paciente.sexo, idPaciente = idPaciente, domicilio = paciente.domicilio };
-            tcPaciente.TV_Animal.Add(a);
             crear(tcPaciente);
+            agregarMordido(idPaciente, idAnimal);
             var resultado = incidente.agregarPaciente(idPaciente, idIncidente);
             idPaciente++;
             guardarId(idPaciente);
@@ -119,6 +117,27 @@ namespace SGREB.Controlador
             }
 
             return -1;
+        }
+
+        private void agregarMordido(int idPaciente, int idAnimal)
+        {
+            try
+            {
+                using (var bitacora = new bitacoraBomberoaContext())
+                {
+                    var tcPaciente = bitacora.TC_Paciente.FirstOrDefault(x => x.idPaciente == idPaciente);
+                    var tvAnimal = bitacora.TV_Animal.FirstOrDefault(x => x.idAnimal == idAnimal);
+
+                    tcPaciente.TV_Animal.Add(tvAnimal);
+                    bitacora.SaveChanges();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.ToString());
+                return;
+            }
         }
 
         public int agregarMordioPorIntoxicacion(PacienteGrid paciente, int idIncidente, int idIntoxicacion)
@@ -130,10 +149,10 @@ namespace SGREB.Controlador
 
             CausaIntoxicacion causa = new CausaIntoxicacion();
 
-            var c = causa.obtener(idIntoxicacion);
             int idPaciente = obtenerId();
             TC_Paciente tcPaciente = new TC_Paciente { edad = int.Parse(paciente.edad), Persoan = id, herido =obtenerBooleano(paciente.herido), fallecido =obtenerBooleano(paciente.fallecido), Sexo = paciente.sexo, idPaciente = idPaciente, domicilio = paciente.domicilio };
             crear(tcPaciente);
+            agregarIntoxicacion(idPaciente, idIntoxicacion);
             var resultado = incidente.agregarPaciente(idPaciente, idIncidente);
             idPaciente++;
             guardarId(idPaciente);
@@ -145,6 +164,27 @@ namespace SGREB.Controlador
             return -1;
         }
 
+        private void agregarIntoxicacion(int idPaciente,int idIntoxicacion)
+        {
+            try
+            {
+                using (var bitacora = new bitacoraBomberoaContext())
+                {
+                    var tcPaciente = bitacora.TC_Paciente.FirstOrDefault(x => x.idPaciente == idPaciente);
+                    var tvIntoxicado = bitacora.TV_CausaIntoxicacion.FirstOrDefault(x => x.idCausaIntoxicacion == idIntoxicacion);
+
+                    tcPaciente.TV_CausaIntoxicacion.Add(tvIntoxicado);
+                    bitacora.SaveChanges();
+
+                }
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.ToString());
+                return;
+            }
+
+        }
         internal int agregarSuicidio(PacienteGrid paciente, int idIncidente)
         {
             TC_Persona tcPersona = new TC_Persona { nombres = paciente.nombre, apellidos = paciente.apellido, dpi = paciente.dpi };

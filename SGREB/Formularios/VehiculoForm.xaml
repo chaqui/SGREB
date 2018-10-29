@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SGREB.Formularios"
         mc:Ignorable="d"
-        Title="CausaSuicidioForm" Height="227.332" Width="377.979">
+        Title="Tipo Vehiculo" Height="227.332" Width="377.979">
     <Grid>
         <Button Content="ingresar" HorizontalAlignment="Left" Margin="246,132,0,0" VerticalAlignment="Top" Width="89" x:Name="btGuardar" Click="btGuardar_Click" />
         <TextBox HorizontalAlignment="Left" Height="23" Margin="83,89,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="199" x:Name="txNombreCausa"/>

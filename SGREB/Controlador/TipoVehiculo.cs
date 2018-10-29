@@ -32,5 +32,29 @@ public class TipoVehiculo  {
 
         }
 
+        internal void eliminar(int id)
+        {
+            var seleccionado = obtener(id);
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+            context.TV_TipoVehiculo.Remove(seleccionado);
+            context.SaveChanges();
+        }
+
+        private TV_TipoVehiculo obtener(int id)
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            var tipo = bitacora.TV_TipoVehiculo.Where(s => s.idTipoVehiculo == id).Single();
+            return tipo;
+        }
+
+        internal void modificar(TV_TipoVehiculo tvVehiculo)
+        {
+            using (var bitacora = new bitacoraBomberoaContext())
+            {
+                var tvVehiculoModificar = bitacora.TV_TipoVehiculo.Find(tvVehiculo.idTipoVehiculo);
+                tvVehiculoModificar.tipo = tvVehiculo.tipo;
+                bitacora.SaveChanges();
+            }
+        }
     }
 }

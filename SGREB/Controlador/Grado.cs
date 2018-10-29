@@ -63,5 +63,13 @@ public class Grado  {
             var tvGrados = bitacora.TV_Grado;
             return tvGrados.ToList();
         }
+
+        internal void eliminar(int id)
+        {
+            var seleccionado = obtener(id);
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+            context.TV_Grado.Remove(seleccionado);
+            context.SaveChanges();
+        }
     }
 }

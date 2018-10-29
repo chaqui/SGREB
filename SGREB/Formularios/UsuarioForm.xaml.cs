@@ -105,22 +105,41 @@ namespace SGREB.Formularios
                 MessageBox.Show("No a seleccionado ningun bombero");
                 return;
             }
-            var tipo = cmbTipo.SelectedItem.ToString();
-            if(tipo == "")
-            {
-                MessageBox.Show("No se a seleccionado el tipo de usuario");
-            }
-            TC_Usuario tcUsuario = new TC_Usuario { bombero = id, nickname = txNickName.Text, contrasenia = txContrasenia.Text, rol = tipo };
-            MessageBox.Show(tipo);
 
-            Usuario usuario = new Usuario();
-            if (tipoF == 1) { 
-            usuario.crear(tcUsuario);
-            }
-            else
+            try
             {
-                usuario.modificar(tcUsuario);
+
+
+                var tipo = cmbTipo.SelectedItem.ToString();
+                if (tipo == "")
+                {
+                    MessageBox.Show("No se a seleccionado el tipo de usuario");
+                }
+                TC_Usuario tcUsuario = new TC_Usuario
+                {
+                    bombero = id,
+                    nickname = txNickName.Text,
+                    contrasenia = txContrasenia.Text,
+                    rol = tipo
+                };
+                Usuario usuario = new Usuario();
+                if (tipoF == 1)
+                {
+                    usuario.crear(tcUsuario);
+                }
+                else
+                {
+                    usuario.modificar(tcUsuario);
+                }
             }
+            catch
+            {
+                MessageBox.Show("Tipo de Usuario no ingresado");
+                return;
+            }
+            
+
+            
         }
 
         private string obtenerIdBombero(string nombre)

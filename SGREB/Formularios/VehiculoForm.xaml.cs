@@ -21,8 +21,19 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class VehiculoForm : Window
     {
+        private int idTipoVehiculo;
+        private int forma;
         public VehiculoForm()
         {
+            forma = 1;
+            InitializeComponent();
+
+        }
+
+        public VehiculoForm(int idTipoVehiculo)
+        {
+            forma = 2;
+            this.idTipoVehiculo = idTipoVehiculo;
             InitializeComponent();
         }
 
@@ -43,7 +54,17 @@ namespace SGREB.Formularios
             }
             TV_TipoVehiculo tvVehiculo = new TV_TipoVehiculo { tipo = nombre };
             TipoVehiculo vehiculo = new TipoVehiculo();
-            vehiculo.crear(tvVehiculo);
+            if (forma == 1)
+            {
+                vehiculo.crear(tvVehiculo);
+            }
+            else if(forma == 2)
+            {
+                tvVehiculo.idTipoVehiculo = idTipoVehiculo;
+                vehiculo.modificar(tvVehiculo);
+            }
+            
+            this.Close();
         }
     }
 }

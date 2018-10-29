@@ -1,4 +1,5 @@
 
+using SGREB.miscellany;
 using SGREB.Models;
 using System;
 using System.Collections.Generic;
@@ -55,7 +56,7 @@ namespace SGREB.Controlador
         {
             
             var bitacora = new bitacoraBomberoaContext();
-            var tcBombero = bitacora.TC_Bombero.Where(s => s.idBombero == id).Single();
+            var tcBombero = bitacora.TC_Bombero.Where(s => s.idBombero == id).SingleOrDefault();
             return tcBombero;
           
 
@@ -83,6 +84,38 @@ namespace SGREB.Controlador
             var bitacora = new bitacoraBomberoaContext();
             var tcBomberos = bitacora.TC_Bombero.Where(s => s.rol == idrol);
             return tcBomberos.ToList();
+        }
+
+        public BomberoInforme seleccionarJefeDeCompania()
+        {
+            var bitacora = new bitacoraBomberoaContext();
+                var query = from rol in bitacora.TV_Rol
+                            where rol.nombre == "Jefe de Compañia"
+                            from jefe in rol.TC_Bombero
+                            join jefePersona in bitacora.TC_Persona on jefe.persona equals jefePersona.idPersona
+                            join gradoJefe in bitacora.TV_Grado on jefe.grado equals gradoJefe.idGrado
+                            select new BomberoInforme
+                            {
+                                NombreCompleto = jefePersona.nombres.TrimEnd() + " " + jefePersona.apellidos.TrimEnd(),
+                                rol = gradoJefe.nombreGrado.TrimEnd() + " " + rol.nombre
+                            };
+            return query.FirstOrDefault();
+
+        }
+        public BomberoInforme secretario()
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            var query = from rol in bitacora.TV_Rol
+                        where rol.nombre == "Secretario"
+                        from jefe in rol.TC_Bombero
+                        join jefePersona in bitacora.TC_Persona on jefe.persona equals jefePersona.idPersona
+                        join gradoJefe in bitacora.TV_Grado on jefe.grado equals gradoJefe.idGrado
+                        select new BomberoInforme
+                        {
+                            NombreCompleto = jefePersona.nombres.TrimEnd() + " " + jefePersona.apellidos.TrimEnd(),
+                            rol = gradoJefe.nombreGrado.TrimEnd() + " " + rol.nombre
+                        };
+            return query.FirstOrDefault();
         }
     }
 }

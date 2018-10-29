@@ -52,12 +52,12 @@ public class Animal  {
         /// modificar animal en la base de datos
         /// </summary>
         /// <param name="animal">anuimal a modificar</param>
-        public void modificar(Animal animal)
+        public void modificar(TV_Animal animal)
         {
             using (var bitacora = new bitacoraBomberoaContext())
             {
                 var tvAnimal = bitacora.TV_Animal.Find(animal.idAnimal);
-                tvAnimal.tipo = animal.nombre;
+                tvAnimal.tipo = animal.tipo;
                 bitacora.SaveChanges();
             }
         }
@@ -72,7 +72,13 @@ public class Animal  {
         }
 
 
-
+        public void eliminar(int id)
+        {
+            var seleccionado = obtener(id);
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+            context.TV_Animal.Remove(seleccionado);
+            context.SaveChanges();
+        }
 
     }
 }

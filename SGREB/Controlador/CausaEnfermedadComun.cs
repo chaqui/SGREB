@@ -38,5 +38,15 @@ namespace SGREB.Controlador
             return comunes.ToList();
 
         }
+
+        internal void modificar(TV_CausaEnfermedadComun causa)
+        {
+            using (var bitacora = new bitacoraBomberoaContext())
+            {
+                var tvCausa = bitacora.TV_CausaEnfermedadComun.Find(causa.idCausa);
+                tvCausa.nombre = causa.nombre;
+                bitacora.SaveChanges();
+            }
+        }
     }
 }

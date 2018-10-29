@@ -21,11 +21,21 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class CausaEnfermedadComunForm : Window
     {
+
+        private int forma;
+        private int idEnfermedadComun;
         public CausaEnfermedadComunForm()
         {
             InitializeComponent();
+            forma = 1;
         }
 
+        public CausaEnfermedadComunForm(int id )
+        {
+            InitializeComponent();
+            forma = 2;
+            idEnfermedadComun = id;
+        }
         private void btCancelar_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -34,6 +44,7 @@ namespace SGREB.Formularios
 
         private void btGuardar_Click(object sender, RoutedEventArgs e)
         {
+
             string nombre = txNombreCausa.Text;
 
             if(nombre == "")
@@ -43,7 +54,16 @@ namespace SGREB.Formularios
             }
             TV_CausaEnfermedadComun causa = new TV_CausaEnfermedadComun { nombre = nombre };
             CausaEnfermedadComun causaEnfermedad = new CausaEnfermedadComun();
-            causaEnfermedad.crear(causa);
+            if(forma == 1)
+            {
+                causaEnfermedad.crear(causa);
+            }
+            else
+            {
+                causa.idCausa = idEnfermedadComun;
+                causaEnfermedad.modificar(causa);
+            }
+            
             this.Close();
         }
     }

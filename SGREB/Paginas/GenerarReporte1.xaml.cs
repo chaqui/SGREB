@@ -173,12 +173,48 @@ namespace SGREB.Paginas
 
         private void buscarMordidos()
         {
-            throw new NotImplementedException();
+            DateTime fechaInicio = DateTime.Parse(dpInicio.SelectedDate.ToString());
+            DateTime fechaFinal = DateTime.Parse(dpFinal.SelectedDate.ToString());
+
+            Reportes reportes = new Reportes();
+            List < DataGridAnimalDatos> resultado = reportes.obtenerMordidos(fechaInicio, fechaFinal);
+
+
+            dgIntoxicados.Items.Clear();
+
+            foreach (var item in resultado)
+            {
+                item.cantidad = "1";
+                item.vivo = item.fallecido == "False" ? "x" : item.fallecido == null ? "x" : " ";
+                item.fallecido = item.fallecido == "True" ? "x" : " ";
+                item.hora = item.hora + " Hrs.";
+                dgIntoxicados.Items.Add(item);
+
+            }
+            dgIntoxicados.Visibility = Visibility.Visible;
         }
 
         private void buscarIntoxicados()
         {
-            throw new NotImplementedException();
+            DateTime fechaInicio = DateTime.Parse(dpInicio.SelectedDate.ToString());
+            DateTime fechaFinal = DateTime.Parse(dpFinal.SelectedDate.ToString());
+
+            Reportes reportes = new Reportes();
+            List<DataGridIntoxicadosDatos> resultado = reportes.obtenerIntoxicados(fechaInicio, fechaFinal);
+
+
+            dgIntoxicados.Items.Clear();
+
+            foreach (var item in resultado)
+            {
+                item.cantidad = "1";
+                item.vivo = item.fallecido == "False" ? "x" : item.fallecido == null ? "x" : " ";
+                item.fallecido = item.fallecido == "True" ? "x" : " ";
+                item.hora = item.hora + " Hrs.";
+                dgIntoxicados.Items.Add(item);
+
+            }
+            dgIntoxicados.Visibility = Visibility.Visible;
         }
 
         private void buscarAtropellados()
@@ -227,8 +263,8 @@ namespace SGREB.Paginas
                 foreach (var item in resultado)
                 {
                     item.cantidad = "1";
+                    item.vivo = item.fallecido == "False" ? "x" : item.fallecido == null?"x": " ";
                     item.fallecido = item.fallecido == "True" ? "x" : " ";
-                    item.vivo = item.fallecido == "False" ? "x" : " ";
                     item.hora = item.hora + " Hrs.";
                     dgMaternidad.Items.Add(item);
 

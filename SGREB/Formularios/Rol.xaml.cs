@@ -8,9 +8,20 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class Rol : Window
     {
+        private int idRol;
+        private int forma;
+
         public Rol()
         {
+
             InitializeComponent();
+            this.forma = 1;
+        }
+
+        public Rol(int idRol)
+        {
+            this.idRol = idRol;
+            this.forma = 2;
         }
 
         private void btRol_click(object sender, RoutedEventArgs e)
@@ -18,7 +29,16 @@ namespace SGREB.Formularios
             TV_Rol tvrol = new TV_Rol();
             tvrol.nombre = nombreRol.Text;
             Controlador.Rol rol = new Controlador.Rol();
-            rol.Crear(tvrol);
+            if(forma == 1)
+            {
+                rol.Crear(tvrol);
+            }
+            else
+            {
+                tvrol.idRol = idRol;
+                rol.modificar(tvrol);
+            }
+         
             this.Close();
         }
     }

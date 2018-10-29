@@ -8,6 +8,7 @@ using iTextSharp.text.pdf;
 using System.Threading.Tasks;
 using System.IO;
 using SGREB.miscellany;
+using System.Windows;
 
 namespace SGREB.Controlador
 {
@@ -16,122 +17,128 @@ namespace SGREB.Controlador
 
         public void crearPDFcomun(string evento, DateTime fechaInicio, DateTime fechaFinal, List<DataGridComunDatos> elementosInforme, BomberoInforme director, BomberoInforme secretario, String ubicacion)
         {
-            int centrado = iTextSharp.text.Image.ALIGN_CENTER;
-            //creacion del documento
-            Document doc = new Document();
+            try { 
+                int centrado = iTextSharp.text.Image.ALIGN_CENTER;
+                //creacion del documento
+                Document doc = new Document();
 
-            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(@ubicacion, FileMode.Create));
-            doc.AddTitle("Informe");
-            doc.SetPageSize(iTextSharp.text.PageSize.LETTER.Rotate());
-            doc.Open();
-            iTextSharp.text.Font _contenidoTabla = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
-            iTextSharp.text.Font _titulo = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
-            iTextSharp.text.Font _tituloTabla = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+                PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(@ubicacion, FileMode.Create));
+                doc.AddTitle("Informe");
+                doc.SetPageSize(iTextSharp.text.PageSize.LETTER.Rotate());
+                doc.Open();
+                iTextSharp.text.Font _contenidoTabla = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+                iTextSharp.text.Font _titulo = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+                iTextSharp.text.Font _tituloTabla = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
 
-            //titulo 
-            Paragraph parafo1 = new Paragraph("Benemerito Comite de Bomberos Voluntarios", _titulo);
-            parafo1.Alignment = centrado;
-            doc.Add(parafo1);
-            Paragraph parafo2 = new Paragraph("19a. Compañia de Bomberos Voluntarios", _titulo);
-            parafo2.Alignment = centrado;
-            doc.Add(parafo2);
-            Paragraph parafo3 = new Paragraph("Estadisticas de " + evento + " Mensuales ", _titulo);
-            parafo3.Alignment = centrado;
-            doc.Add(parafo3);
-            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.ToShortDateString() + " al " + fechaFinal.ToShortDateString(), _titulo);
-            parafo4.Alignment = centrado;
-            doc.Add(parafo4);
-            doc.Add(Chunk.NEWLINE);
+                //titulo 
+                Paragraph parafo1 = new Paragraph("Benemerito Comite de Bomberos Voluntarios", _titulo);
+                parafo1.Alignment = centrado;
+                doc.Add(parafo1);
+                Paragraph parafo2 = new Paragraph("19a. Compañia de Bomberos Voluntarios", _titulo);
+                parafo2.Alignment = centrado;
+                doc.Add(parafo2);
+                Paragraph parafo3 = new Paragraph("Estadisticas de " + evento + " Mensuales ", _titulo);
+                parafo3.Alignment = centrado;
+                doc.Add(parafo3);
+                Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.ToShortDateString() + " al " + fechaFinal.ToShortDateString(), _titulo);
+                parafo4.Alignment = centrado;
+                doc.Add(parafo4);
+                doc.Add(Chunk.NEWLINE);
 
 
 
-            //tabla de informe 
-            PdfPTable tblIncidente = new PdfPTable(8);
-            tblIncidente.WidthPercentage = 100;
+                //tabla de informe 
+                PdfPTable tblIncidente = new PdfPTable(8);
+                tblIncidente.WidthPercentage = 100;
 
-            //celdas
-            //Titulo de las Celdas
-            PdfPCell clFecha = new PdfPCell(new Phrase("Fecha", _tituloTabla));
-            clFecha.HorizontalAlignment = centrado;
-            tblIncidente.AddCell(clFecha);
-            PdfPCell clHora = new PdfPCell(new Phrase("Hora", _tituloTabla));
-            clHora.HorizontalAlignment = centrado;
-            tblIncidente.AddCell(clHora);
-            PdfPCell clCantidad = new PdfPCell(new Phrase("Cantidad", _tituloTabla));
-            clCantidad.HorizontalAlignment = centrado;
-            tblIncidente.AddCell(clCantidad);
-            PdfPCell clLugar = new PdfPCell(new Phrase("Lugar", _tituloTabla));
-            clLugar.HorizontalAlignment = centrado;
-            tblIncidente.AddCell(clLugar);
-            PdfPCell clEdad = new PdfPCell(new Phrase("Edad", _tituloTabla));
-            clEdad.HorizontalAlignment = centrado;
-            tblIncidente.AddCell(clEdad);
-            PdfPCell clSexo = new PdfPCell(new Phrase("Sexo", _tituloTabla));
-            clSexo.HorizontalAlignment = centrado;
-            tblIncidente.AddCell(clSexo);
-            PdfPCell clVivo = new PdfPCell(new Phrase("Vivo", _tituloTabla));
-            clVivo.HorizontalAlignment = centrado;
-            tblIncidente.AddCell(clVivo);
-            PdfPCell clFallecido = new PdfPCell(new Phrase("Fallecido", _tituloTabla));
-            clFallecido.HorizontalAlignment = centrado;
-            tblIncidente.AddCell(clFallecido);
-
-            foreach (DataGridComunDatos elemento in elementosInforme)
-            {
-                clFecha = new PdfPCell(new Phrase(elemento.Fecha, _contenidoTabla));
+                //celdas
+                //Titulo de las Celdas
+                PdfPCell clFecha = new PdfPCell(new Phrase("Fecha", _tituloTabla));
                 clFecha.HorizontalAlignment = centrado;
                 tblIncidente.AddCell(clFecha);
-                clHora = new PdfPCell(new Phrase(elemento.Hora, _contenidoTabla));
+                PdfPCell clHora = new PdfPCell(new Phrase("Hora", _tituloTabla));
                 clHora.HorizontalAlignment = centrado;
                 tblIncidente.AddCell(clHora);
-                clCantidad = new PdfPCell(new Phrase(elemento.Cantidad, _contenidoTabla));
+                PdfPCell clCantidad = new PdfPCell(new Phrase("Cantidad", _tituloTabla));
                 clCantidad.HorizontalAlignment = centrado;
                 tblIncidente.AddCell(clCantidad);
-                clLugar = new PdfPCell(new Phrase(elemento.Lugar, _contenidoTabla));
+                PdfPCell clLugar = new PdfPCell(new Phrase("Lugar", _tituloTabla));
                 clLugar.HorizontalAlignment = centrado;
                 tblIncidente.AddCell(clLugar);
-                clEdad = new PdfPCell(new Phrase(elemento.sexo, _contenidoTabla));
+                PdfPCell clEdad = new PdfPCell(new Phrase("Edad", _tituloTabla));
                 clEdad.HorizontalAlignment = centrado;
                 tblIncidente.AddCell(clEdad);
-                clSexo = new PdfPCell(new Phrase(elemento.Edad, _contenidoTabla));
+                PdfPCell clSexo = new PdfPCell(new Phrase("Sexo", _tituloTabla));
                 clSexo.HorizontalAlignment = centrado;
                 tblIncidente.AddCell(clSexo);
-                clVivo = new PdfPCell(new Phrase(elemento.Vivo, _contenidoTabla));
+                PdfPCell clVivo = new PdfPCell(new Phrase("Vivo", _tituloTabla));
                 clVivo.HorizontalAlignment = centrado;
                 tblIncidente.AddCell(clVivo);
-                clFallecido = new PdfPCell(new Phrase(elemento.Fallecido, _contenidoTabla));
+                PdfPCell clFallecido = new PdfPCell(new Phrase("Fallecido", _tituloTabla));
                 clFallecido.HorizontalAlignment = centrado;
                 tblIncidente.AddCell(clFallecido);
+
+                foreach (DataGridComunDatos elemento in elementosInforme)
+                {
+                    clFecha = new PdfPCell(new Phrase(elemento.Fecha, _contenidoTabla));
+                    clFecha.HorizontalAlignment = centrado;
+                    tblIncidente.AddCell(clFecha);
+                    clHora = new PdfPCell(new Phrase(elemento.Hora, _contenidoTabla));
+                    clHora.HorizontalAlignment = centrado;
+                    tblIncidente.AddCell(clHora);
+                    clCantidad = new PdfPCell(new Phrase(elemento.Cantidad, _contenidoTabla));
+                    clCantidad.HorizontalAlignment = centrado;
+                    tblIncidente.AddCell(clCantidad);
+                    clLugar = new PdfPCell(new Phrase(elemento.Lugar, _contenidoTabla));
+                    clLugar.HorizontalAlignment = centrado;
+                    tblIncidente.AddCell(clLugar);
+                    clEdad = new PdfPCell(new Phrase(elemento.sexo, _contenidoTabla));
+                    clEdad.HorizontalAlignment = centrado;
+                    tblIncidente.AddCell(clEdad);
+                    clSexo = new PdfPCell(new Phrase(elemento.Edad, _contenidoTabla));
+                    clSexo.HorizontalAlignment = centrado;
+                    tblIncidente.AddCell(clSexo);
+                    clVivo = new PdfPCell(new Phrase(elemento.Vivo, _contenidoTabla));
+                    clVivo.HorizontalAlignment = centrado;
+                    tblIncidente.AddCell(clVivo);
+                    clFallecido = new PdfPCell(new Phrase(elemento.Fallecido, _contenidoTabla));
+                    clFallecido.HorizontalAlignment = centrado;
+                    tblIncidente.AddCell(clFallecido);
+                }
+
+                doc.Add(tblIncidente);
+
+                doc.Add(Chunk.NEWLINE);
+
+                //Firmas
+                PdfPTable tblFirmas = new PdfPTable(2);
+                tblIncidente.WidthPercentage = 100;
+                PdfPCell clDirecto = new PdfPCell(new Phrase(director.NombreCompleto, _tituloTabla));
+                clDirecto.HorizontalAlignment = centrado;
+                clDirecto.Border = 0;
+                tblFirmas.AddCell(clDirecto);
+                PdfPCell clSecretario = new PdfPCell(new Phrase(secretario.NombreCompleto, _tituloTabla));
+                clSecretario.HorizontalAlignment = centrado;
+                clSecretario.Border = 0;
+                tblFirmas.AddCell(clSecretario);
+                clDirecto = new PdfPCell(new Phrase("Directo", _tituloTabla));
+                clDirecto.HorizontalAlignment = centrado;
+                clDirecto.Border = 0;
+                tblFirmas.AddCell(clDirecto);
+                clSecretario = new PdfPCell(new Phrase("Secretario", _tituloTabla));
+                clSecretario.HorizontalAlignment = centrado;
+                clSecretario.Border = 0;
+                tblFirmas.AddCell(clSecretario);
+                //cerrar pdf 
+                doc.Add(tblFirmas);
+                doc.Close();
+                writer.Close();
+                MessageBox.Show("documento Creado");
             }
-
-            doc.Add(tblIncidente);
-
-            doc.Add(Chunk.NEWLINE);
-
-            //Firmas
-            PdfPTable tblFirmas = new PdfPTable(2);
-            tblIncidente.WidthPercentage = 100;
-            PdfPCell clDirecto = new PdfPCell(new Phrase(director.NombreCompleto, _tituloTabla));
-            clDirecto.HorizontalAlignment = centrado;
-            clDirecto.Border = 0;
-            tblFirmas.AddCell(clDirecto);
-            PdfPCell clSecretario = new PdfPCell(new Phrase(secretario.NombreCompleto, _tituloTabla));
-            clSecretario.HorizontalAlignment = centrado;
-            clSecretario.Border = 0;
-            tblFirmas.AddCell(clSecretario);
-            clDirecto = new PdfPCell(new Phrase("Directo", _tituloTabla));
-            clDirecto.HorizontalAlignment = centrado;
-            clDirecto.Border = 0;
-            tblFirmas.AddCell(clDirecto);
-            clSecretario = new PdfPCell(new Phrase("Secretario", _tituloTabla));
-            clSecretario.HorizontalAlignment = centrado;
-            clSecretario.Border = 0;
-            tblFirmas.AddCell(clSecretario);
-            //cerrar pdf 
-            doc.Add(tblFirmas);
-            doc.Close();
-            writer.Close();
-
+            catch
+            {
+                MessageBox.Show("Error al crear el PDF");
+            }
         }
 
         public void crearPDFIncendio(string evento, DateTime fechaInicio, DateTime fechaFinal, List<DataGridIncendiosDatos> elementosInforme, BomberoInforme director, BomberoInforme secretario, String ubicacion)
@@ -889,8 +896,12 @@ namespace SGREB.Controlador
             int justificado = iTextSharp.text.Image.ALIGN_JUSTIFIED;
             //creacion del documento
             Document doc = new Document();
+            try
+            {
 
+            
             PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(@ubicacion, FileMode.Create));
+            
             doc.AddTitle("Informe");
             doc.SetPageSize(iTextSharp.text.PageSize.LEGAL);
             doc.Open();
@@ -918,19 +929,19 @@ namespace SGREB.Controlador
             Paragraph parrafoPrincipal = new Paragraph("El Infrascrito Secretario de la 19ª. compañía de Bomberos Voluntarios de la ciudad de San Pedro Sacatepéquez, departamento " +
                 "de San Marcos por medio de la presente hace entrega una copia certificada de un servicio realizado por esta compañía el día "+ fecha.Day.ToString() + 
                 " de " + obtenerMeses(fecha.Month) + " " + fecha.Year.ToString()+" y a solicitud de: "+datos.solicitanteCertificacion+ " "+datos.oficioSolicitanteCertificacion+", " +
-                "que literalmente dice:",_contenidoTabla);
+                "que literalmente dice:");
             parrafoPrincipal.Alignment = justificado;
             doc.Add(parrafoPrincipal);
             doc.Add(Chunk.NEWLINE);
 
             //cabecera de reporte
 
-            Paragraph tituloReporte = new Paragraph("BENEMERITO CUERPO VOLUNTARIO DE BOMBEROS DE GUATEMALA ", _contenidoTabla);
+            Paragraph tituloReporte = new Paragraph("BENEMERITO CUERPO VOLUNTARIO DE BOMBEROS DE GUATEMALA ");
             tituloReporte.Alignment = centrado;
             doc.Add(tituloReporte);
             doc.Add(Chunk.NEWLINE);
 
-            Paragraph tituloReporte2 = new Paragraph("REPORTE DE AMBULANCIA",_contenidoTabla);
+            Paragraph tituloReporte2 = new Paragraph("REPORTE DE AMBULANCIA");
 
             //Cuerpo del Reporte
 
@@ -945,26 +956,92 @@ namespace SGREB.Controlador
                 fallecidono = "x";
             }
 
-            Paragraph reporte = new Paragraph("Control: " + datos.idControl + " Minutos Trabajados: " + datos.MinutosTrabajados+ " Solicitud por telefono: "+datos.numeroTelefono+ 
-                " Personal: "+datos.solPersona+ " Fecha: "+ fecha.ToString()+ " Salida de compañía: " + datos.HoraSalidaDeCompañia + " Hrs. Entrada a compañía: "+datos.HoraEntradaDeCompañia+
-                " Hrs. Dirección: "+ datos.direccion + " Nombre del o (los) solicitante (es): "+ datos.solicitantes+ "Nombre (s) de (los) paciente (s):  "+datos.nombrePaciente +
-                " fallecidos: si: "+fallecidosi+ " no: "+fallecidono+ "Edad: "+ datos.edad+ " domicilio: "+datos.domicilio+" acompañante"+ datos.acompaniante+ " servicio: "+ datos.tipoServico+ 
-                " traslado a: "+ datos.traslado + " radiotelefonista: "+datos.radioTelefonista+ " Piloto(s): "+datos.pilotos+ "Unidad(es): "+datos.unidades  +" Personal Destacado: "+ datos.personal );
+            Paragraph reporte = new Paragraph("Control: " + datos.idControl + " Tiempo Trabajado: " + datos.MinutosTrabajados+ " Hrs. Solicitud por telefono: "+datos.numeroTelefono+ 
+                " Personal: "+datos.solPersona+ " Fecha: " + datos.fecha.Day.ToString() + " de " + obtenerMeses(datos.fecha.Month) + " " + datos.fecha.Year.ToString() + " Salida de compañía: " + datos.HoraSalidaDeCompañia + " Hrs. Entrada a compañía: "+datos.HoraEntradaDeCompañia+
+                " Hrs. Dirección: " + datos.direccion + " Nombre del o (los) solicitante (es): " + datos.solicitantes+ " Nombre (s) de (los) paciente (s):  " + datos.nombrePaciente +
+                " fallecidos: si: " + fallecidosi+ " no: " + fallecidono+ " Edad: " + datos.edad+ " domicilio: " + datos.domicilio+ " acompañante: " + datos.acompaniante+ " servicio: " + datos.tipoServico+
+                " traslado a: " + datos.traslado + " radiotelefonista: " + datos.radioTelefonista+ " Piloto(s): " + datos.pilotos+ " Unidad(es): " + datos.unidades  + " Personal Destacado: " + datos.personal );
 
-            reporte.Alignment = centrado;
+            reporte.Alignment = justificado;
             doc.Add(reporte);
             doc.Add(Chunk.NEWLINE);
 
-            Paragraph observacionesTitulo = new Paragraph("Observaciones: ");
-            observacionesTitulo.Alignment = justificado;
-            doc.Add(observacionesTitulo);
-            Paragraph observaciones = new Paragraph(datos.observaciones);
-            observaciones.Alignment = justificado;
-            doc.Add(observaciones);
-            doc.Add(Chunk.NEWLINE);
+                Paragraph observacionesTitulo;
 
-            Paragraph razon = new Paragraph("Razón: : la Secretaría Ejecutiva del Cuerpo, para que conste que en esta fecha y a solicitud en esta fecha se extiende copia certificada de este reporte a:"+
-                datos.solicitanteCertificacion+ " "+datos.oficioSolicitanteCertificacion+ ". Se entrega en una hoja de papel tamaño oficio con membrete de la institución a los diez días del mes de agosto del dos mil dieciocho.");
+                observacionesTitulo = new Paragraph("Observaciones: ");
+
+
+                observacionesTitulo.Alignment = justificado;
+                doc.Add(observacionesTitulo);
+                Paragraph observaciones;
+                if (datos.observaciones  == null)
+                {
+                    observaciones = new Paragraph("No existen.");
+                }
+                else
+                {
+                    observaciones = new Paragraph(datos.observaciones);
+                }
+                observaciones.Alignment = justificado;
+                doc.Add(observaciones);
+                doc.Add(Chunk.NEWLINE);
+
+                PdfPTable tblFirmas = new PdfPTable(3);
+                tblFirmas.WidthPercentage = 100;
+
+                PdfPCell clTitulo = new PdfPCell(new Phrase("Reporte formulado por:"));
+                clTitulo.Border = 0;
+                clTitulo.HorizontalAlignment = justificado;
+                tblFirmas.AddCell(clTitulo);
+
+                PdfPCell clNombre = new PdfPCell(new Phrase(datos.redactor));
+                clNombre.Border = 0;
+                clNombre.HorizontalAlignment = justificado;
+                tblFirmas.AddCell(clNombre);
+
+                PdfPCell clFirma = new PdfPCell(new Phrase("f.  elegible ______________"));
+                clFirma.Border = 0;
+                clFirma.HorizontalAlignment = justificado;
+                tblFirmas.AddCell(clFirma);
+
+
+                clTitulo = new PdfPCell(new Phrase("Es conforme al piloto:"));
+                clTitulo.Border = 0;
+                clTitulo.HorizontalAlignment = justificado;
+                tblFirmas.AddCell(clTitulo);
+
+                clNombre = new PdfPCell(new Phrase(datos.pilotos));
+                clNombre.Border = 0;
+                clNombre.HorizontalAlignment = justificado;
+                tblFirmas.AddCell(clNombre);
+
+                clFirma = new PdfPCell(new Phrase("f.  elegible ______________"));
+                clFirma.Border = 0;
+                clFirma.HorizontalAlignment = justificado;
+                tblFirmas.AddCell(clFirma);
+
+                clTitulo = new PdfPCell(new Phrase("Vo. Bo. Jefe de servicio:"));
+                clTitulo.Border = 0;
+                clTitulo.HorizontalAlignment = justificado;
+                tblFirmas.AddCell(clTitulo);
+
+                clNombre = new PdfPCell(new Phrase(datos.vobo));
+                clNombre.Border = 0;
+                clNombre.HorizontalAlignment = justificado;
+                tblFirmas.AddCell(clNombre);
+
+                clFirma = new PdfPCell(new Phrase("f.  elegible ______________"));
+                clFirma.Border = 0;
+                clFirma.HorizontalAlignment = justificado;
+                tblFirmas.AddCell(clFirma);
+                doc.Add(tblFirmas);
+                doc.Add(Chunk.NEWLINE);
+                doc.Add(Chunk.NEWLINE);
+
+
+
+                Paragraph razon = new Paragraph("Razón: La Secretaría Ejecutiva del Cuerpo, para que conste que en esta fecha y a solicitud en esta fecha se extiende copia certificada de este reporte a: "+
+                datos.solicitanteCertificacion+ " "+datos.oficioSolicitanteCertificacion+ ". Se entrega en una hoja de papel tamaño oficio con membrete de la institución a los "+ fecha.Day.ToString() + " días del mes de " + obtenerMeses(fecha.Month) + " del dos mil dieciocho.");
             razon.Alignment = justificado;
             doc.Add(razon);
             doc.Add(Chunk.NEWLINE);
@@ -979,8 +1056,16 @@ namespace SGREB.Controlador
             Paragraph RolSecretario = new Paragraph(secretario.rol);
             RolSecretario.Alignment = centrado;
             doc.Add(RolSecretario);
-
-
+   
+            doc.Close();
+                writer.Close();
+                MessageBox.Show("documento Creado");
+            }
+            catch (IOException)
+            {
+                MessageBox.Show("Error al crear archivo");
+                return;
+            }
 
         }
 
@@ -1016,7 +1101,9 @@ namespace SGREB.Controlador
             return "";
         }
 
+   
 
+        
 
     }
 }

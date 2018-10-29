@@ -38,6 +38,7 @@ namespace SGREB
             var r = n.ShowDialog();
             if (n.InicioDeSesion.ingreso)
             {
+
                 this.menu.Items.Clear();
                 if (n.InicioDeSesion.normal) {
                     administrador = false;
@@ -74,13 +75,370 @@ namespace SGREB
             MenuItem unidadesMenu = new MenuItem();
             unidadesMenu.Header = "Unidades";
             unidadesMenu.Click += unidades_click;
+
             administrarMenu.Items.Add(unidadesMenu);
+
             this.menu.Items.Add(administrarMenu);
+
+
+            MenuItem editarMenu = new MenuItem();
+            editarMenu.Header = "Editar";
+
+            MenuItem animalesMenu = new MenuItem();
+            animalesMenu.Header = "Animales";
+            animalesMenu.Click += animales_click;
+            editarMenu.Items.Add(animalesMenu);
+
+            MenuItem nfermedadComunMenu = new MenuItem();
+            nfermedadComunMenu.Header = "Enfermedades Comunes";
+            nfermedadComunMenu.Click += EnfermedadComun_click;
+            editarMenu.Items.Add(nfermedadComunMenu);
+
+            MenuItem IntoxicacionMenu = new MenuItem();
+            IntoxicacionMenu.Header = "Causas de Intoxicación";
+            IntoxicacionMenu.Click += intoxicacion_click;
+            editarMenu.Items.Add(IntoxicacionMenu);
+
+
+            MenuItem causaSuicidioMenu = new MenuItem();
+            causaSuicidioMenu.Header = "Causas de Suicidio";
+            causaSuicidioMenu.Click += suicidio_click;
+            editarMenu.Items.Add(causaSuicidioMenu);
+
+            MenuItem GradoMenu = new MenuItem();
+            GradoMenu.Header = "Grados";
+            GradoMenu.Click += grado_click;
+            editarMenu.Items.Add(GradoMenu);
+
+            MenuItem medioSolicitudoMenu = new MenuItem();
+            medioSolicitudoMenu.Header = "Medio Solicitud";
+            medioSolicitudoMenu.Click += medioSolicitudoMenu_click;
+            editarMenu.Items.Add(medioSolicitudoMenu);
+
+            MenuItem rolMenu = new MenuItem();
+            rolMenu.Header = "Medio Solicitud";
+            rolMenu.Click += rolMenu_click;
+            editarMenu.Items.Add(rolMenu);
+
+            MenuItem tipoServicioMenu = new MenuItem();
+            tipoServicioMenu.Header = "Tipos de Servicio";
+            tipoServicioMenu.Click += tipoServicioMenu_click;
+            editarMenu.Items.Add(tipoServicioMenu);
+
+            MenuItem tipoUnidadMenu = new MenuItem();
+            tipoUnidadMenu.Header = "Tipos de Unidad";
+            tipoUnidadMenu.Click += tipoUnidadMenu_click;
+            editarMenu.Items.Add(tipoUnidadMenu);
+
+            MenuItem tipoVehiculoMenu = new MenuItem();
+            tipoVehiculoMenu.Header = "Tipos de Unidad";
+            tipoVehiculoMenu.Click += tipoVehiculoMenu_click;
+            tipoVehiculoMenu.Items.Add(tipoVehiculoMenu);
+
+            this.menu.Items.Add(editarMenu);
 
         }
 
+        private void tipoVehiculoMenu_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("tipoVehiculo")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
 
-        private void  menuNormal()
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("tipoVehiculo")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+
+        private void tipoUnidadMenu_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("tipoUnidad")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
+
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("tipoUnidad")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+
+        private void tipoServicioMenu_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("tipoServicio")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
+
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("tipoServicio")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+
+        private void rolMenu_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("rol")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
+
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("rol")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+
+        private void medioSolicitudoMenu_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("medioSolicitud")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
+
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("medioSolicitud")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+
+        private void grado_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("grado")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
+
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("grado")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+
+        private void suicidio_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("causaSuicidio")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
+
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("causaSuicidio")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+
+        private void intoxicacion_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("causaIntoxicacion")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
+
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("causaIntoxicacion")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+
+        private void EnfermedadComun_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if (a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("CausaEnfermedadComun")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
+
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("CausaEnfermedadComun")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+
+        private void animales_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                if(a == MessageBoxResult.OK)
+                {
+                    this.contenido.Children.Clear();
+                    var certificacion = new EditarElementos("animal")
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(certificacion);
+                }
+
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var certificacion = new EditarElementos("animal")
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(certificacion);
+            }
+        }
+            private void  menuNormal()
         {
             MenuItem reportesMenu = new MenuItem();
             reportesMenu.Header = "Reportes";
@@ -122,9 +480,11 @@ namespace SGREB
 
         private void certificacion_click(object sender, RoutedEventArgs e)
         {
+            scrollBackground.Visibility = Visibility.Collapsed;
             if (this.contenido.Children.Count > 0)
             {
                 var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+                
 
                 if (a == MessageBoxResult.OK)
                 {
@@ -134,28 +494,29 @@ namespace SGREB
                         menuAdministrador();
                     }
                     this.contenido.Children.Clear();
-                    var reportes = new ReporteEspecial()
+                    var certificacion = new Certificacion()
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,
                         HorizontalAlignment = HorizontalAlignment.Stretch
                     };
-                    this.contenido.Children.Add(reportes);
+                    this.contenido.Children.Add(certificacion);
                 }
             }
             else
             {
                 this.contenido.Children.Clear();
-                var reportes = new ReporteEspecial()
+                var certificacion = new Certificacion()
                 {
                     VerticalAlignment = VerticalAlignment.Stretch,
                     HorizontalAlignment = HorizontalAlignment.Stretch
                 };
-                this.contenido.Children.Add(reportes);
+                this.contenido.Children.Add(certificacion);
             }
         }
 
         private void MultiReporteMenu_Click(object sender, RoutedEventArgs e)
         {
+            scrollBackground.Visibility = Visibility.Collapsed;
             if (this.contenido.Children.Count > 0)
             {
                 var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
@@ -190,6 +551,7 @@ namespace SGREB
 
         private void cerrarSesio_click(object sebder, RoutedEventArgs e)
         {
+
             var a = MessageBox.Show("Desea cerrar sesión", "Alerta", MessageBoxButton.OKCancel);
             if(a == MessageBoxResult.OK)
             {
@@ -208,6 +570,7 @@ namespace SGREB
 
         private void reportes_click(object sebder, RoutedEventArgs e)
         {
+            scrollBackground.Visibility = Visibility.Collapsed;
             if (this.contenido.Children.Count > 0)
             {
                 var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
@@ -243,6 +606,7 @@ namespace SGREB
 
         private void resumen_click(object sebder, RoutedEventArgs e)
         {
+            scrollBackground.Visibility = Visibility.Collapsed;
             if (this.contenido.Children.Count > 0)
             {
                 var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
@@ -277,6 +641,7 @@ namespace SGREB
 
         private void especial_click(object sebder, RoutedEventArgs e)
         {
+            scrollBackground.Visibility = Visibility.Collapsed;
             if (this.contenido.Children.Count > 0)
             {
                 var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
@@ -289,7 +654,7 @@ namespace SGREB
                         menuAdministrador();
                     }
                     this.contenido.Children.Clear();
-                    var reportes = new ReporteEspecial()
+                    var reportes = new Certificacion()
                     {
                         VerticalAlignment = VerticalAlignment.Stretch,
                         HorizontalAlignment = HorizontalAlignment.Stretch
@@ -300,7 +665,7 @@ namespace SGREB
             else
             {
                 this.contenido.Children.Clear();
-                var reportes = new ReporteEspecial()
+                var reportes = new Certificacion()
                 {
                     VerticalAlignment = VerticalAlignment.Stretch,
                     HorizontalAlignment = HorizontalAlignment.Stretch
@@ -317,6 +682,7 @@ namespace SGREB
 
         private void usuarios_click(object sebder, RoutedEventArgs e)
         {
+            scrollBackground.Visibility = Visibility.Collapsed;
             if (this.contenido.Children.Count > 0)
             {
                 var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
@@ -353,6 +719,7 @@ namespace SGREB
 
         private void bomberos_click(object sebder, RoutedEventArgs e)
         {
+            scrollBackground.Visibility = Visibility.Collapsed;
             if (this.contenido.Children.Count > 0)
             {
                 var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
@@ -385,7 +752,8 @@ namespace SGREB
         }
         private void unidades_click(object sebder, RoutedEventArgs e)
         {
-            if(this.contenido.Children.Count > 0)
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
             {
                 var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
                 if (a == MessageBoxResult.OK)
@@ -418,7 +786,8 @@ namespace SGREB
 
         private void mostrarIngresoDeReporte_Click(object sender, RoutedEventArgs e)
         {
-            if(this.contenido.Children.Count > 0)
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
             {
                var a=  MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
                 if (a == MessageBoxResult.OK)
@@ -434,6 +803,7 @@ namespace SGREB
 
         private void mostrarReporte()
         {
+            scrollBackground.Visibility = Visibility.Collapsed;
             if (administrador)
             {
                 reporteAdministrador = true;

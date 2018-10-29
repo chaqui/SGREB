@@ -1,5 +1,6 @@
 
 using SGREB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -34,6 +35,16 @@ namespace SGREB.Controlador
             var bitacora = new bitacoraBomberoaContext();
             var rol = bitacora.TV_Rol.Where(s=>s.idRol==id).Single();
             return rol;
+        }
+
+        internal void modificar(TV_Rol tvrol)
+        {
+            using (var bitacora = new bitacoraBomberoaContext())
+            {
+                var tRolModificar = bitacora.TV_Rol.Find(tvrol.idRol);
+                tRolModificar.nombre = tRolModificar.nombre;
+                bitacora.SaveChanges();
+            }
         }
 
         /// <summary>

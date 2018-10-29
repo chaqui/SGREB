@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace SGREB.miscellany
 {
-    public class BomberoInforme
+    public class CantidadTipoIncidente
     {
-        public string NombreCompleto { set; get; }
-        public string rol { set; get; }
-
+        public string nombreIncidente { set; get; }
+        public int cantidad { set; get; }
     }
 }

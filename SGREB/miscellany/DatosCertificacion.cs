@@ -10,7 +10,7 @@ namespace SGREB.miscellany
         public string MinutosTrabajados { set; get; }
         public string numeroTelefono { set; get; }
         public string solPersona { set; get; }
-        public int tipoServico { set; get; }
+        public string  tipoServico { set; get; }
         public DateTime fecha { set; get; }
         public string HoraSalidaDeCompañia { set; get; }
         public string HoraEntradaDeCompañia { set; get; }

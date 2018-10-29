@@ -1,5 +1,6 @@
 
 using SGREB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -47,6 +48,24 @@ namespace SGREB.Controlador
             var bitacora = new bitacoraBomberoaContext();
             var tipos = bitacora.TV_TipoUnidad;
             return tipos.ToList();
+        }
+
+        internal void eliminar(int id)
+        {
+            var seleccionado = obtener(id);
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+            context.TV_TipoUnidad.Remove(seleccionado);
+            context.SaveChanges();
+        }
+
+        internal void modificar(TV_TipoUnidad tvTipoUnidad)
+        {
+            using (var bitacora = new bitacoraBomberoaContext())
+            {
+                var tvTipoUnidadModificar = bitacora.TV_TipoUnidad.Find(tvTipoUnidad.idTipoUnidad);
+                tvTipoUnidadModificar.nombreTipo = tvTipoUnidad.nombreTipo;
+                bitacora.SaveChanges();
+            }
         }
     }
 }

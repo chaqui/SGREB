@@ -1,0 +1,22 @@
+﻿<Window x:Class="SGREB.Formularios.SolicitanteCertificacionForm"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SGREB.Formularios"
+        mc:Ignorable="d"
+        Title="SolicitanteCertificacionForm" Height="222" Width="314">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="67*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Nombre:" HorizontalAlignment="Left" Margin="30,34,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
+        <Label Content="Profesion:" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" Height="26" Width="60"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="0,35,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1" x:Name="txNombre"/>
+        <TextBox HorizontalAlignment="Left" Height="23" Margin="0,68,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120" Grid.Column="1" x:Name="txProfesion"/>
+        <Button Content="Aceptar" Grid.Column="1" HorizontalAlignment="Left" Margin="95,138,0,0" VerticalAlignment="Top" Width="85" Click="Button_Click"/>
+        <Button Content="Cancelar" HorizontalAlignment="Left" Margin="80,138,0,0" VerticalAlignment="Top" Width="90" Grid.ColumnSpan="2" Click="Button_Click_1"/>
+
+    </Grid>
+</Window>

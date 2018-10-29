@@ -20,9 +20,19 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class CausaSuicidioForm : Window
     {
+        private int idCausaSuicidio;
+        private int forma;
         public CausaSuicidioForm()
         {
+            forma = 1;
             InitializeComponent();
+        }
+
+        public CausaSuicidioForm(int idCausaSuicidio)
+        {
+            this.idCausaSuicidio = idCausaSuicidio;
+            forma = 2;
+             InitializeComponent();
         }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)
@@ -42,7 +52,16 @@ namespace SGREB.Formularios
             }
             TV_CausaSuicidio causa = new TV_CausaSuicidio { CausaSuicidio = nombre };
             CausaSuicidio causaSuicidio = new CausaSuicidio();
-            causaSuicidio.crear(causa);
+            if (forma == 1)
+            {
+                causaSuicidio.crear(causa);
+            }
+            else
+            {
+                causa.idCausa = idCausaSuicidio;
+                causaSuicidio.modificar(causa);
+            }
+           
         }
     }
 }

@@ -1,4 +1,5 @@
 using SGREB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 namespace SGREB.Controlador
@@ -53,6 +54,16 @@ namespace SGREB.Controlador
             return tvMedioSolicitud.ToList();
         }
 
+        internal void modificar(TV_MedioSolicitud tvMedio)
+        {
+            using (var bitacora = new bitacoraBomberoaContext())
+            {
+                var tvMedioModificar = bitacora.TV_MedioSolicitud.Find(tvMedio.idSolicitud);
+                tvMedioModificar.medio = tvMedio.medio;
+                bitacora.SaveChanges();
+            }
+        }
+
         /// <summary>
         /// obtien el medio de Solicitud por su Id
         /// </summary>
@@ -77,6 +88,12 @@ namespace SGREB.Controlador
             return tV_MedioSolicitud.ToList();
         }
 
-    
+        internal void eliminar(int id)
+        {
+            var seleccionado = obtener(id);
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+            context.TV_MedioSolicitud.Remove(seleccionado);
+            context.SaveChanges();
+        }
     }
 }

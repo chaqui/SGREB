@@ -147,6 +147,8 @@
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.1\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -176,6 +178,7 @@
     </ApplicationDefinition>
     <Compile Include="Controlador\AccidenteTransito.cs" />
     <Compile Include="Controlador\CausaEnfermedadComun.cs" />
+    <Compile Include="Controlador\Certificacion.cs" />
     <Compile Include="Controlador\Incendio.cs" />
     <Compile Include="Controlador\InicioDeSesion.cs" />
     <Compile Include="Controlador\PDFCreador.cs" />
@@ -192,6 +195,9 @@
     </Compile>
     <Compile Include="Formularios\InstitucionForm.xaml.cs">
       <DependentUpon>InstitucionForm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Formularios\SolicitanteCertificacionForm.xaml.cs">
+      <DependentUpon>SolicitanteCertificacionForm.xaml</DependentUpon>
     </Compile>
     <Compile Include="Formularios\VehiculoForm.xaml.cs">
       <DependentUpon>VehiculoForm.xaml</DependentUpon>
@@ -245,11 +251,17 @@
     <Compile Include="miscellany\BomberoComboBox.cs" />
     <Compile Include="miscellany\BomberoDataGrid.cs" />
     <Compile Include="miscellany\BomberoInforme.cs" />
+    <Compile Include="miscellany\CantidadTipoIncidente.cs" />
+    <Compile Include="miscellany\DataGridAnimalDatos.cs" />
     <Compile Include="miscellany\DataGridAtropelladosDatos.cs" />
+    <Compile Include="miscellany\DataGridBusqueCertificacionDatos.cs" />
     <Compile Include="miscellany\DataGridComunDatos.cs" />
     <Compile Include="miscellany\DataGridEnfermedadComunDatos.cs" />
     <Compile Include="miscellany\DataGridFallecimientoDatos.cs" />
     <Compile Include="miscellany\DataGridIncendiosDatos.cs" />
+    <Compile Include="miscellany\DataGridIntoxicadosDatos.cs" />
+    <Compile Include="miscellany\DataGridMaternidadDatos.cs" />
+    <Compile Include="miscellany\DataGridMordidosDatos.cs" />
     <Compile Include="miscellany\DataGridServiciosDeAguaDatos.cs" />
     <Compile Include="miscellany\DatosCertificacion.cs" />
     <Compile Include="miscellany\PacienteGrid.cs" />
@@ -291,6 +303,10 @@
     <Page Include="Formularios\InstitucionForm.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Formularios\SolicitanteCertificacionForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Formularios\VehiculoForm.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -368,6 +384,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Paginas\Certificacion.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Paginas\EditarElementos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Paginas\GenerarReporte1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -402,7 +426,6 @@
     <Compile Include="Controlador\VehiculoIncendidado.cs" />
     <Compile Include="Controlador\ViviendaInundada.cs" />
     <Compile Include="Models\bitacoraBomberoaContext.cs" />
-    <Compile Include="Models\Mapping\PacienteDeIncidenteMap.cs" />
     <Compile Include="Models\Mapping\sysdiagramMap.cs" />
     <Compile Include="Models\Mapping\TC_AccidenteTransitoMap.cs" />
     <Compile Include="Models\Mapping\TC_BomberoMap.cs" />
@@ -436,7 +459,6 @@
     <Compile Include="Models\Mapping\TV_TipoServicioMap.cs" />
     <Compile Include="Models\Mapping\TV_TipoUnidadMap.cs" />
     <Compile Include="Models\Mapping\TV_TipoVehiculoMap.cs" />
-    <Compile Include="Models\PacienteDeIncidente.cs" />
     <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\TC_AccidenteTransito.cs" />
     <Compile Include="Models\TC_Bombero.cs" />
@@ -479,6 +501,12 @@
     <Compile Include="Paginas\administrador\UsuarioControl.xaml.cs">
       <DependentUpon>UsuarioControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Paginas\Certificacion.xaml.cs">
+      <DependentUpon>Certificacion.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Paginas\EditarElementos.xaml.cs">
+      <DependentUpon>EditarElementos.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\GenerarReporte1.xaml.cs">
       <DependentUpon>GenerarReporte1.xaml</DependentUpon>
     </Compile>
@@ -495,19 +523,12 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Paginas\ReporteEspecial.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Paginas\ResumenReporte.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Paginas\ReporteEspecial.xaml.cs">
-      <DependentUpon>ReporteEspecial.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Paginas\ResumenReporte.xaml.cs">
       <DependentUpon>ResumenReporte.xaml</DependentUpon>
     </Compile>
@@ -542,7 +563,9 @@
   <ItemGroup>
     <Resource Include="Resources\logo-completo-png.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

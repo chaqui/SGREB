@@ -21,9 +21,22 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class AnimalForm : Window
     {
+        private int forma;
+        private int idAnimal;
+        public AnimalForm(  int idAnimal)
+        {
+            this.forma = 2;
+            InitializeComponent();
+            this.idAnimal = idAnimal;
+            Animal animal = new Animal();
+            txNombreCausa.Text = animal.obtener(idAnimal).tipo;
+        }
         public AnimalForm()
         {
+            this.forma = 1;
             InitializeComponent();
+
+
         }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)
@@ -34,6 +47,7 @@ namespace SGREB.Formularios
 
         private void btGuardar_Click(object sender, RoutedEventArgs e)
         {
+            
             string nombre = txNombreCausa.Text;
 
             if(nombre == "")
@@ -43,7 +57,18 @@ namespace SGREB.Formularios
             }
             TV_Animal tvanimal = new TV_Animal { tipo = nombre };
             Animal animal = new Animal();
-            animal.crear(tvanimal);
+            if (forma == 1)
+            {
+                animal.crear(tvanimal);
+                this.Close();
+            }
+            else
+            {
+                tvanimal.idAnimal = this.idAnimal;
+                animal.modificar(tvanimal);
+                this.Close();
+            }
+           
         }
     }
 }

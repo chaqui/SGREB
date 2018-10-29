@@ -85,7 +85,7 @@ namespace SGREB.Controlador
         /// modificar la tabla causa intoxicación
         /// </summary>
         /// <param name="causaIntoxicacion"></param>
-        public void modificar(CausaIntoxicacion causaIntoxicacion)
+        public void modificar(TV_CausaIntoxicacion causaIntoxicacion)
         {
             using (var bitacora = new bitacoraBomberoaContext())
             {
@@ -95,8 +95,12 @@ namespace SGREB.Controlador
             }
         }
 
-
-
-
+        public void eliminar(int id)
+        {
+            var seleccionado = obtener(id);
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+            context.TV_CausaIntoxicacion.Remove(seleccionado);
+            context.SaveChanges();
+        }
     }
 }

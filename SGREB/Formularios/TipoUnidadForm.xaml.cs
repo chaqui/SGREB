@@ -21,12 +21,21 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class TipoUnidadForm : Window
     {
+        private int idTipoUnidad;
+        private int forma;
+
         public TipoUnidadForm()
         {
             InitializeComponent();
+            forma = 1;
         }
 
-
+        public TipoUnidadForm(int idTipoUnidad)
+        {
+            this.idTipoUnidad = idTipoUnidad;
+            InitializeComponent();
+            forma = 2;
+        }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)
         {
@@ -46,7 +55,16 @@ namespace SGREB.Formularios
                 TipoUnidad unidadTipo = new TipoUnidad();
                 var tvTipoUnidad = new TV_TipoUnidad();
                 tvTipoUnidad.nombreTipo = unidad;
-                unidadTipo.Crear(tvTipoUnidad);
+                if(forma == 1)
+                {
+                    unidadTipo.Crear(tvTipoUnidad);
+                }
+                else
+                {
+                    tvTipoUnidad.idTipoUnidad = idTipoUnidad;
+                    unidadTipo.modificar(tvTipoUnidad);
+                }
+               
                 this.Close();
             }
         }

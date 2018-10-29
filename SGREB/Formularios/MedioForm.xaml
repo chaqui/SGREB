@@ -8,7 +8,7 @@
         Title="Nuevo Medio" Height="236.22" Width="436.703">
     <Grid>
 
-        <Button Content="cancelar" HorizontalAlignment="Left" Margin="329,169,0,0" VerticalAlignment="Top" Width="89" x:Name="btCancelar"/>
+        <Button Content="cancelar" HorizontalAlignment="Left" Margin="329,169,0,0" VerticalAlignment="Top" Width="89" x:Name="btCancelar" Click="btCancelar_Click"/>
         <Button Content="guardar" HorizontalAlignment="Left" Margin="328,132,0,0" VerticalAlignment="Top" Width="90" x:Name="btAceptar" Click="btAceptar_Click"/>
         <Label Content="Nombre:" HorizontalAlignment="Left" Margin="10,65,0,0" VerticalAlignment="Top"/>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="71,65,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="244" x:Name="txNombre"/>

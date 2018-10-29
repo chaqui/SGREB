@@ -16,7 +16,6 @@ namespace SGREB.Models
         {
         }
 
-        public DbSet<PacienteDeIncidente> PacienteDeIncidentes { get; set; }
         public DbSet<sysdiagram> sysdiagrams { get; set; }
         public DbSet<TC_AccidenteTransito> TC_AccidenteTransito { get; set; }
         public DbSet<TC_Bombero> TC_Bombero { get; set; }
@@ -53,7 +52,6 @@ namespace SGREB.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Configurations.Add(new PacienteDeIncidenteMap());
             modelBuilder.Configurations.Add(new sysdiagramMap());
             modelBuilder.Configurations.Add(new TC_AccidenteTransitoMap());
             modelBuilder.Configurations.Add(new TC_BomberoMap());

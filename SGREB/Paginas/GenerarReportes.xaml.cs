@@ -60,15 +60,14 @@ namespace SGREB.Paginas
             Reportes reportes = new Reportes();
             PDFCreador creator = new PDFCreador();
             TipoIncidente tipoIncidente = new TipoIncidente();
-           
+            Bombero bombero = new Bombero();
             foreach (var comun in comunes)
             {
                List< DataGridComunDatos> datos = reportes.obtenerReproteComunes(comun, inicio, final);
-
+                
                 if(datos.Count > 0)
                 {
-                    creator.crearPDFcomun(tipoIncidente.obtenerNombre(comun), inicio, final, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, 
-                        new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicacion+"/"+tipoIncidente.obtenerNombre(comun));
+                    creator.crearPDFcomun(tipoIncidente.obtenerNombre(comun), inicio, final, datos, bombero.seleccionarJefeDeCompania(),bombero.secretario(), ubicacion+"/"+tipoIncidente.obtenerNombre(comun));
                 }
 
             }
@@ -76,11 +75,9 @@ namespace SGREB.Paginas
             foreach (var incendio in incendios)
             {
                 List<DataGridIncendiosDatos> datos = reportes.obtenerIncendios(incendio, inicio, final);
-
                 if (datos.Count > 0)
                 {
-                    creator.crearPDFIncendio(tipoIncidente.obtenerNombre(incendio), inicio, final, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" },
-                        new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicacion + "/" + tipoIncidente.obtenerNombre(incendio));
+                    creator.crearPDFIncendio(tipoIncidente.obtenerNombre(incendio), inicio, final, datos, bombero.seleccionarJefeDeCompania(), bombero.secretario(), ubicacion + "/" + tipoIncidente.obtenerNombre(incendio));
                 }
 
             }

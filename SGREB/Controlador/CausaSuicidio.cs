@@ -1,5 +1,6 @@
 
 using SGREB.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -72,13 +73,21 @@ public class CausaSuicidio {
     /// modificar la causa de suicidio
     /// </summary>
     /// <param name="causaSuicidio"></param>
-    public void modificar(CausaSuicidio causaSuicidio)
+    public void modificar(TV_CausaSuicidio causaSuicidio)
     {
         using (var bitacora = new bitacoraBomberoaContext())
         {
-            var tvCausaSuicido = bitacora.TV_Animal.Find(causaSuicidio.idCausa);
-            tvCausaSuicido.tipo = causaSuicidio.nCausaSuicidio;
+            var tvCausaSuicido = bitacora.TV_CausaSuicidio.Find(causaSuicidio.idCausa);
+            tvCausaSuicido.CausaSuicidio = causaSuicidio.CausaSuicidio;
             bitacora.SaveChanges();
         }
+    }
+
+    internal void eliminar(int id)
+    {
+        var seleccionado = obtener(id);
+        bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+        context.TV_CausaSuicidio.Remove(seleccionado);
+        context.SaveChanges();
     }
 }

@@ -9,9 +9,19 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class TipoServicioVariosForm : Window
     {
+        private int idTipoServicio;
+        private int forma;
+
         public TipoServicioVariosForm()
         {
             InitializeComponent();
+            forma = 1; 
+        }
+
+        public TipoServicioVariosForm(int idTipoServicio)
+        {
+            this.idTipoServicio = idTipoServicio;
+            forma = 2;
         }
 
         private void btGuardar_Click(object sender, RoutedEventArgs e)
@@ -24,9 +34,19 @@ namespace SGREB.Formularios
 
             TipoServicio tipoServicio = new TipoServicio();
             TV_TipoServicio tvTipoServiciio = new TV_TipoServicio { nombre = txNombre.Text };
-            tipoServicio.crear(tvTipoServiciio);
-            MessageBox.Show("tipo de servicio creado");
+
+            if  (forma == 1)
+            {
+                tipoServicio.crear(tvTipoServiciio);
+                MessageBox.Show("tipo de servicio creado");          
+            }
+            else
+            {
+                tvTipoServiciio.idTipoServicio = idTipoServicio;
+                tipoServicio.Modificar(tvTipoServiciio);
+            }
             this.Close();
+
         }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)

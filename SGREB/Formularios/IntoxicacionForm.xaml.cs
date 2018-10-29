@@ -21,8 +21,18 @@ namespace SGREB.Formularios
     /// </summary>
     public partial class IntoxicacionForm : Window
     {
+        private int idIntoxicacion;
+        private int forma;
         public IntoxicacionForm()
         {
+            InitializeComponent();
+            this.forma = 1;
+        }
+
+        public IntoxicacionForm(int idIntoxicacion)
+        {
+            this.idIntoxicacion = idIntoxicacion;
+            this.forma = 2;
             InitializeComponent();
         }
 
@@ -43,7 +53,17 @@ namespace SGREB.Formularios
             }
             TV_CausaIntoxicacion causa = new TV_CausaIntoxicacion { nombre = nombre };
             CausaIntoxicacion causaIntoxicacion = new CausaIntoxicacion();
-            causaIntoxicacion.crear(causa);
+            if(forma == 1)
+            {
+                causaIntoxicacion.crear(causa);
+            }
+            else
+            {
+                causa.idCausaIntoxicacion = idIntoxicacion;
+                causaIntoxicacion.modificar(causa);
+            }
+            
+            this.Close();
         }
     }
 }

@@ -62,5 +62,13 @@ public class TipoServicio  {
             var tvTipoIncidentes = bitacora.TV_TipoServicio;
             return tvTipoIncidentes.ToList();
         }
+
+        internal void eliminar(int id)
+        {
+            var seleccionado = obtener(id);
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+            context.TV_TipoServicio.Remove(seleccionado);
+            context.SaveChanges();
+        }
     }
 }
