@@ -133,7 +133,7 @@ namespace SGREB
             MenuItem tipoVehiculoMenu = new MenuItem();
             tipoVehiculoMenu.Header = "Tipos de Unidad";
             tipoVehiculoMenu.Click += tipoVehiculoMenu_click;
-            tipoVehiculoMenu.Items.Add(tipoVehiculoMenu);
+            editarMenu.Items.Add(tipoVehiculoMenu);
 
             this.menu.Items.Add(editarMenu);
 
@@ -476,6 +476,51 @@ namespace SGREB
             sesion.Items.Add(cerrarSesion);
             this.menu.Items.Add(sesion);
 
+
+            MenuItem ayuda = new MenuItem();
+            ayuda.Header = "Ayuda";
+
+            MenuItem acercaDe = new MenuItem();
+            acercaDe.Header = "Acerca de";
+            acercaDe.Click += acercaDe_click;
+            ayuda.Items.Add(acercaDe);
+
+            this.menu.Items.Add(ayuda);
+        }
+
+        private void acercaDe_click(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (this.contenido.Children.Count > 0)
+            {
+                var a = MessageBox.Show("Esta cambiando de formulario", "Alerta", MessageBoxButton.OKCancel);
+
+                if (a == MessageBoxResult.OK)
+                {
+                    if (reporteAdministrador)
+                    {
+                        this.menu.Items.Clear();
+                        menuAdministrador();
+                    }
+                    this.contenido.Children.Clear();
+                    var acercaDe = new AcercaDe()
+                    {
+                        VerticalAlignment = VerticalAlignment.Stretch,
+                        HorizontalAlignment = HorizontalAlignment.Stretch
+                    };
+                    this.contenido.Children.Add(acercaDe);
+                }
+            }
+            else
+            {
+                this.contenido.Children.Clear();
+                var acercaDe = new AcercaDe()
+                {
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Stretch
+                };
+                this.contenido.Children.Add(acercaDe);
+            }
         }
 
         private void certificacion_click(object sender, RoutedEventArgs e)
@@ -812,6 +857,7 @@ namespace SGREB
             editarMenu.Header="editar";
             MenuItem limpiarMenu = new MenuItem();
             limpiarMenu.Header = "limpiar";
+            limpiarMenu.Click += mostrarReporte;
             editarMenu.Items.Add(limpiarMenu);
             this.menu.Items.Add(editarMenu);
             this.contenido.Children.Clear();
@@ -822,5 +868,22 @@ namespace SGREB
             };
             this.contenido.Children.Add(contenido);
         }
+
+        private void mostrarReporte(object sender, RoutedEventArgs e)
+        {
+            scrollBackground.Visibility = Visibility.Collapsed;
+            if (administrador)
+            {
+                reporteAdministrador = true;
+            }
+            this.contenido.Children.Clear();
+            var contenido = new IngresoDeIncidente()
+            {
+                VerticalAlignment = VerticalAlignment.Stretch,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
+            this.contenido.Children.Add(contenido);
+        }
+
     }
 }

@@ -40,7 +40,7 @@ public class TipoVehiculo  {
             context.SaveChanges();
         }
 
-        private TV_TipoVehiculo obtener(int id)
+        public TV_TipoVehiculo obtener(int id)
         {
             var bitacora = new bitacoraBomberoaContext();
             var tipo = bitacora.TV_TipoVehiculo.Where(s => s.idTipoVehiculo == id).Single();

@@ -35,6 +35,8 @@ namespace SGREB.Formularios
             InitializeComponent();
             forma = 2;
             idEnfermedadComun = id;
+            CausaEnfermedadComun causaEnfermedad = new CausaEnfermedadComun();
+            txNombreCausa.Text = causaEnfermedad.obtener( id).nombre;
         }
         private void btCancelar_Click(object sender, RoutedEventArgs e)
         {

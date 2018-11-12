@@ -33,6 +33,8 @@ namespace SGREB.Formularios
             this.idCausaSuicidio = idCausaSuicidio;
             forma = 2;
              InitializeComponent();
+            CausaSuicidio causaSuicidio = new CausaSuicidio();
+            txNombreCausa.Text = causaSuicidio.obtener(idCausaSuicidio).CausaSuicidio;
         }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)

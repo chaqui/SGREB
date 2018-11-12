@@ -432,6 +432,7 @@ namespace SGREB.Paginas
                 form.ShowDialog();
                 obtenerTiposUnidad();
             }
+            actualizarGrid();
         }
     }
 }

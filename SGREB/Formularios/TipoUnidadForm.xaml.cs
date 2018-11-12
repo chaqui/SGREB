@@ -35,6 +35,8 @@ namespace SGREB.Formularios
             this.idTipoUnidad = idTipoUnidad;
             InitializeComponent();
             forma = 2;
+            TipoUnidad unidadTipo = new TipoUnidad();
+            txTipoUnidad.Text = unidadTipo.obtener(idTipoUnidad).nombreTipo;
         }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)

@@ -34,6 +34,9 @@ namespace SGREB.Formularios
             this.idIntoxicacion = idIntoxicacion;
             this.forma = 2;
             InitializeComponent();
+            CausaIntoxicacion causaIntoxicacion = new CausaIntoxicacion();
+
+            txNombreCausa.Text = causaIntoxicacion.obtener(idIntoxicacion).nombre;
         }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)

@@ -22,6 +22,9 @@ namespace SGREB.Formularios
         {
             this.idTipoServicio = idTipoServicio;
             forma = 2;
+            InitializeComponent();
+            TipoServicio tipoServicio = new TipoServicio();
+            txNombre.Text = tipoServicio.obtener(idTipoServicio).nombre;
         }
 
         private void btGuardar_Click(object sender, RoutedEventArgs e)

@@ -22,6 +22,9 @@ namespace SGREB.Formularios
         {
             this.idRol = idRol;
             this.forma = 2;
+            InitializeComponent();
+            Controlador.Rol rol = new Controlador.Rol();
+            nombreRol.Text = rol.obtener(idRol).nombre;
         }
 
         private void btRol_click(object sender, RoutedEventArgs e)

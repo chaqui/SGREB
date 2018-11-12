@@ -21,8 +21,8 @@
         <Grid>
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="75,170,0,0" VerticalAlignment="Top" Width="485" x:Name="dgUnidades">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Path=id}" Header="id" ></DataGridTextColumn>
-                    <DataGridTextColumn Binding="{Binding Path=Nombre}" Header="nombre" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=id}" Header="Id" ></DataGridTextColumn>
+                    <DataGridTextColumn Binding="{Binding Path=nombre}" Header="Nombre" ></DataGridTextColumn>
                 </DataGrid.Columns>
             </DataGrid>
             <Button Content="Editar" HorizontalAlignment="Left" Margin="625,243,0,0" VerticalAlignment="Top" Width="90" x:Name="btEditar" Click="btEditar_Click"/>

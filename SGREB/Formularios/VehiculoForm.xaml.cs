@@ -35,6 +35,8 @@ namespace SGREB.Formularios
             forma = 2;
             this.idTipoVehiculo = idTipoVehiculo;
             InitializeComponent();
+            TipoVehiculo vehiculo = new TipoVehiculo();
+            txNombreCausa.Text = vehiculo.obtener(idTipoVehiculo).tipo;
         }
 
         private void btCancelar_Click(object sender, RoutedEventArgs e)

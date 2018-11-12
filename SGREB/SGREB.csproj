@@ -252,6 +252,7 @@
     <Compile Include="miscellany\BomberoDataGrid.cs" />
     <Compile Include="miscellany\BomberoInforme.cs" />
     <Compile Include="miscellany\CantidadTipoIncidente.cs" />
+    <Compile Include="miscellany\Cronometro.cs" />
     <Compile Include="miscellany\DataGridAnimalDatos.cs" />
     <Compile Include="miscellany\DataGridAtropelladosDatos.cs" />
     <Compile Include="miscellany\DataGridBusqueCertificacionDatos.cs" />
@@ -369,6 +370,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Formularios\UsuarioForm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Paginas\AcercaDe.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -492,6 +497,9 @@
     <Compile Include="Models\TV_TipoServicio.cs" />
     <Compile Include="Models\TV_TipoUnidad.cs" />
     <Compile Include="Models\TV_TipoVehiculo.cs" />
+    <Compile Include="Paginas\AcercaDe.xaml.cs">
+      <DependentUpon>AcercaDe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Paginas\administrador\Bomberos.xaml.cs">
       <DependentUpon>Bomberos.xaml</DependentUpon>
     </Compile>

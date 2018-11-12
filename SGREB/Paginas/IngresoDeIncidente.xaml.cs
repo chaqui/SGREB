@@ -33,9 +33,12 @@ namespace SGREB
         private List<TV_CausaEnfermedadComun> causasEnfermedadComun;
         private List<TT_Lugar> LugaresDeTraslado;
         private string observaciones;
+        private Cronometro cronometro;
         public IngresoDeIncidente()
         {
             InitializeComponent();
+            cronometro = new Cronometro();
+            cronometro.start();
             obtenerMedios();
             radiotelefonistas = new List<BomberoComboBox>();
             tipoServiciosVarios = new List<TV_TipoServicio>();
@@ -184,7 +187,7 @@ namespace SGREB
         private void mostrarGridComun(String nombreIncidente)
         {
             obtenerLugaresDeTraslado();
-
+                     obtenerLugaresComunes();
             tituloIncidenteComun.Content = nombreIncidente;
             gridComun.Visibility = Visibility.Visible;
             this.Height = 2000;
@@ -327,6 +330,8 @@ namespace SGREB
                     break;
                 case 10: //Accidente de Transito
                     obtenerVehiculosAccidenteDeTransito();
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresDeAccidente();
                     gridAccidenteTransito.Visibility = Visibility.Visible;
                     break;
                 case 11: //Accidente de Motocicleta
@@ -755,7 +760,9 @@ namespace SGREB
 
         private void btGuardarCompleto_Click(object sender, RoutedEventArgs e)
         {
-            var id = guardarIncidente(false, false);
+            cronometro.stop();
+            MessageBox.Show( cronometro.segundos.ToString());
+            var id = guardarIncidente(false, false,true);
             if(id == -1)
             {
                 MessageBox.Show("error al guardar el incidente");
@@ -807,9 +814,38 @@ namespace SGREB
             }
         }
 
-        private void guardarAccidentesDeTransito(int id)
+        private int guardarAccidentesDeTransito(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                if (id == -1) return id;
+                guardarPaciente(id);
+                string placa = txPlaca.Text;
+                string tipo = cmbTipoVehiculoAccidente.SelectedItem.ToString();
+                if(tipo == "")
+                {
+                    MessageBox.Show("no selecciono el tipo de vehiculo");
+                    return -1;
+                }
+                int idTipo = 0;
+                foreach( var v in vehiculos)
+                {
+                    if(tipo == v.tipo)
+                    {
+                        idTipo = v.idTipoVehiculo;
+                        break;
+                    }
+                }
+                TC_AccidenteTransito accidenteTransito = new TC_AccidenteTransito { placa = placa, tipoVehiculo = idTipo };
+                AccidenteTransito accidente = new AccidenteTransito();
+                accidente.Crear(accidenteTransito);
+
+                return 0;
+            }
+            catch
+            {
+                return -1;
+            }
         }
 
         private int guardarEnfermedadCOmun(int id)
@@ -1202,7 +1238,7 @@ namespace SGREB
 
         private void btGuardarFalsaAlarma_Click(object sender, RoutedEventArgs e)
         {
-            var resultado = guardarIncidente(false, true);
+            var resultado = guardarIncidente(false, true, false);
             if (resultado != -1)
             {
                 MessageBox.Show("Incidente Guardado");
@@ -1212,10 +1248,12 @@ namespace SGREB
                 MessageBox.Show("error al guardar", "error");
             }
         }
-        public int guardarIncidente(Boolean cbm, Boolean falsaAlarma)
+        public int guardarIncidente(Boolean cbm, Boolean falsaAlarma, Boolean trasladoC)
         {
             try
             {
+
+               
                 int idSolicitud = guardarSolicitud(cbm, falsaAlarma);
                 if (idSolicitud == -1)
                 {
@@ -1244,14 +1282,19 @@ namespace SGREB
                 }
                 tcIncidente.formuladioPor = obtenerIdBomberoRev(cmbFormuladoPor.SelectedItem.ToString());
                 tcIncidente.JefeDeServicio = obtenerIdBomberoRev(cmbVoBo.SelectedItem.ToString());
-                int traslado = obtenerIdLugar();
+            
+                
                 Lugar lugar = new Lugar();
                 var idLugar = lugar.guardar(new TT_Lugar { direccion = txLugar.Text });
                 tcIncidente.lugar = idLugar;
                 tcIncidente.solicitud = idSolicitud;
+            if (trasladoC)
+            {
+                int traslado = obtenerIdLugar();
                 tcIncidente.LugarTraslado = traslado;
+            }
 
-                Incidente incidente = new Incidente();
+            Incidente incidente = new Incidente();
                 return incidente.crear(tcIncidente);
 
             }
@@ -1259,9 +1302,6 @@ namespace SGREB
             {
                 return -1;
             }
-
-            
-            
         }
 
         private void rBFalsaArlarma_Checked(object sender, RoutedEventArgs e)
@@ -1352,9 +1392,16 @@ namespace SGREB
         /// <param name="e"></param>
         private void btGuardarVarios_Click(object sender, RoutedEventArgs e)
         {
-            var id = guardarIncidente(false, false);
+            cronometro.stop();
+            MessageBox.Show(cronometro.segundos.ToString());
+            var id = guardarIncidente(false, false, false);
             var seleccion = combBoxClaseServicio.SelectedItem.ToString();
-            int idTipo = 0;
+            int idTipo = -1;
+            if(id == -1)
+            {
+                MessageBox.Show("No se guardo el incidente");
+                return;
+            }
             foreach (var tipoServicioVarios in tipoServiciosVarios)
             {
                 if(seleccion == tipoServicioVarios.nombre)
@@ -1362,7 +1409,7 @@ namespace SGREB
                     idTipo = tipoServicioVarios.idTipoServicio;
                 } 
             }
-            if(idTipo == 0)
+            if(idTipo == -1)
             {
                 return;
             }
@@ -1391,7 +1438,7 @@ namespace SGREB
 
         private void btGuardarCBM_Click_2(object sender, RoutedEventArgs e)
         {
-            var resultado = guardarIncidente(true, false);
+            var resultado = guardarIncidente(true, false, false);
 
         if (resultado != -1)
             {
@@ -1743,7 +1790,10 @@ namespace SGREB
             {
                 return obtenerIdLugar(cmbTrasladoMordido.SelectedItem.ToString());
             }
-
+            else if (idTipoIncidente == 10 )
+            {
+                return obtenerIdLugar(cmbTrasladoAccidenteTransito.SelectedItem.ToString());
+            }
             return -1;
         }
 
@@ -1837,6 +1887,44 @@ namespace SGREB
         private void btEliminarPacienteAccidenteTransito_Click(object sender, RoutedEventArgs e)
         {
             PacientesAccidenteTransito.Items.Remove(PacientesAccidenteTransito.SelectedItem);
+        }
+
+        private void cmbTrasladoAccidenteTransito_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var seleccion = cmbTrasladoAccidenteTransito.SelectedItem.ToString();
+                if (seleccion == "Agregar Nueva Institucion...")
+                {
+                    abrirFormularioDeInstitucion();
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresDeAccidente();
+                }
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void obtenerLugaresDeAccidente()
+        {
+            cmbTrasladoAccidenteTransito.Items.Clear();
+            try
+            {
+                foreach (var l in LugaresDeTraslado)
+                {
+                    cmbTrasladoAccidenteTransito.Items.Add(l.institucio);
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                cmbTrasladoAccidenteTransito.Items.Add("Agregar Nueva Institucion...");
+            }
         }
     }
 }

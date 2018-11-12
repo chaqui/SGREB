@@ -35,6 +35,8 @@ namespace SGREB.Formularios
             this.IdMedio = idMedio;
             forma = 2;
             InitializeComponent();
+            MedioSolicitud medio = new MedioSolicitud();
+            txNombre.Text = medio.obtener(idMedio).medio;
         }
 
         /// <summary>

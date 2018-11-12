@@ -22,6 +22,9 @@ namespace SGREB.Formularios
         {
             forma = 2;
             this.idGrado = idGrado;
+            InitializeComponent();
+            Grado grado = new Grado();
+            nombreGrado.Text = grado.obtener(idGrado).nombreGrado;
         }
 
         private void btGrado_Click(object sender, RoutedEventArgs e)

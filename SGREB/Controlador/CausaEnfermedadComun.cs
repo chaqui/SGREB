@@ -39,6 +39,15 @@ namespace SGREB.Controlador
 
         }
 
+        internal TV_CausaEnfermedadComun obtener(int id)
+        {
+            var bitacora = new bitacoraBomberoaContext();
+            var tvAnimales = bitacora.TV_CausaEnfermedadComun.Where(s => s.idCausa == id).Single();
+            return tvAnimales;
+        }
+
+    
+
         internal void modificar(TV_CausaEnfermedadComun causa)
         {
             using (var bitacora = new bitacoraBomberoaContext())
