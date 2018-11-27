@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using iTextSharp;
-using iTextSharp.text;
+﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
-using System.Threading.Tasks;
-using System.IO;
 using SGREB.miscellany;
+using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Windows;
 
 namespace SGREB.Controlador
@@ -92,10 +88,10 @@ namespace SGREB.Controlador
                     clLugar = new PdfPCell(new Phrase(elemento.Lugar, _contenidoTabla));
                     clLugar.HorizontalAlignment = centrado;
                     tblIncidente.AddCell(clLugar);
-                    clEdad = new PdfPCell(new Phrase(elemento.sexo, _contenidoTabla));
+                    clEdad = new PdfPCell(new Phrase(elemento.Edad, _contenidoTabla));
                     clEdad.HorizontalAlignment = centrado;
                     tblIncidente.AddCell(clEdad);
-                    clSexo = new PdfPCell(new Phrase(elemento.Edad, _contenidoTabla));
+                    clSexo = new PdfPCell(new Phrase(elemento.sexo, _contenidoTabla));
                     clSexo.HorizontalAlignment = centrado;
                     tblIncidente.AddCell(clSexo);
                     clVivo = new PdfPCell(new Phrase(elemento.Vivo, _contenidoTabla));
@@ -140,8 +136,128 @@ namespace SGREB.Controlador
                 MessageBox.Show("Error al crear el PDF");
             }
         }
+        public void crearPDFAccidenteTransito(string evento, DateTime fechaInicio, DateTime fechaFinal, List<DataGridAccidenteTransito> elementosInforme, BomberoInforme director, BomberoInforme secretario, String ubicacion)
+        {
+            int centrado = iTextSharp.text.Image.ALIGN_CENTER;
+            //creacion del documento
+            Document doc = new Document();
 
-        public void crearPDFIncendio(string evento, DateTime fechaInicio, DateTime fechaFinal, List<DataGridIncendiosDatos> elementosInforme, BomberoInforme director, BomberoInforme secretario, String ubicacion)
+            PdfWriter writer = PdfWriter.GetInstance(doc, new FileStream(@ubicacion, FileMode.Create));
+            doc.AddTitle("Informe");
+            doc.SetPageSize(iTextSharp.text.PageSize.LETTER.Rotate());
+            doc.Open();
+            iTextSharp.text.Font _contenidoTabla = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 8, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+            iTextSharp.text.Font _titulo = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 12, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+            iTextSharp.text.Font _tituloTabla = new iTextSharp.text.Font(iTextSharp.text.Font.FontFamily.HELVETICA, 10, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+
+            //titulo 
+            Paragraph parafo1 = new Paragraph("Benemerito Comite de Bomberos Voluntarios", _titulo);
+            parafo1.Alignment = centrado;
+            doc.Add(parafo1);
+            Paragraph parafo2 = new Paragraph("19a. Compañia de Bomberos Voluntarios", _titulo);
+            parafo2.Alignment = centrado;
+            doc.Add(parafo2);
+            Paragraph parafo3 = new Paragraph("Estadisticas de " + evento, _titulo);
+            parafo3.Alignment = centrado;
+            doc.Add(parafo3);
+            Paragraph parafo4 = new Paragraph("Correspondiente del " + fechaInicio.Day.ToString() + " de " + obtenerMeses(fechaInicio.Month) + " " + fechaInicio.Year.ToString()
+                + " al " + fechaFinal.Day.ToString() + " de " + obtenerMeses(fechaFinal.Month) + " " + fechaFinal.Year.ToString(), _titulo);
+            parafo4.Alignment = centrado;
+            doc.Add(parafo4);
+            doc.Add(Chunk.NEWLINE);
+
+
+
+            //tabla de informe 
+            PdfPTable tblIncidente = new PdfPTable(8);
+            tblIncidente.WidthPercentage = 100;
+
+            //celdas
+            //Titulo de las Celdas
+            PdfPCell clFecha = new PdfPCell(new Phrase("Fecha", _tituloTabla));
+            clFecha.HorizontalAlignment = centrado;
+            tblIncidente.AddCell(clFecha);
+            PdfPCell clHora = new PdfPCell(new Phrase("Hora", _tituloTabla));
+            clHora.HorizontalAlignment = centrado;
+            tblIncidente.AddCell(clHora);
+            PdfPCell clCantidad = new PdfPCell(new Phrase("Cantidad", _tituloTabla));
+            clCantidad.HorizontalAlignment = centrado;
+            tblIncidente.AddCell(clCantidad);
+            PdfPCell clLugar = new PdfPCell(new Phrase("Lugar", _tituloTabla));
+            clLugar.HorizontalAlignment = centrado;
+            tblIncidente.AddCell(clLugar);
+            PdfPCell clNombre = new PdfPCell(new Phrase("Tipo Vehiculo", _tituloTabla));
+            clNombre.HorizontalAlignment = centrado;
+            tblIncidente.AddCell(clNombre);
+            PdfPCell clEdad = new PdfPCell(new Phrase("Sexo", _tituloTabla));
+            clEdad.HorizontalAlignment = centrado;
+            tblIncidente.AddCell(clEdad);
+            PdfPCell clSexo = new PdfPCell(new Phrase("Herido", _tituloTabla));
+            clSexo.HorizontalAlignment = centrado;
+            tblIncidente.AddCell(clSexo);
+            PdfPCell clVivo = new PdfPCell(new Phrase("Fallecido", _tituloTabla));
+            clVivo.HorizontalAlignment = centrado;
+            tblIncidente.AddCell(clVivo);
+
+            foreach (DataGridAccidenteTransito elemento in elementosInforme)
+            {
+                clFecha = new PdfPCell(new Phrase(elemento.fecha, _contenidoTabla));
+                clFecha.HorizontalAlignment = centrado;
+                tblIncidente.AddCell(clFecha);
+                clHora = new PdfPCell(new Phrase(elemento.hora, _contenidoTabla));
+                clHora.HorizontalAlignment = centrado;
+                tblIncidente.AddCell(clHora);
+                clCantidad = new PdfPCell(new Phrase(elemento.cantidad, _contenidoTabla));
+                clCantidad.HorizontalAlignment = centrado;
+                tblIncidente.AddCell(clCantidad);
+                clLugar = new PdfPCell(new Phrase(elemento.lugar, _contenidoTabla));
+                clLugar.HorizontalAlignment = centrado;
+                tblIncidente.AddCell(clLugar);
+                clNombre = new PdfPCell(new Phrase(elemento.tipoVehiculo, _contenidoTabla));
+                clNombre.HorizontalAlignment = centrado;
+                tblIncidente.AddCell(clNombre);
+                clEdad = new PdfPCell(new Phrase(elemento.sexo, _contenidoTabla));
+                clEdad.HorizontalAlignment = centrado;
+                tblIncidente.AddCell(clEdad);
+                clSexo = new PdfPCell(new Phrase(elemento.herido, _contenidoTabla));
+                clSexo.HorizontalAlignment = centrado;
+                tblIncidente.AddCell(clSexo);
+                clVivo = new PdfPCell(new Phrase(elemento.fallecido, _contenidoTabla));
+                clVivo.HorizontalAlignment = centrado;
+                tblIncidente.AddCell(clVivo);
+
+            }
+
+            doc.Add(tblIncidente);
+
+            doc.Add(Chunk.NEWLINE);
+
+            //Firmas
+            PdfPTable tblFirmas = new PdfPTable(2);
+            tblIncidente.WidthPercentage = 100;
+            PdfPCell clDirecto = new PdfPCell(new Phrase(director.NombreCompleto, _tituloTabla));
+            clDirecto.HorizontalAlignment = centrado;
+            clDirecto.Border = 0;
+            tblFirmas.AddCell(clDirecto);
+            PdfPCell clSecretario = new PdfPCell(new Phrase(secretario.NombreCompleto, _tituloTabla));
+            clSecretario.HorizontalAlignment = centrado;
+            clSecretario.Border = 0;
+            tblFirmas.AddCell(clSecretario);
+            clDirecto = new PdfPCell(new Phrase("Directo", _tituloTabla));
+            clDirecto.HorizontalAlignment = centrado;
+            clDirecto.Border = 0;
+            tblFirmas.AddCell(clDirecto);
+            clSecretario = new PdfPCell(new Phrase("Secretario", _tituloTabla));
+            clSecretario.HorizontalAlignment = centrado;
+            clSecretario.Border = 0;
+            tblFirmas.AddCell(clSecretario);
+            //cerrar pdf 
+            doc.Add(tblFirmas);
+            doc.Close();
+            writer.Close();
+        }
+
+            public void crearPDFIncendio(string evento, DateTime fechaInicio, DateTime fechaFinal, List<DataGridIncendiosDatos> elementosInforme, BomberoInforme director, BomberoInforme secretario, String ubicacion)
         {
             int centrado = iTextSharp.text.Image.ALIGN_CENTER;
             //creacion del documento
@@ -428,7 +544,7 @@ namespace SGREB.Controlador
 
 
             //tabla de informe 
-            PdfPTable tblIncidente = new PdfPTable(9);
+            PdfPTable tblIncidente = new PdfPTable(10);
             tblIncidente.WidthPercentage = 100;
 
             //celdas

@@ -117,6 +117,29 @@ namespace SGREB.Controlador
             return incendios;
         }
 
+        internal List<DataGridAccidenteTransito> obtenerReporteAccidenteTransito(int idIncidente, DateTime fechaInicio, DateTime fechaFinal)
+        {
+            bitacoraBomberoaContext context = new bitacoraBomberoaContext();
+
+            var query = from tc in context.TC_Incidente
+                        where tc.tipoIncidente == idIncidente && tc.Fecha < fechaFinal && tc.Fecha > fechaInicio
+                        join lug in context.TT_Lugar on tc.lugar equals lug.idLugar
+                        from acc in tc.TC_AccidenteTransito 
+                        join veh in context.TV_TipoVehiculo on acc.tipoVehiculo equals veh.idTipoVehiculo
+                        from pac in tc.TC_Paciente
+                        select new DataGridAccidenteTransito
+                        {
+                            fecha = tc.Fecha.ToString(),
+                            hora = tc.horaSalida.ToString().Remove(8, 8),
+                            lugar = lug.direccion,
+                            tipoVehiculo = veh.tipo,
+                            herido = pac.herido.ToString(),
+                            fallecido = pac.fallecido.ToString(),
+                            sexo = pac.Sexo
+                        };
+            return query.ToList();
+        }
+
         public List<DataGridAtropelladosDatos> obtenerreportesAtropellados(int idIncidente, DateTime fechaInicio, DateTime fechaFinal)
         {
             bitacoraBomberoaContext context = new bitacoraBomberoaContext();
@@ -133,7 +156,7 @@ namespace SGREB.Controlador
                         {
                             fecha = tc.Fecha.ToString(),
                             hora = tc.horaSalida.ToString().Remove(8, 8),
-                            cantidad = lug.direccion,
+                            domicilio = lug.direccion,
                             sexo = pac.Sexo.ToString(),
                             edad = pac.edad.ToString(),
                             fallecido = pac.fallecido.ToString(),
@@ -185,7 +208,7 @@ namespace SGREB.Controlador
                             hora = tc.horaSalida.ToString().Remove(8, 8),
                             cantidad = lug.direccion,
                             lugar = lug.direccion,
-                            nombre = per.nombres + " " + per.apellidos,
+                            nombre = per.nombres.TrimEnd() + " " + per.apellidos.TrimEnd(),
                             galones = ser.Galones.ToString()
                         };
 

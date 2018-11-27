@@ -46,6 +46,9 @@
     <Reference Include="ICSharpCode.AvalonEdit, Version=5.0.3.0, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.5.0.4\lib\Net40\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>..\packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
     </Reference>
@@ -105,6 +108,18 @@
     </Reference>
     <Reference Include="MvcPdfWriter-4.5, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvcPdfWriter.0.2\lib\net45\MvcPdfWriter-4.5.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.0\lib\net40\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.0\lib\net40\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.4.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
       <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
@@ -170,6 +185,9 @@
     <Reference Include="WPF_AutoCompleteComboBox">
       <HintPath>..\..\..\..\Desktop\WPF_AutoCompleteComboBox_dll\WPF_AutoCompleteComboBox.dll</HintPath>
     </Reference>
+    <Reference Include="Xceed.Words.NET, Version=1.2.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\DocX.1.2.1\lib\Xceed.Words.NET.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -184,6 +202,7 @@
     <Compile Include="Controlador\PDFCreador.cs" />
     <Compile Include="Controlador\Reportes.cs" />
     <Compile Include="Controlador\TV_InstitucionSalud.cs" />
+    <Compile Include="Controlador\WordCreador.cs" />
     <Compile Include="Formularios\CausaEnfermedadComunForm.xaml.cs">
       <DependentUpon>CausaEnfermedadComunForm.xaml</DependentUpon>
     </Compile>
@@ -253,6 +272,7 @@
     <Compile Include="miscellany\BomberoInforme.cs" />
     <Compile Include="miscellany\CantidadTipoIncidente.cs" />
     <Compile Include="miscellany\Cronometro.cs" />
+    <Compile Include="miscellany\DataGridAccidenteTransito.cs" />
     <Compile Include="miscellany\DataGridAnimalDatos.cs" />
     <Compile Include="miscellany\DataGridAtropelladosDatos.cs" />
     <Compile Include="miscellany\DataGridBusqueCertificacionDatos.cs" />
@@ -263,6 +283,7 @@
     <Compile Include="miscellany\DataGridIntoxicadosDatos.cs" />
     <Compile Include="miscellany\DataGridMaternidadDatos.cs" />
     <Compile Include="miscellany\DataGridMordidosDatos.cs" />
+    <Compile Include="miscellany\DataGridPadre.cs" />
     <Compile Include="miscellany\DataGridServiciosDeAguaDatos.cs" />
     <Compile Include="miscellany\DatosCertificacion.cs" />
     <Compile Include="miscellany\PacienteGrid.cs" />
@@ -573,6 +594,26 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>8</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
