@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace SGREB.miscellany
 {
-    public class DataGridMaternidadDatos
+    public class DataGridMaternidadDatos: DataGridPadre
     {
-        public string fecha { set; get; }
-        public string hora { set; get; }
-        public string cantidad { set; get; }
+
         public string edad { set; get; }
         public string lugar { set; get;  }
         public string aborto { set; get; }

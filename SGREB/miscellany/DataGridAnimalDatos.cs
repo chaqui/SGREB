@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace SGREB.miscellany
 {
-    class DataGridAnimalDatos
+    class DataGridAnimalDatos : DataGridPadre
     {
-        public string fecha { set; get; }
-        public string hora { set; get; }
-        public string cantidad { set; get; }
+      
         public string lugar { set; get; }
         public string claseAnimal { set; get; }
         public string sexo { set; get; }

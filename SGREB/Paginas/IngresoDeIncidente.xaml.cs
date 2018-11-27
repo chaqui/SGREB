@@ -349,12 +349,18 @@ namespace SGREB
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 16: //Incendios de Viviendas 
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresTrasladoIncendio();
                     mostrarIncidendios(nombreIncidente);
                     break;
                 case 17: //Conatos de Incendios
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresTrasladoIncendio();
                     mostrarIncidendios(nombreIncidente);
                     break;
                 case 18: //Incendios Forestales
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresTrasladoIncendio();
                     mostrarIncidendios(nombreIncidente);
                     break;
                 case 19: //Vapuleados
@@ -377,12 +383,18 @@ namespace SGREB
                     mostrarGridComun(nombreIncidente);
                     break;
                 case 25: //Incendios de Mercados
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresTrasladoIncendio();
                     mostrarIncidendios(nombreIncidente);
                     break;
                 case 26: //Incendios en Gasolineras
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresTrasladoIncendio();
                     mostrarIncidendios(nombreIncidente);
                     break;
                 case 27: //Incendios en Locales Comerciales
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresTrasladoIncendio();
                     mostrarIncidendios(nombreIncidente);
                     break;
                 case 28: //persona electrocutada
@@ -436,6 +448,26 @@ namespace SGREB
             finally
             {
                 cmbTrasladoaAMaternidad.Items.Add("Agregar Nueva Institucion...");
+            }
+        }
+
+        private void obtenerLugaresTrasladoIncendio()
+        {
+            cmbTrasladoIncendio.Items.Clear();
+            try
+            {
+                foreach (var l in LugaresDeTraslado)
+                {
+                    cmbTrasladoIncendio.Items.Add(l.institucio);
+                }
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                cmbTrasladoIncendio.Items.Add("Agregar Nueva Institucion...");
             }
         }
 
@@ -761,8 +793,15 @@ namespace SGREB
         private void btGuardarCompleto_Click(object sender, RoutedEventArgs e)
         {
             cronometro.stop();
-            MessageBox.Show( cronometro.segundos.ToString());
-            var id = guardarIncidente(false, false,true);
+            int id = -1;
+            if (idTipoIncidente==12)
+            {
+                id = guardarIncidente(false, false, false);
+            }
+            else
+            {
+                id = guardarIncidente(false, false, true);
+            }
             if(id == -1)
             {
                 MessageBox.Show("error al guardar el incidente");
@@ -819,8 +858,9 @@ namespace SGREB
             try
             {
                 if (id == -1) return id;
-                guardarPaciente(id);
-                string placa = txPlaca.Text;
+                guardarPacienteAccidenteTransito(id);
+
+                string placa = txtPlaca.Text;
                 string tipo = cmbTipoVehiculoAccidente.SelectedItem.ToString();
                 if(tipo == "")
                 {
@@ -836,7 +876,7 @@ namespace SGREB
                         break;
                     }
                 }
-                TC_AccidenteTransito accidenteTransito = new TC_AccidenteTransito { placa = placa, tipoVehiculo = idTipo };
+                TC_AccidenteTransito accidenteTransito = new TC_AccidenteTransito { placa = placa, tipoVehiculo = idTipo, idIncidente = id };
                 AccidenteTransito accidente = new AccidenteTransito();
                 accidente.Crear(accidenteTransito);
 
@@ -1111,22 +1151,17 @@ namespace SGREB
 
         private void guardarIncendio(int idIncidente)
         {
-            try
-            {            
+                   
             guardarPacientesIncendio(idIncidente);
             guardarUnidades(idIncidente);
             Incendio tcIncendio = new Incendio();
-            var aguaUtilizada = float.Parse(txGalones.Text);
+            var aguaUtilizada = Convert.ToSingle(Double.Parse( txGalones.Text));
             var propietario = txtPropietario.Text;
-            var perdidas = float.Parse(txtPerdidas.Text);
+            var perdidas = Convert.ToSingle (Double.Parse(txtPerdidas.Text));
                 Persona persona = new Persona();
                 var id = persona.Crear(new TC_Persona { nombres = propietario });
                 tcIncendio.crear(new TC_Incendio { perdidas = perdidas, propietario = id, aguaUtilizada = aguaUtilizada, idIncidente = idIncidente });
-            }
-            catch
-            {
-                return;
-            }
+          
         }
 
         private void guardarBOmberos(int idIncidente)
@@ -1171,7 +1206,23 @@ namespace SGREB
             return 0;
         }
 
-        
+        private int guardarPacienteAccidenteTransito(int idIncidente)
+        {
+            Paciente paciente = new Paciente();
+            foreach (var item in dataGridPacientesAccidenteTransito.Items)
+            {
+                var seleccionado = (PacienteGrid)item;
+                var id = paciente.agregar(seleccionado, idIncidente);
+                if (id == -1)
+                {
+                    return -1;
+                }
+
+            }
+            return 0;
+        }
+
+
 
         private int guardarPacienteEnfermadadComun(int idIncidente)
         {
@@ -1250,9 +1301,7 @@ namespace SGREB
         }
         public int guardarIncidente(Boolean cbm, Boolean falsaAlarma, Boolean trasladoC)
         {
-            try
-            {
-
+            
                
                 int idSolicitud = guardarSolicitud(cbm, falsaAlarma);
                 if (idSolicitud == -1)
@@ -1291,17 +1340,14 @@ namespace SGREB
             if (trasladoC)
             {
                 int traslado = obtenerIdLugar();
+                if(traslado != -1) { }
                 tcIncidente.LugarTraslado = traslado;
             }
 
             Incidente incidente = new Incidente();
                 return incidente.crear(tcIncidente);
 
-            }
-            catch
-            {
-                return -1;
-            }
+       
         }
 
         private void rBFalsaArlarma_Checked(object sender, RoutedEventArgs e)
@@ -1794,6 +1840,11 @@ namespace SGREB
             {
                 return obtenerIdLugar(cmbTrasladoAccidenteTransito.SelectedItem.ToString());
             }
+            else if(Array.IndexOf(incendios, idTipoIncidente) != -1)
+            {
+                return obtenerIdLugar(cmbTrasladoIncendio.SelectedItem.ToString());
+            }
+           
             return -1;
         }
 
@@ -1881,12 +1932,12 @@ namespace SGREB
             PacienteForm pacienteForm = new PacienteForm();
             pacienteForm.ShowDialog();
             var paciente = pacienteForm.pacienteGrid;
-            PacientesAccidenteTransito.Items.Add(paciente);
+            dataGridPacientesAccidenteTransito.Items.Add(paciente);
         }
 
         private void btEliminarPacienteAccidenteTransito_Click(object sender, RoutedEventArgs e)
         {
-            PacientesAccidenteTransito.Items.Remove(PacientesAccidenteTransito.SelectedItem);
+            dataGridPacientesAccidenteTransito.Items.Remove(dataGridPacientesAccidenteTransito.SelectedItem);
         }
 
         private void cmbTrasladoAccidenteTransito_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -1924,6 +1975,24 @@ namespace SGREB
             finally
             {
                 cmbTrasladoAccidenteTransito.Items.Add("Agregar Nueva Institucion...");
+            }
+        }
+
+        private void cmbTrasladoIncendio_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var seleccion = cmbTrasladoIncendio.SelectedItem.ToString();
+                if (seleccion == "Agregar Nueva Institucion...")
+                {
+                    abrirFormularioDeInstitucion();
+                    obtenerLugaresDeTraslado();
+                    obtenerLugaresTrasladoIncendio();
+                }
+            }
+            catch
+            {
+
             }
         }
     }

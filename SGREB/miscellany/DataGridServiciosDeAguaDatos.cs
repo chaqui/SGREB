@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace SGREB.miscellany
 {
-    class DataGridServiciosDeAguaDatos
+    class DataGridServiciosDeAguaDatos: DataGridPadre
     {
-        public string fecha { set; get; }
-        public string hora { set; get; }
-        public string cantidad { set; get; }
         public string lugar { set; get; }
         public string nombre { set; get; }
         public string galones { set; get;  }

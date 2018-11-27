@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace SGREB.miscellany
 {
-    class DataGridAtropelladosDatos
+    class DataGridAtropelladosDatos:DataGridPadre
     {
-        public string fecha { set; get; }
-        public string hora { set; get; }
-        public string cantidad { set; get; }
         public string lugar { set; get; }
         public string tipoVehiculo { set; get; }
         public string sexo { set; get; }

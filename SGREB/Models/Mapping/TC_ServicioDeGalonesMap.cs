@@ -11,9 +11,6 @@ namespace SGREB.Models.Mapping
             this.HasKey(t => t.idServicio);
 
             // Properties
-            this.Property(t => t.idServicio)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
-
             // Table & Column Mappings
             this.ToTable("TC_ServicioDeGalones");
             this.Property(t => t.idServicio).HasColumnName("idServicio");

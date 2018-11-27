@@ -63,6 +63,8 @@ namespace SGREB.Formularios
 
         private void btAceptar_Click(object sender, RoutedEventArgs e)
         {
+            try
+            { 
             var piloto = cmbPiloto.SelectedItem.ToString();
             var placa = cmbUnidad.SelectedItem.ToString();
             if (piloto == "")
@@ -79,6 +81,11 @@ namespace SGREB.Formularios
                  
             }
             this.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Porfavor revise los datos ingresdos", "error de ingreso");
+            }
         }
 
         /// <summary>

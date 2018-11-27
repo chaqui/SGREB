@@ -6,13 +6,12 @@ using System.Threading.Tasks;
 
 namespace SGREB.miscellany
 {
-    class DataGridMordidosDatos: DataGridPadre
+    public class DataGridAccidenteTransito: DataGridPadre
     {
         public string lugar { set; get; }
-        public string claseAnimal { set; get; }
-        public string sexo { set; get; }
-        public string edad { set; get; }
-        public string vivo { set; get; }
+        public string tipoVehiculo { set; get; }
+        public string herido { set; get; }
         public string fallecido { set; get; }
+        public string sexo { set; get; }
     }
 }
