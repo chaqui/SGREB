@@ -18,8 +18,8 @@ namespace SGREB
     {
         private int idTipoIncidente;
         private List<TipoIncidente> tiposDeIncidentes;
-        private int[] comunes = new int[] {  3, 7, 9,14,15,19,21,22,23,24,28,30,31,32,33,34 };
-        private int[] incendios = new int[] { 16, 17, 18, 25, 26, 27, 28 };
+        private int[] comunes = new int[] {3, 7, 9, 11, 12, 16, 17, 22, 24, 25, 26, 27, 28, 32, 34, 35, 36, 37, 38}; //19
+        private int[] incendios = new int[] { 13, 18, 20, 21, 29, 30, 31 };
         private List<TV_MedioSolicitud> medios;
         private List<BomberoComboBox> radiotelefonistas;
         private List<TV_TipoServicio> tipoServiciosVarios;
@@ -33,12 +33,9 @@ namespace SGREB
         private List<TV_CausaEnfermedadComun> causasEnfermedadComun;
         private List<TT_Lugar> LugaresDeTraslado;
         private string observaciones;
-        private Cronometro cronometro;
         public IngresoDeIncidente()
         {
             InitializeComponent();
-            cronometro = new Cronometro();
-            cronometro.start();
             obtenerMedios();
             radiotelefonistas = new List<BomberoComboBox>();
             tipoServiciosVarios = new List<TV_TipoServicio>();
@@ -828,9 +825,9 @@ namespace SGREB
 
         private void btGuardarCompleto_Click(object sender, RoutedEventArgs e)
         {
-            cronometro.stop();
+
             int id = -1;
-            if (idTipoIncidente==12)
+            if (idTipoIncidente==14)
             {
                 id = guardarIncidente(false, false, false);
             }
@@ -851,41 +848,68 @@ namespace SGREB
             else if(Array.IndexOf(incendios, idTipoIncidente) != -1){
                 guardarIncendio(id);
             }
+            //GuardarEnfermedadComun
             else if(idTipoIncidente == 2)
             {
                 guardarEnfermedadCOmun(id);
             }
+            //Guardar Maternidad
             else if(idTipoIncidente == 4)
             {
                 guardarMaternidad(id);
             }
+            //Guardar Atropellados
             else if(idTipoIncidente == 5)
             {
                 guardarAtropellados(id);
             }
+            //Guardar Intoxicados
             else if(idTipoIncidente == 6)
             {
                 guardarIntoxicados(id);
             }
+            //Guardar Mordidos
             else if(idTipoIncidente == 8)
             {
                 guardarMordidos(id);
             }
+            //Guardar Accidentess De Transito
             else if(idTipoIncidente == 10)
             {
                 guardarAccidentesDeTransito(id);
             }
-            else if(idTipoIncidente == 12)
+            //Guardar Servicios de Agua
+            else if(idTipoIncidente == 14)
             {
                 guardarServicioDeAgua(id);
             }
-            else if(idTipoIncidente == 20)
+            //Guardar Vehiculos Incendiados
+            else if(idTipoIncidente == 19)
+            {
+                guardarVehiculosIncendiados(id);
+            }
+            //Guardar Suicidios
+            else if(idTipoIncidente == 23)
             {
                 guardarSuicidios(id);
             }
-            else if(idTipoIncidente == 29)
+            //Guardar Inundaciones
+            else if(idTipoIncidente == 33)
             {
                 guardarInundaciones(id);
+            }
+        }
+
+        private int guardarVehiculosIncendiados(int id)
+        {
+            try
+            {
+                if (id == -1) return id;
+                return 0;
+            }
+            catch
+            {
+                return -1;
             }
         }
 
@@ -1474,8 +1498,7 @@ namespace SGREB
         /// <param name="e"></param>
         private void btGuardarVarios_Click(object sender, RoutedEventArgs e)
         {
-            cronometro.stop();
-            MessageBox.Show(cronometro.segundos.ToString());
+
             var id = guardarIncidente(false, false, false);
             var seleccion = combBoxClaseServicio.SelectedItem.ToString();
             int idTipo = -1;

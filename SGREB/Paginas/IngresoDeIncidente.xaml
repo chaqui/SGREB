@@ -354,7 +354,7 @@
         </Grid>
 
         <!-- Formulario para ingresar personas suicidadas-->
-        <Grid Margin="39,661,24,-806" x:Name="gridSuicidios" Visibility="Visible">
+        <Grid Margin="39,661,24,-806" x:Name="gridSuicidios" Visibility="Collapsed">
             <Label Content="Suicidados" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="16"  />
             <DataGrid HorizontalAlignment="Left" Height="195" Margin="15,80,0,0" VerticalAlignment="Top" Width="465" x:Name="gdPacientesSucicidados">
                 <DataGrid.Columns>
