@@ -2,18 +2,8 @@
 using SGREB.miscellany;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace SGREB.Paginas
 {
@@ -447,10 +437,11 @@ namespace SGREB.Paginas
             TipoIncidente tipo = new TipoIncidente();
             var nombreTipo = tipo.obtenerNombre(idIncidente);
 
-            string ubicaciion = obtenerLugar();
-            if (ubicaciion != "")
+            List<string> ubicaciion = obtenerLugar();
+
+            if (ubicaciion[0] != "")
             {
-                pdf.crearPDFAccidenteTransito(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion);
+                pdf.crearPDFAccidenteTransito(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion[0]);
             }
             else
             {
@@ -473,10 +464,10 @@ namespace SGREB.Paginas
             TipoIncidente tipo = new TipoIncidente();
             var nombreTipo = tipo.obtenerNombre(idIncidente);
 
-            string ubicaciion = obtenerLugar();
-            if (ubicaciion != "")
+            List<string> ubicaciion = obtenerLugar();
+            if (ubicaciion[0] != "")
             {
-                pdf.crearPDFEComun(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion);
+                pdf.crearPDFEComun(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion[0]);
             }
             else
             {
@@ -504,10 +495,10 @@ namespace SGREB.Paginas
             TipoIncidente tipo = new TipoIncidente();
             var nombreTipo = tipo.obtenerNombre(idIncidente);
 
-            string ubicaciion = obtenerLugar();
-            if (ubicaciion != "")
+            List<string> ubicaciion = obtenerLugar();
+            if (ubicaciion[0] != "")
             {
-                pdf.crearPdfSuicidios(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion);
+                pdf.crearPdfSuicidios(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion[0]);
             }
             else
             {
@@ -530,10 +521,10 @@ namespace SGREB.Paginas
             TipoIncidente tipo = new TipoIncidente();
             var nombreTipo = tipo.obtenerNombre(idIncidente);
 
-            string ubicaciion = obtenerLugar();
-            if (ubicaciion != "")
+            List<string> ubicaciion = obtenerLugar();
+            if (ubicaciion[0] != "")
             {
-                pdf.crearPdfServiciosDeAgua(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion);
+                pdf.crearPdfServiciosDeAgua(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion[0]);
             }
             else
             {
@@ -566,10 +557,10 @@ namespace SGREB.Paginas
             TipoIncidente tipo = new TipoIncidente();
             var nombreTipo = tipo.obtenerNombre(idIncidente);
 
-            string ubicaciion = obtenerLugar();
-            if (ubicaciion != "")
+            List<string> ubicaciion = obtenerLugar();
+            if (ubicaciion[0] != "")
             {
-                pdf.crearPDFAtropellado(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion);
+                pdf.crearPDFAtropellado(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion[0]);
             }
             else
             {
@@ -597,10 +588,10 @@ namespace SGREB.Paginas
             TipoIncidente tipo = new TipoIncidente();
             var nombreTipo = tipo.obtenerNombre(idIncidente);
 
-            string ubicaciion = obtenerLugar();
-            if (ubicaciion != "")
+            List<String> ubicaciion = obtenerLugar();
+            if (ubicaciion[0] != "")
             {
-                pdf.crearPDFIncendio(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion);
+                pdf.crearPDFIncendio(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion[0]);
             }
             else
             {
@@ -624,10 +615,10 @@ namespace SGREB.Paginas
             TipoIncidente tipo = new TipoIncidente();
             var nombreTipo = tipo.obtenerNombre(idIncidente);
 
-            string ubicaciion = obtenerLugar();
-            if (ubicaciion != "")
+            List<string> ubicaciion = obtenerLugar();
+            if (ubicaciion[0] != "")
             {
-                pdf.crearPDFcomun(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion);
+                pdf.crearPDFcomun(nombreTipo, fechaInicio, fechaFinal, datos, new BomberoInforme { NombreCompleto = "Juan Pedro Paz" }, new BomberoInforme { NombreCompleto = "Pedro Antonio Yoc Perez" }, ubicaciion[0]);
             }
             else
             {
@@ -635,17 +626,26 @@ namespace SGREB.Paginas
             }
     }
 
-        private string obtenerLugar()
+        private List<string> obtenerLugar()
         {
+            List<string> resultados = new List<string>();
             System.Windows.Forms.SaveFileDialog saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
-            saveFileDialog1.Filter = "PDF|*.pdf";
+            saveFileDialog1.Filter = "PDF|*.pdf | DOCX|*.docx";
             saveFileDialog1.Title = "Guardar PDF";
             saveFileDialog1.ShowDialog();
+            if (saveFileDialog1.Filter == "")
+            {
+                MessageBox.Show("No selecciono el tipo de formato");
+                return null;
+            }
             if (saveFileDialog1.FileName != "")
             {
-                return saveFileDialog1.FileName;
+                resultados.Add( saveFileDialog1.FileName);
+                resultados.Add(saveFileDialog1.Filter);
+                return resultados;
             }
-            return "";
+            return null;
         }
+
     }
 }
