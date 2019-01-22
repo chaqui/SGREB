@@ -512,10 +512,10 @@ namespace SGREB.Controlador
             }
             doc.InsertTable(t);
             doc.InsertParagraph(Environment.NewLine + Environment.NewLine);
-
+             
             Table tf = doc.AddTable(3, 2);
             tf.Alignment = Alignment.center;
-            tf.Rows[0].Cells[0].Paragraphs.First().Append("f." + "__________:___");
+            tf.Rows[0].Cells[0].Paragraphs.First().Append("f." + "_____________");
             tf.Rows[1].Cells[0].Paragraphs.First().Append(director.NombreCompleto);
             tf.Rows[2].Cells[0].Paragraphs.First().Append("Director");
 
