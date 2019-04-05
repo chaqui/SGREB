@@ -282,6 +282,7 @@ namespace SGREB
             gridEComun.Visibility = Visibility.Collapsed;
             gridIncendioVehiculo.Visibility = Visibility.Collapsed;
             btGuardarVarios.Visibility = Visibility.Collapsed;
+
             //seleccion de formulario por id
             switch (idTipoIncidente)
             {
@@ -465,6 +466,10 @@ namespace SGREB
             }
         }
 
+        /// <summary>
+        /// obtener los lugares de traslado a los pacientes y alamacenarlos en una variable
+        /// s para hacerlo utilizarlo en un incendio
+        /// </summary>
         private void obtenerLugaresTrasladoIncendio()
         {
             cmbTrasladoIncendio.Items.Clear();
@@ -484,6 +489,11 @@ namespace SGREB
                 cmbTrasladoIncendio.Items.Add("Agregar Nueva Institucion...");
             }
         }
+
+        /// <summary>
+        /// obtener los lugares de traslado a los pacientes y alamacenarlos en una variable
+        /// s para hacerlo utilizarlo en un incendio de un vehiculo
+        /// </summary>
         private void obtenerLugaresTrasladoIncendioVehiculo()
         {
             cmbTrasladoIncendio.Items.Clear();
@@ -503,7 +513,10 @@ namespace SGREB
                 cmbTrasladoVehiculoIncendiado.Items.Add("Agregar Nueva Institucion...");
             }
         }
-
+        /// <summary>
+        /// obtener los lugares de traslado a los pacientes y alamacenarlos en una variable
+        /// s para hacerlo utilizarlo cuando es mordido por un animal
+        /// </summary>
         private void obtenerLugaresMordido()
         {
             cmbTrasladoMordido.Items.Clear();
@@ -525,6 +538,10 @@ namespace SGREB
           
         }
 
+        /// <summary>
+        /// obtener los lugares de traslado a los pacientes y alamacenarlos en una variable
+        /// s para hacerlo utilizarlo en un paciebnte intoxicado
+        /// </summary>
         private void obtenerLugaresIntoxicados()
         {
             cmbTrasladoIntoxicados.Items.Clear();
@@ -547,7 +564,10 @@ namespace SGREB
             }
             
         }
-
+        /// <summary>
+        /// obtener los lugares de traslado a los pacientes y alamacenarlos en una variable
+        /// s para hacerlo utilizarlo en un atropellado
+        /// </summary>
         private void obtenerLugaresAtropellado()
         {
             cmbTrasladoAtropellado.Items.Clear();
@@ -568,8 +588,10 @@ namespace SGREB
                 cmbTrasladoAtropellado.Items.Add("Agregar Nueva Institucion...");
             }
         }
-            
 
+        /// <summary>
+        /// obtener los lugares de traslado a los pacientes y alamacenarlos en una variable
+        /// </summary>
         private void obtenerLugaresDeTraslado()
         {
 
@@ -647,6 +669,7 @@ namespace SGREB
 
         }
 
+
         private void obtenerElementos()
         {
             if(bomberos.Count == 0)
@@ -670,6 +693,7 @@ namespace SGREB
             
         }
 
+
         private void obtenerElementosRev()
         {
             Persona persona = new Persona();
@@ -689,6 +713,9 @@ namespace SGREB
         }
 
 
+        /// <summary>
+        /// mostrar la lista de lista de servicios varios en el grid de Servicios Varios 
+        /// </summary>
         private void mostrarServiciosVarios()
         {
             obtenerTiposDeServicioVarios();
@@ -700,6 +727,9 @@ namespace SGREB
 
         }
 
+        /// <summary>
+        /// obtener todos los servicios varios de la base de datos y almacenarlo en una lista
+        /// </summary>
         private void obtenerTiposDeServicioVarios()
         {
             TipoServicio tipoServicio = new TipoServicio();
@@ -750,11 +780,14 @@ namespace SGREB
         /// </summary>
         /// <param name="cmb"> true: se envio a los bomberos municipales, 
         ///                    false: no se envio </param>
+        ///           
         /// <returns>id de la solicitud creada</returns>
         private int guardarSolicitud(Boolean cmb, Boolean falsaAlarma)
         {
+            ///<exception cref="">verificar si se almacena el elemento</exception>
             try
             { 
+
                 var idRadioTelefonista = obtenerIdRadioTelefonista(cmbRadioTelefonista.SelectedItem.ToString());
                 var idMedio = obtenerIdMedio(cmbMedioSolicitud.SelectedItem.ToString());
                 var nombre = txNombresSolicitante.Text;
@@ -763,6 +796,7 @@ namespace SGREB
                 var medio = cmbMedioSolicitud.SelectedItem.ToString();
                 medio = medio.Replace(" ", "");
                 
+                ///<summary>si el medio es telefono, obtener el numero de telefono</summary>
                 if (medio == "telefono" || medio == "Telefono")
                 {
                     try
@@ -776,7 +810,7 @@ namespace SGREB
                     telefono = txTelefono.Text.Replace(" ", "").Replace("\n", "").Replace("\r", "");
                 }
                 
-            
+                ///<summary>obtener el DPI del solicitante</summary>
                 var dpi = txDPISolicitante.Text;
                 if (nombre == "" && apellidos =="")
                 {
@@ -821,11 +855,14 @@ namespace SGREB
             }
         }
 
-
-
+        /// <summary>
+        /// funcion para guardar la mayoria de incidentes
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btGuardarCompleto_Click(object sender, RoutedEventArgs e)
         {
-
+            
             int id = -1;
             if (idTipoIncidente==14)
             {
@@ -900,6 +937,12 @@ namespace SGREB
             }
         }
 
+        /// <summary>
+        /// guardar Vehiculos incendiados
+        /// Pendiente
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private int guardarVehiculosIncendiados(int id)
         {
             try
@@ -913,6 +956,14 @@ namespace SGREB
             }
         }
 
+
+        /// <summary>
+        /// funcion para guardar los accidentes de transito
+        /// </summary>
+        /// Pendiente
+        /// <permission cref="private"></permission>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private int guardarAccidentesDeTransito(int id)
         {
             try
@@ -948,6 +999,12 @@ namespace SGREB
             }
         }
 
+
+        /// <summary>
+        /// guardar incidentes de enfermedad común
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         private int guardarEnfermedadCOmun(int id)
         {
             try
@@ -969,6 +1026,12 @@ namespace SGREB
             }
         }
 
+
+        /// <summary>
+        /// obtener el id de la causa común
+        /// </summary>
+        /// <param name="nombre"> nombre de la causa comun</param>
+        /// <returns></returns>
         private int obtenerIdCAusaEComun(string nombre)
         {
             foreach (var causa in causasEnfermedadComun)
@@ -981,6 +1044,10 @@ namespace SGREB
             return -1;
         }
 
+        /// <summary>
+        /// guardar inundanciones
+        /// </summary>
+        /// <param name="id"></param>
         private void guardarInundaciones(int id)
         {
             throw new NotImplementedException();
